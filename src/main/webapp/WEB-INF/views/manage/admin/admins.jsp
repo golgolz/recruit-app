@@ -5,6 +5,13 @@
 	
 <!DOCTYPE html>
 <html>
+<%
+	String adminId = (String)session.getAttribute("adminId");
+	if(adminId == null || adminId == ""){
+	    response.sendRedirect("http://localhost/recruit-app/manage/adminLogin/adminLoginPage.do");
+	    return;
+	}
+%>
 <head>
 <jsp:include page="../../assets/layout/admin/lib.jsp" />
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

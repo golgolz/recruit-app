@@ -22,3 +22,20 @@
        "Noto Sans KR", "Malgun Gothic", sans-serif;
    }
 </style>
+<script type="text/javascript">
+	
+	document.addEventListener('DOMContentLoaded', function() {
+    	
+    	    var logoutLink = document.getElementById('logout_menu');
+		    
+		    logoutLink.addEventListener("click", function(event) {
+		        event.preventDefault();
+		        var conResult = confirm('로그아웃 하시겠습니까?');
+		        if(conResult){
+		    		window.location.href = 'http://localhost/recruit-app/manage/logout.do';
+		    	}else{
+		    		return;
+		    	}//end else
+		      });//click
+	});
+</script>

@@ -36,6 +36,12 @@ public class AdminBasicController {
         this.abs = abs;
     }
 
+    @GetMapping("/manage/adminLogin/adminLoginPage.do")
+    public String adminLoginPage() {
+
+        return "manage/adminLogin/adminLogin";
+    }
+
     @PostMapping("/manage/adminLogin/adminLogin.do")
     public String adminLogin(AdminLoginVO lVO, Model model, RedirectAttributes redirectAttributes) {
         String inputAdminId = lVO.getAdminId();
@@ -59,15 +65,15 @@ public class AdminBasicController {
 
         model.addAttribute("adminId", adminId);
 
-        return "/manage/index.do";
+        return "manage/dashboard/dashboard";
     }
 
-    @GetMapping("/logout.do")
+    @GetMapping("manage/logout.do")
     public String logout(SessionStatus ss) {
 
         ss.setComplete();
 
-        return "/manage/adminLogin/adminLoginPage.do";
+        return "manage/adminLogin/adminLogin";
     }
 
     @GetMapping("/api/manage/admins.do")
@@ -90,23 +96,12 @@ public class AdminBasicController {
         return abs.searchAdminCnt(searchVO);
     }
 
-    @GetMapping("/manage/user/users.do")
-    public String searchUser(Model model) {
-
-        return "manage/user/users";
-    }
-
     @GetMapping("/manage/user/detail.do")
     public String searchUserDetail(Model model) {
 
         return "manage/user/detail";
     }
 
-    @GetMapping("/manage/adminLogin/adminLoginPage.do")
-    public String adminLoginPage() {
-
-        return "manage/adminLogin/adminLogin";
-    }
 
     @PostMapping("/manage/admin/addAdmin.do")
     public @ResponseBody Map<String, Object> addAdmin(InsertAdminVO insertAdminVO) {
