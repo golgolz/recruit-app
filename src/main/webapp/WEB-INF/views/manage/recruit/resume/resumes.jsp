@@ -44,6 +44,26 @@
     	updateResumeList();
 	});
 	
+	function updateResumeCount(){
+		$.ajax({
+    		url: "${pageContext.request.contextPath}/api/manage/resume/counts.do",
+            method: 'GET',
+            data: searchVO,
+            dataType: 'JSON',
+            success: function(data) {
+            	console.log(data);
+            	populateTable(data);
+                if(!(data && data.length > 0)){
+                    $("#sodr_list tbody").html('<tr><td colspan="10" style="font-size: 16px; font-weight: bold;">검색 결과가 없습니다.</td></tr>');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("Error fetching data: " + error);
+                $("#sodr_list tbody").html('<tr><td colspan="10" style="font-size: 16px; font-weight: bold;">데이터를 불러오는 데 실패했습니다.</td></tr>');
+            }
+    	});
+	}
+	
 	function updateResumeList(){
     	var searchVO = createSearchVO();
     	console.log(searchVO);

@@ -126,7 +126,65 @@
 		WHERE rnum BETWEEN #{startNum} AND #{endNum}
 	</select>
 	<select id="selectResumeCount" resultType="int" parameterType="kr.co.sist.admin.vo.resume.SearchVO">
-		select count(*) from apply
+		SELECT COUNT(*) AS total_count
+		FROM (
+		    SELECT apply.resume_num
+		    FROM apply
+		         LEFT JOIN resume ON apply.resume_num = resume.resume_num
+		         LEFT JOIN recruit ON recruit.recruit_num = apply.recruit_num
+		         LEFT JOIN users ON resume.user_id = users.user_id
+		         LEFT JOIN education ON resume.resume_num = education.resume_num
+		         LEFT JOIN (
+		            SELECT resume_num,
+		                   CASE
+		                       WHEN SUM(
+		                           CASE
+		                               WHEN resignation_date IS NULL THEN TRUNC(CURRENT_DATE) - join_date
+		                               ELSE resignation_date - join_date
+		                           END
+		                       ) IS NULL THEN 0
+		                       ELSE 1
+		                   END AS has_career
+		            FROM career
+		            GROUP BY resume_num
+		        ) c ON apply.resume_num = c.resume_num
+		    <where>
+		        <choose>
+		            <when test="category == 0 and keyword != null and keyword != ''">
+		                AND users.name LIKE '%' || #{keyword} || '%'
+		            </when>
+		            <when test="category == 1 and keyword != null and keyword != ''">
+		                AND resume.title LIKE '%' || #{keyword} || '%'
+		            </when>
+		            <when test="category == 2 and keyword != null and keyword != ''">
+		                AND resume.self_introduction LIKE '%' || #{keyword} || '%'
+		            </when>
+		            <when test="category == 3 and keyword != null and keyword != ''">
+		                AND resume.addr LIKE '%' || #{keyword} || '%'
+		            </when>
+		        </choose>
+		        <if test="startDate != null">
+		            AND apply.apply_date >= #{startDate}
+		        </if>
+		        <if test="endDate != null">
+		            AND apply.apply_date <![CDATA[ <= ]]> #{endDate}
+		        </if>
+		        <if test="career != null and career != ''">
+		            AND (
+		                CASE
+		                    WHEN c.has_career = 0 THEN '신입'
+		                    ELSE '경력'
+		                END
+		            ) = #{career}
+		        </if>
+		        <if test="recruitId != null">
+		            AND apply.recruit_num = #{recruitId}
+		        </if>
+		        <if test="endSchool != null and endSchool != ''">
+		            AND education.school_classification >= #{endSchool}
+		        </if>
+		    </where>
+		)
 	</select>
     <select id="selectMetaResume" parameterType="java.lang.String" resultMap="resumeDetailResultMap">
 	    SELECT 
