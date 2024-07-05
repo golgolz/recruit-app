@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import kr.co.sist.admin.domain.recruit.RecruitDomain;
+import kr.co.sist.domain.companyinfo.WelfareDomain;
 import kr.co.sist.user.dao.recruit.RecruitUserDAO;
 import kr.co.sist.user.domain.recruit.RecruitListDomain;
 import kr.co.sist.user.vo.recruit.SearchVO;
@@ -51,5 +52,9 @@ public class RecruitUserService {
         RecruitDomain recruit = null;
         recruit = recruitUserDAO.selectOneRecruit(recruitId);
         return recruit;
+    }
+
+    public List<WelfareDomain> selectWelfare(String companyCode) {
+        return recruitUserDAO.selectWelfare(companyCode);
     }
 }

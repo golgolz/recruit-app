@@ -39,7 +39,7 @@
 				<a
 					id="company_menu"
 					class="nav-link text-white"
-					href="http://localhost/recruit-app/manage/company/companies.jsp">
+					href="http://localhost/recruit-app/companyinfo/adminCompanyinfoList.do">
 					<span class="nav-link-text ms-1">기업 관리</span>
 				</a>
 			</li>
@@ -71,7 +71,7 @@
 				<a
 					id="notice_menu"
 					class="nav-link text-white"
-					href="http://localhost/recruit-app/manage/notice/notices.jsp">
+					href="http://localhost/recruit-app/manage/notice/notice.do">
 					<span class="nav-link-text ms-1">공지사항 관리</span>
 				</a>
 			</li>

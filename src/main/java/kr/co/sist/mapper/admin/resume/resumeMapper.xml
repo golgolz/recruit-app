@@ -31,92 +31,102 @@
 	</resultMap>
     <select id="selectResumes" resultMap="resumeListResultMap" parameterType="kr.co.sist.admin.vo.resume.SearchVO">
 	    SELECT resume_num, recruit_title, name, apply_date, resume_title, career, addr, doc_pass_flag, final_pass_flag
-	    FROM (
-	        SELECT ROW_NUMBER() OVER (ORDER BY apply.apply_date ASC) AS rnum,
-	               recruit.title AS recruit_title,
-	               resume.resume_num,
-	               users.name,
-	               apply.apply_date,
-	               resume.title AS resume_title,
-	               CASE
-	                   WHEN c.total_days IS NULL THEN '신입'
-	                   ELSE '경력(' ||
-	                        CASE
-	                            WHEN FLOOR(c.total_days / 365) > 0 THEN FLOOR(c.total_days / 365) || '년'
-	                            ELSE ''
-	                        END ||
-	                        CASE
-	                            WHEN FLOOR(c.total_days / 365) > 0 AND FLOOR(MOD(c.total_days, 365) / 30) > 0 THEN ' '
-	                            ELSE ''
-	                        END ||
-	                        CASE
-	                            WHEN FLOOR(MOD(c.total_days, 365) / 30) > 0 THEN FLOOR(MOD(c.total_days, 365) / 30) || '개월'
-	                            WHEN c.total_days > 0 AND FLOOR(MOD(c.total_days, 365) / 30) = 0 THEN
-	                                CASE
-	                                    WHEN FLOOR(c.total_days / 365) = 0 THEN '1개월 미만'
-	                                    ELSE ''
-	                                END
-	                            ELSE ''
-	                        END || ')'
-	               END AS career,
-	               resume.addr,
-	               CASE
-	                   WHEN apply.progress_state = '지원완료' THEN '미정'
-	                   WHEN apply.progress_state = '불합격' THEN '불합격'
-	                   ELSE '합격'
-	               END AS doc_pass_flag,
-	               CASE
-	                   WHEN apply.progress_state = '불합격' THEN '불합격'
-	                   WHEN apply.progress_state = '최종합격' THEN '합격'
-	                   ELSE '미정'
-	               END AS final_pass_flag
-	        FROM apply
-	                 LEFT JOIN resume ON apply.resume_num = resume.resume_num
-	                 LEFT JOIN recruit ON recruit.recruit_num = apply.recruit_num
-	                 LEFT JOIN users ON resume.user_id = users.user_id
-	                 LEFT JOIN (
-	            SELECT resume_num,
-	                   SUM(
-	                           CASE
-	                               WHEN resignation_date IS NULL THEN TRUNC(CURRENT_DATE) - join_date
-	                               ELSE resignation_date - join_date
-	                           END
-	                       ) AS total_days
-	            FROM career
-	            GROUP BY resume_num
-	        ) c ON apply.resume_num = c.resume_num
-	        <where>
-			    <if test="keyword != null and keyword != ''">
-			        AND self_introduction LIKE '%' || #{keyword} || '%'
-			    </if>
-	        </where>
-	    )
-	    <where>
-		    <if test="name != null and name != ''">
-		        AND name LIKE '%' || #{name} || '%'
-		    </if>
-		    <if test="title != null and title != ''">
-		        AND resume_title LIKE '%' || #{title} || '%'
-		    </if>
-		    <if test="startApplyDate != null">
-		        AND apply_date >= #{startApplyDate}
-		    </if>
-		    <if test="endApplyDate != null">
-		        AND apply_date <![CDATA[ <= ]]> #{endApplyDate}
-		    </if>
-		    <if test="career != null and career != ''">
-		        AND career LIKE '%' || #{career} || '%'
-		    </if>
-		    <!-- <if test="endSchool != null and endSchool != ''">
-		        AND r.end_school = #{endSchool}
-		    </if> -->
-		    <if test="addr != null and addr != ''">
-		        AND addr LIKE '%' || #{addr} || '%'
-		    </if>
-	        <if test="startNum != 0 and endNum != 0">
-	            AND rnum BETWEEN #{startNum} AND #{endNum}
-	        </if>
-	    </where>
+		FROM (
+		    SELECT ROW_NUMBER() OVER (ORDER BY apply.apply_date ASC) AS rnum,
+		           recruit.title AS recruit_title,
+		           resume.resume_num,
+		           users.name,
+		           apply.apply_date,
+		           resume.title AS resume_title,
+		           CASE
+		               WHEN c.total_days IS NULL THEN '신입'
+		               ELSE '경력(' ||
+		                    CASE
+		                        WHEN FLOOR(c.total_days / 365) > 0 THEN FLOOR(c.total_days / 365) || '년'
+		                        ELSE ''
+		                    END ||
+		                    CASE
+		                        WHEN FLOOR(c.total_days / 365) > 0 AND FLOOR(MOD(c.total_days, 365) / 30) > 0 THEN ' '
+		                        ELSE ''
+		                    END ||
+		                    CASE
+		                        WHEN FLOOR(MOD(c.total_days, 365) / 30) > 0 THEN FLOOR(MOD(c.total_days, 365) / 30) || '개월'
+		                        WHEN c.total_days > 0 AND FLOOR(MOD(c.total_days, 365) / 30) = 0 THEN
+		                            CASE
+		                                WHEN FLOOR(c.total_days / 365) = 0 THEN '1개월 미만'
+		                                ELSE ''
+		                            END
+		                        ELSE ''
+		                    END || ')'
+		           END AS career,
+		           resume.addr,
+		           CASE
+		               WHEN apply.progress_state = '지원완료' THEN '미정'
+		               WHEN apply.progress_state = '불합격' THEN '불합격'
+		               ELSE '합격'
+		           END AS doc_pass_flag,
+		           CASE
+		               WHEN apply.progress_state = '불합격' THEN '불합격'
+		               WHEN apply.progress_state = '최종합격' THEN '합격'
+		               ELSE '미정'
+		           END AS final_pass_flag
+		    FROM apply
+		             LEFT JOIN resume ON apply.resume_num = resume.resume_num
+		             LEFT JOIN recruit ON recruit.recruit_num = apply.recruit_num
+		             LEFT JOIN users ON resume.user_id = users.user_id
+		             LEFT JOIN education ON resume.resume_num = education.resume_num
+		             LEFT JOIN (
+		        SELECT resume_num,
+		               SUM(
+		                       CASE
+		                           WHEN resignation_date IS NULL THEN TRUNC(CURRENT_DATE) - join_date
+		                           ELSE resignation_date - join_date
+		                       END
+		                   ) AS total_days
+		        FROM career
+		        GROUP BY resume_num
+		    ) c ON apply.resume_num = c.resume_num
+		    <where>
+		        <choose>
+		            <when test="category == 0 and keyword != null and keyword != ''">
+		                AND users.name LIKE '%' || #{keyword} || '%'
+		            </when>
+		            <when test="category == 1 and keyword != null and keyword != ''">
+		                AND resume.title LIKE '%' || #{keyword} || '%'
+		            </when>
+		            <when test="category == 2 and keyword != null and keyword != ''">
+		                AND resume.self_introduction LIKE '%' || #{keyword} || '%'
+		            </when>
+		            <when test="category == 3 and keyword != null and keyword != ''">
+		                AND resume.addr LIKE '%' || #{keyword} || '%'
+		            </when>
+		        </choose>
+		        <if test="startDate != null">
+		            AND apply.apply_date >= #{startDate}
+		        </if>
+		        <if test="endDate != null">
+		            AND apply.apply_date <![CDATA[ <= ]]> #{endDate}
+		        </if>
+		        <if test="career != null and career != ''">
+		            AND (
+		                CASE
+		                    WHEN c.total_days IS NULL THEN '신입'
+		                    ELSE '경력'
+		                END
+		            ) = #{career}
+		        </if>
+		        <if test="recruitId != null">
+		            AND apply.recruit_num = #{recruitId}
+		        </if>
+		        <if test="endSchool != null and endSchool != ''">
+		        	AND education.school_classification >= #{endSchool}
+		        </if>
+		    </where>
+		)
+		WHERE rnum BETWEEN #{startNum} AND #{endNum}
+	</select>
+	<select id="selectResumeCount" resultType="int" parameterType="kr.co.sist.admin.vo.resume.SearchVO">
+		select count(*) from apply
 	</select>
     <select id="selectMetaResume" parameterType="java.lang.String" resultMap="resumeDetailResultMap">
 	    SELECT 

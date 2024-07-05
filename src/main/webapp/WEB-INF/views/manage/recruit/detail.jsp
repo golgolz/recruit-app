@@ -483,7 +483,33 @@ input[type="number"]::-webkit-inner-spin-button {
 							<img src="http://localhost/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
 							공고상세
 						</div>
-						<div id="summernote">공고 상세 내용을 입력해주세요.</div>
+						<div id="summernote">
+							<p style="font-size: 25px;">
+								<b>포지션상세</b>
+							</p>
+							<p> 
+								포지션 상세에 대한 내용을 자유롭게 작성해주세요.</p><p>
+								<br></p><p></p>
+							</p>
+							<p style="font-size: 25px;">
+								<b>주요업무</b>
+							</p>
+							<p>
+								주요업무에 대한 내용을 자유롭게 작성해주세요.</p><p>
+								<br></p><p></p>
+							</p>
+							<p style="font-size: 25px;">
+								<b>자격요건</b>
+							</p>
+							<p>
+								자격요건에 대한 내용을 자유롭게 작성해주세요.</p><p>
+								<br></p><p></p>
+							</p>
+							<p style="font-size: 25px;">
+								<b>우대사항</b>
+							</p>
+								우대사항에 대한 내용을 자유롭게 작성해주세요.<br>
+						</div>
 						<div class="alignCenter">
 					        <c:choose>
 					            <c:when test="${empty recruitNum}">

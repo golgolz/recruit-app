@@ -8,6 +8,7 @@ import kr.co.sist.admin.domain.basic.AdminInfoDomain;
 import kr.co.sist.admin.domain.basic.AdminLoginDomain;
 import kr.co.sist.admin.vo.basic.InsertAdminVO;
 import kr.co.sist.admin.vo.basic.SearchVO;
+import kr.co.sist.admin.vo.basic.UpdateAdminInfoVO;
 import kr.co.sist.properties.MyBatisConfig;
 
 @Component
@@ -35,6 +36,10 @@ public class AdminBasicDAO {
         List<AdminInfoDomain> list =
                 ss.selectList("kr.co.sist.mapper.admin.basic.adminMapper.selectAdminList", sVO);
 
+        System.out.println(sVO.getStartNum() + " : " + sVO.getEndNum());
+        for (AdminInfoDomain aid : list) {
+            System.out.println(aid.getAdminId());
+        }
         myBatis.closeHandler(ss);
 
         return list;
@@ -73,6 +78,22 @@ public class AdminBasicDAO {
         myBatis.closeHandler(ss);
 
         return adminInfo;
-    }
+    }// selectAdminInfo
+
+    public int updateAdminInfo(UpdateAdminInfoVO adminInfo) {
+        SqlSession ss = myBatis.getMyBatisHandler(false);
+
+        int cnt = ss.update("kr.co.sist.mapper.admin.basic.adminMapper.updateAdminInfo", adminInfo);
+
+        if (cnt > 0) {
+            ss.commit();
+        } else {
+            ss.rollback();
+        }
+
+        myBatis.closeHandler(ss);
+
+        return cnt;
+    }// updateAdminInfo
 
 }

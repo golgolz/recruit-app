@@ -11,40 +11,40 @@ import kr.co.sist.vo.companyinfo.SearchVO;
 
 @Service
 public class CompanyinfoAdminService {
-    
-    @Autowired(required=false)
+
+    @Autowired(required = false)
     private CompanyinfoAdminDAO companyinfoAdminDAO;
 
     public List<SearchDomain> searchAllCompanyinfo() {
-        System.out.println("ÀÌ°Ç ¼­ºñ½º¾ß");
-        
-        List<SearchDomain> list=null;
-        list=companyinfoAdminDAO.selectAllCompanyinfo();
-        
+        // System.out.println("ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ñ½º¾ï¿½");
+
+        List<SearchDomain> list = null;
+        list = companyinfoAdminDAO.selectAllCompanyinfo();
+
         return list;
-//        return companyinfoUserDAO.selectAllCompanyinfo();
+        // return companyinfoUserDAO.selectAllCompanyinfo();
     }
 
     public List<SearchDomain> searchCompanyinfoList(SearchVO sVO) {
-        
+
         return companyinfoAdminDAO.selectCompanyinfoList(sVO);
     }
-    
+
     public List<SearchDomain> searchCompanyinfo(Map<String, Object> params) {
-        System.out.println("ÀÌ°Ç serviceÀÇ params¾ß : "+params);
-//        if("companyClassification"==null) {
-//            
-//        }
+        // System.out.println("ï¿½Ì°ï¿½ serviceï¿½ï¿½ paramsï¿½ï¿½ : "+params);
+        // if("companyClassification"==null) {
+        //
+        // }
         return companyinfoAdminDAO.selectCompanyinfo(params);
     }
-    
-    
-    public List<SearchDomain> searchCompanyinfoDetail(String companyCode){
-        List<SearchDomain> list=null;
+
+
+    public List<SearchDomain> searchCompanyinfoDetail(String companyCode) {
+        List<SearchDomain> list = null;
         try {
-            list=companyinfoAdminDAO.selectCompanyinfoDetail(companyCode);
-            
-        }catch(PersistenceException pe) {
+            list = companyinfoAdminDAO.selectCompanyinfoDetail(companyCode);
+
+        } catch (PersistenceException pe) {
             pe.printStackTrace();
         }
         return list;

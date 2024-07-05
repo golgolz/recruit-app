@@ -4,11 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -20,6 +22,7 @@ import kr.co.sist.admin.service.basic.AdminBasicService;
 import kr.co.sist.admin.vo.basic.AdminLoginVO;
 import kr.co.sist.admin.vo.basic.InsertAdminVO;
 import kr.co.sist.admin.vo.basic.SearchVO;
+import kr.co.sist.admin.vo.basic.UpdateAdminInfoVO;
 
 @SessionAttributes("adminId")
 @Controller
@@ -123,7 +126,31 @@ public class AdminBasicController {
             response.put("resultMsg", "error");
             return response;
         }
+    }// addAdmin
 
+    @GetMapping("/api/manage/admin/{adminId}.do")
+    @ResponseBody
+    public ResponseEntity<AdminInfoDomain> getAdminInfo(@PathVariable String adminId) {
+        AdminInfoDomain adminInfo = abs.searchAdminInfo(adminId);
+        if (adminInfo != null) {
+            return ResponseEntity.ok(adminInfo);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }// getAdminInfo
+
+    @GetMapping("/api/manage/admin/modifyAdmin.do")
+    @ResponseBody
+    public Map<String, Object> modifyAdminInfo(UpdateAdminInfoVO adminInfo) {
+        int cnt = abs.modifyAdminInfo(adminInfo);
+        Map<String, Object> response = new HashMap<String, Object>();
+        if (cnt > 0) {
+            response.put("resultMsg", "success");
+            return response;
+        } else {
+            response.put("resultMsg", "error");
+            return response;
+        }
     }
 
 }

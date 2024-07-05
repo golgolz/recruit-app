@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     info=""%>
+<%
+String userId = (String)session.getAttribute("userId");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,7 +67,7 @@
 	       			<section class="content">
 	            		<div class="ResumeMngCont">
 	              			<div class="hdWrap">
-	                			<h2 class="hd_1" style="font-weight: bold;">이력서 관리</h2>
+	                			<h2 class="hd_1" style="font-weight: bold;">이력서 목록</h2>
 	              			</div>
 	              			<div class="btnBx">
 	                			<input type="button" id="registerBtn" class="btn btn-outline-primary btn-sm" value="이력서 등록" />

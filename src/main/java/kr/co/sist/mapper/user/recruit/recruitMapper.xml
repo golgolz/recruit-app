@@ -185,4 +185,7 @@
 	    WHERE 
 	        r.recruit_num = #{recruit_num}
 	</select>
+	<select id="selectWelfares" resultType="kr.co.sist.user.domain.recruit.WelfareDomain" parameterType="java.lang.String">
+		select category, welfare_content as content from welfare where company_code = #{companyCode}
+	</select>
 </mapper>

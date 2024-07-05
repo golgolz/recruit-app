@@ -37,16 +37,7 @@
                 data-attribute-id="gnb"
                 data-gnb-kind="event"
               >
-                <a href="http://localhost/recruit-app/companyInfo/user_company_info.jsp"><span>기업</span></a>
-              </li>
-              <li
-                class="Menu_MenuItem__wI1yA"
-                data-attribute-id="gnb"
-                data-gnb-kind="community"
-              >
-                <a href="http://localhost/recruit-app/resumes.do"
-                  ><span>이력서관리</span></a
-                >
+                <a href="http://localhost/recruit-app/companyinfo/companyinfoList.do"><span>기업</span></a>
               </li>
               <li
                 class="Menu_MenuItem__wI1yA"

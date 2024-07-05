@@ -7,19 +7,181 @@
 	<jsp:include page="../assets/layout/user/lib.jsp" />  
 	<!-- golgolz start -->
     <link href="http://localhost/recruit-app/assets/css/recruit/view-sv-202405201324.css" rel="stylesheet" type="text/css"/>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 	<!-- golgolz end -->
 	<style text="text/css">
 		<!-- golgolz start -->
 		#container, .container{
 		    width: 1200px;
 		}
+		p{
+			font-size: 14px;
+		}
+		.artReadJobSum .tbList > dd, .artReadJobSum .tbList > dt {
+			font-size: 15px;
+		}
 		<!-- golgolz end -->
 	</style>
 	<script text="text/javascript">
+		var company = "";
+		
 		$(function(){
 			<!-- golgolz start -->
+			$.ajax({
+	            url: "${pageContext.request.contextPath}/api/recruit.do?id=" + ${recruitNum},
+	            method: 'GET',
+	            dataType: 'JSON',
+	            success: function(data) {
+	            	console.log(data);
+	            	renderRecruitData(data);
+	            	company = data.companyCode;
+	            },
+	            error: function(xhr, status, error) {
+	                console.error("Error fetching data: " + error);
+	            }
+	        });
+			
+			
 			<!-- golgolz end -->
 		});
+		
+		function renderRecruitData(Recruit) {
+			$.ajax({
+				url: "${pageContext.request.contextPath}/api/welfares.do?company=" + Recruit.companyCode,
+				method: 'GET',
+	            dataType: 'JSON',
+	            success: function(data) {
+	            	updateWelfare(data);
+	            },
+	            error: function(xhr, status, error) {
+	                console.error("Error fetching data: " + error);
+	            }
+			});
+
+			$('.coName').text(Recruit.companyName);
+		    var h3Element = $('.hd_3');
+		    var headerDiv = h3Element.find('.header');
+		    h3Element.contents().filter(function() {
+		        return this.nodeType === 3; // 텍스트 노드
+		    }).remove();
+		    h3Element.append(document.createTextNode(Recruit.title));
+		    h3Element.prepend(headerDiv);
+
+		    $('.tbList dt:contains("경력") + dd strong').text(Recruit.careerStandard);
+		    switch (Recruit.eduStandard) {
+		        case "1":
+		            $('.tbList dt:contains("학력") + dd strong').text('고등학교 졸업 이상');
+		            break;
+		        case "2":
+		            $('.tbList dt:contains("학력") + dd strong').text('대학교(2,3년제) 졸업 이상');
+		            break;
+		        case "3":
+		            $('.tbList dt:contains("학력") + dd strong').text('대학교(4년제) 졸업 이상');
+		            break;
+		        case "4":
+		            $('.tbList dt:contains("학력") + dd strong').text('대학원(석사) 졸업 이상');
+		            break;
+		        case "5":
+		            $('.tbList dt:contains("학력") + dd strong').text('대학원(박사) 졸업 이상');
+		            break;
+		        default:
+		            $('.tbList dt:contains("학력") + dd strong').text('학력무관');
+		    }
+		    
+		    $('.tbList dt:contains("고용형태") + dd strong').text(Recruit.hireCategory);
+		    $('.tbList dt:contains("급여") + dd').text(Recruit.salary + " 만원");
+		    $('.tbList dt:contains("지역") + dd').text(Recruit.workPlace);
+		    $('.tbList dt:contains("시간") + dd span.tahoma:first').text(Recruit.workDay);
+		    $('.tbList dt:contains("시간") + dd span.tahoma:last').text(Recruit.workTime);
+		    $('#recruitContent').html(Recruit.content);
+		    
+		    const today = new Date();
+		    const endDate = new Date(Recruit.endDate);
+		    updateDateInfo(Recruit.inputDate, Recruit.endDate);
+		    
+		    if (today > endDate) {
+		        replaceApplyButton('.tbOline .btn');
+		        replaceApplyButton('.sumBtn');
+		    } else {
+		        $('.devOnlineApplyBtn').on('click', function() {
+		            console.log('지원하기 버튼이 클릭되었습니다.');
+		        });
+		        updateCountdown(endDate);
+		        countdownTimer = setInterval(() => updateCountdown(endDate), 1000);
+		    }
+		}
+
+		function updateCountdown(endDate) {
+		    const today = new Date();
+		    const distance = endDate - today;
+
+		    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+		    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+		    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+		    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+		    let countdownText = '';
+		    if (days > 0) {
+		        countdownText += days + "일 ";
+		    }
+		    countdownText += hours.toString().padStart(2, '0') + ':' + 
+				            minutes.toString().padStart(2, '0') + ':' + 
+				            seconds.toString().padStart(2, '0');
+		    $('.devRemainCount .tahoma').text(countdownText);
+
+		    if (distance < 0) {
+		        clearInterval(countdownTimer);
+		        $('.devRemainCount .tahoma').text('마감됨');
+		        replaceApplyButton('.tbOline .btn');
+		        replaceApplyButton('.sumBtn');
+		    }
+		}
+
+		function updateDateInfo(inputDate, endDate) {
+		    var startDate = new Date(inputDate);
+		    var startDateStr = startDate.getFullYear() + '.' + 
+		                       (startDate.getMonth() + 1).toString().padStart(2, '0') + '.' + 
+		                       startDate.getDate().toString().padStart(2, '0');
+		    var startDayOfWeek = ['일', '월', '화', '수', '목', '금', '토'][startDate.getDay()];
+		    $('.date dt:contains("시작일") + dd .tahoma').text(startDateStr);
+		    $('.date dt:contains("시작일") + dd').append('(' + startDayOfWeek + ')');
+
+		    var endDateObj = new Date(endDate);
+		    var endDateStr = endDateObj.getFullYear() + '.' + 
+		                     (endDateObj.getMonth() + 1).toString().padStart(2, '0') + '.' + 
+		                     endDateObj.getDate().toString().padStart(2, '0');
+		    var endDayOfWeek = ['일', '월', '화', '수', '목', '금', '토'][endDateObj.getDay()];
+		    $('.date dt:contains("마감일") + dd .tahoma').text(endDateStr);
+		    $('.date dt:contains("마감일") + dd').append('(' + endDayOfWeek + ')');
+		}
+
+		let countdownTimer;
+		$(window).on('unload', function() {
+		    if (countdownTimer) {
+		        clearInterval(countdownTimer);
+		    }
+		});
+		
+		function updateWelfare(welfareData) {
+		    var $welfareContainer = $('.location .tbRow dl:first dd');
+		    console.log("welfareData : ", welfareData);
+		    $welfareContainer.find('dl').remove();
+
+		    if (welfareData.length > 0) {
+		        var firstItem = welfareData[0];
+		        $welfareContainer.find('dl:first dt').text(firstItem.category);
+		        $welfareContainer.find('dl:first dd').text(firstItem.content);
+		    }
+
+		    for (var i = 1; i < welfareData.length; i++) {
+		        var item = welfareData[i];
+		        var $newDl = $('<dl>');
+		        $newDl.append('<dt>' + item.category + '</dt>');
+		        $newDl.append('<dd>' + item.content + '</dd>');
+		        $welfareContainer.append($newDl);
+		    }
+
+		}
 	</script>
 </head>
 <body>
@@ -29,25 +191,24 @@
 			<section class="Section_Section__P1hhc">
 			<!-- golgolz start -->
 				<div id="wrap" style="margin-bottom: 30px; margin-top: 37px;">
-					<section id="container" style="width:1200px;">
+					<section id="container" style="width:1100px;">
 						<h2 class="tpl_hd_1" style="font-size: 36px; margin-top: 42px; font-weight: bold;">
-							채용정보
+							채용 공고 상세 보기
 						</h2>
 						<section class="secReadSummary">
 							<h2 class="hd_2 blind">요약정보</h2>
-							<div class="readSumWrap clear" style="width:1200px;">
-								<article class="artReadJobSum" style="width:1200px;">
+							<div class="readSumWrap clear" style="width:1100px;">
+								<article class="artReadJobSum" style="width:1100px;">
 									<div class="sumTit">
-										<h3 class="hd_3">
+										<h3 class="hd_3" style="width: 1060px;">
 											<div class="header">
-												<span class="coName"> 아르네코리아㈜ </span>
+												<span class="coName"></span>
 											</div>
-											[아르네코리아㈜] 개발팀 정규직 채용(광주)
 										</h3>
 									</div>
 									<div class="tbRow clear">
-										<div class="tbCol">
-											<h4 class="hd_4">지원자격</h4>
+										<div class="tbCol" style="font-size: 14px;">
+											<h2 class="hd_2">지원자격</h2>
 											<dl class="tbList">
 												<dt>경력</dt>
 												<dd>
@@ -60,48 +221,29 @@
 											</dl>
 										</div>
 										<div class="tbCol">
-											<h4 class="hd_4">근무조건</h4>
+											<h2 class="hd_2">근무조건</h2>
 											<dl class="tbList">
 												<dt>고용형태</dt>
 												<dd>
 													<ul class="addList">
-														<li><strong class="col_1">정규직</strong> <span
-															class="tahoma"></span></li>
+														<li>
+															<strong class="col_1"></strong> 
+														</li>
 													</ul>
 												</dd>
 												<dt>급여</dt>
-												<dd>
-													<em class="dotum"></em> 회사내규에 따름
-												</dd>
+												<dd></dd>
 												<dt>지역</dt>
-												<dd>
-													<a
-														href="https://www.jobkorea.co.kr/List_GI/GI_Area_List.asp?AreaNo=E010&amp;AllStat=1"
-														target="_blank" title="새창">광주
-														광산구</a>
-												</dd>
+												<dd></dd>
 												<dt>시간</dt>
 												<dd>
-													주<span class="tahoma">5</span>일 (월~금)<span class="dvs"></span>
-													<span class="tahoma">08:00~17:00</span>
+													<span class="tahoma"></span>
+													<span class="tahoma"></span>
 												</dd>
 											</dl>
 										</div>
 										<div class="tbCol tbCoInfo">
-											<h4 class="hd_4">기업정보</h4>
-											<div class="tbLogo">
-												<div class="logo">
-													<p>
-														<a
-															href="https://www.jobkorea.co.kr/Recruit/Co_Read/C/487603?Oem_Code=C1"
-															target="_blank" title="새창"><img
-															src="./recruit_detail_files/2j9sp006Xo_jG6ql2m28o0cpVcRt_2po.jpg"
-															id="cologo" name="cologo" alt="아르네코리아㈜"
-															onload="go_logo_size(this, 100, 40);" width="100"
-															height="40" /></a>
-													</p>
-												</div>
-											</div>
+											<h2 class="hd_2">기업정보</h2>
 											<dl class="tbList">
 												<dt>사원수</dt>
 												<dd>
@@ -163,10 +305,11 @@
 								<div class="divReadBx clear devMakeSameHeight">
 									<article class="artReadDetail">
 										<h3 class="hd_3 blind">상세요강 정보</h3>
-										<iframe name="gib_frame" id="gib_frame" width="1200"
+										<!-- <iframe name="gib_frame" id="gib_frame" width="1200"
 											scrolling="no" frameborder="0" marginheight="0"
 											marginwidth="0" src="test.html" onload="ifrmNavi(this)"
-											title="상세요강"></iframe>
+											title="상세요강"></iframe> -->
+										<div id="recruitContent" style="text-align: left; padding: 15px;"></div>
 									</article>
 								</div>
 							</section>
@@ -179,17 +322,17 @@
 											<dl class="time">
 												<dt class="girIcn icnTime">남은시간</dt>
 												<dd class="devRemainCount">
-													<span class="tahoma">07:30:38</span>
+													<span class="tahoma"></span>
 												</dd>
 											</dl>
 											<dl class="date">
 												<dt>시작일</dt>
 												<dd>
-													<span class="tahoma">2024.05.22</span>(수)
+													<span class="tahoma"></span>
 												</dd>
 												<dt>마감일</dt>
 												<dd>
-													<span class="tahoma">2024.06.07</span>(금)
+													<span class="tahoma"></span>
 												</dd>
 											</dl>
 										</div>
@@ -206,11 +349,11 @@
 											</div>
 										</div>
 
-										<div class="tbRow tbRsm tbCase">
+										<!-- <div class="tbRow tbRsm tbCase">
 											<dl>
 												<dt>지원양식</dt>
 												<dd class="devTplLyClick">
-													<strong>잡코리아 이력서 양식</strong>
+													<strong>구지직 이력서 양식</strong>
 												</dd>
 											</dl>
 										</div>
@@ -218,15 +361,14 @@
 											<dl>
 												<dt>모집분야</dt>
 												<dd>
-													<a
-														href="https://www.jobkorea.co.kr/Recruit/GI_Read/44738554?rPageCode=AM&amp;logpath=21&amp;sn=6#Apply">CDU개발팀</a>
+													<a href="https://www.jobkorea.co.kr/Recruit/GI_Read/44738554?rPageCode=AM&amp;logpath=21&amp;sn=6#Apply">CDU개발팀</a>
 												</dd>
 												<dt>모집인원</dt>
 												<dd>
 													<span class="tahoma">○</span>명
 												</dd>
 											</dl>
-										</div>
+										</div> -->
 									</article>
 								</div>
 
@@ -234,7 +376,7 @@
 							</section>
 
 							<!-- 통계 -->
-							<section class="secReadStatistic">
+							<!-- <section class="secReadStatistic">
 								<h2 class="hd_2">지원자 현황 통계</h2>
 
 								<article class="artReadStatistic divReadBx clear blur">
@@ -429,7 +571,7 @@
 								</article>
 
 								<article class="artReadStrategy"></article>
-							</section>
+							</section> -->
 
 							<section class="secReadWork" id="secReadWork">
 								<h2 class="hd_2">근무환경</h2>
@@ -440,25 +582,8 @@
 												<dt>복리후생</dt>
 												<dd>
 													<dl>
-														<dt>연금·보험</dt>
-														<dd>국민연금 , 고용보험, 산재보험, 건강보험, 퇴직연금, 개인연금</dd>
-													</dl>
-													<dl>
-														<dt>휴무·휴가·행사</dt>
-														<dd>주5일제, 연차제도</dd>
-													</dl>
-													<dl>
-														<dt>보상·수당·지원</dt>
-														<dd>퇴직금, 인센티브, 자녀교육비, 장기근속 포상, 우수사원 포상제도, 가족 의료비 지원,
-															자기개발 지원, 휴일근로수당, 연월차제도수당, 휴가비</dd>
-													</dl>
-													<dl>
-														<dt>사내제도·성장</dt>
-														<dd>사내 외국어강좌 운영</dd>
-													</dl>
-													<dl>
-														<dt>사내시설</dt>
-														<dd>기숙사 지원, 구내식당, 휴식공간</dd>
+														<dt></dt>
+														<dd></dd>
 													</dl>
 													<dl>
 														<dt>편의·여가·건강</dt>

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import kr.co.sist.admin.domain.recruit.RecruitDomain;
+import kr.co.sist.domain.companyinfo.WelfareDomain;
 import kr.co.sist.user.domain.recruit.RecruitListDomain;
 import kr.co.sist.user.service.recruit.RecruitUserService;
 import kr.co.sist.user.vo.recruit.SearchVO;
@@ -64,5 +65,11 @@ public class RecruitUserController {
     @ResponseBody
     public RecruitDomain searchOneRecruit(@RequestParam("id") int recruitId) {
         return recruitUserService.searchOneRecruit(recruitId);
+    }
+
+    @GetMapping("/api/welfares.do")
+    @ResponseBody
+    public List<WelfareDomain> selectWelfare(@RequestParam("company") String companyCode) {
+        return recruitUserService.selectWelfare(companyCode);
     }
 }

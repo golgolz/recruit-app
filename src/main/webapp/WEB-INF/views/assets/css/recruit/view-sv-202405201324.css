@@ -632,7 +632,7 @@ a .girBtn:hover {
 .artReadJobSum .tbList > dd,
 .artReadJobSum .tbList > dt {
   display: inline-block;
-  font-size: 13px;
+  font-size: 15px;
   letter-spacing: 0;
   margin: 4px 0 5px;
 }
