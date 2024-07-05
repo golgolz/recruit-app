@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" info=""%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html>
@@ -20,6 +21,8 @@
         $("#btn-reset").click(function(){
             // 현재 페이지로 리다이렉트하여 초기화
             window.location.href = window.location.pathname;
+            
+           
         });
     });
 
@@ -171,7 +174,7 @@
     <div class="container-fluid">
             <!-- golgolz start -->
             <div class="s_wrap">
-        <form name="fsearch" id="fsearch" method="get" onsubmit="return handleFormSubmit(event);" action="/recruit-app/manage/review/review.do">
+        <form name="fsearch" id="fsearch" method="get" action="/recruit-app/manage/review/review.do">
     <input type="hidden" name="code" value="list">
     <div class="tbl_frm01">
         <table>
@@ -184,11 +187,11 @@
                     <th scope="row">검색어</th>
                     <td>
                         <select name="sfl">
-                            <option value="id">아이디</option>
-                            <option value="name">회원명</option>
-                            <option value="titleOrContent">제목 또는 내용</option> <!-- 추가 -->
+                            <option value="id" <c:if test="${param.sfl == 'id'}">selected</c:if>>아이디</option>
+                            <option value="name" <c:if test="${param.sfl == 'name'}">selected</c:if>>회원명</option>
+                            <option value="titleOrContent" <c:if test="${param.sfl == 'titleOrContent'}">selected</c:if>>제목 또는 내용</option>
                         </select>
-                        <input type="text" name="stx" value="" class="frm_input" size="30">
+                        <input type="text" name="stx" value="${param.stx}" class="frm_input" size="30">
                     </td>
                 </tr>
             </tbody>
@@ -199,6 +202,8 @@
         <input type="button" value="초기화" class="btn btn-outline-secondary btn-sm" id="btn-reset">
     </div>
 </form>
+
+
 
         <div class="local_ov mart30">
             총 리뷰 수 : <b class="fc_red">${reviewList != null ? reviewList.size() : 0}</b>건
