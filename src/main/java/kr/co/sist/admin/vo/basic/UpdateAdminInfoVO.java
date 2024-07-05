@@ -13,5 +13,6 @@ import lombok.ToString;
 @ToString
 public class UpdateAdminInfoVO {
     private String adminId;
+    private String modifyAdminId;
     private String authority;
 }

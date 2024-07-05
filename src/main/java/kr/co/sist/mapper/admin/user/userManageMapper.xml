@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="kr.co.sist.mapper.admin.user.userManageMapper">
+ 	<resultMap id="userInfoResultMap" type="kr.co.sist.admin.domain.user.UserInfoDomain">
+	    <result property="userId" column="user_id"/>
+	    <result property="name" column="name"/>
+	    <result property="phone" column="phone"/>
+	    <result property="signupDate" column="signup_date"/>
+	</resultMap>
+ 	<select id="selectUserList" resultMap="userInfoResultMap" parameterType="kr.co.sist.admin.vo.user.SearchVO">
+  		select rnum,name,user_id,phone,signup_date
+  		from (
+  			select row_number() over(order by signup_date desc) as rnum,name,user_id,phone,signup_date
+			from users
+			<where>
+				<choose>
+	                <when test="category == 1 and keyword != null and keyword != ''">
+	                    and user_id LIKE '%' || #{keyword} || '%'
+	                </when>
+	                <when test="category == 2 and keyword != null and keyword != ''">
+	                    and name LIKE '%' || #{keyword} || '%'
+	                </when>
+	                <when test="category == 3 and keyword != null and keyword != ''">
+	                    and phone Like '%' || #{keyword} || '%'
+	                </when>
+	            </choose>
+	            <if test="signupDateStart != null">
+                	and signup_date >= #{ signupDateStart }
+	            </if>
+	            <if test="signupDateEnd != null">
+	                and signup_date <![CDATA[ <= ]]> #{ signupDateEnd }
+	            </if>
+			</where>
+			)
+		<where>
+			<if test="startNum != 0 and endNum != 0">
+				rnum between #{startNum} and #{endNum}
+			</if>
+		</where>
+  </select>
+  <select id="selectUserCnt" resultType="int" parameterType="kr.co.sist.admin.vo.user.SearchVO">
+  		select count(*) as total_count
+  		from (
+  			select row_number() over(order by signup_date desc) as rnum,name,user_id,phone,signup_date
+			from users
+			<where>
+				<choose>
+	                <when test="category == 1 and keyword != null and keyword != ''">
+	                    and user_id LIKE '%' || #{keyword} || '%'
+	                </when>
+	                <when test="category == 2 and keyword != null and keyword != ''">
+	                    and name LIKE '%' || #{keyword} || '%'
+	                </when>
+	                <when test="category == 3 and keyword != null and keyword != ''">
+	                    and phone '%' || #{keyword} || '%'
+	                </when>
+	            </choose>
+	            <if test="signupDateStart != null">
+                	and signup_date >= #{ signupDateStart }
+	            </if>
+	            <if test="signupDateEnd != null">
+	                and signup_date <![CDATA[ <= ]]> #{ signupDateEnd }
+	            </if>
+			</where>
+			)
+  </select>
+ 
+ </mapper>

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8" info=""%>
 <!doctype html>
 <html lang="ko" data-bs-theme="auto">
+<% String resultMsg = (String)request.getAttribute("resultMsg"); %>
   <head>
   	<script src="https://getbootstrap.com/docs/5.3/assets/js/color-modes.js"></script>
 	<link rel="shortcut icon" href="http://demofran.com/data/banner/JnLfWUSUyR6sXJP5n3Re4Fvdc93k93.ico" type="image/x-icon">
@@ -110,7 +111,6 @@
 	  content: url("http://localhost/recruit-app/assets/images/admin/adminLoginIcoNight.png");
 	} 
     </style>
-
     
     <!-- Custom styles for this template -->
     <link href="https://getbootstrap.com/docs/5.3/examples/sign-in/sign-in.css" rel="stylesheet">
@@ -181,7 +181,7 @@
 
     
 <main class="form-signin w-100 m-auto">
-  <form id="adminLoginFrm" action="/manage/adminLogin/adminLogin.do" method="post">
+  <form id="adminLoginFrm" action="http://localhost/recruit-app/manage/adminLogin/adminLogin.do" method="post">
     <img class="mb-4" src="http://localhost/recruit-app/assets/images/admin/adminLoginIcoNight.png" alt="" width="80" height="80">
     <h1 class="h3 mb-3 fw-normal"><strong>Admin Login</strong></h1>
 
@@ -195,9 +195,19 @@
     </div>
 
     <div class="form-check text-start my-3" style="padding-left: 0px;">
+	    <%
+	    	if(resultMsg == null || resultMsg == ""){
+	    %>
       <label class="form-check-label" for="flexCheckDefault" style="font-size: 15px;">
         관리자 인증이 필요합니다.
       </label>
+	    <%
+	    	}else {
+	    %>
+      <label class="form-check-label" for="flexCheckDefault" style="font-size: 15px; color: red;">
+      <%= resultMsg %>	
+      </label>
+      <% }//end else %>
     </div>
     <button class="btn btn-primary w-100 py-2" type="button" id="loginBtn">로그인</button>
     <p class="mt-5 mb-3 text-body-secondary">By. GolGolZ</p>
