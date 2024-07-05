@@ -163,33 +163,33 @@ window.onload = function() {
     <div class="container-fluid">
             <!-- golgolz start -->
             <div class="s_wrap">
-        <form name="fsearch" id="fsearch" method="get" onsubmit="return handleFormSubmit(event);" action="/manage/review/review.do">
-            <input type="hidden" name="code" value="list">
-            <div class="tbl_frm01">
-                <table>
-                    <colgroup>
-                        <col class="w100">
-                        <col>
-                    </colgroup>
-                    <tbody>
-                        <tr>
-                            <th scope="row">검색어</th>
-                            <td>
-                                <select name="sfl">
-                                    <option value="id">아이디</option>
-                                    <option value="name">회원명</option>
-                                    <option value="titleOrContent">제목 또는 내용</option>
-                                </select>
-                                <input type="text" name="stx" value="" class="frm_input" size="30">
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="btn_confirm">
-                <input type="submit" value="검색" class="btn btn-secondary btn-sm">
-            </div>
-        </form>
+        <form name="fsearch" id="fsearch" method="get" onsubmit="return handleFormSubmit(event);" action="/recruit-app/manage/review/review.do">
+    <input type="hidden" name="code" value="list">
+    <div class="tbl_frm01">
+        <table>
+            <colgroup>
+                <col class="w100">
+                <col>
+            </colgroup>
+            <tbody>
+                <tr>
+                    <th scope="row">검색어</th>
+                    <td>
+                        <select name="sfl">
+                            <option value="id">아이디</option>
+                            <option value="name">회원명</option>
+                            <option value="titleOrContent">제목 또는 내용</option> <!-- 추가 -->
+                        </select>
+                        <input type="text" name="stx" value="" class="frm_input" size="30">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="btn_confirm">
+        <input type="submit" value="검색" class="btn btn-secondary btn-sm">
+    </div>
+</form>
 
         <div class="local_ov mart30">
             총 리뷰 수 : <b class="fc_red">${reviewList != null ? reviewList.size() : 0}</b>건

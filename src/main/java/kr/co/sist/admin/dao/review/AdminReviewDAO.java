@@ -11,9 +11,9 @@ import kr.co.sist.properties.MyBatisConfig;
 
 @Repository
 public class AdminReviewDAO {
-    
+
     private static final Logger logger = LoggerFactory.getLogger(AdminReviewDAO.class);
-    
+
     private final MyBatisConfig myBatis;
 
     @Autowired
@@ -21,6 +21,11 @@ public class AdminReviewDAO {
         this.myBatis = myBatis;
     }
 
+    /**
+     * ID로 리뷰 검색
+     * @param userId 사용자 ID
+     * @return 해당 사용자 ID를 가진 리뷰 리스트
+     */
     public List<ReviewVO> searchReviewById(String userId) {
         logger.debug("searchReviewById called with userId: {}", userId);
         SqlSession session = myBatis.getMyBatisHandler(false);
@@ -30,6 +35,11 @@ public class AdminReviewDAO {
         return result;
     }
 
+    /**
+     * 이름으로 리뷰 검색
+     * @param name 사용자 이름
+     * @return 해당 사용자 이름을 가진 리뷰 리스트
+     */
     public List<ReviewVO> searchReviewByName(String name) {
         logger.debug("searchReviewByName called with name: {}", name);
         SqlSession session = myBatis.getMyBatisHandler(false);
@@ -39,6 +49,11 @@ public class AdminReviewDAO {
         return result;
     }
 
+    /**
+     * 제목 또는 내용으로 리뷰 검색
+     * @param keyword 검색 키워드
+     * @return 해당 키워드를 포함한 제목 또는 내용을 가진 리뷰 리스트
+     */
     public List<ReviewVO> searchReviewByTitleOrContent(String keyword) {
         logger.debug("searchReviewByTitleOrContent called with keyword: {}", keyword);
         SqlSession session = myBatis.getMyBatisHandler(false);
@@ -48,6 +63,10 @@ public class AdminReviewDAO {
         return result;
     }
 
+    /**
+     * 전체 리뷰 조회
+     * @return 모든 리뷰 리스트
+     */
     public List<ReviewVO> getAllReviews() {
         logger.debug("getAllReviews called");
         SqlSession session = myBatis.getMyBatisHandler(false);
@@ -57,6 +76,11 @@ public class AdminReviewDAO {
         return result;
     }
 
+    /**
+     * 리뷰 상세 정보 조회 (수정을 위해)
+     * @param reviewNum 리뷰 번호
+     * @return 해당 리뷰 번호의 상세 정보
+     */
     public ReviewVO getReviewDetailsForUpdate(int reviewNum) {
         logger.debug("getReviewDetailsForUpdate called with reviewNum: {}", reviewNum);
         SqlSession session = myBatis.getMyBatisHandler(false);
@@ -66,6 +90,11 @@ public class AdminReviewDAO {
         return result;
     }
 
+    /**
+     * 리뷰 업데이트
+     * @param review 수정할 리뷰 객체
+     * @return 업데이트된 레코드 수
+     */
     public int updateReview(ReviewVO review) {
         logger.debug("updateReview called with review: {}", review);
         SqlSession session = myBatis.getMyBatisHandler(false);
@@ -75,6 +104,11 @@ public class AdminReviewDAO {
         return result;
     }
 
+    /**
+     * 리뷰 삭제
+     * @param reviewNum 삭제할 리뷰 번호
+     * @return 삭제된 레코드 수
+     */
     public int deleteReview(int reviewNum) {
         logger.debug("deleteReview called with reviewNum: {}", reviewNum);
         SqlSession session = myBatis.getMyBatisHandler(false);
