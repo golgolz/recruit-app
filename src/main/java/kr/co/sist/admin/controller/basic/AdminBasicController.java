@@ -111,9 +111,15 @@ public class AdminBasicController {
     @PostMapping("/manage/admin/addAdmin.do")
     public @ResponseBody Map<String, Object> addAdmin(InsertAdminVO insertAdminVO) {
 
-        int cnt = abs.addAdmin(insertAdminVO);
-
         Map<String, Object> response = new HashMap<String, Object>();
+        String resultId = abs.chkDuplAdminId(insertAdminVO.getAdminId());
+
+        if (resultId != null || resultId != "") {
+            response.put("resultMsg", "duplication");
+            return response;
+        }
+
+        int cnt = abs.addAdmin(insertAdminVO);
 
         if (cnt > 0) {
             AdminInfoDomain adminInfo = abs.searchAdminInfo(insertAdminVO.getAdminId());
@@ -141,9 +147,19 @@ public class AdminBasicController {
 
     @GetMapping("/api/manage/admin/modifyAdmin.do")
     @ResponseBody
-    public Map<String, Object> modifyAdminInfo(UpdateAdminInfoVO adminInfo) {
-        int cnt = abs.modifyAdminInfo(adminInfo);
+    public Map<String, Object> modifyAdminInfo(String adminId, UpdateAdminInfoVO adminInfo) {
+
         Map<String, Object> response = new HashMap<String, Object>();
+        String resultId = abs.chkDuplAdminId(adminId);
+
+        if (resultId != null || resultId != "") {
+            response.put("resultMsg", "duplication");
+            return response;
+        }
+
+        adminInfo.setAdminId(adminId);
+
+        int cnt = abs.modifyAdminInfo(adminInfo);
         if (cnt > 0) {
             response.put("resultMsg", "success");
             return response;

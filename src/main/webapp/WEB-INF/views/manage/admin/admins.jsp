@@ -105,12 +105,11 @@
 		    function getCheckedPermissions() {
 		    	 var permissions = {};
 		    	 $(".addCheckbox").each(function() {
-		    	   permissions[$(this).attr("id")] = $(this).is(":checked") ? 'Y' : 'N';
+		    	   permissions[$(this).attr("name")] = $(this).is(":checked") ? 'Y' : 'N';
 		    	 });
 		    	 return JSON.stringify(permissions);
 		    }//function
 		    
-		    // 체크된 권한 정보를 가져오는 함수
 		    function getModifyCheckedPermissions() {
 		    	 var permissions = {};
 		    	 $(".modifyCheckbox").each(function() {
@@ -140,11 +139,11 @@
 		  			 // 성공 시
 		  			 alert("새로운 관리자가 등록 되었습니다.");
 		  			 updateAdminList(false);
-		  			 
 		  			 resetForm();
-	  			    }else {
+	  			    }else if(response.resultMsg === 'duplication') {
+    	            	alert('이미 존재하는 ID로는 변경이 불가합니다.');
+    	            }else {
 	  			      alert("문제가 발생 했습니다. 잠시 후 다시 시도해주세요.");
-	  			    	
 	  			      resetForm();
 	  			    }
 	  			    },
@@ -212,6 +211,7 @@
 	    	        	var authority = JSON.parse(adminInfo.authority);
 	    	            
 	    	            $("#modifyAdminId").val(adminInfo.adminId);
+	    	            $("#defaultAdminId").val(adminInfo.adminId);
 	    	            
 			            for (var key in authority) {
 			                $("#modify" + key.charAt(0).toUpperCase() + key.slice(1)).prop('checked', authority[key] === 'Y');
@@ -226,13 +226,15 @@
 	    	});
 	    	
 	    	$("#adminSetBtn").click(function(){
-	    		var adminId = $("#modifyAdminId").val().trim();
+	    		var adminId = $("#defaultAdminId").val().trim();
+	    		var modifyAdminId = $("#modifyAdminId").val().trim();
   				var permissionsJson = getModifyCheckedPermissions();
-  				
   				var adminData = {
   						adminId:adminId,
+  						modifyAdminId:modifyAdminId,
   						authority:permissionsJson
   								}
+  				
 	    		$.ajax({
 	    	        url: "${pageContext.request.contextPath}/api/manage/admin/modifyAdmin.do",
 	    	        method: 'GET',
@@ -241,6 +243,10 @@
 	    	        success: function(response) {
 	    	            if(response.resultMsg === 'success'){
 	    	            	alert('저장 되었습니다.');
+	    	            }else if(response.resultMsg === 'duplication') {
+	    	            	alert('이미 존재하는 ID로는 변경이 불가합니다.');
+	    	            }else {
+	    	            	alert('정보 수정 중 문제가 발생 했습니다. 잠시 후 다시 시도 해주세요.');
 	    	            }
 	    	            updateAdminList(false);
 	    	        },
@@ -591,6 +597,7 @@
 				          <div class="mb-3">
 				            <label for="modifyAdminId" class="form-label">관리자 ID</label>
 				            <input type="email" class="form-control" id="modifyAdminId" name="adminId" maxlength="30" style="margin-right:5px; border: 1px solid #dedede; font-size: 15px; padding-left: 5px;">
+				            <input type="hidden" class="form-control" id="defaultAdminId" name="adminId" maxlength="30" style="margin-right:5px; border: 1px solid #dedede; font-size: 15px; padding-left: 5px;">
 				          </div>
 				          <div class="mb-3">
 				            <label class="form-label">권한 부여</label>
