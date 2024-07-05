@@ -15,121 +15,129 @@
 <script type="text/javascript">
     $(function(){
         $("#review_menu").addClass("bg-gradient-primary");
+
+        // 초기화 버튼 클릭 이벤트 핸들러
+        $("#btn-reset").click(function(){
+            // 현재 페이지로 리다이렉트하여 초기화
+            window.location.href = window.location.pathname;
+        });
     });
 
     // JSON 데이터를 파싱하여 테이블에 추가하는 함수
     function loadReviews(reviewListJson, page = 1, itemsPerPage = 8) {
-    console.log("loadReviews called with reviewListJson:", reviewListJson);
-    const reviews = JSON.parse(reviewListJson);
-    const reviewListTable = document.querySelector('.list');
+        console.log("loadReviews called with reviewListJson:", reviewListJson);
+        const reviews = JSON.parse(reviewListJson);
+        const reviewListTable = document.querySelector('.list');
 
-    reviewListTable.innerHTML = ''; // 기존 리스트 초기화
+        reviewListTable.innerHTML = ''; // 기존 리스트 초기화
 
-    const startIndex = (page - 1) * itemsPerPage;
-    const endIndex = page * itemsPerPage;
-    const paginatedReviews = reviews.slice(startIndex, endIndex);
+        const startIndex = (page - 1) * itemsPerPage;
+        const endIndex = page * itemsPerPage;
+        const paginatedReviews = reviews.slice(startIndex, endIndex);
 
-    paginatedReviews.forEach((review, index) => {
-        console.log("Adding review:", review); // 디버그 로그 추가
-        const row = document.createElement('tr');
+        paginatedReviews.forEach((review, index) => {
+            console.log("Adding review:", review); // 디버그 로그 추가
+            const row = document.createElement('tr');
 
-        const reviewNumCell = document.createElement('td');
-        reviewNumCell.textContent = startIndex + index + 1;
-        row.appendChild(reviewNumCell);
+            const reviewNumCell = document.createElement('td');
+            reviewNumCell.textContent = startIndex + index + 1;
+            row.appendChild(reviewNumCell);
 
-        const userIdCell = document.createElement('td');
-        userIdCell.textContent = review.userId;
-        row.appendChild(userIdCell);
+            const userIdCell = document.createElement('td');
+            userIdCell.textContent = review.userId;
+            row.appendChild(userIdCell);
 
-        const authorCell = document.createElement('td');
-        authorCell.textContent = review.author;
-        row.appendChild(authorCell);
+            const authorCell = document.createElement('td');
+            authorCell.textContent = review.author;
+            row.appendChild(authorCell);
 
-        const titleCell = document.createElement('td');
-        titleCell.textContent = review.title;
-        row.appendChild(titleCell);
+            const titleCell = document.createElement('td');
+            titleCell.textContent = review.title;
+            row.appendChild(titleCell);
 
-        const inputDateCell = document.createElement('td');
-        inputDateCell.textContent = review.inputDate;
-        row.appendChild(inputDateCell);
+            const inputDateCell = document.createElement('td');
+            inputDateCell.textContent = review.inputDate;
+            row.appendChild(inputDateCell);
 
-        const recommendCell = document.createElement('td');
-        recommendCell.textContent = review.recommend;
-        row.appendChild(recommendCell);
+            const recommendCell = document.createElement('td');
+            recommendCell.textContent = review.recommend;
+            row.appendChild(recommendCell);
 
-        const deleteFlagCell = document.createElement('td');
-        deleteFlagCell.textContent = review.deleteFlag;
-        row.appendChild(deleteFlagCell);
+            const deleteFlagCell = document.createElement('td');
+            deleteFlagCell.textContent = review.deleteFlag;
+            row.appendChild(deleteFlagCell);
 
-        reviewListTable.appendChild(row);
-    });
+            reviewListTable.appendChild(row);
+        });
 
-    updatePagination(reviews.length, page, itemsPerPage);
-}
+        updatePagination(reviews.length, page, itemsPerPage);
+    }
 
-function updatePagination(totalItems, currentPage, itemsPerPage) {
-    const totalPages = Math.ceil(totalItems / itemsPerPage);
-    const paginationUl = document.querySelector('.pagination');
-    paginationUl.innerHTML = '';
+    function updatePagination(totalItems, currentPage, itemsPerPage) {
+        const totalPages = Math.ceil(totalItems / itemsPerPage);
+        const paginationUl = document.querySelector('.pagination');
+        paginationUl.innerHTML = '';
 
-    const prevPageLi = document.createElement('li');
-    prevPageLi.className = 'page-items';
-    const prevPageLink = document.createElement('a');
-    prevPageLink.className = 'page-link';
-    prevPageLink.href = '#';
-    prevPageLink.setAttribute('aria-label', 'Previous');
-    prevPageLink.innerHTML = '<span aria-hidden="true">&laquo;</span>';
-    prevPageLink.onclick = function (e) {
-        e.preventDefault();
-        if (currentPage > 1) {
-            loadReviews(window.reviewListJson, currentPage - 1, itemsPerPage);
-        }
-    };
-    prevPageLi.appendChild(prevPageLink);
-    paginationUl.appendChild(prevPageLi);
-
-    for (let i = 1; i <= totalPages; i++) {
-        const pageLi = document.createElement('li');
-        pageLi.className = 'page-items';
-        const pageLink = document.createElement('a');
-        pageLink.className = 'page-link';
-        pageLink.href = '#';
-        pageLink.textContent = i;
-        pageLink.setAttribute('data-page', i);
-        pageLink.onclick = function (e) {
+        const prevPageLi = document.createElement('li');
+        prevPageLi.className = 'page-items';
+        const prevPageLink = document.createElement('a');
+        prevPageLink.className = 'page-link';
+        prevPageLink.href = '#';
+        prevPageLink.setAttribute('aria-label', 'Previous');
+        prevPageLink.innerHTML = '<span aria-hidden="true">&laquo;</span>';
+        prevPageLink.onclick = function (e) {
             e.preventDefault();
-            loadReviews(window.reviewListJson, i, itemsPerPage);
+            if (currentPage > 1) {
+                loadReviews(window.reviewListJson, currentPage - 1, itemsPerPage);
+            }
         };
-        pageLi.appendChild(pageLink);
-        paginationUl.appendChild(pageLi);
+        prevPageLi.appendChild(prevPageLink);
+        paginationUl.appendChild(prevPageLi);
+
+        for (let i = 1; i <= totalPages; i++) {
+            const pageLi = document.createElement('li');
+            pageLi.className = 'page-items';
+            const pageLink = document.createElement('a');
+            pageLink.className = 'page-link';
+            pageLink.href = '#';
+            pageLink.textContent = i;
+            pageLink.setAttribute('data-page', i);
+            pageLink.onclick = function (e) {
+                e.preventDefault();
+                loadReviews(window.reviewListJson, i, itemsPerPage);
+            };
+            pageLi.appendChild(pageLink);
+            paginationUl.appendChild(pageLi);
+        }
+
+        const nextPageLi = document.createElement('li');
+        nextPageLi.className = 'page-items';
+        const nextPageLink = document.createElement('a');
+        nextPageLink.className = 'page-link';
+        nextPageLink.href = '#';
+        nextPageLink.setAttribute('aria-label', 'Next');
+        nextPageLink.innerHTML = '<span aria-hidden="true">&raquo;</span>';
+        nextPageLink.onclick = function (e) {
+            e.preventDefault();
+            if (currentPage < totalPages) {
+                loadReviews(window.reviewListJson, currentPage + 1, itemsPerPage);
+            }
+        };
+        nextPageLi.appendChild(nextPageLink);
+        paginationUl.appendChild(nextPageLi);
     }
 
-    const nextPageLi = document.createElement('li');
-    nextPageLi.className = 'page-items';
-    const nextPageLink = document.createElement('a');
-    nextPageLink.className = 'page-link';
-    nextPageLink.href = '#';
-    nextPageLink.setAttribute('aria-label', 'Next');
-    nextPageLink.innerHTML = '<span aria-hidden="true">&raquo;</span>';
-    nextPageLink.onclick = function (e) {
-        e.preventDefault();
-        if (currentPage < totalPages) {
-            loadReviews(window.reviewListJson, currentPage + 1, itemsPerPage);
+    window.onload = function() {
+        window.reviewListJson = '${reviewListJson}';
+        console.log("window.onload called with reviewListJson:", window.reviewListJson);
+        if (window.reviewListJson) {
+            loadReviews(window.reviewListJson);
         }
     };
-    nextPageLi.appendChild(nextPageLink);
-    paginationUl.appendChild(nextPageLi);
-}
-
-window.onload = function() {
-    window.reviewListJson = '${reviewListJson}';
-    console.log("window.onload called with reviewListJson:", window.reviewListJson);
-    if (window.reviewListJson) {
-        loadReviews(window.reviewListJson);
-    }
-};
-
 </script>
+
+
+
 <!-- golgolz start -->
 
 <link href="http://localhost/recruit-app/assets/css/pagenation.css" rel="stylesheet" />
@@ -188,6 +196,7 @@ window.onload = function() {
     </div>
     <div class="btn_confirm">
         <input type="submit" value="검색" class="btn btn-secondary btn-sm">
+        <input type="button" value="초기화" class="btn btn-outline-secondary btn-sm" id="btn-reset">
     </div>
 </form>
 
