@@ -9,6 +9,16 @@
 	    <result property="phone" column="phone"/>
 	    <result property="signupDate" column="signup_date"/>
 	</resultMap>
+	<resultMap id="userDetailInfo" type="kr.co.sist.admin.domain.user.UserDetailDomain">
+		<result property="name" column="name"/>
+		<result property="gender" column="gender"/>
+		<result property="userId" column="user_id"/>
+		<result property="phone" column="phone"/>
+		<result property="tel" column="tel"/>
+		<result property="signupDate" column="signup_date"/>
+		<result property="birthDate" column="birth_date"/>
+		<result property="recentloginDate" column="recentlogin_date"/>
+	</resultMap>
  	<select id="selectUserList" resultMap="userInfoResultMap" parameterType="kr.co.sist.admin.vo.user.SearchVO">
   		select rnum,name,user_id,phone,signup_date
   		from (
@@ -65,6 +75,11 @@
 	            </if>
 			</where>
 			)
+  </select>
+  <select id="selectUserDetail" resultMap="userDetailInfo" parameterType="String">
+  		select name,gender,user_id,phone,tel,signup_date,birth_date,recentlogin_date
+		from users
+		where user_id=#{ userId }
   </select>
  
  </mapper>

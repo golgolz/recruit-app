@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" info=""%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,7 +76,7 @@
 					<h6 class="font-weight-bolder mb-0">회원정보 상세</h6>
 				</nav>
 				<p style="font-size: 15px; text-align: right;">
-							<strong>최근 로그인 일시: 2024-06-11 16:28:33</strong>
+							<strong>최근 로그인 일시: ${ detailInfo.recentloginDate }</strong>
 							</p>
 			</div>
 		</nav>
