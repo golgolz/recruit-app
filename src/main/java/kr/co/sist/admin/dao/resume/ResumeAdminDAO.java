@@ -28,6 +28,14 @@ public class ResumeAdminDAO {
         return resumes;
     }
 
+    public int selectResumeCount(SearchVO searchVO) {
+        SqlSession session = myBatis.getMyBatisHandler(false);
+        int count = session.selectOne("kr.co.sist.resume.admin.selectResumeCount", searchVO);
+        myBatis.closeHandler(session);
+
+        return count;
+    }
+
     public ResumeDomain searchOneResume(String resumeNum) {
         SqlSession session = myBatis.getMyBatisHandler(false);
         StringBuilder subData = new StringBuilder("{");

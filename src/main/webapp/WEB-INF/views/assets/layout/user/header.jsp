@@ -11,7 +11,7 @@
           <nav class="MainBar_MainBarNav__pVhal">
             <div class="MainBar_MainBarNavLogo__caIek">
               <a
-                href="http://localhost/recruit-app/main/main.jsp"
+                href="http://localhost/recruit-app/main/main.do"
                 aria-label="Wanted"
                 data-attribute-id="gnb"
                 data-gnb-kind="jobsfeed"

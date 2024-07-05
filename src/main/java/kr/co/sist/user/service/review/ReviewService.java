@@ -104,4 +104,9 @@ public class ReviewService {
     public CompanyInfoVO getCompanyDetailsByCode(String companyCode) {
         return userReviewDAO.getCompanyDetailsByCode(companyCode);
     }
+    
+    //¸®ºä ÃÑ °¹¼ö °¡Á®¿À±â
+    public int getTotalReviewCount(String companyCode) {
+        return userReviewDAO.getTotalReviewCount(companyCode);
+    }
 }

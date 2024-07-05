@@ -70,34 +70,32 @@ String companyCode = request.getParameter("companyCode");
             <input type="hidden" id="jkcId" value="nexonhr">
             <input type="hidden" id="devPath" value="https://www.jobkorea.co.kr">
             <div class="logo">
-                <img src="${companyInfo.companyImg}" alt="${companyInfo.companyName} 로고" onerror="companylogoOnError(this)">
+                <img src="http://localhost/recruit-app/assets/images/company/logo/<c:out value="${ companyInfo.companyImg }"/>" style="width:100px; height:auto;">
+            
             </div>
             <div class="company-header-branding-body">
                 <div class="special-feature"></div>
                 <div class="name">
                     ${companyInfo.companyName}
                 </div>
-                <div class="summary">
-                    <div class="summary-item">넥슨그룹 계열사</div>
-                    <div class="summary-item">컴퓨터·하드웨어·장비</div>
-                </div>
             </div>
         </div>
     </div>
     <div class="company-nav" role="navigation" style="background-color: #ffffff;">
         <div class="company-nav-container">
-            <a href="../companyInfo/user_company_detail.jsp" class="company-nav-item activecompany-nav-item">
+            <a href="<c:url value='/companyinfo/companyinfoDetail.do?companyCode=${companyInfo.companyCode}' />" 
+            class="company-nav-item activecompany-nav-item">
                 <div class="name">기업정보</div>
                 <div class="post">
                     <div class="header screen-out">게시물</div>
                     <div class="value"></div>
                 </div>
             </a>
-            <a href="reviewResult.jsp" class="company-nav-item active">
+            <a href="${pageContext.request.contextPath}/review/reviewResult.do?companyCode=${companyInfo.companyCode}" class="company-nav-item active">
                 <div class="name">기업리뷰</div>
                 <div class="post">
                     <div class="header screen-out">게시물</div>
-                    <div class="value">${fn:length(reviewScreenOutput)}</div>
+                    <div class="value">${totalReviewCount}</div>
                 </div>
             </a>
             <a href="../recruit/recruits.jsp" class="company-nav-item ">
@@ -202,8 +200,8 @@ String companyCode = request.getParameter("companyCode");
                         <article id="viewReviewsFilter" class="filter">
                             <div class="col1Wrap jply_review_filter"></div>
                             <div id="viewReviewsTitle" class="result">
-                                총 <span class="num">${fn:length(reviewScreenOutput)}</span>개의 기업리뷰
-                            </div>
+    							총 <span class="num">${totalReviewCount}</span>개의 기업리뷰
+							</div>
                         </article>
                     </div>
 

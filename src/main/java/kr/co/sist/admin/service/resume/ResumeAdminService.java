@@ -16,9 +16,24 @@ public class ResumeAdminService {
     }
 
     public List<ResumeListDomain> searchResumes(SearchVO searchVO) {
-        List<ResumeListDomain> resumes = resumeAdminDAO.selectResumes(searchVO);
+        switch (searchVO.getCareer()) {
+            case "0":
+                searchVO.setCareer("");
+                break;
+            case "1":
+                searchVO.setCareer("신입");
+                break;
+            case "2":
+                searchVO.setCareer("경력");
+                break;
+        }
 
+        List<ResumeListDomain> resumes = resumeAdminDAO.selectResumes(searchVO);
         return resumes;
+    }
+
+    public int searchResumeCount(SearchVO searchVO) {
+        return resumeAdminDAO.selectResumeCount(searchVO);
     }
 
     public ResumeDomain searchOneResume(String resumeNum) {

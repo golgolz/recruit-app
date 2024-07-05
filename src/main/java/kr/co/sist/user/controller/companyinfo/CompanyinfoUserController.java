@@ -17,56 +17,59 @@ import kr.co.sist.vo.companyinfo.SearchVO;
 
 @Controller
 public class CompanyinfoUserController {
-     @Autowired(required=false)
-     private CompanyinfoUserService companyinfoUserService;
+    @Autowired(required = false)
+    private CompanyinfoUserService companyinfoUserService;
 
     @GetMapping("/companyinfo/companyinfoList.do")
     public String searchAllCompanyinfo(Model model) {
-        System.out.println("ÀÌ°Ç ÄÁÆ®·Ñ·¯¾ß");
-        List<SearchDomain> list=companyinfoUserService.searchAllCompanyinfo();
-        model.addAttribute("listCompanyinfo",list);
-//        return "companyinfo/companyinfo_list";
+        // System.out.println("ï¿½Ì°ï¿½ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ï¿½ï¿½");
+        List<SearchDomain> list = companyinfoUserService.searchAllCompanyinfo();
+        model.addAttribute("listCompanyinfo", list);
+        // return "companyinfo/companyinfo_list";
         return "companyinfo/user_company_info";
     }
-    
+
     @GetMapping("/companyinfo/search_test.do")
     public String SearchCompanyinfoList(Model model, @ModelAttribute SearchVO sVO) {
         List<SearchDomain> list = companyinfoUserService.searchCompanyinfoList(sVO);
         model.addAttribute("listCompanyinfo", list);
         return "companyinfo/search_test";
     }
-    
+
     @ResponseBody
     @PostMapping("/companyinfo/companySearchList.do")
-    public Map<String, Object> companyinfoSearchList(Model model, @RequestParam(name = "companyName" , defaultValue ="null")String companyName, @RequestParam(name = "avgSal" , defaultValue ="0")String strAvgSal, @RequestParam(name = "selectedValue" , defaultValue ="¼±ÅÃ¾ÈÇÔ")String selectedValue) {
-        int avgSal=Integer.parseInt(strAvgSal);
-     // °Ë»ö Á¶°ÇÀ» HashMap¿¡ ÀúÀå
+    public Map<String, Object> companyinfoSearchList(Model model,
+            @RequestParam(name = "companyName", defaultValue = "null") String companyName,
+            @RequestParam(name = "avgSal", defaultValue = "0") String strAvgSal,
+            @RequestParam(name = "selectedValue", defaultValue = "ï¿½ï¿½ï¿½Ã¾ï¿½ï¿½ï¿½") String selectedValue) {
+        int avgSal = Integer.parseInt(strAvgSal);
+        // ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ HashMapï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         Map<String, Object> params = new HashMap<>();
         params.put("companyName", companyName);
         params.put("avgSal", avgSal);
         params.put("companyClassification", selectedValue);
-        System.out.println("ÀÌ°Ç controllerÀÇ params¾ß : "+params);
+        // System.out.println("ï¿½Ì°ï¿½ controllerï¿½ï¿½ paramsï¿½ï¿½ : "+params);
 
-        // ¼­ºñ½º °èÃþ¿¡ °Ë»ö ¿äÃ»
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ ï¿½ï¿½Ã»
         List<SearchDomain> companyList = companyinfoUserService.searchCompanyinfo(params);
 
-        // °á°ú µ¥ÀÌÅÍ¿Í »óÅÂ¸¦ ´ãÀ» Map »ý¼º
+        // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½ï¿½ Map ï¿½ï¿½ï¿½ï¿½
         Map<String, Object> response = new HashMap<>();
         response.put("companyList", companyList);
-        response.put("status", "success"); // ¼º°ø »óÅÂ Ãß°¡
+        response.put("status", "success"); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
 
         return response;
     }
-    
+
     @GetMapping("/companyinfo/companyinfoDetail.do")
     public String searchCompanyinfoDetail(String companyCode, Model model) {
-        List<SearchDomain> list=companyinfoUserService.searchCompanyinfoDetail(companyCode);
-        List<SearchDomain> list2=companyinfoUserService.searchHistory(companyCode);
-        List<SearchDomain> list3=companyinfoUserService.searchWelfare(companyCode);
-        model.addAttribute("companyDetail",list);
-        model.addAttribute("history",list2);
-        model.addAttribute("welfare",list3);
-//        return "companyinfo/companyinfo_list";
+        List<SearchDomain> list = companyinfoUserService.searchCompanyinfoDetail(companyCode);
+        List<SearchDomain> list2 = companyinfoUserService.searchHistory(companyCode);
+        List<SearchDomain> list3 = companyinfoUserService.searchWelfare(companyCode);
+        model.addAttribute("companyDetail", list);
+        model.addAttribute("history", list2);
+        model.addAttribute("welfare", list3);
+        // return "companyinfo/companyinfo_list";
         return "companyinfo/user_company_detail";
     }
 

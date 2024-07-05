@@ -15,7 +15,7 @@
 				<a
 					id="dashboard_menu"
 					class="nav-link text-white"
-					href="http://localhost/recruit-app/manage/dashboard/dashboard.jsp">
+					href="http://localhost/recruit-app/manage/dashboard/dashboard.do">
 					<span class="nav-link-text ms-1">대시보드</span>
 				</a>
 			</li>
@@ -55,7 +55,7 @@
 				<a
 					id="review_menu"
 					class="nav-link text-white"
-					href="http://localhost/recruit-app/manage/review/reviews.jsp">
+					href="http://localhost/recruit-app/manage/review/reviews.do">
 					<span class="nav-link-text ms-1">리뷰 관리</span>
 				</a>
 			</li>

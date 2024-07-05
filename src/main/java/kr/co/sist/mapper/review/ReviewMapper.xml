@@ -9,7 +9,7 @@
     SELECT
         COMPANY_CODE AS companyCode,
         COMPANY_NAME AS companyName,
-        COMPANY_IMG AS companyImg
+        LOGO AS companyImg
     FROM
         COMPANYINFO
     WHERE
@@ -205,100 +205,9 @@
     FETCH FIRST 1 ROWS ONLY
 </select>
   
-  <!--  admin -->
-  
-  <!-- ID 검색 -->
-  <select id="searchReviewById" parameterType="String" resultType="map">
-    SELECT
-        REVIEW_NUM AS 번호,
-        USER_ID AS 아이디,
-        (SELECT NAME FROM USERS WHERE USER_ID = REVIEW.USER_ID) AS 작성자,
-        TITLE AS 제목,
-        INPUT_DATE AS 작성일,
-        RECOMMEND AS 추천수,
-        CASE
-            WHEN DELETE_FLAG = 'Y' THEN 'Yes'
-            ELSE 'No'
-        END AS 삭제여부
-    FROM
-        REVIEW
-    WHERE
-        USER_ID = #{userId}
-  </select>
+  <!-- 리뷰 총 갯수 가져오기 -->
+  <select id="getTotalReviewCount" resultType="int">
+    SELECT COUNT(*) FROM REVIEW WHERE COMPANY_CODE = #{companyCode}
+</select>
 
-  <!-- 이름 검색 -->
-  <select id="searchReviewByName" parameterType="String" resultType="map">
-    SELECT
-        REVIEW.REVIEW_NUM AS 번호,
-        REVIEW.USER_ID AS 아이디,
-        USERS.NAME AS 작성자,
-        REVIEW.TITLE AS 제목,
-        REVIEW.INPUT_DATE AS 작성일,
-        REVIEW.RECOMMEND AS 추천수,
-        CASE
-            WHEN REVIEW.DELETE_FLAG = 'Y' THEN 'Yes'
-            ELSE 'No'
-        END AS 삭제여부
-    FROM
-        REVIEW
-    JOIN
-        USERS ON REVIEW.USER_ID = USERS.USER_ID
-    WHERE
-        USERS.NAME = #{name}
-  </select>
-
-  <!-- 제목 또는 내용 검색 -->
-  <select id="searchReviewByTitleOrContent" parameterType="String" resultType="map">
-    SELECT
-        REVIEW.REVIEW_NUM AS 번호,
-        REVIEW.USER_ID AS 아이디,
-        USERS.NAME AS 작성자,
-        REVIEW.TITLE AS 제목,
-        REVIEW.CONTENT AS 내용,
-        REVIEW.INPUT_DATE AS 작성일,
-        REVIEW.RECOMMEND AS 추천수,
-        CASE
-            WHEN REVIEW.DELETE_FLAG = 'Y' THEN 'Yes'
-            ELSE 'No'
-        END AS 삭제여부
-    FROM
-        REVIEW
-    JOIN
-        USERS ON REVIEW.USER_ID = USERS.USER_ID
-    WHERE
-        USERS.NAME LIKE '%' || #{keyword} || '%'
-        OR REVIEW.CONTENT LIKE '%' || #{keyword} || '%'
-  </select>
-
-  <!-- 리뷰 업데이트 위한 조회 -->
-  <select id="getReviewDetailsForUpdate" parameterType="int" resultType="map">
-    SELECT
-        R.TITLE AS title,
-        R.CONTENT AS content,
-        C.COMPANY_NAME AS companyName,
-        C.LOGO AS logo
-    FROM
-        REVIEW R
-    JOIN
-        COMPANYINFO C ON R.COMPANY_CODE = C.COMPANY_CODE
-    WHERE
-        R.REVIEW_NUM = #{reviewNum}
-  </select>
-
-  <!-- 리뷰 업데이트 -->
-  <update id="updateReview" parameterType="map">
-    UPDATE REVIEW
-    SET 
-        TITLE = #{title},
-        CONTENT = #{content},
-        INPUT_DATE = SYSDATE
-    WHERE 
-        REVIEW_NUM = #{reviewNum}
-  </update>
-
-  <!-- 리뷰 삭제 -->
-  <delete id="deleteReview" parameterType="int">
-    DELETE FROM REVIEW
-    WHERE REVIEW_NUM = #{reviewNum}
-  </delete>
 </mapper>

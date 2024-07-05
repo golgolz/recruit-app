@@ -152,7 +152,7 @@
                .append($('<td>').text(recruit.careerStandard))
                .append($('<td>').text(recruit.hireCategory))
                .append($('<td>').text(recruit.workPlace))
-               .append($('<td>').html('<input type="button" value="바로가기" class="btn btn-outline-secondary btn-sm goResumes" style="font-weight: bold; margin: 0px auto;" />'));
+               .append($('<td>').html('<input type="button" value="바로가기" class="btn btn-outline-secondary btn-sm goResumes" style="font-weight: bold; margin: 0px auto;" data-recruit-id="' + recruit.id + '" />'));
 
             tableBody.append(row);
         });
@@ -165,7 +165,8 @@
 
         $('.goResumes').on('click', function(e) {
             e.stopPropagation();
-    		location.href = "http://localhost/recruit-app/manage/resumes.do";
+            var recruitId = $(this).data('recruit-id');
+            location.href = "http://localhost/recruit-app/manage/resumes.do?recruitNum=" + recruitId;
         });
 
         var totalCount = tableBody.children().length;
