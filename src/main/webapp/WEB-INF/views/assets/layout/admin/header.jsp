@@ -15,7 +15,7 @@
 				<a
 					id="dashboard_menu"
 					class="nav-link text-white"
-					href="http://localhost/recruit-app/manage/dashboard/dashboard.jsp">
+					href="http://localhost/recruit-app/manage/dashboard/dashboard.do">
 					<span class="nav-link-text ms-1">대시보드</span>
 				</a>
 			</li>
@@ -55,7 +55,7 @@
 				<a
 					id="review_menu"
 					class="nav-link text-white"
-					href="http://localhost/recruit-app/manage/review/reviews.jsp">
+					href="http://localhost/recruit-app/manage/review/review.do">
 					<span class="nav-link-text ms-1">리뷰 관리</span>
 				</a>
 			</li>
@@ -77,10 +77,10 @@
 			</li>
 			<li class="nav-item" style="padding-top: 350px;">
 				<a
-					id="dashboard_menu"
+					id="logout_menu"
 					class="nav-link text-white"
 					style="justify-content: center; font-weight: 500;"
-					href="http://localhost/recruit-app/manage/dashboard/dashboard.jsp">
+					href="#">
 					<span class="nav-link-text ms-1">로그아웃</span>
 				</a>
 			</li>

@@ -39,6 +39,7 @@
     <mapper resource="kr/co/sist/mapper/admin/companyinfo/companyinfoAdminMapper.xml"/>
     <mapper resource="kr/co/sist/mapper/user/mypage/mypageMapper.xml"/>
     <mapper resource="kr/co/sist/mapper/user/notice/noticeMapper.xml"/>
+    <mapper resource="kr/co/sist/mapper/admin/user/userManageMapper.xml"/>
     
   </mappers>
 </configuration>

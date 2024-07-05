@@ -140,17 +140,17 @@
 						</div>
 
 						
-							<div class="btnListExDn">
+							<!-- <div class="btnListExDn">
 							<input type="button" value="목록" class="btn btn-outline-dark btn-sm detail-control" onclick="location.href='http://localhost/recruit-app/manage/qna/new_qnas.jsp'">
 							<input type="button" value="답변하기" class="btn btn-outline-success btn-sm float-right" onclick="location.href='http://localhost/recruit-app/manage/qna/answer_frm.jsp'"style="float:right">
-								<!-- <a href="new_qnas.jsp" class="btnMtcTpl">목록</a>  -->
-								<!-- <a href="answer_frm.jsp" class="btnMtcTpl">답변하기</a> -->
-							</div>
+								<a href="new_qnas.jsp" class="btnMtcTpl">목록</a> 
+								<a href="answer_frm.jsp" class="btnMtcTpl">답변하기</a>
+							</div> -->
 							<!-- <button type="button" onclick="javascript:window.scrollTo(0,0);" class="btnMtcTpl">TOP</button> -->
 
 					</div>
 				<div id="emailFrm">
-		<form action="${pageContext.request.contextPath}/manage/qnas.do" method="post" id="answerPost">
+		<form action="${pageContext.request.contextPath}/manage/qna/qnas.do" method="post" id="answerPost">
 		<div class="ec-base-table typeWrite ">
 		<table border="1" summary="">
 			<colgroup>
@@ -177,8 +177,8 @@
 		</div>
 		
 		<textarea  id="ans_content" name="ans_content" style="margin-left: 600px">${newDetail.ans_content}</textarea>
-		<div id="emailButtonArea" style="margin-top: 20px">
-			<input type="button" value="취소" class="btn btn-outline-danger " style="float:right ; margin-right : 40px">
+		<div id="emailButtonArea" style="margin-top: 20px; padding-bottom: 40px">
+			<input type="button" value="취소" class="btn btn-outline-danger " style="float:right ; margin-right : 40px" onclick="location.href='http://localhost/recruit-app/manage/qna/new_qnas.do';">
 			<input type="button" value="전송하기" class="btn btn-outline-secondary " style="float:right ; margin-right : 10px" id="btnSend">
 			<!-- <input type="button" class="btn btn-info btn-sm" value="전송" /> 
 			<input type="button" class="btn btn-info btn-sm" value="취소" /> -->

@@ -10,7 +10,7 @@
                 data-attribute-id="fnb"
                 data-fnb-kind="home"
                 data-page-path="/"
-                href="https://www.wanted.co.kr/"
+                href="http://localhost/recruit-app/main/main.do"
               >
                 <img src="http://localhost/recruit-app/assets/images/logo.png" style="max-width: 35%" />
               </a>

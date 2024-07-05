@@ -30,7 +30,7 @@ public class ReviewController {
     @Autowired(required = false)
     private ReviewService reviewService;
 
-    // ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½ ï¿½ï¿½ï¿½
+    // ¸®ºä È­¸é Ãâ·Â
     @GetMapping("/review/reviewResult.do")
     public String reviewScreen(
             @RequestParam(value = "companyCode", defaultValue = "comp_0001") String companyCode,
@@ -38,29 +38,31 @@ public class ReviewController {
             @RequestParam(value = "reviewNum", required = false) Integer reviewNum, Model model) {
 
         int offset = page * 3;
-        List<ReviewVO> reviewScreenOutput =
-                reviewService.getReviewScreenOutputWithPagination(companyCode, offset);
+        List<ReviewVO> reviewScreenOutput = reviewService.getReviewScreenOutputWithPagination(companyCode, offset);
 
-        // reviewScreenOutputï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ì¿¡ï¿½ï¿½ reviewQuestionsMap ï¿½ï¿½ï¿½ï¿½
+        // reviewScreenOutputÀÌ ºñ¾îÀÖÁö ¾ÊÀº °æ¿ì¿¡¸¸ reviewQuestionsMap »ý¼º
         Map<Integer, ReviewQuestionsVO> reviewQuestionsMap = new HashMap<>();
         if (!reviewScreenOutput.isEmpty()) {
             for (ReviewVO review : reviewScreenOutput) {
-                ReviewQuestionsVO reviewQuestions =
-                        reviewService.getReviewQuestions(review.getReviewNum());
+                ReviewQuestionsVO reviewQuestions = reviewService.getReviewQuestions(review.getReviewNum());
                 reviewQuestionsMap.put(review.getReviewNum(), reviewQuestions);
             }
         }
 
-        // È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        // È¸»ç Á¤º¸ °¡Á®¿À±â
         CompanyInfoVO companyInfo = reviewService.getCompanyDetailsByCode(companyCode);
+
+        // ÃÑ ¸®ºä °¹¼ö °¡Á®¿À±â
+        int totalReviewCount = reviewService.getTotalReviewCount(companyCode);
 
         model.addAttribute("reviewScreenOutput", reviewScreenOutput);
         model.addAttribute("reviewQuestionsMap", reviewQuestionsMap);
         model.addAttribute("companyCode", companyCode);
         model.addAttribute("currentPage", page);
-        model.addAttribute("companyInfo", companyInfo); // È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ðµ¨¿ï¿½ ï¿½ß°ï¿½
+        model.addAttribute("companyInfo", companyInfo); // È¸»ç Á¤º¸ ºä¿¡ Àü´Þ
+        model.addAttribute("totalReviewCount", totalReviewCount); // ÃÑ ¸®ºä °¹¼ö ¸ðµ¨¿¡ Ãß°¡
 
-        // reviewNumï¿½ï¿½ nullï¿½ï¿½ ï¿½Æ´ï¿½ ï¿½ï¿½ì¿¡ï¿½ï¿½ ï¿½ðµ¨¿ï¿½ ï¿½ß°ï¿½
+        // reviewNumÀÌ nullÀÌ ¾Æ´Ñ °æ¿ì¿¡¸¸ ¸ðµ¨¿¡ Ãß°¡
         if (reviewNum != null) {
             model.addAttribute("reviewNum", reviewNum);
         }
@@ -68,7 +70,8 @@ public class ReviewController {
         return "review/reviewResult";
     }
 
-    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½
+
+    // ÆäÀÌÁö³×ÀÌ¼Ç 
     @GetMapping("/review/loadMoreReviews.do")
     public String loadMoreReviews(@RequestParam("page") int page,
             @RequestParam("companyCode") String companyCode, Model model) {
@@ -76,7 +79,7 @@ public class ReviewController {
         List<ReviewVO> reviewScreenOutput =
                 reviewService.getReviewScreenOutputWithPagination(companyCode, offset);
 
-        // ï¿½ï¿½ ï¿½ï¿½ï¿½ä¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ðµ¨¿ï¿½ ï¿½ß°ï¿½
+        // °¢ ¸®ºä¿¡ ´ëÇØ °³º°ÀûÀÎ ¸®ºä Åë°è °ªÀ» °¡Á®¿Í ¸ðµ¨¿¡ Ãß°¡
         Map<Integer, ReviewQuestionsVO> reviewQuestionsMap = new HashMap<>();
         for (ReviewVO review : reviewScreenOutput) {
             ReviewQuestionsVO reviewQuestions =
@@ -86,12 +89,12 @@ public class ReviewController {
 
         model.addAttribute("reviewScreenOutput", reviewScreenOutput);
         model.addAttribute("reviewQuestionsMap", reviewQuestionsMap);
-        return "review/reviewListFragment"; // ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ä¸¦ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½×¸ï¿½Æ® ï¿½ï¿½
+        return "review/reviewListFragment"; // Ãß°¡ ¸®ºä¸¦ À§ÇÑ ÇÁ·¡±×¸ÕÆ® ºä
     }
 
 
 
-    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
+    // ¼³¹® Á¶»ç ÆäÀÌÁö ÀÌµ¿
     @GetMapping("/review/reviewSurvey.do")
     public String reviewSurveyForm(@RequestParam("reviewNum") int reviewNum,
             @RequestParam("companyCode") String companyCode, @RequestParam("userId") String userId,
@@ -111,8 +114,7 @@ public class ReviewController {
         reviewSurveyDomain.setUserId(userId);
 
         reviewService.insertReviewSurvey(reviewSurveyDomain);
-        return "redirect:/review/reviewResult.do?companyCode=" + companyCode; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ð·º¼ï¿½ï¿½ï¿½
-                                                                              // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        return "redirect:/review/reviewResult.do?companyCode=" + companyCode; // ¼º°ø ÈÄ ¸®µð·º¼ÇÇÒ ÆäÀÌÁö ¼³Á¤
     }
 
     @PostMapping("/review/updateRecommend.do")
@@ -121,57 +123,54 @@ public class ReviewController {
 
         String userId = (String) session.getAttribute("userId");
         if (userId == null || userId.isEmpty()) {
-            return "redirect:/user/loginPage.do"; // ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ð·º¼ï¿½
+            return "redirect:/user/loginPage.do"; // ·Î±×ÀÎ ÆäÀÌÁö·Î ¸®µð·º¼Ç
         }
 
-        logger.info("Controller - updateRecommend() ï¿½ï¿½ï¿½ï¿½, reviewNum: {}", reviewNum);
+        logger.info("Controller - updateRecommend() ½ÃÀÛ, reviewNum: {}", reviewNum);
 
         RecommendVO recommendVO = new RecommendVO();
         recommendVO.setUserId(userId);
         recommendVO.setReviewNum(reviewNum);
 
-        // ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ãµ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ checkIfRecommended ï¿½ï¿½ï¿½)
-        logger.debug("Controller - checkIfRecommended È£ï¿½ï¿½ ï¿½ï¿½"); // È£ï¿½ï¿½ ï¿½ï¿½ ï¿½Î±ï¿½ ï¿½ß°ï¿½
+        // ÄÁÆ®·Ñ·¯¿¡¼­ ÃßÃµ ¿©ºÎ È®ÀÎ (¼­ºñ½ºÀÇ checkIfRecommended »ç¿ë)
+        logger.debug("Controller - checkIfRecommended È£Ãâ Àü"); // È£Ãâ Àü ·Î±× Ãß°¡
         boolean isRecommended = reviewService.checkIfRecommended(recommendVO);
-        logger.debug("Controller - checkIfRecommended È£ï¿½ï¿½ ï¿½ï¿½, isRecommended: {}", isRecommended); // È£ï¿½ï¿½
-                                                                                                  // ï¿½ï¿½
-                                                                                                  // ï¿½Î±ï¿½
-                                                                                                  // ï¿½ß°ï¿½
+        logger.debug("Controller - checkIfRecommended È£Ãâ ÈÄ, isRecommended: {}", isRecommended); // È£Ãâ ÈÄ ·Î±× Ãß°¡
 
         if (isRecommended) {
-            redirectAttributes.addFlashAttribute("recommendMsg", "ï¿½Ì¹ï¿½ ï¿½ï¿½Ãµï¿½ß½ï¿½ï¿½Ï´ï¿½.");
+            redirectAttributes.addFlashAttribute("recommendMsg", "ÀÌ¹Ì ÃßÃµÇß½À´Ï´Ù.");
         } else {
-            // ï¿½ï¿½Ãµ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ updateRecommend ï¿½ï¿½ï¿½)
+            // ÃßÃµ ·ÎÁ÷ ½ÇÇà (¼­ºñ½ºÀÇ updateRecommend »ç¿ë)
             reviewService.updateRecommend(recommendVO);
-            redirectAttributes.addFlashAttribute("recommendMsg", "ï¿½ï¿½Ãµï¿½ï¿½ ï¿½Ï·ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
+            redirectAttributes.addFlashAttribute("recommendMsg", "ÃßÃµÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
         }
 
         return "redirect:/review/reviewResult.do";
     }
 
-    // ï¿½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½
+    // ¸®ºä ÀÛ¼º
     @GetMapping("/review/reviewWrite.do")
     public String writeReview(
             @RequestParam(value = "companyCode", defaultValue = "comp_0001") String companyCode,
             Model model, HttpSession session) {
         String userId = (String) session.getAttribute("userId");
         if (userId == null || userId.isEmpty()) {
-            return "redirect:/user/loginPage.do"; // ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ð·º¼ï¿½
+            return "redirect:/user/loginPage.do"; // ·Î±×ÀÎ ÆäÀÌÁö·Î ¸®µð·º¼Ç
         }
 
-        // È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ðµ¨¿ï¿½ ï¿½ß°ï¿½
+        // È¸»ç Á¤º¸¸¦ °¡Á®¿Í ¸ðµ¨¿¡ Ãß°¡
         CompanyInfoVO companyInfo = reviewService.getCompanyInfo(companyCode);
         model.addAttribute("companyInfo", companyInfo);
         model.addAttribute("userId", userId);
 
-        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Î±ï¿½ ï¿½ß°ï¿½
+        // µð¹ö±ëÀ» À§ÇÑ ·Î±× Ãß°¡
         System.out.println("Company Info: " + companyInfo);
         System.out.println("User ID: " + userId);
 
-        return "review/reviewWrite"; // ï¿½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
+        return "review/reviewWrite"; // ¸®ºä ÀÛ¼º ÆäÀÌÁö·Î ÀÌµ¿
     }
 
-    // ï¿½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ Ã³ï¿½ï¿½
+    // ¸®ºä ÀÛ¼º Ã³¸®
     @PostMapping("/review/submitReview.do")
     public String submitReview(@RequestParam("title") String title,
             @RequestParam("content") String content,
@@ -190,10 +189,10 @@ public class ReviewController {
 
         reviewService.insertReview(reviewDomain);
 
-        // ï¿½Û¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        // ÀÛ¼ºµÈ ¸®ºäÀÇ ¸®ºä ¹øÈ£¸¦ °¡Á®¿È
         int reviewNum = reviewDomain.getReviewNum();
 
-        // reviewNum, companyCode, userIdï¿½ï¿½ URL ï¿½Ä¶ï¿½ï¿½ï¿½Í·ï¿½ ï¿½ï¿½ï¿½ï¿½
+        // reviewNum, companyCode, userId¸¦ URL ÆÄ¶ó¹ÌÅÍ·Î Àü´Þ
         return "redirect:/review/reviewSurvey.do?reviewNum=" + reviewNum + "&companyCode="
                 + companyCode + "&userId=" + userId;
     }

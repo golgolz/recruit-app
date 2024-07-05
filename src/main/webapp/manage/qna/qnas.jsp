@@ -68,8 +68,8 @@
 					<!--// tap menu -->
 					<div class="mtcTplTab">
 						<ul class="tabItems">
-							<li class="on"><a href="qnas.jsp">문의 내역</a></li>
-							<li class=""><a href="new_qnas.jsp">새로운 문의</a></li>
+							<li class="on"><a href="http://localhost/recruit-app/manage/qna/qnas.do">문의 내역</a></li>
+							<li class=""><a href="http://localhost/recruit-app/manage/qna/new_qnas.do">새로운 문의</a></li>
 						</ul>
 					</div>
 					<!-- tap menu //-->
@@ -99,8 +99,8 @@
 									<c:forEach var="qna" items="${oldQnas}">
 										<tr>
 											<td><c:out value="${qna.qna_num}"/></td>
-											<td class="alLeft"><span class="tit"><a
-													href="old_detail.jsp"><c:out value="${qna.title}"/></a></span></td>
+											<td class="alLeft"><span class="tit">
+											<a href="http://localhost/recruit-app/manage/qna/qnas.do?qna_num=${qna.qna_num}"><c:out value="${qna.title}"/></a></span></td>
 											<td><c:out value="${qna.input_date}"/></td>
 											<td class="">답변완료</td>
 										</tr>

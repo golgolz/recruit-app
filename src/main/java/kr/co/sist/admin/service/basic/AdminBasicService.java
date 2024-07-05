@@ -58,6 +58,12 @@ public class AdminBasicService {
         return adminInfo;
     }
 
+    public String chkDuplAdminId(String adminId) {
+        String resultId = amDAO.selectAdminId(adminId);
+
+        return resultId;
+    }
+
     public int modifyAdminInfo(UpdateAdminInfoVO adminInfo) {
         int cnt = amDAO.updateAdminInfo(adminInfo);
 

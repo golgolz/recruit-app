@@ -80,7 +80,7 @@
 						<div class="listBtmArea">
 							<div class="btnListExDn">
 								<!-- <a href="qnas.jsp" class="btnMtcTpl">목록</a> -->
-								<input type="button" value="목록" class="btn btn-outline-dark btn-sm detail-control" onclick="location.href='http://localhost/recruit-app/manage/qna/qnas.jsp'">
+								<input type="button" value="목록" class="btn btn-outline-dark btn-sm detail-control" onclick="location.href='http://localhost/recruit-app/manage/qna/qnas.do'">
 							</div>
 							<!-- <button type="button" onclick="javascript:window.scrollTo(0,0);" class="btnMtcTpl">TOP</button> -->
 						</div>
