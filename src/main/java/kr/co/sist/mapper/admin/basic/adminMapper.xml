@@ -53,4 +53,9 @@
   		from admin
   		where admin_id=#{ adminId }
   </select>
+  <update id="updateAdminInfo" parameterType="kr.co.sist.admin.vo.basic.UpdateAdminInfoVO">
+  		update admin
+  		set admin_id=#{ adminId },authority=#{ authority }
+  		where admin_id=#{ adminId }
+  </update>
  </mapper>

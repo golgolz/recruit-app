@@ -15,9 +15,6 @@
 	body.modal-open {
   		padding-right: 0 !important;
 	}
-	.list0:hover td:last-child {
-		background-color: transparent;
-	}
 	
 	.page-item{
 		margin-right: 3px;
@@ -31,6 +28,9 @@
 		var showPages = 3;
 		var totalPages = 0;
 		var currentPage = 1;
+		
+	    //초기로딩
+	    updateAdminList(true);
 		
 		$("#admin_menu").addClass("bg-gradient-primary");
 		
@@ -106,6 +106,15 @@
 		    	 var permissions = {};
 		    	 $(".addCheckbox").each(function() {
 		    	   permissions[$(this).attr("id")] = $(this).is(":checked") ? 'Y' : 'N';
+		    	 });
+		    	 return JSON.stringify(permissions);
+		    }//function
+		    
+		    // 체크된 권한 정보를 가져오는 함수
+		    function getModifyCheckedPermissions() {
+		    	 var permissions = {};
+		    	 $(".modifyCheckbox").each(function() {
+		    	   permissions[$(this).attr("name")] = $(this).is(":checked") ? 'Y' : 'N';
 		    	 });
 		    	 return JSON.stringify(permissions);
 		    }//function
@@ -190,49 +199,75 @@
 	    	});//click
 
 	    	$('#adminModal').on('hidden.bs.modal', function () {
-	    		  // 입력창 전체 초기화
-	    		  $("#addAdminId").val('');
-	    		  $("#addPassword").val('');
-	    		  $("#addPasswordCon").val('');
-	    		  // 모든 체크박스 체크 해제
-	    		  $("#adminModal input[type='checkbox']").prop("checked", false);
+	    			resetForm();
 	    		});
 	    	
-	    	$(".adminSettingBtn").click(function(){
-	    		
-	    		$("#settingModal").modal("show");
-	    		
-	    	});//click
+	    	$(document).on('click', '.adminSettingBtn', function() {
+	    		var adminId = $(this).closest('tr').data('admin-id'); 
+	    		$.ajax({
+	    	        url: "${pageContext.request.contextPath}/api/manage/admin/" + adminId + ".do",
+	    	        method: 'GET',
+	    	        dataType: 'JSON',
+	    	        success: function(adminInfo) {
+	    	        	var authority = JSON.parse(adminInfo.authority);
+	    	            
+	    	            $("#modifyAdminId").val(adminInfo.adminId);
+	    	            
+			            for (var key in authority) {
+			                $("#modify" + key.charAt(0).toUpperCase() + key.slice(1)).prop('checked', authority[key] === 'Y');
+			            }
+	    	            
+			    		$("#settingModal").modal("show");
+	    	        },
+	    	        error: function(xhr, status, error) {
+	    	            console.error("Error fetching admin data: " + error);
+	    	        }
+	    	    });
+	    	});
 	    	
 	    	$("#adminSetBtn").click(function(){
+	    		var adminId = $("#modifyAdminId").val().trim();
+  				var permissionsJson = getModifyCheckedPermissions();
+  				
+  				var adminData = {
+  						adminId:adminId,
+  						authority:permissionsJson
+  								}
+	    		$.ajax({
+	    	        url: "${pageContext.request.contextPath}/api/manage/admin/modifyAdmin.do",
+	    	        method: 'GET',
+	    	        data: adminData,
+	    	        //dataType: 'JSON',
+	    	        success: function(response) {
+	    	            if(response.resultMsg === 'success'){
+	    	            	alert('저장 되었습니다.');
+	    	            }
+	    	            updateAdminList(false);
+	    	        },
+	    	        error: function(xhr, status, error) {
+	    	            console.error("Error fetching admin data: " + error);
+	    	        }
+	    	    });
 	    		
-	    		//유효성 검증 로직, 데이터베이스에 데이터를 추가하는 로직 추가할 예정
+	    		resetModifyFrm();
 	    		
-	    		alert('저장 되었습니다.');
-	    		
-	    		// 입력창 전체 초기화
-	    		$("#modifyAdminId").val('');
-	    		// 모든 체크박스 체크 해제
-	    		$("#settingModal input[type='checkbox']").prop("checked", false);
-	    		$("#settingModal").modal("hide");
 	    	});//click
 	    	
 	    	$("#cancleBtn2").click(function(){
-	    		// 입력창 전체 초기화
-	    		$("#modifyAdminId").val('');
-	    	    $("#settingModal input[type='checkbox']").prop("checked", false);
-	    		$("#settingModal").modal("hide");
+	    		resetModifyFrm();
 	    	});//click
 	    	
 	    	$('#settingModal').on('hidden.bs.modal', function () {
-	    		  // 입력창 전체 초기화
-	    		  $("#modifyAdminId").val('');
-	    		  // 모든 체크박스 체크 해제
-	    		  $("#settingModal input[type='checkbox']").prop("checked", false);
-	    		});
+	    		resetModifyFrm();
+	    	});//on
 	    	
-	    	//초기로딩
-	    	updateAdminList(true);
+	    	function resetModifyFrm() {
+	    		// 입력창 전체 초기화
+	    		$("#modifyAdminId").val('');
+	    		$("#settingModal input[type='checkbox']").prop("checked", false);
+	    		$("#settingModal").modal("hide");
+	    	}//function
+	    	
 	
 			function updateAdminList(isFirst) {
 				var searchVO = {};
@@ -246,7 +281,6 @@
 			        searchVO = getSearchVO();
 			    }
 				
-			    //console.log(startNum+","+itemsPerPage);
 			    $.ajax({
 		            url: "${pageContext.request.contextPath}/api/manage/admins.do",
 		            method: 'GET',
@@ -276,6 +310,7 @@
 	            	var authority = JSON.parse(adminInfo.authority);
 	                var row = $('<tr>')
 	                    .addClass('list0')
+	                    .attr('data-admin-id',adminInfo.adminId);
 	                    //.attr('data-href', 'http://localhost/recruit-app/manage/recruits/detail.do?id=' + recruit.id);
 	                row.append($('<td>').text(index + startNum))
 	                   .append($('<td>').text(adminInfo.position))
@@ -301,7 +336,6 @@
 	        	    };
 	        	}//function
 	        	
-	        	
 	            
 	            function countAdminList(searchVO){
 	        		$.ajax({
@@ -323,12 +357,12 @@
 	        	$("#btn-reset").click(function(e){
 	        		e.preventDefault();
 	        		$("#keyword").val('');
-	        	});
+	        	});//click
 	        	
 	        	$("#btn-search").click(function(e){
 	        		e.preventDefault();
 	        		updateAdminList(false);
-	        	});
+	        	});//click
 	            
 	            $('.pagination').on('click', '.page-link', function(e) {
 	                
@@ -493,15 +527,15 @@
 				      <div class="modal-body">
 				          <div class="mb-3">
 				            <label for="addAdminId" class="form-label">관리자 ID</label>
-				            <input type="email" class="form-control" id="addAdminId" name="adminId" maxlength="30" style="margin-right:5px; border: 1px solid #dedede; font-size: 15px;">
+				            <input type="email" class="form-control" id="addAdminId" name="adminId" maxlength="30" style="margin-right:5px; border: 1px solid #dedede; font-size: 15px; padding-left: 5px;">
 				          </div>
 				          <div class="mb-3">
 				            <label for="addPassword" class="form-label">비밀번호</label>
-				            <input type="password" class="form-control" id="addPassword" name="password" maxlength="16" style="margin-right:5px; border: 1px solid #dedede; font-size: 15px;">
+				            <input type="password" class="form-control" id="addPassword" name="password" maxlength="16" style="margin-right:5px; border: 1px solid #dedede; font-size: 15px; padding-left: 5px;">
 				          </div>
 				          <div class="mb-3">
 				            <label for="addPasswordCon" class="form-label">비밀번호 확인</label>
-				            <input type="password" class="form-control" id="addPasswordCon" maxlength="16" style="margin-right:5px; border: 1px solid #dedede; font-size: 15px;">
+				            <input type="password" class="form-control" id="addPasswordCon" maxlength="16" style="margin-right:5px; border: 1px solid #dedede; font-size: 15px; padding-left: 5px;">
 				          </div>
 				          <div class="mb-3">
 				            <label class="form-label">권한 부여</label>
@@ -556,37 +590,37 @@
 				        <form id="modifyAdminFrm" action="modifyAdmin.do" method="post">
 				          <div class="mb-3">
 				            <label for="modifyAdminId" class="form-label">관리자 ID</label>
-				            <input type="email" class="form-control" id="modifyAdminId" name="adminId" maxlength="30" style="margin-right:5px; border: 1px solid #dedede; font-size: 15px;">
+				            <input type="email" class="form-control" id="modifyAdminId" name="adminId" maxlength="30" style="margin-right:5px; border: 1px solid #dedede; font-size: 15px; padding-left: 5px;">
 				          </div>
 				          <div class="mb-3">
 				            <label class="form-label">권한 부여</label>
 				            <div class="form-check">
-				              <input class="modifyCheckbox" name="modifyCheckbox" type="checkbox" value="dashboard" id="dashboard2">
-				              <label class="form-check-label" for="dashboard2">대시보드</label>
+				              <input class="modifyCheckbox" name="dashboard" type="checkbox" value="dashboard" id="modifyDashboard">
+				              <label class="form-check-label" for="modifyDashboard">대시보드</label>
 				            </div>
 				            <div class="form-check">
-				              <input class="modifyCheckbox" name="modifyCheckbox" type="checkbox" value="user" id="user2">
-				              <label class="form-check-label" for="user2">사용자 관리</label>
+				              <input class="modifyCheckbox" name="user" type="checkbox" value="user" id="modifyUser">
+				              <label class="form-check-label" for="modifyUser">사용자 관리</label>
 				            </div>
 				            <div class="form-check">
-				              <input class="modifyCheckbox" name="modifyCheckbox" type="checkbox" value="company" id="company2">
-				              <label class="form-check-label" for="company2">기업 관리</label>
+				              <input class="modifyCheckbox" name="company" type="checkbox" value="company" id="modifyCompany">
+				              <label class="form-check-label" for="modifyCompany">기업 관리</label>
 				            </div>
 				            <div class="form-check">
-				              <input class="modifyCheckbox" name="modifyCheckbox" type="checkbox" value="recruit" id="recruit2">
-				              <label class="form-check-label" for="recruit2">공고 관리</label>
+				              <input class="modifyCheckbox" name="recruit" type="checkbox" value="recruit" id="modifyRecruit">
+				              <label class="form-check-label" for="modifyRecruit">공고 관리</label>
 				            </div>
 				            <div class="form-check">
-				              <input class="modifyCheckbox" name="modifyCheckbox" type="checkbox" value="review" id="review2">
-				              <label class="form-check-label" for="review2">리뷰 관리</label>
+				              <input class="modifyCheckbox" name="review" type="checkbox" value="review" id="modifyReview">
+				              <label class="form-check-label" for="modifyReview">리뷰 관리</label>
 				            </div>
 				            <div class="form-check">
-				              <input class="modifyCheckbox" name="modifyCheckbox" type="checkbox" value="qna" id="qna2">
-				              <label class="form-check-label" for="qna2">문의 관리</label>
+				              <input class="modifyCheckbox" name="qna" type="checkbox" value="qna" id="modifyQna">
+				              <label class="form-check-label" for="modifyQna">문의 관리</label>
 				            </div>
 				            <div class="form-check">
-				              <input class="modifyCheckbox" name="modifyCheckbox" type="checkbox" value="notice" id="notice2">
-				              <label class="form-check-label" for="notice2">공지 관리</label>
+				              <input class="modifyCheckbox" name="notice" type="checkbox" value="notice" id="modifyNotice">
+				              <label class="form-check-label" for="modifyNotice">공지 관리</label>
 				            </div>
 				          </div>
 				        </form>

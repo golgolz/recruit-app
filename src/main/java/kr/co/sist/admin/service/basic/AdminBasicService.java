@@ -9,6 +9,7 @@ import kr.co.sist.admin.domain.basic.AdminInfoDomain;
 import kr.co.sist.admin.domain.basic.AdminLoginDomain;
 import kr.co.sist.admin.vo.basic.InsertAdminVO;
 import kr.co.sist.admin.vo.basic.SearchVO;
+import kr.co.sist.admin.vo.basic.UpdateAdminInfoVO;
 
 @Service
 public class AdminBasicService {
@@ -44,7 +45,7 @@ public class AdminBasicService {
 
         String password = iVO.getPassword();
         String cipherPass = passwordEncoder.encode(password);
-        iVO.setPassword(password);
+        iVO.setPassword(cipherPass);
 
         int cnt = amDAO.insertAdmin(iVO);
 
@@ -55,6 +56,12 @@ public class AdminBasicService {
         AdminInfoDomain adminInfo = amDAO.selectAdminInfo(adminId);
 
         return adminInfo;
+    }
+
+    public int modifyAdminInfo(UpdateAdminInfoVO adminInfo) {
+        int cnt = amDAO.updateAdminInfo(adminInfo);
+
+        return cnt;
     }
 
 }
