@@ -9,7 +9,7 @@
     SELECT
         COMPANY_CODE AS companyCode,
         COMPANY_NAME AS companyName,
-        COMPANY_IMG AS companyImg
+        LOGO AS companyImg
     FROM
         COMPANYINFO
     WHERE
