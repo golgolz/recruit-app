@@ -19,6 +19,14 @@ public class CompanyinfoAdminController {
         model.addAttribute("listCompanyinfo",list);
         return "companyinfo/companies";
     }
+    @GetMapping("/companyinfo/adminCompanyinfoDetail.do")
+    public String companyinfoDetail() {
+        return "companyinfo/admin_company_detail";
+    }
+    @GetMapping("/companyinfo/adminCompanyinfoWrite.do")
+    public String insertCompanyinfoPage() {
+        return "companyinfo/admin_company_detail_write";
+    }
     
 //    @GetMapping("/companyinfo/search_test.do")
 //    public String SearchCompanyinfoList(Model model, @ModelAttribute SearchVO sVO) {

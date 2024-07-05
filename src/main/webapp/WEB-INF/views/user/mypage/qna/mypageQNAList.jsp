@@ -19,17 +19,23 @@
 	<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/mypage.css"/>
 	<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/signup.css"/>
 	
+	<!--jQuery CDN 시작-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<!--jQuery CDN 끝-->
+	
 	<!-- golgolz end -->
 	<style type="text/css">
 		<!-- golgolz start -->
 		
 		<!-- golgolz end -->
 	</style>
+	
 	<script type="text/javascript">
 		$(function(){
 			<!-- golgolz start -->
 			<!-- golgolz end -->
 		});
+		
 	</script>
 <style>
 td{
@@ -58,13 +64,13 @@ td{
 			<!--// tap menu -->
 			<div class="mtcTplTab">
 				<ul class="tabItems">
-					<li class=""><a href="mypageWriteQNA.jsp">문의</a></li>
-					<li class="on"><a href="mypageQNAList.jsp">문의 내역</a></li>
+					<li class=""><a href="http://localhost/recruit-app/user/mypage/qna/mypageQnaForm.do">문의</a></li>
+					<li class="on"><a href="http://localhost/recruit-app/user/mypage/qna/mypageQNAList.do">문의 내역</a></li>
 				</ul>
 			</div>
 			<!-- tap menu //-->
 			<!--// 내 제안내역 보기 -->
-			<div class="inquiryListWrap">
+			<div class="inquiryListWrap" id="pageContent">
 			<!--// List 시작 -->
 			<div class="schListWrap">
 				<div class="mtcSchListTb">
@@ -89,7 +95,7 @@ td{
 							<c:forEach var="uesrqna" items="${qnaList}">
 								<tr>
 								<td><c:out value="${uesrqna.qna_num}"/></td>
-								<td class="alLeft"><span class="tit"><a href="mypageQNADetail.jsp"><c:out value="${uesrqna.title}"/></a></span></td>
+								<td class="alLeft"><span class="tit"><a href="http://localhost/recruit-app/user/mypage/qna/mypageQNADetail.do?qna_num=${uesrqna.qna_num}"><c:out value="${uesrqna.title}"/></a></span></td>
 								<td><c:out value="${uesrqna.input_date}"/></td>
 								<td class="">답변완료</td>
 								</tr>
@@ -97,16 +103,6 @@ td{
 						</tbody>
 						</table>
 		
-		<!-- 			<div class="listBtmArea">
-					<div class="tplPagination">
-		   	 <div class="tplPagination">
-		        <ul>
-		          <li><span class="now">1</span></li>
-		        </ul>
-		    </div>
-			</div>
-			</div> -->
-			
 				<div style="text-align:center; margin-top:30px">
 			        <nav aria-label="...">
 			                <ul class="pagination pagination-lg" style="display: inline-flex;">
