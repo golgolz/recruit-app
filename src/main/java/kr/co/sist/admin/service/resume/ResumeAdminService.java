@@ -28,27 +28,6 @@ public class ResumeAdminService {
                 break;
         }
 
-        // switch (searchVO.getEndSchool()) {
-        // case "0":
-        // searchVO.setEndSchool("");
-        // break;
-        // case "1":
-        // searchVO.setEndSchool("고등학교");
-        // break;
-        // case "2":
-        // searchVO.setEndSchool("대학교(2,3년)");
-        // break;
-        // case "3":
-        // searchVO.setEndSchool("");
-        // break;
-        // case "4":
-        // searchVO.setEndSchool("");
-        // break;
-        // case "5":
-        // searchVO.setEndSchool("");
-        // break;
-        // }
-        System.out.println(searchVO.toString());
         List<ResumeListDomain> resumes = resumeAdminDAO.selectResumes(searchVO);
         return resumes;
     }

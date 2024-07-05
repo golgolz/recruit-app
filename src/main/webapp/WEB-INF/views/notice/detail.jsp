@@ -49,8 +49,8 @@
 
         <div class="noticeViewWrap">
             <p class="noticeTit">
-                <span class="sort"><c:out value="${noticeDetail.category}"/></span>
-                <span class="tit"><c:out value="${noticeDetail.title}"/></span>
+                <span class="sort" style="margin-right:40px ; text-align:center"><c:out value="${noticeDetail.category}"/></span>
+                <span class="tit" style="vertical-align:middle"><c:out value="${noticeDetail.title}"/></span>
                 <span class="date" style="display: block; text-align: right; margin-left:750px"><c:out value="${noticeDetail.input_date}"/></span>
             </p>
             <div class="noticeView">
@@ -63,7 +63,7 @@
             <div class="listBtmArea" style="margin-bottom:30px">
                 <div class="btnListExDn">
                <!--  <input type="btton" value="목록" class="btn btn-outline-dark btn-sm detail-control"> -->
-                    <a href="notices.jsp" class="btnMtcTpl">목록</a>
+                    <a href="http://localhost/recruit-app/notice/notices.do" class="btnMtcTpl">목록</a>
                 </div>
                 <!-- <button type="button" onclick="javascript: window.scrollTo(0,0);" class="btnMtcTpl">TOP</button> -->
             </div>
@@ -77,5 +77,4 @@
 		</main>
 	</div>
 </body>
-
 </html>

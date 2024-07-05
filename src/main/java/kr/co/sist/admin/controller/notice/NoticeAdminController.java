@@ -1,5 +1,39 @@
 package kr.co.sist.admin.controller.notice;
 
-public class NoticeAdminController {
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 
+@Controller
+public class NoticeAdminController {
+    
+    @GetMapping("/manage/notice/notices.do")
+    public String searchAllNotice() {
+        return "manage/notice/notices";
+    }
+    @GetMapping("/manage/notice/noticeSearch.do")
+    public String searchNotice(Model model) {
+        return "";
+    }
+    @GetMapping("/manage/notice/noticesDetail.do")
+    public String searchNoticeDetail(Model model) {
+        return "manage/notice/notices_detail";
+    }
+    @GetMapping("/manage/notice/noticesWrite.do")
+    public String insertNoticePage() {
+        return "manage/notice/notices_write";
+    }
+    @GetMapping("/manage/notice/noticesInsert.do")
+    public String insertNotice(Model model) {
+        return "";
+    }
+    @GetMapping("/manage/notice/noticesUpdate.do")
+    public String updateNotice(Model model) {
+        return "manage/notice/notices_update";
+    }
+    @GetMapping("/manage/notice/noticesDelete.do")
+    public String deleteNotice(Model model) {
+        return "";
+    }
+    
 }

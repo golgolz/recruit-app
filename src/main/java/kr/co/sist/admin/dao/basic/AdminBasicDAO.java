@@ -36,10 +36,6 @@ public class AdminBasicDAO {
         List<AdminInfoDomain> list =
                 ss.selectList("kr.co.sist.mapper.admin.basic.adminMapper.selectAdminList", sVO);
 
-        System.out.println(sVO.getStartNum() + " : " + sVO.getEndNum());
-        for (AdminInfoDomain aid : list) {
-            System.out.println(aid.getAdminId());
-        }
         myBatis.closeHandler(ss);
 
         return list;
@@ -80,19 +76,32 @@ public class AdminBasicDAO {
         return adminInfo;
     }// selectAdminInfo
 
-    public int updateAdminInfo(UpdateAdminInfoVO adminInfo) {
+    public String selectAdminId(String adminId) {
         SqlSession ss = myBatis.getMyBatisHandler(false);
 
-        int cnt = ss.update("kr.co.sist.mapper.admin.basic.adminMapper.updateAdminInfo", adminInfo);
-
-        if (cnt > 0) {
-            ss.commit();
-        } else {
-            ss.rollback();
-        }
-
+        String resultId =
+                ss.selectOne("kr.co.sist.mapper.admin.basic.adminMapper.selectAdminId", adminId);
         myBatis.closeHandler(ss);
 
+        return resultId;
+    }// selectAdminId
+
+    public int updateAdminInfo(UpdateAdminInfoVO adminInfo) {
+        SqlSession ss = myBatis.getMyBatisHandler(false);
+        int cnt = 0;
+        try {
+
+            cnt = ss.update("kr.co.sist.mapper.admin.basic.adminMapper.updateAdminInfo", adminInfo);
+            ss.commit();
+            /*
+             * if (cnt > 0) { ss.commit(); } else { ss.rollback(); }
+             */
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+            ss.rollback();
+        }
+        myBatis.closeHandler(ss);
         return cnt;
     }// updateAdminInfo
 

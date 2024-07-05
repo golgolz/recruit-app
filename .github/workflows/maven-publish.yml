@@ -37,14 +37,14 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
         
-    - name: Build JAR
+    - name: Build WAR
       run: mvn clean package
       env:
         MAVEN_OPTS: -Dfile.encoding=UTF-8
       
-    - name: Upload JAR
+    - name: Upload WAR
       uses: actions/upload-artifact@v2
       with:
-        name: recruit-app-jar
-        path: target/*.jar
+        name: recruit-app-war
+        path: target/*.war
         if-no-files-found: error
