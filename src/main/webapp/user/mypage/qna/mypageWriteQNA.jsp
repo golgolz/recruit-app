@@ -53,7 +53,7 @@
 				<div class="mtcTplTab">
 					<ul class="tabItems">
 						<li class="on"><a href="mypageWriteQNA.jsp">문의</a></li>
-						<li class=""><a href="mypageQNAList.jsp">문의 내역</a></li>
+						<li class=""><a href="http://localhost/recruit-app/user/mypage/qna/mypageQNAList.do">문의 내역</a></li>
 					</ul>
 				</div>
 			<!-- tap menu //-->

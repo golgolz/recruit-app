@@ -68,7 +68,7 @@
 		
 				<div class="listBtmArea" style="margin-bottom:30px">
 				<div class="btnListExDn">
-					<a href="mypageQNAList.jsp" class="btnMtcTpl">목록</a>
+					<a href="http://localhost/recruit-app/user/mypage/qna/mypageQNAList.do" class="btnMtcTpl">목록</a>
 					<!-- <input type="btton" value="목록" class="btn btn-outline-dark btn-sm detail-control"> -->
 				</div>
 					<!-- <button type="button" onclick="javascript:window.scrollTo(0,0);" class="btnMtcTpl">TOP</button> -->

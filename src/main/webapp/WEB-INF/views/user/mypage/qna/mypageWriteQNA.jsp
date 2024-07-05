@@ -27,8 +27,11 @@
 	<script type="text/javascript">
 		$(function(){
 			<!-- golgolz start -->
+			$("#btnSend").click(function(){
+				$("#Qnaform").submit();
+			});//click
 			<!-- golgolz end -->
-		});
+		});//ready
 	</script>
 </head>
 <body>
@@ -52,13 +55,13 @@
 				<!--// tap menu -->
 				<div class="mtcTplTab">
 					<ul class="tabItems">
-						<li class="on"><a href="mypageWriteQNA.jsp">문의</a></li>
-						<li class=""><a href="mypageQNAList.jsp">문의 내역</a></li>
+						<li class="on"><a href="http://localhost/recruit-app/user/mypage/qna/mypageQnaForm.do">문의</a></li>
+						<li class=""><a href="http://localhost/recruit-app/user/mypage/qna/mypageQNAList.do">문의 내역</a></li>
 					</ul>
 				</div>
 			<!-- tap menu //-->
 		    <div class="inquiryForm inquiryForm--selection">
-		       <form action="${pageContext.request.contextPath}/user/mypage/qna/mypageQNAList.do" method="post" id="Qnaform">
+		       <form action="${pageContext.request.contextPath}/user/mypage/qna/mypageWriteQNA.do" method="post" id="Qnaform">
 		       <fieldset>
 		       <legend>문의하기 입력</legend>
 			    <div class="tbInquiryBx">
@@ -98,7 +101,7 @@
 			       <textarea name="contents" id="lb_inq_2" title="내용을 입력하세요." class="txArea"></textarea> -->
 			       <div>
 			       <textarea name="content" value="${param.content}" id="lb_inq_2" title="내용을 입력하세요." style="height:350px; width:400px"></textarea>
-			       <input id="reply_date" name="qna_num"  value="${param.qna_num}" type="hidden" />
+			       <%-- <input id="reply_date" name="qna_num"  value="${param.qna_num}" type="hidden" /> --%>
 			       </div>
 			       </div>
 			       
@@ -107,13 +110,16 @@
 			         <textarea name="email"  title="내용을 입력하세요." style="height:45px; width:400px"></textarea>
 			       </div> -->
 			       
-			       <div class="tbRow">
-			       <!-- <div class="tbRow tbMail"> -->
+			       <!-- <div class="tbRow">
+			       <div class="tbRow tbMail">
 			         <div class="tbCell tbTh">
                                     <label for="lb_inq_4">답변 e-메일 <em>(필수)</em></label>
                                 </div>
                                 <div class="tbCell">
-                         	        <textarea name="email"  title="내용을 입력하세요." style="height:35px; width:400px" class="vertical-center-textarea" readonly="readonly"></textarea>
+                         	        <textarea name="email"  title="내용을 입력하세요." style="height:35px; width:400px" class="vertical-center-textarea" readonly="readonly"></textarea> -->
+                                    
+                                    
+                                    
                                     <!-- <input type="text" id="lb_inq_4" name="emailName" class="mtcIpt" title="이메일 주소 앞부분" /> -->
 			      <!-- <div class="tbCell__dropdown">
 			         <select name="" id="lb_view_2" title="이메일 사업자 입력">
@@ -144,7 +150,7 @@
 			      </div>
 			      <div class="inquiryBtn" style="margin-bottom:30px">
 			       <!--   <button type="submit" class="btnInq"><span>문의하기</span></button> -->
-			         <button type="submit" class="btnInq" id=""><span>문의하기</span></button>
+			         <button type="submit" class="btnInq" id="btnSend"><span>문의하기</span></button>
 			         <button type="button" class="btnInq btnCancel"><span>취소</span></button>
 			      </div>
 			      </fieldset>
