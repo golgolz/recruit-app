@@ -95,7 +95,7 @@ String companyCode = request.getParameter("companyCode");
                 <div class="name">기업리뷰</div>
                 <div class="post">
                     <div class="header screen-out">게시물</div>
-                    <div class="value">${fn:length(reviewScreenOutput)}</div>
+                    <div class="value">${totalReviewCount}</div>
                 </div>
             </a>
             <a href="../recruit/recruits.jsp" class="company-nav-item ">
@@ -200,8 +200,8 @@ String companyCode = request.getParameter("companyCode");
                         <article id="viewReviewsFilter" class="filter">
                             <div class="col1Wrap jply_review_filter"></div>
                             <div id="viewReviewsTitle" class="result">
-                                총 <span class="num">${fn:length(reviewScreenOutput)}</span>개의 기업리뷰
-                            </div>
+    							총 <span class="num">${totalReviewCount}</span>개의 기업리뷰
+							</div>
                         </article>
                     </div>
 
