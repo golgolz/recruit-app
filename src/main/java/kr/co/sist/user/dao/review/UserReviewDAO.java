@@ -154,6 +154,14 @@ public class UserReviewDAO {
         myBatis.closeHandler(ss);
         return companyInfo;
     }
+    
+    //¸®ºä ÃÑ °¹¼ö °¡Á®¿À±â
+    public int getTotalReviewCount(String companyCode) {
+        SqlSession ss = myBatis.getMyBatisHandler(true);
+        int totalReviewCount = ss.selectOne("kr.co.sist.user.mapper.review.ReviewMapper.getTotalReviewCount", companyCode);
+        myBatis.closeHandler(ss);
+        return totalReviewCount;
+    }
    
 
 }
