@@ -66,7 +66,7 @@
                                     <div class="name">기업리뷰</div>
                                     <div class="post">
                                         <div class="header screen-out">게시물</div>
-                                        <div class="value">53</div>
+                                        <div class="value">${totalReviewCount}</div>
                                     </div>
                                 </a>
                                 <a href="http://localhost/recruit-app/recruit/detail.do?companyCode=${ companyIntroDetail.companyCode }" class="company-nav-item ">
