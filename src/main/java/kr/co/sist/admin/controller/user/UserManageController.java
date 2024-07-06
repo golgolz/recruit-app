@@ -51,6 +51,7 @@ public class UserManageController {
                     "사용자 정보 조회 중 문제가 발생 했습니다. 잠시 후 다시 시도해주세요.");
             return "redirect:/manage/user/users.do";
         }
+        System.out.println(detailInfo.getRecentloginDate());
 
         model.addAttribute("detailInfo", detailInfo);
 
