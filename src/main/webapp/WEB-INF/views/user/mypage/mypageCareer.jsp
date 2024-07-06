@@ -271,8 +271,8 @@
             </div>
             </div>
           </div>
-		 <jsp:include page="../../../../assets/layout/user/footer.jsp" />
         </div>
+		 <jsp:include page="../../../../assets/layout/user/footer.jsp" />
 			<!-- golgolz end -->
 			</section>
 		</main>

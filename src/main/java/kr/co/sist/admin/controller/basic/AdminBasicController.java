@@ -92,7 +92,7 @@ public class AdminBasicController {
 
     @GetMapping("/api/manage/admin/counts.do")
     @ResponseBody
-    public int searchRecruitsCount(@ModelAttribute SearchVO searchVO) {
+    public int searchAdminCount(@ModelAttribute SearchVO searchVO) {
         return abs.searchAdminCnt(searchVO);
     }
 

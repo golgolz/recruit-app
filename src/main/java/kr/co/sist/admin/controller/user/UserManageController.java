@@ -37,7 +37,7 @@ public class UserManageController {
 
     @GetMapping("/api/manage/user/counts.do")
     @ResponseBody
-    public int searchRecruitsCount(@ModelAttribute SearchVO searchVO) {
+    public int searchUserCount(@ModelAttribute SearchVO searchVO) {
         return ums.searchUserCnt(searchVO);
     }
 
