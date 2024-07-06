@@ -44,7 +44,7 @@
                 data-attribute-id="gnb"
                 data-gnb-kind="resume"
               >
-                <a href="https://www.wanted.co.kr/cv/list"
+                <a href="http://localhost/recruit-app/notice/notices.do"
                   ><span>공지사항</span></a
                 >
               </li>
@@ -54,7 +54,7 @@
                 data-gnb-kind="freelancer"
               >
                 <a
-                  href="https://www.wanted.co.kr/gigs/experts"
+                  href="http://localhost/recruit-app/user/mypage/qna/mypageQnaForm.do"
                   target="_blank"
                   rel="noopener noreferrer"
                   ><span>문의사항</span></a
