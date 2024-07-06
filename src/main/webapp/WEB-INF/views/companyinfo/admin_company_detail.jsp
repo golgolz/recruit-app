@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" info=""%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,6 +80,9 @@ input{
 			<!-- golgolz start -->
 			<div id="contentcolumn" class="">
 				<div class="contents">
+				<c:if test="${not empty requestScope.companyDetail}">
+                    <c:set var="companyIntroDetail" value="${requestScope.companyDetail[0]}" />
+                </c:if>
 					<form id="dataForm" name="dataForm" action="http://localhost/online-shop/manage/goods/register_process.jsp" method="post" enctype="multipart/form-data">
 						<div class="subtitle">
 							<img src="http://localhost/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
@@ -93,37 +97,37 @@ input{
 								<tr>
 									<td class="label">기업명</td>
 									<td class="box text">
-										<input type="text" name="name" value="" size="20" class="inputbox naver_shopping_prodName" />
+										<input type="text" name="name" value="<c:out value="${companyIntroDetail.companyName}" />" size="20" class="inputbox naver_shopping_prodName" />
 									</td>
 								</tr>
 								<tr>
 									<td class="label">사업자등록번호</td>
 									<td class="box text">
-										<input type="text" name="name" value="" size="20" class="inputbox naver_shopping_prodName" /> 입력 예시) 123-45-67890
+										<input type="text" name="name" value="<c:out value="${companyIntroDetail.businessNumber}" />" size="20" class="inputbox naver_shopping_prodName" /> 입력 예시) 123-45-67890
 									</td>
 								</tr>
 								<tr>
 									<td class="label">사원수(명)</td>
 									<td class="box text">
-										<input type="text" name="name" value="" size="13" class="inputbox naver_shopping_prodName" /> 명
+										<input type="text" name="name" value="<c:out value="${companyIntroDetail.headcount}" />" size="13" class="inputbox naver_shopping_prodName" /> 명
 									</td>
 								</tr>
 								<tr>
 									<td class="label">설립년도(년)</td>
 									<td class="box text">
-										<input type="text" name="name" value="" size="13" class="inputbox naver_shopping_prodName" /> 년
+										<input type="text" name="name" value="<c:out value="${companyIntroDetail.establishmentDate}" />" size="13" class="inputbox naver_shopping_prodName" /> 년
 									</td>
 								</tr>
 								<tr>
 									<td class="label">매출액(만원)</td>
 									<td class="box text">
-										<input type="text" name="name" value="" size="13" class="inputbox naver_shopping_prodName" /> 만원
+										<input type="text" name="name" value="<c:out value="${companyIntroDetail.revenue}" />" size="13" class="inputbox naver_shopping_prodName" /> 만원
 									</td>
 								</tr>
 								<tr>
 									<td class="label">기업소개</td>
 									<td class="box text">
-										<textarea id="companyIntro" rows="7" cols="90"></textarea>
+										<textarea id="companyIntro" rows="7" cols="90"><c:out value="${companyIntroDetail.description}" /></textarea>
 										<!-- <input type="text" name="name" value="" size="13" class="inputbox naver_shopping_prodName" /> -->
 									</td>
 								</tr>
