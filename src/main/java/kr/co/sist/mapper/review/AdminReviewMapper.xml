@@ -20,8 +20,8 @@
     FROM
         REVIEW
     WHERE
-        USER_ID = #{userId}
-  </select>
+        USER_ID LIKE '%' || #{userId} || '%'
+</select>
 
   <!-- 이름 검색 -->
   <select id="searchReviewByName" parameterType="String" resultType="kr.co.sist.admin.vo.review.ReviewVO">
@@ -41,11 +41,11 @@
     JOIN
         USERS ON REVIEW.USER_ID = USERS.USER_ID
     WHERE
-        USERS.NAME = #{name}
-  </select>
+        USERS.NAME LIKE '%' || #{name} || '%'
+</select>
 
   <!-- 제목 또는 내용 검색 -->
-  <select id="searchReviewByTitleOrContent" parameterType="String" resultType="kr.co.sist.admin.vo.review.ReviewVO">
+ <select id="searchReviewByTitleOrContent" parameterType="String" resultType="kr.co.sist.admin.vo.review.ReviewVO">
     SELECT
         REVIEW.REVIEW_NUM AS reviewNum,
         REVIEW.USER_ID AS userId,
@@ -63,10 +63,10 @@
     JOIN
         USERS ON REVIEW.USER_ID = USERS.USER_ID
     WHERE
-        USERS.NAME LIKE CONCAT('%', #{keyword}, '%')
-        OR REVIEW.TITLE LIKE CONCAT('%', #{keyword}, '%')
-        OR REVIEW.CONTENT LIKE CONCAT('%', #{keyword}, '%')
-  </select>
+        USERS.NAME LIKE '%' || #{keyword} || '%'
+        OR REVIEW.TITLE LIKE '%' || #{keyword} || '%'
+        OR REVIEW.CONTENT LIKE '%' || #{keyword} || '%'
+</select>
 
   <!-- 리뷰 업데이트 위한 조회 -->
   <select id="getReviewDetailsForUpdate" parameterType="int" resultType="kr.co.sist.admin.vo.review.ReviewVO">

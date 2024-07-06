@@ -20,12 +20,11 @@ public class AdminReviewController {
     @Autowired
     private AdminReviewService adminReviewService;
 
-    // 리뷰 관리 화면 표시 및 검색 처리
+ // 리뷰 관리 화면 표시 및 검색 처리
     @GetMapping("/manage/review/review.do")
     public String review(@RequestParam(value = "sfl", required = false) String searchField,
                          @RequestParam(value = "stx", required = false) String searchText,
                          Model model) {
-        logger.debug("review method called with searchField: {}, searchText: {}", searchField, searchText);
         List<ReviewVO> reviewList = null;
 
         try {
@@ -47,11 +46,10 @@ public class AdminReviewController {
 
             ObjectMapper mapper = new ObjectMapper();
             String reviewListJson = mapper.writeValueAsString(reviewList);
-            logger.debug("reviewListJson: {}", reviewListJson);
             model.addAttribute("reviewListJson", reviewListJson);
             model.addAttribute("reviewList", reviewList);  // JSP에서 총 리뷰 수를 표시하기 위해 추가
         } catch (Exception e) {
-            logger.error("Error occurred in review method", e);
+            e.printStackTrace();
         }
 
         return "manage/review/review";

@@ -22,6 +22,7 @@ import kr.co.sist.user.vo.review.RecommendVO;
 import kr.co.sist.user.vo.review.ReviewQuestionsVO;
 import kr.co.sist.user.vo.review.ReviewVO;
 
+
 @Controller
 public class ReviewController {
 
@@ -30,6 +31,14 @@ public class ReviewController {
     @Autowired(required = false)
     private ReviewService reviewService;
 
+    @ModelAttribute
+    public void addGlobalAttributes(Model model, @RequestParam(value = "companyCode", required = false) String companyCode) {
+        if (companyCode != null) {
+            int totalReviewCount = reviewService.getTotalReviewCount(companyCode);
+            model.addAttribute("totalReviewCount", totalReviewCount);
+        }
+    }
+    
     // 리뷰 화면 출력
     @GetMapping("/review/reviewResult.do")
     public String reviewScreen(
