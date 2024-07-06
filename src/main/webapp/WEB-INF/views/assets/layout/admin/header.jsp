@@ -63,7 +63,7 @@
 				<a
 					id="qna_menu"
 					class="nav-link text-white"
-					href="http://localhost/recruit-app/manage/qna/qnas.jsp">
+					href="http://localhost/recruit-app/manage/qna/qnas.do">
 					<span class="nav-link-text ms-1">문의 관리</span>
 				</a>
 			</li>

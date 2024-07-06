@@ -99,8 +99,8 @@
 									<c:forEach var="qna" items="${oldQnas}">
 										<tr>
 											<td><c:out value="${qna.qna_num}"/></td>
-											<td class="alLeft"><span class="tit">
-											<a href="http://localhost/recruit-app/manage/qna/qnas.do?qna_num=${qna.qna_num}"><c:out value="${qna.title}"/></a></span></td>
+											<td class="alLeft"><span class="tit"><a
+													href="http://localhost/recruit-app/manage/qna/old_detail.do?qna_num=${qna.qna_num }"><c:out value="${qna.title}"/></a></span></td>
 											<td><c:out value="${qna.input_date}"/></td>
 											<td class="">답변완료</td>
 										</tr>
