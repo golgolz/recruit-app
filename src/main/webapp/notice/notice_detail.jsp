@@ -52,7 +52,7 @@
             </div>
             <div class="listBtmArea" style="margin-bottom:30px">
                 <div class="btnListExDn">
-                    <a href="notice_list.jsp" class="btnMtcTpl">목록</a>
+                    <a href="http://localhost/recruit-app/notice/notices.do" class="btnMtcTpl">목록</a>
                 </div>
                 <button type="button" onclick="javascript: window.scrollTo(0,0);" class="btnMtcTpl">TOP</button>
             </div>
