@@ -21,10 +21,10 @@ public class ResumeAdminService {
                 searchVO.setCareer("");
                 break;
             case "1":
-                searchVO.setCareer("½ÅÀÔ");
+                searchVO.setCareer("ì‹ ìž…");
                 break;
             case "2":
-                searchVO.setCareer("°æ·Â");
+                searchVO.setCareer("ê²½ë ¥");
                 break;
         }
 

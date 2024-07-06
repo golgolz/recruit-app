@@ -41,7 +41,6 @@ public class ResumeAdminController {
     @ResponseBody
     public List<ResumeListDomain> searchResumes(@ModelAttribute SearchVO searchVO) {
         List<ResumeListDomain> resumes = resumeAdminService.searchResumes(searchVO);
-
         return resumes;
     }
 
