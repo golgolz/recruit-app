@@ -32,8 +32,8 @@ public class ResumeAdminController {
     }
 
     @GetMapping("/manage/resumes/detail.do")
-    public String showResumeDetailPage(SearchVO searchVO, Model model) {
-        model.addAttribute("searchVO", searchVO);
+    public String showResumeDetailPage(@RequestParam("id") String resumeNum, Model model) {
+        model.addAttribute("resumeNum", resumeNum);
         return "/manage/recruit/resume/detail";
     }
 
@@ -52,7 +52,7 @@ public class ResumeAdminController {
 
     @GetMapping("/api/manage/resumes/detail.do")
     @ResponseBody
-    public ResumeDomain searchOneResume(@RequestParam String resumeNum) {
+    public ResumeDomain searchOneResume(@RequestParam("id") String resumeNum) {
         ResumeDomain resume = resumeAdminService.searchOneResume(resumeNum);
 
         return resume;

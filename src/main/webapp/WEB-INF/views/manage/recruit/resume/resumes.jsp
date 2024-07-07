@@ -137,7 +137,7 @@
 	            "<td>" +
 	                "<input type='button' value='바로가기' class='btn btn-outline-secondary btn-sm' " +
 	                "style='font-weight: bold; margin: 0px auto;' " +
-	                "onclick='location.href=\"http://localhost/recruit-app/manage/recruit/resume/detail.jsp?id=" + item.resumeId + "\"' />" +
+	                "onclick='location.href=\"http://localhost/recruit-app/manage/resumes/detail.do?id=" + item.resumeId + "\"' />" +
 	            "</td>";
 	        
 	        tableBody.appendChild(row);

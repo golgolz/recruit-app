@@ -8,10 +8,177 @@
 <link href="http://localhost/recruit-app/assets/css/manage/goods/general.css" rel="stylesheet" />
 <link href="http://localhost/recruit-app/assets/css/manage/goods/goods.css" rel="stylesheet" />
 <link href="http://localhost/recruit-app/assets/css/manage/goods/default.css" rel="stylesheet" />
+<style>
+	table{
+		margin-top: 10px;
+	}
+</style>
 <script type="text/javascript">
 	$(function(){
     	$("#recruit_menu").addClass("bg-gradient-primary");
+    	
+    	$.ajax({
+            url: "${pageContext.request.contextPath}/api/manage/resumes/detail.do?id=${resumeNum}",
+            method: 'GET',
+            dataType: 'JSON',
+            success: function(data) {
+            	updateProfileTable(data);
+            	updateSkillsInfo(data.subData.skills);
+            	updateEducationInfo(data.subData.education);
+            	updateCareerInfo(data.subData.career);
+            	updateCertificationInfo(data.subData.certifications);
+            	updateIntroduce(data.introduce);
+            	updateLanguageInfo(data.subData.languages);
+            },
+            error: function(xhr, status, error) {
+                console.error("Error fetching data: " + error);
+                $("#sodr_list tbody").html('<tr><td colspan="10" style="font-size: 16px; font-weight: bold;">데이터를 불러오는 데 실패했습니다.</td></tr>');
+            }
+        });
 	});
+	
+	function updateProfileTable(data) {
+	    $('#name').text(data.owner);
+	    const birthDate = new Date(data.birth);
+	    const today = new Date();
+	    const age = today.getFullYear() - birthDate.getFullYear();
+	    $('#birth').text(data.birth + ' (만 ' + age + '세)');
+	    $('#gender').text(data.gender);
+	    $('#email').text(data.email);
+	    $('#tel').text(data.tel);
+	    $('#phone').text(data.phone);
+	    $('#addr').text(data.addr);
+	    //$('#profileTable img').attr('src', `http://localhost/recruit-app/assets/images/${data.profile}`);
+	}
+	
+	function updateSkillsInfo(skillsData) {
+	    var $skillTable = $('#skill_table tbody');
+	    $skillTable.empty();
+
+	    if (!skillsData || skillsData.length === 0) {
+	        $skillTable.append('<tr><td colspan="2">보유 기술 없음</td></tr>');
+	        return;
+	    }
+
+	    var skillNames = skillsData.map(function(skill) {
+	        return skill.skill_name;
+	    }).join(', ');
+
+	    var newRow = '<tr><td colspan="2"><span style="font-size:16px;"><strong>' + 
+	                 skillNames + 
+	                 '</strong></span></td></tr>';
+
+	    $skillTable.append(newRow);
+	}
+	
+	function updateEducationInfo(educationData) {
+	    var $tbody = $('#school_table tbody');
+	    $tbody.empty(); 
+
+	    if (!educationData || educationData.length === 0) {
+	        $tbody.append('<tr><td colspan="7" style="text-align: center;">해당사항 없음</td></tr>');
+	        return;
+	    }
+
+	    educationData.forEach(function(education) {
+	        var row = '<tr>' +
+	            '<td>' + getSchoolClassification(education.school_classification) + '</td>' +
+	            '<td>' + education.school_name + '</td>' +
+	            '<td>' + education.admission_date + '</td>' +
+	            '<td>' + education.graduation_date + '</td>' +
+	            '<td>' + education.graduation_state + '</td>' +
+	            '<td>' + education.major + '</td>' +
+	            '<td>' + education.grades + ' (' + education.total_score + ')</td>' +
+	            '</tr>';
+	        $tbody.append(row);
+	    });
+	}
+	
+	function getSchoolClassification(code) {
+	    var classifications = {
+	        '1': '고등학교',
+	        '2': '대학교(2,3년제)',
+	        '3': '대학교(4년제)',
+	        '4': '대학원(석사)',
+	        '5': '대학원(박사)'
+	    };
+	    
+	    return classifications[code] || '기타';
+	}
+	
+	function updateCareerInfo(careerData) {
+	    var $tbody = $('#career_table tbody');
+	    $tbody.empty();
+
+	    if (!careerData || careerData.length === 0) {
+	        $tbody.append('<tr><td colspan="5" style="text-align: center;">해당사항 없음</td></tr>');
+	        return;
+	    }
+
+	    careerData.forEach(function(career) {
+	        var row = '<tr>' +
+	            '<td>' + career.company_name + '</td>' +
+	            '<td>' + career.join_date + '</td>' +
+	            '<td>' + (career.resignation_date ? career.resignation_date : '재직중') + '</td>' +
+	            '<td>' + career.job_description + '</td>' +
+	            '<td>' + formatSalary(career.sal) + ' 만원</td>' +
+	            '</tr>';
+	        $tbody.append(row);
+	    });
+	}
+	
+	function formatSalary(salary) {
+	    return salary.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+	
+	function updateCertificationInfo(certificationData) {
+	    var $tbody = $('#certification_table tbody');
+	    $tbody.empty(); 
+
+	    if (!certificationData || certificationData.length === 0) {
+	        $tbody.append('<tr><td colspan="3" style="text-align: center;">해당사항 없음</td></tr>');
+	        return;
+	    }
+
+	    certificationData.forEach(function(certification) {
+	        var row = '<tr>' +
+	            '<td>' + certification.certificate_name + '</td>' +
+	            '<td>' + certification.publisher + '</td>' +
+	            '<td>' + certification.acquisition_date + '</td>' +
+	            '</tr>';
+	        $tbody.append(row);
+	    });
+	}
+	
+	function updateIntroduce(introduce) {
+	    var $introduceContent = $('#introduceContent');
+	    
+	    if (!introduce) {
+	        $introduceContent.html('<p>내용 없음</p>');
+	        return;
+	    }
+	    $introduceContent.html(introduce);
+	}
+	
+	function updateLanguageInfo(languageData) {
+	    var $tbody = $('#language_table tbody');
+	    $tbody.empty(); 
+
+	    if (!languageData || languageData.length === 0) {
+	        $tbody.append('<tr><td colspan="4" style="text-align: center;">해당사항 없음</td></tr>');
+	        return;
+	    }
+
+	    languageData.forEach(function(language) {
+	        var row = '<tr>' +
+	            '<td>' + language.category + '</td>' +
+	            '<td>' + language.language + '</td>' +
+	            '<td>' + (language.test_name ? language.test_name : '해당사항 없음') + '</td>' +
+	            '<td>' + language.lang_level + '</td>' +
+	            '</tr>';
+	        $tbody.append(row);
+	    });
+	}
 </script>
 <link href="http://localhost/recruit-app/assets/css/manage/resume/detail.css" rel="stylesheet" />
 <!-- golgolz end -->
@@ -63,7 +230,7 @@
 								src="http://localhost/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
 							인적사항
 						</div>
-						<table class="tbstyleB" width="100%">
+						<table class="tbstyleB" id="profileTable" width="100%">
 							<colgroup>
 								<col width="15%" />
 								<col width="85%" />
@@ -75,9 +242,7 @@
 								<tr>
 									<td class="label">이름</td>
 									<td class="box text">
-										<!-- <input type="hidden" name="code" value="" />
-										<input type="text" name="name" value="" size="50" class="inputbox naver_shopping_prodName" /> -->
-										<span>우미연</span>
+										<span id="name"></span>
 									</td>
 									<td rowspan="4">
 										<img src="http://localhost/recruit-app/assets/images/default.png" />
@@ -86,74 +251,51 @@
 								<tr>
 									<td class="label">생년월일</td>
 									<td class="box text">
-										<!-- <input type="hidden" name="code" value="" />
-										<input type="text" name="name" value="" size="50" class="inputbox naver_shopping_prodName" /> -->
-										<span>1996-08-21(만 27세)</span>
+										<span id="birth"></span>
 									</td>
 								</tr>
 								<tr>
 									<td class="label">성별</td>
 									<td class="box text">
-										<label>
-											<input type="radio" id="good_code_type1" name="maker" value="1" checked/> 여자
-										</label>
-										<label>
-											<input type="radio" id="good_code_type0" name="maker" value="0" /> 남자
-										</label> 
+										<span id="gender"></span>
 									</td>
 								</tr>
 								<tr>
 									<td class="label">이메일</td>
 									<td class="box text">
-										<!-- <input type="hidden" name="code" value="" />
-										<input type="text" name="name" value="" size="50" class="inputbox naver_shopping_prodName" /> -->
-										yeon.dev.8@gmail.com
+										<span id="email"></span>
 									</td>
 								</tr>
 								<tr>
 									<td class="label">전화번호</td>
 									<td class="box text" colspan="2">
-										<!-- <input type="hidden" name="code" value="" />
-										<input type="text" name="name" value="" size="50" class="inputbox naver_shopping_prodName" /> -->
-										010-8282-8282
+										<span id="tel"></span>
 									</td>
 								</tr>
 								<tr>
 									<td class="label">휴대폰번호</td>
 									<td class="box text" colspan="2">
-										<!-- <input type="hidden" name="code" value="" />
-										<input type="text" name="name" value="" size="50" class="inputbox naver_shopping_prodName" /> -->
-										010-8282-8282
+										<span id="phone"></span>
 									</td>
 								</tr>
 								<tr>
 									<td class="label">주소</td>
 									<td class="box text" colspan="2">
-										<!-- <input type="hidden" name="code" value="" />
-										<input type="text" name="name" value="" size="50" class="inputbox naver_shopping_prodName" /> -->
-										서울시 노원구
+										<span id="addr"></span>
 									</td>
 								</tr>
 							</tbody>
 						</table>
 						<div class="subtitle">
-							<img
-								src="http://localhost/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
+							<img src="http://localhost/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
 							스킬
 						</div>
-						<table cellpadding="0" cellspacing="1" border="0" class="tbstyleB"
-							width="100%">
+						<table id="skill_table" cellpadding="0" cellspacing="1" border="0" class="tbstyleB" width="100%">
 							<colgroup>
 								<col width="15%" />
 								<col width="85%" />
 							</colgroup>
-							<tbody>
-								<tr>
-									<span style="font-size:16px;">
-										<strong>Java, JSP, Oracle DB</strong>
-									</span>
-								</tr>
-							</tbody>
+							<tbody></tbody>
 						</table>
 						<div class="subtitle">
 							<img
@@ -165,65 +307,31 @@
 								<tr>
 									<th>학교구분</th>
 									<th>학교명</th>
-									<th>입학년월</th>
-									<th>졸업년월</th>
+									<th>입학일자</th>
+									<th>졸업일자</th>
 									<th>졸업상태</th>
 									<th>전공명</th>
 									<th>학점</th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
-									<td>대학교</td>
-									<td>가나다대학교</td>
-									<td>2020.03</td>
-									<td>2024.02</td>
-									<td>졸업</td>
-									<td>컴퓨터공학</td>
-									<td>4.2(4.5)</td>
-								</tr>
-								<tr>
-									<td>대학교</td>
-									<td>가나다대학교</td>
-									<td>2020.03</td>
-									<td>2024.02</td>
-									<td>졸업</td>
-									<td>컴퓨터공학</td>
-									<td>4.2(4.5)</td>
-								</tr>
-							</tbody>
+							<tbody></tbody>
 						</table>
 						<div class="subtitle">
 							<img
 								src="http://localhost/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
 							경력
 						</div>
-						<table id="school_table" class="table table-striped table-bordered horizontal_arrange" width="100%">
+						<table id="career_table" class="table table-striped table-bordered horizontal_arrange" width="100%">
 							<thead class="thead-dark">
 								<tr>
 									<th>기업명</th>
 									<th>입사년월</th>
 									<th>퇴사년월</th>
-									<th>포지션</th>
+									<th>수행업무</th>
 									<th>연봉</th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
-									<td>가나다 주식회사</td>
-									<td>2022.03</td>
-									<td>2024.02</td>
-									<td>백엔드 엔지니어</td>
-									<td>6,000만원</td>
-								</tr>
-								<tr>
-									<td>라마바 주식회사</td>
-									<td>2020.03</td>
-									<td>2022.02</td>
-									<td>백엔드 엔지니어</td>
-									<td>3,000만원</td>
-								</tr>
-							</tbody>
+							<tbody></tbody>
 						</table>
 						<div class="subtitle">
 							<img
@@ -238,41 +346,23 @@
 									<th>취득일</th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
-									<td>SQLD</td>
-									<td>한국데이터산업진흥원</td>
-									<td>2020.03</td>
-								</tr>
-							</tbody>
+							<tbody></tbody>
 						</table>
 						<div class="subtitle">
 							<img
 								src="http://localhost/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
 							어학
 						</div>
-						<table id="certification_table" class="table table-striped table-bordered horizontal_arrange">
+						<table id="language_table" class="table table-striped table-bordered horizontal_arrange">
 							<thead class="thead-dark">
 								<tr>
-									<th>어학 시험명</th>
-									<th>발행처</th>
-									<th>등급(점수)</th>
-									<th>취득일</th>
+									<th>분류</th>
+									<th>언어</th>
+									<th>시험명</th>
+									<th>수준</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>토익</td>
-									<td>YBM</td>
-									<td>300</td>
-									<td>2020.03</td>
-								</tr>
-								<tr>
-									<td>Opic</td>
-									<td>YBM</td>
-									<td>NH</td>
-									<td>2020.03</td>
-								</tr>
 							</tbody>
 						</table>
 						<div class="subtitle">
