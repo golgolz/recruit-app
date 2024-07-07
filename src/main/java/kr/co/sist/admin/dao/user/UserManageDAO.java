@@ -3,6 +3,7 @@ package kr.co.sist.admin.dao.user;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Component;
+import kr.co.sist.admin.domain.user.UserDetailDomain;
 import kr.co.sist.admin.domain.user.UserInfoDomain;
 import kr.co.sist.admin.vo.user.SearchVO;
 import kr.co.sist.properties.MyBatisConfig;
@@ -35,4 +36,15 @@ public class UserManageDAO {
 
         return cnt;
     }// selectUserCnt
+
+    public UserDetailDomain selectUserDetail(String userId) {
+        SqlSession ss = myBatis.getMyBatisHandler(false);
+
+        UserDetailDomain detailInfo = ss.selectOne(
+                "kr.co.sist.mapper.admin.user.userManageMapper.selectUserDetail", userId);
+
+        myBatis.closeHandler(ss);
+
+        return detailInfo;
+    }// selectUserDetail
 }

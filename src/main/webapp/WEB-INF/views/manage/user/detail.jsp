@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" info=""%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,7 +76,7 @@
 					<h6 class="font-weight-bolder mb-0">회원정보 상세</h6>
 				</nav>
 				<p style="font-size: 15px; text-align: right;">
-							<strong>최근 로그인 일시: 2024-06-11 16:28:33</strong>
+							<strong>최근 로그인 일시: ${ detailInfo.recentloginDate }</strong>
 							</p>
 			</div>
 		</nav>
@@ -97,35 +98,35 @@
 								<tr>
 									<td class="label">회원명</td>
 									<td class="box text">
-										이*화
+										${ detailInfo.name }
 										<!-- <input type="text" name="name" value="이*화" size="20" class="inputbox naver_shopping_prodName" /> -->
 									</td>
 								</tr>
 								<tr>
 									<td class="label">성별</td>
 									<td class="box text">
-										여자
+										${ detailInfo.gender }
 										<!-- <input type="text" name="name" value="여자" size="20" class="inputbox naver_shopping_prodName" /> -->
 									</td>
 								</tr>
 								<tr>
 									<td class="label">아이디</td>
 									<td class="box text">
-										l**@daum.net
+										${ detailInfo.userId }
 										<!-- <input type="text" name="name" value="l**@daum.net" size="20" class="inputbox naver_shopping_prodName" /> -->
 									</td>
 								</tr>
 								<tr>
 									<td class="label">휴대폰번호</td>
 									<td class="box text">
-									010-****-1234
+									${ detailInfo.phone }
 										<!-- <input type="text" name="name" value="010-****-1234" size="20" class="inputbox naver_shopping_prodName" /> -->
 									</td>
 								</tr>
 								<tr>
 									<td class="label">전화번호</td>
 									<td class="box text">
-									02-***-5678
+									${ detailInfo.tel }
 										<!-- <input type="text" name="name" value="02-***-5678" size="20" class="inputbox naver_shopping_prodName" /> -->
 									</td>
 								</tr>
@@ -144,19 +145,14 @@
 								<tr>
 									<td class="label">가입일자</td>
 									<td class="box text">
-									2021-03-22
+									${ detailInfo.signupDate }
 										<!-- <input type="text" name="name" value="2021-03-22" size="20" class="inputbox naver_shopping_prodName" /> -->
 									</td>
 								</tr>
 								<tr>
 									<td class="label">생년월일</td>
 									<td class="box text">
-										<!-- <input type="text" name="name" value="" size="20" class="inputbox naver_shopping_prodName" /> -->
-									</td>
-								</tr>
-								<tr>
-									<td class="label">주소</td>
-									<td class="box text">
+									${ detailInfo.birthDate }
 										<!-- <input type="text" name="name" value="" size="20" class="inputbox naver_shopping_prodName" /> -->
 									</td>
 								</tr>

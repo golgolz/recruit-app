@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" info=""%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +11,11 @@
 <script src="http://localhost/recruit-app/assets/js/admin/datepicker-ko.js"></script>
 <script type="text/javascript">
 	$(function(){
+		
+		<c:if test="${ not empty resultMsg }">
+			alert('${resultMsg}');
+    	</c:if>
+		
 		var startNum = 1;
 		var endNum = startNum + itemsPerPage;
 		var itemsPerPage = 10;
@@ -79,16 +85,39 @@
 	                    .addClass('list0')
 	                    .attr('data-user-id',userInfo.userId);
 	                
+	                var form = $('<form>')
+	                  .attr('method', 'POST')
+	                  .attr('action', 'http://localhost/recruit-app/manage/userDetail.do');
+
+	                var hiddenInput = $('<input>')
+	                  .attr('type', 'hidden')
+	                  .attr('name', 'userId')
+	                  .val(userInfo.userId);
+
+	                form.append(hiddenInput);
+
+	                // 버튼 요소 생성 (폼 제출 용도)
+	                var detailButton = $('<input>')
+	                  .attr('type', 'submit') // submit 타입으로 변경
+	                  .attr('value', '상세조회')
+	                  .addClass('btn btn-outline-secondary btn-sm detailBtn')
+	                  .css('font-weight', 'bold')
+	                  .css('margin', '0px auto');
+
+	                form.append(detailButton);
+	                
 	                row.append($('<td>').text(index + startNum))
 	                   .append($('<td>').text(userInfo.name))
 	                   .append($('<td>').text(userInfo.userId))
 	                   .append($('<td>').text(userInfo.phone))
 	                   .append($('<td>').text(userInfo.signupDate))
-	                   .append($('<td>').html('<input type="button" value="상세조회" class="btn btn-outline-secondary btn-sm" style="font-weight: bold; margin:0px auto;"/>'));
+	                   .append($('<td>').append(form));
+	                   //.append($('<td>').html('<input type="button" value="상세조회" class="btn btn-outline-secondary btn-sm detailBtn" style="font-weight: bold; margin:0px auto;"/>'));
 
 	                tableBody.append(row);
 	            });//each
 	    	}//function
+	    	
 	          
 	            function getSearchVO() {
 	        	    return {
