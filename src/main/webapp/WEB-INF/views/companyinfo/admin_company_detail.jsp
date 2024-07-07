@@ -113,15 +113,15 @@ input{
 									</td>
 								</tr>
 								<tr>
-									<td class="label">설립년도(년)</td>
+									<td class="label">설립일</td>
 									<td class="box text">
-										<input type="text" name="name" value="<c:out value="${companyIntroDetail.establishmentDate}" />" size="13" class="inputbox naver_shopping_prodName" /> 년
+										<input type="text" name="name" value="<c:out value="${companyIntroDetail.establishmentDate}" />" size="13" class="inputbox naver_shopping_prodName" />
 									</td>
 								</tr>
 								<tr>
-									<td class="label">매출액(만원)</td>
+									<td class="label">매출액(억)</td>
 									<td class="box text">
-										<input type="text" name="name" value="<c:out value="${companyIntroDetail.revenue}" />" size="13" class="inputbox naver_shopping_prodName" /> 만원
+										<input type="text" name="name" value="<c:out value="${companyIntroDetail.revenue}" />" size="13" class="inputbox naver_shopping_prodName" /> 억
 									</td>
 								</tr>
 								<tr>
@@ -218,7 +218,6 @@ input{
 									<td class="box text">
 										<input type="text" name="name" value="" size="50" class="inputbox naver_shopping_prodName" />
 										<input type="button" id="btn-register" class="btn btn-outline-success btn-sm" value="추가" />
-										<input type="button" id="btn-register" class="btn btn-outline-warning btn-sm" value="수정" />
 										<input type="button" id="btn-register" class="btn btn-outline-danger btn-sm" value="삭제" />
 									</td>
 								</tr>
@@ -260,7 +259,6 @@ input{
 									<td class="box text">
 										<input type="text" name="name" value="" size="50" class="inputbox naver_shopping_prodName" />
 										<input type="button" id="btn-register" class="btn btn-outline-success btn-sm" value="추가" />
-										<input type="button" id="btn-register" class="btn btn-outline-warning btn-sm" value="수정" />
 										<input type="button" id="btn-register" class="btn btn-outline-danger btn-sm" value="삭제" />
 									</td>
 								</tr>
