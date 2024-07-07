@@ -166,13 +166,15 @@
                                     </table>
                                 </div>
                             </div>
-                            <div class="company-infomation-container corporate-issues-container corporate-history fixed-height" style="padding-bottom:450px">
+                            <div class="company-infomation-container corporate-issues-container corporate-history fixed-height">
                                 <h3 class="header">연혁</h3>
                                 <div class="corporate-history-list-company">
                                     <div class="corporate-history-list-item">
-                                        <c:if test="${not empty requestScope.history[0].baseDate}">
-                                            <div id="devJKhistory"><c:out value="${requestScope.history[0].baseDate}" /> <c:out value="${requestScope.history[0].historyContent}" /></div>
+                                    <c:forEach var="history" items="${ requestScope.history }" varStatus="i">
+                                        <c:if test="${not empty history.baseDate}">
+                                            <div id="devJKhistory"><c:out value="${history.baseDate}" /> : <c:out value="${history.historyContent}" /></div>
                                         </c:if>
+                                  	</c:forEach>
                                     </div>
                                 </div>
                             </div>
@@ -180,9 +182,10 @@
                             <div class="company-infomation-container working-environment-container working-environment-benefit" style="margin:auto; width:1040px; margin-top:50px">
                                 <h3 class="header">복리후생</h3>
                                 <div class="benefit-list">
+                                    <c:forEach var="welfare" items="${ requestScope.welfare }" varStatus="i">
                                     <div class='benefit-item-group'>
-                                        <c:if test="${not empty requestScope.welfare[0].category}">
-                                            <div class="benefit-header"><c:out value="${requestScope.welfare[0].category}" /></div>
+                                        <c:if test="${not empty welfare.category}">
+                                            <div class="benefit-header"><c:out value="${welfare.category}" /></div>
                                         </c:if>
                                         <div class="benefit-body">
                                             <c:if test="${not empty requestScope.welfare[0].welfareContent}">
@@ -190,6 +193,7 @@
                                             </c:if>
                                         </div>
                                     </div>
+                                   	</c:forEach>
                                 </div>
                             </div>
                         </div>

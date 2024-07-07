@@ -50,5 +50,26 @@ public class CompanyinfoAdminService {
         return list;
     }
 
+    public List<SearchDomain> searchHistory(String companyCode) {
+        List<SearchDomain> list = null;
+        try {
+            list = companyinfoAdminDAO.selectHistory(companyCode);
+
+        } catch (PersistenceException pe) {
+            pe.printStackTrace();
+        }
+        return list;
+    }
+
+    public List<SearchDomain> searchWelfare(String companyCode) {
+        List<SearchDomain> list = null;
+        try {
+            list = companyinfoAdminDAO.selectWelfare(companyCode);
+
+        } catch (PersistenceException pe) {
+            pe.printStackTrace();
+        }
+        return list;
+    }
 
 }

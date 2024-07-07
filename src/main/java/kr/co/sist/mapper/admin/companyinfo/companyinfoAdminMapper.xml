@@ -64,7 +64,7 @@
     </select>
     
     <select id="selectCompanyinfoDetail" resultMap="companyInfoResultMap" parameterType="String">
-    	SELECT COMPANY_CODE,COMPANY_NAME,LOGO,COMPANY_IMG,DESCRIPTION,HEADCOUNT,COMPANY_CLASSIFICATION,REVENUE,CEO_NAME,ADDR,ESTABLISHMENT_DATE,INPUT_DATE
+    	SELECT COMPANY_CODE,COMPANY_NAME,BUSINESS_NUMBER,LOGO,COMPANY_IMG,DESCRIPTION,HEADCOUNT,COMPANY_CLASSIFICATION,REVENUE,CEO_NAME,ADDR,ESTABLISHMENT_DATE,INPUT_DATE
     	FROM COMPANYINFO
     	WHERE COMPANY_CODE = #{companyCode}
     </select>
@@ -87,5 +87,52 @@
     	WHERE COMPANY_CODE = #{companyCode}
     </select>
     
+    <insert id="insertCompanyinfoDetail" parameterType="kr.co.sist.vo.companyinfo.CompanyinfoVO">
+	    INSERT INTO COMPANYINFO(COMPANY_CODE, COMPANY_NAME, DESCRIPTION, LOGO, COMPANY_IMG, AVG_SAL, REVENUE, ESTABLISHMENT_DATE, HEADCOUNT, BUSINESS_NUMBER, ADDR, CEO_NAME, COMPANY_CLASSIFICATION, INPUT_DATE)
+		VALUES(#{companyCode},#{companyName},#{description},#{logo},#{companyImg},#{avgSal},#{revenue},#{establishmentDate},#{headcount},#{businessNumber},#{addr},#{ceoName},#{companyClassification},#{inputDate});
+    </insert>
+    
+    <update id="updateCompanyinfoDetail">
+    	update companyinfo
+    	<set>
+			<if test="ename neq null and ename neq ''">
+				ename=#{ ename } ,
+			</if>
+			<if test="sal gt 0">
+				sal=#{ sal } ,
+			</if>
+			<if test="job neq null and job neq ''">
+				job=#{ job }
+			</if>
+		</set>
+		where company_code=#{ companyCode }
+    </update>
+    
+    <insert id="insertHistory" parameterType="kr.co.sist.vo.companyinfo.CompanyinfoVO">
+	    INSERT INTO WELFARE(COMPANY_CODE, CATEGORY, CONTENT)
+	    VALUES(#{companyCode},#{category},#{content});
+    </insert>
+    
+    <update id="updateHistory">
+    
+    </update>
+    
+    <delete id="deleteHistory">
+    
+    </delete>
+    
+    <insert id="insertWelfare" parameterType="kr.co.sist.vo.companyinfo.CompanyinfoVO">
+	    INSERT INTO HISTORY(COMPANY_CODE, BASE_DATE, CONTENT)
+	    VALUES(#{companyCode},#{baseDate},#{content});
+    </insert>
+    
+    <update id="updateWelfare">
+    
+    </update>
+    
+    <delete id="deleteWelfare">
+    
+    </delete>
+
     
 </mapper>

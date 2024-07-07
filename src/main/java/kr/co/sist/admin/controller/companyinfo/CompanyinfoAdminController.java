@@ -20,7 +20,13 @@ public class CompanyinfoAdminController {
         return "companyinfo/companies";
     }
     @GetMapping("/companyinfo/adminCompanyinfoDetail.do")
-    public String companyinfoDetail() {
+    public String companyinfoDetail(String companyCode, Model model) {
+        List<SearchDomain> list=companyinfoAdminService.searchCompanyinfoDetail(companyCode);
+        List<SearchDomain> list2=companyinfoAdminService.searchHistory(companyCode);
+        List<SearchDomain> list3=companyinfoAdminService.searchWelfare(companyCode);
+        model.addAttribute("companyDetail",list);
+        model.addAttribute("history",list2);
+        model.addAttribute("welfare",list3);
         return "companyinfo/admin_company_detail";
     }
     @GetMapping("/companyinfo/adminCompanyinfoWrite.do")

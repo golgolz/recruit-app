@@ -54,5 +54,21 @@ public class CompanyinfoAdminDAO {
         
         return list;
     }
+    public List<SearchDomain> selectHistory(String companyCode)throws PersistenceException{
+        List<SearchDomain> list=null;
+        SqlSession ss=mbConfig.getMyBatisHandler(false);
+        list=ss.selectList("kr.co.sist.admin.companyinfo.selectHistory", companyCode);
+        mbConfig.closeHandler(ss);
+        
+        return list;
+    }
+    public List<SearchDomain> selectWelfare(String companyCode)throws PersistenceException{
+        List<SearchDomain> list=null;
+        SqlSession ss=mbConfig.getMyBatisHandler(false);
+        list=ss.selectList("kr.co.sist.admin.companyinfo.selectWelfare", companyCode);
+        mbConfig.closeHandler(ss);
+        
+        return list;
+    }
     
 }
