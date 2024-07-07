@@ -59,7 +59,7 @@
 		
 				<div class="viewCont">
 					<dl class="inqCont">
-					<dt><strong>[답변]</strong><c:out value="${qnaDetail.reply_date}"/></dt>
+					<dt><strong>[<c:out value="${qnaDetail.flag}"/>]</strong><c:out value="${qnaDetail.reply_date}"/></dt>
 					<dd><strong><c:out value="${qnaDetail.ans_title}"/></strong></dd><br/>
 					<dd><c:out value="${qnaDetail.ans_content}"/></dd>
 					</dl>

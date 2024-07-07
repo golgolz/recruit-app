@@ -5,11 +5,19 @@
   
 <mapper namespace="kr.co.sist.qna.admin">
   <select id="selectNewQnas" resultType="kr.co.sist.admin.domain.qna.QnaDomain">
-	select   row_number() over (order by input_date) as qna_num,
+	<!-- select   row_number() over (order by input_date) as qna_num,
         category, title, content, user_id, input_date
     from  qna
-    where  flag = 'N'
-    order by  input_date desc
+    where  flag = '답변대기'
+    order by  input_date desc -->
+     select qna_num, category, title, content, user_id, input_date
+    from (
+        select qna_num, category, title, content, user_id, input_date,
+               row_number() over (order by input_date desc) as rnum
+        from qna
+        where flag = '답변대기'
+    ) qnas
+    order by input_date desc
   </select>
   
   <select id="selectOneNewQna" resultType="kr.co.sist.admin.domain.qna.QnaDomain">
@@ -30,7 +38,7 @@
   <select id="selectOldQnas" resultType="kr.co.sist.admin.domain.qna.QnaDomain">
   	select   row_number() over (order by input_date) as qna_num, category, title, input_date
     from  qna
-    where  flag = 'Y'
+    where  flag = '답변완료'
     order by  input_date desc
   </select>
   
@@ -58,8 +66,8 @@
   
   <update id="updateQnaFlag" parameterType="int">
     update qna
-    set flag = 'Y'
-    where qna_num = #{qna_num} and flag = 'N'
+    set flag = '답변완료'
+    where qna_num = #{qna_num} and flag = '답변대기'
   </update>
 	
 </mapper>
