@@ -1,6 +1,8 @@
 package kr.co.sist.user.dao.notice;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -49,24 +51,48 @@ public class NoticeUserDAO {
         }
     }// 공지사항 카테고리로 불러오기
 
-    public Object selectNoticesbyKeyword(String keyword) {
+    // public Object selectNoticesbyKeyword(String keyword, String searchType) {
+    // SqlSession session = myBatis.getMyBatisHandler(false);
+    // try {
+    // Map<String, String> params = new HashMap<>();
+    // params.put("keyword", keyword);
+    // params.put("searchType", searchType);
+    //
+    // List<NoticeUserDomain> noticeList =
+    // session.selectList("kr.co.sist.notice.user.selectNoticesbyKeyword", params);
+    //
+    // if (noticeList.isEmpty()) {
+    // return null; // 검색 결과 없음
+    // } else if (noticeList.size() == 1) {
+    // return noticeList.get(0); // 검색 결과 공지사항 하나
+    // } else {
+    // return noticeList; // 검색 결과 공지사항 리스트
+    // }
+    // } catch (Exception e) {
+    // throw new RuntimeException("오류 발생", e);
+    // } finally {
+    // myBatis.closeHandler(session);
+    // }
+    // }
+
+    public List<NoticeUserDomain> selectNoticesbyKeyword(String keyword, String searchType) {
         SqlSession session = myBatis.getMyBatisHandler(false);
         try {
+            Map<String, String> params = new HashMap<>();
+            params.put("keyword", keyword);
+            params.put("searchType", searchType);
+
             List<NoticeUserDomain> noticeList =
-                    session.selectList("kr.co.sist.notice.user.selectNoticesbyKeyword", keyword);
-            if (noticeList.isEmpty()) {
-                return null; // 검색결과없음
-            } else if (noticeList.size() == 1) {
-                return noticeList.get(0); // 검색결과 공지사항 하나
-            } else {
-                return noticeList; // 검색결과 공지사항 리스트
-            }
+                    session.selectList("kr.co.sist.notice.user.selectNoticesbyKeyword", params);
+
+            return noticeList; // List<NoticeUserDomain> 형태로 반환
         } catch (Exception e) {
-            throw new RuntimeException("공지사항 조회 중 오류 발생", e);
+            throw new RuntimeException("오류 발생", e);
         } finally {
             myBatis.closeHandler(session);
         }
     }
+
 
 
     public NoticeUserDomain selectOneNotice(int notice_num) {
