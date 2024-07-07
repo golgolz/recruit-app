@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import kr.co.sist.admin.dao.companyinfo.CompanyinfoAdminDAO;
 import kr.co.sist.domain.companyinfo.SearchDomain;
+import kr.co.sist.vo.companyinfo.CompanyinfoVO;
 import kr.co.sist.vo.companyinfo.SearchVO;
 
 @Service
@@ -70,6 +71,32 @@ public class CompanyinfoAdminService {
             pe.printStackTrace();
         }
         return list;
+    }
+    
+    public boolean addCompanyinfoDetail(CompanyinfoVO companyinfoVO) {
+        return companyinfoAdminDAO.insertCompanyinfoDetail(companyinfoVO);
+    }
+
+    public String searchNextCompNum() {
+
+      //이벤트 마지막 번호 + 1 메서드
+        String nextCompNum = "";
+        try {
+            String lastCompNum = companyinfoAdminDAO.selectLastCompNum();
+            //숫자 추출 과정
+            String prefix = "comp_";
+            String numberStr = lastCompNum.substring(prefix.length());
+            int number = Integer.parseInt(numberStr);
+            number++;
+            //증가된 숫자 형식에 맞춰 문자열 변환
+            nextCompNum = String.format("%s%04d", prefix,number);
+
+        }catch(PersistenceException pe) {
+            pe.printStackTrace();
+        }
+
+        return nextCompNum;
+        
     }
 
 }

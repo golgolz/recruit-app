@@ -69,6 +69,13 @@
     	WHERE COMPANY_CODE = #{companyCode}
     </select>
     
+    <select id="lastCompNum" resultType="String">
+    	SELECT COMPANY_CODE
+    	FROM COMPANYINFO
+    	WHERE ROWNUM=1
+    	ORDER BY COMPANY_CODE DESC
+    </select>
+    
     <select id="selectHistory" resultMap="companyInfoResultMap" parameterType="String">
     	SELECT COMPANY_CODE,BASE_DATE,HISTORY_CONTENT
     	FROM HISTORY
@@ -89,33 +96,26 @@
     
     <insert id="insertCompanyinfoDetail" parameterType="kr.co.sist.vo.companyinfo.CompanyinfoVO">
 	    INSERT INTO COMPANYINFO(COMPANY_CODE, COMPANY_NAME, DESCRIPTION, LOGO, COMPANY_IMG, AVG_SAL, REVENUE, ESTABLISHMENT_DATE, HEADCOUNT, BUSINESS_NUMBER, ADDR, CEO_NAME, COMPANY_CLASSIFICATION, INPUT_DATE)
-		VALUES(#{companyCode},#{companyName},#{description},#{logo},#{companyImg},#{avgSal},#{revenue},#{establishmentDate},#{headcount},#{businessNumber},#{addr},#{ceoName},#{companyClassification},#{inputDate});
+		VALUES(#{companyCode},#{companyName},#{description},#{logo},#{companyImg},#{avgSal},#{revenue},TO_DATE(#{establishmentDate}, 'YYYY'),#{headcount},#{businessNumber},#{addr},#{ceoName},#{companyClassification},SYSDATE)
     </insert>
     
     <update id="updateCompanyinfoDetail">
-    	update companyinfo
-    	<set>
-			<if test="ename neq null and ename neq ''">
-				ename=#{ ename } ,
-			</if>
-			<if test="sal gt 0">
-				sal=#{ sal } ,
-			</if>
-			<if test="job neq null and job neq ''">
-				job=#{ job }
-			</if>
-		</set>
-		where company_code=#{ companyCode }
+    	UPDATE COMPANYINFO
+    	SET COMPANY_NAME=#{companyName},
+    		BUSINESS_NUMBER=#{businessNumber},
+    		HEADCOUNT=#{headcount},
+    		ESTABLISHMENTDATE=#{establishmentDate},
+    		REVENUE=#{revenue},
+    		DESCRIPTION=#{description},
+    		LOGO=#{logo},
+    		COMPANY_IMG=#{companyImg}
+		WHERE COMPANY_CODE=#{ companyCode }
     </update>
     
     <insert id="insertHistory" parameterType="kr.co.sist.vo.companyinfo.CompanyinfoVO">
 	    INSERT INTO WELFARE(COMPANY_CODE, CATEGORY, CONTENT)
 	    VALUES(#{companyCode},#{category},#{content});
     </insert>
-    
-    <update id="updateHistory">
-    
-    </update>
     
     <delete id="deleteHistory">
     
@@ -125,10 +125,6 @@
 	    INSERT INTO HISTORY(COMPANY_CODE, BASE_DATE, CONTENT)
 	    VALUES(#{companyCode},#{baseDate},#{content});
     </insert>
-    
-    <update id="updateWelfare">
-    
-    </update>
     
     <delete id="deleteWelfare">
     

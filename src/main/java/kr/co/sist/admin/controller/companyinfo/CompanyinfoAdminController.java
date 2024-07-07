@@ -1,12 +1,19 @@
 package kr.co.sist.admin.controller.companyinfo;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import kr.co.sist.admin.service.companyinfo.CompanyinfoAdminService;
 import kr.co.sist.domain.companyinfo.SearchDomain;
+import kr.co.sist.vo.companyinfo.CompanyinfoVO;
 
 @Controller
 public class CompanyinfoAdminController {
@@ -31,7 +38,66 @@ public class CompanyinfoAdminController {
     }
     @GetMapping("/companyinfo/adminCompanyinfoWrite.do")
     public String insertCompanyinfoPage() {
+        System.out.println("get");
         return "companyinfo/admin_company_detail_write";
+    }
+
+    @PostMapping("/companyinfo/addCompanyinfoWrite.do")
+    public String insertCompanyinfoPage(CompanyinfoVO cVO,HttpServletRequest request) throws IOException {
+        String nextCompNum=companyinfoAdminService.searchNextCompNum();
+        String uploadLogoPath = "C:/dev/recruit-app/src/main/webapp/WEB-INF/views/assets/images/company/logo";
+
+        File logoDir = new File(uploadLogoPath);
+
+        if (!logoDir.exists()) {
+            logoDir.mkdirs();
+        }
+
+        int maxSize = 100 * 1024 * 1024; // 100MB
+        MultipartRequest mrLogo = new MultipartRequest(request, uploadLogoPath, maxSize, "UTF-8", new DefaultFileRenamePolicy());
+
+        String companyName = mrLogo.getParameter("companyName");
+        String businessNumber = mrLogo.getParameter("businessNumber");
+        int headcount = Integer.parseInt(mrLogo.getParameter("headcount"));
+        String establishmentDate = mrLogo.getParameter("establishmentDate");
+        int revenue = Integer.parseInt(mrLogo.getParameter("revenue"));
+        String description = mrLogo.getParameter("description");
+        String addr = mrLogo.getParameter("addr");
+        String ceoName = mrLogo.getParameter("ceoName");
+        int avgSal = Integer.parseInt(mrLogo.getParameter("avgSal"));
+        String companyClassification = mrLogo.getParameter("companyClassification");
+        String inputDate = mrLogo.getParameter("inputDate");
+        String logo = mrLogo.getFilesystemName("logo");
+        String companyImg = mrLogo.getFilesystemName("companyImg");
+
+        cVO.setCompanyName(companyName);
+        cVO.setBusinessNumber(businessNumber);
+        cVO.setHeadcount(headcount);
+        cVO.setEstablishmentDate(establishmentDate);
+        cVO.setRevenue(revenue);
+        cVO.setDescription(description);
+        cVO.setAddr(addr);
+        cVO.setCeoName(ceoName);
+        cVO.setAvgSal(avgSal);
+        cVO.setCompanyClassification(companyClassification);
+        cVO.setInputDate(inputDate);
+        cVO.setLogo(logo);
+        cVO.setCompanyImg(companyImg);
+        cVO.setCompanyCode(nextCompNum);
+        System.out.println("cVO.toString() : " + cVO.toString());
+        
+        companyinfoAdminService.addCompanyinfoDetail(cVO);
+        
+        return "companyinfo/admin_company_detail_write";
+    }
+    
+    @PostMapping("/companyinfo/addCompanyinfoDetail.do")
+    public String addCompanyinfo(CompanyinfoVO companyinfoVO) {
+        String result = "success";
+        if (!companyinfoAdminService.addCompanyinfoDetail(companyinfoVO)) {
+            result = "fail";
+        }
+        return result;
     }
     
 //    @GetMapping("/companyinfo/search_test.do")

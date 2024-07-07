@@ -188,8 +188,8 @@
                                             <div class="benefit-header"><c:out value="${welfare.category}" /></div>
                                         </c:if>
                                         <div class="benefit-body">
-                                            <c:if test="${not empty requestScope.welfare[0].welfareContent}">
-                                                <p><c:out value="${requestScope.welfare[0].welfareContent}" /></p>
+                                            <c:if test="${not empty welfare.welfareContent}">
+                                                <p><c:out value="${welfare.welfareContent}" /></p>
                                             </c:if>
                                         </div>
                                     </div>
