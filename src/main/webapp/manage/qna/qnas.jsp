@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" info=""%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>sss
 <!DOCTYPE html>
 <html>
 <head>
@@ -101,7 +102,7 @@
 											<td><c:out value="${qna.qna_num}"/></td>
 											<td class="alLeft"><span class="tit"><a
 													href="http://localhost/recruit-app/manage/qna/old_detail.do?qna_num=${qna.qna_num }"><c:out value="${qna.title}"/></a></span></td>
-											<td><c:out value="${qna.input_date}"/></td>
+											<td><fmt:formatDate value="${qna.input_date}" pattern="yy-MM-dd HH:mm:ss" /></td>
 											<td class="">답변완료</td>
 										</tr>
 									</c:forEach>

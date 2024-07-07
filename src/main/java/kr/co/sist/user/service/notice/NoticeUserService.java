@@ -22,17 +22,8 @@ public class NoticeUserService {
         return notieceList;
     }
 
-    // public List<NoticeUserDomain> searchNoticesByCategory(String category) {
-    // System.out.println("============="+category);
-    // List<NoticeUserDomain> noticeList = null;
-    // noticeList = noticeUserDAO.selectNoticesByCategory(category);
-    // System.out.println("============="+category);
-    // return noticeList;
-    // }
-
     public List<NoticeUserDomain> searchNoticesByCategory(String category) {
         List<NoticeUserDomain> result = noticeUserDAO.selectNoticesByCategory(category);
-        // noticeList = noticeUserDAO.selectNoticesByCategory(category);
         return result;
     }
 
