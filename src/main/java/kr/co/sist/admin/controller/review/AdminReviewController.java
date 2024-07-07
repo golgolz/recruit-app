@@ -61,7 +61,7 @@ public class AdminReviewController {
     
     
  // 리뷰 상세 조회
-    @GetMapping("/reviewsUpdate.do")
+    @GetMapping("/manage/review/reviewUpdate.do")
     public String getReviewDetailsForUpdate(@RequestParam("reviewNum") int reviewNum, Model model) {
         logger.debug("getReviewDetailsForUpdate method called with reviewNum: {}", reviewNum);
 
@@ -74,6 +74,7 @@ public class AdminReviewController {
 
         return "manage/review/reviewUpdate";
     }
+
     
  // 리뷰 업데이트
     @PostMapping("/updateReview.do")
