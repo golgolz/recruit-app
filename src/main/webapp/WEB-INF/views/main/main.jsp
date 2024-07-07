@@ -85,7 +85,7 @@
 
                   <div class="custom-post">
                     <div class="custom-slider-image-container"  style="width: 200 %;">
-                      <img src="../assets/images/ads/1.webp" class="custom-slider-image" >
+                      <img src="${pageContext.request.contextPath}/assets/images/ads/3.webp" class="custom-slider-image" >
                       <div class="custom-image-text">
                         <strong>클라썸은 지금도 전 직원 채용중.</strong> <br/>
                         <span style="font-size: 15px;">어서 지원하세요!</span>
@@ -97,7 +97,7 @@
 
                   <div class="custom-post">
                     <div class="custom-slider-image-container" style="width: 150%;">
-                      <img src="../assets/images/ads/3.webp" class="custom-slider-image">
+                      <img src="${pageContext.request.contextPath}/assets/images/ads/2.webp" class="custom-slider-image">
                       <div class="custom-image-text">
                         <strong>인공지능 (AI)포지션.</strong> <br/>
                         <span style="font-size: 15px;">눈여겨볼 인공지능 (AI) 공고를 소개합니다</span>

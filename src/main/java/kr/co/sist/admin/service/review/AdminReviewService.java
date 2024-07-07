@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import kr.co.sist.admin.dao.review.AdminReviewDAO;
+import kr.co.sist.admin.vo.review.ReviewDetailVO;
 import kr.co.sist.admin.vo.review.ReviewVO;
 
 @Service
@@ -28,4 +29,18 @@ public class AdminReviewService {
     public List<ReviewVO> searchReviewByTitleOrContent(String keyword) {
         return adminReviewDAO.searchReviewByTitleOrContent(keyword);
     }
+    
+    //리뷰 상세 조회
+    public ReviewDetailVO getReviewDetailsForUpdate(int reviewNum) {
+        return adminReviewDAO.getReviewDetailsForUpdate(reviewNum);
+    }
+
+    public void updateReview(ReviewDetailVO review) {
+        adminReviewDAO.updateReview(review);
+    }
+
+    public void deleteReview(int reviewNum) {
+        adminReviewDAO.deleteReview(reviewNum);
+    }
+    
 }

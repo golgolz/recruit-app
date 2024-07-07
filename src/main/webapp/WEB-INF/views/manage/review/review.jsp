@@ -16,13 +16,16 @@
 <script type="text/javascript">
     $(function(){
         $("#review_menu").addClass("bg-gradient-primary");
+        
+        // 리뷰 행 클릭 시 상세 페이지로 이동
+        $('.list').on('click', 'tr', function() {
+            var reviewNum = $(this).data('review-num');
+            window.location.href = '/recruit-app/manage/review/reviewUpdate.do?reviewNum=' + reviewNum;
+        });
 
         // 초기화 버튼 클릭 이벤트 핸들러
         $("#btn-reset").click(function(){
-            // 현재 페이지로 리다이렉트하여 초기화
             window.location.href = window.location.pathname;
-            
-           
         });
     });
 
@@ -41,6 +44,7 @@
         paginatedReviews.forEach((review, index) => {
             console.log("Adding review:", review); // 디버그 로그 추가
             const row = document.createElement('tr');
+            row.setAttribute('data-review-num', review.reviewNum);
 
             const reviewNumCell = document.createElement('td');
             reviewNumCell.textContent = startIndex + index + 1;
@@ -141,6 +145,7 @@
 
 
 
+
 <!-- golgolz start -->
 
 <link href="http://localhost/recruit-app/assets/css/pagenation.css" rel="stylesheet" />
@@ -174,7 +179,7 @@
     <div class="container-fluid">
             <!-- golgolz start -->
             <div class="s_wrap">
-        <form name="fsearch" id="fsearch" method="get" action="/recruit-app/manage/review/review.do">
+        <form name="fsearch" id="fsearch" method="get" onsubmit="return handleFormSubmit(event);" action="/recruit-app/manage/review/review.do">
     <input type="hidden" name="code" value="list">
     <div class="tbl_frm01">
         <table>
@@ -202,8 +207,6 @@
         <input type="button" value="초기화" class="btn btn-outline-secondary btn-sm" id="btn-reset">
     </div>
 </form>
-
-
 
         <div class="local_ov mart30">
             총 리뷰 수 : <b class="fc_red">${reviewList != null ? reviewList.size() : 0}</b>건

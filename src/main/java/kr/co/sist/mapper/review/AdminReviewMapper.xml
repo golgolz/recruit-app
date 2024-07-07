@@ -68,21 +68,27 @@
         OR REVIEW.CONTENT LIKE '%' || #{keyword} || '%'
 </select>
 
-  <!-- 리뷰 업데이트 위한 조회 -->
-  <select id="getReviewDetailsForUpdate" parameterType="int" resultType="kr.co.sist.admin.vo.review.ReviewVO">
+  <!-- 리뷰 상세 조회 -->
+<select id="getReviewDetailsForUpdate" parameterType="int" resultType="kr.co.sist.admin.vo.review.ReviewDetailVO">
     SELECT
-        TITLE AS title,
-        CONTENT AS content,
+        R.REVIEW_NUM AS reviewNum,
+        R.USER_ID AS userId,
+        (SELECT NAME FROM USERS WHERE USER_ID = R.USER_ID) AS author,
+        R.TITLE AS title,
+        R.CONTENT AS content,
+        R.INPUT_DATE AS inputDate,
+        R.RECOMMEND AS recommend,
+        R.DELETE_FLAG AS deleteFlag,
         (SELECT COMPANY_NAME FROM COMPANYINFO WHERE COMPANY_CODE = R.COMPANY_CODE) AS companyName,
         (SELECT LOGO FROM COMPANYINFO WHERE COMPANY_CODE = R.COMPANY_CODE) AS logo
     FROM
         REVIEW R
     WHERE
         R.REVIEW_NUM = #{reviewNum}
-  </select>
+</select>
 
-  <!-- 리뷰 업데이트 -->
-  <update id="updateReview" parameterType="kr.co.sist.admin.vo.review.ReviewVO">
+ <!-- 리뷰 업데이트 -->
+<update id="updateReview" parameterType="kr.co.sist.admin.vo.review.ReviewDetailVO">
     UPDATE REVIEW
     SET 
         TITLE = #{title},
@@ -90,13 +96,13 @@
         INPUT_DATE = SYSDATE
     WHERE 
         REVIEW_NUM = #{reviewNum}
-  </update>
+</update>
 
-  <!-- 리뷰 삭제 -->
-  <delete id="deleteReview" parameterType="int">
+<!-- 리뷰 삭제 -->
+<delete id="deleteReview" parameterType="int">
     DELETE FROM REVIEW
     WHERE REVIEW_NUM = #{reviewNum}
-  </delete>
+</delete>
 
   <!-- 모든 리뷰 검색 -->
   <select id="getAllReviews" resultType="kr.co.sist.admin.vo.review.ReviewVO">
