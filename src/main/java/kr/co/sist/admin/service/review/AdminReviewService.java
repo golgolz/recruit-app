@@ -28,4 +28,20 @@ public class AdminReviewService {
     public List<ReviewVO> searchReviewByTitleOrContent(String keyword) {
         return adminReviewDAO.searchReviewByTitleOrContent(keyword);
     }
+    
+    //리뷰 상세 조회
+    public ReviewVO getReviewDetailsForUpdate(int reviewNum) {
+        return adminReviewDAO.getReviewDetailsForUpdate(reviewNum);
+    }
+
+    //리뷰 업데이트
+    public int updateReview(ReviewVO review) {
+        return adminReviewDAO.updateReview(review);
+    }
+
+    //리뷰 삭제
+    public int deleteReview(int reviewNum) {
+        return adminReviewDAO.deleteReview(reviewNum);
+    }
+    
 }

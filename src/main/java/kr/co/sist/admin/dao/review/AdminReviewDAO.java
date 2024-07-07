@@ -76,11 +76,7 @@ public class AdminReviewDAO {
         return result;
     }
 
-    /**
-     * 리뷰 상세 정보 조회 (수정을 위해)
-     * @param reviewNum 리뷰 번호
-     * @return 해당 리뷰 번호의 상세 정보
-     */
+    // 리뷰 상세 조회
     public ReviewVO getReviewDetailsForUpdate(int reviewNum) {
         logger.debug("getReviewDetailsForUpdate called with reviewNum: {}", reviewNum);
         SqlSession session = myBatis.getMyBatisHandler(false);
@@ -90,11 +86,7 @@ public class AdminReviewDAO {
         return result;
     }
 
-    /**
-     * 리뷰 업데이트
-     * @param review 수정할 리뷰 객체
-     * @return 업데이트된 레코드 수
-     */
+    // 리뷰 업데이트
     public int updateReview(ReviewVO review) {
         logger.debug("updateReview called with review: {}", review);
         SqlSession session = myBatis.getMyBatisHandler(false);
@@ -104,11 +96,7 @@ public class AdminReviewDAO {
         return result;
     }
 
-    /**
-     * 리뷰 삭제
-     * @param reviewNum 삭제할 리뷰 번호
-     * @return 삭제된 레코드 수
-     */
+    // 리뷰 삭제
     public int deleteReview(int reviewNum) {
         logger.debug("deleteReview called with reviewNum: {}", reviewNum);
         SqlSession session = myBatis.getMyBatisHandler(false);

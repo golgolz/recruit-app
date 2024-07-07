@@ -41,6 +41,10 @@
         paginatedReviews.forEach((review, index) => {
             console.log("Adding review:", review); // 디버그 로그 추가
             const row = document.createElement('tr');
+            row.style.cursor = "pointer"; // 커서 스타일 변경
+            row.onclick = function() {
+                window.location.href = '/recruit-app/manage/review/reviewDetails.do?reviewNum=' + review.reviewNum;
+            };
 
             const reviewNumCell = document.createElement('td');
             reviewNumCell.textContent = startIndex + index + 1;
@@ -174,7 +178,7 @@
     <div class="container-fluid">
             <!-- golgolz start -->
             <div class="s_wrap">
-        <form name="fsearch" id="fsearch" method="get" action="/recruit-app/manage/review/review.do">
+        <form name="fsearch" id="fsearch" method="get" onsubmit="return handleFormSubmit(event);" action="/recruit-app/manage/review/review.do">
     <input type="hidden" name="code" value="list">
     <div class="tbl_frm01">
         <table>
@@ -202,8 +206,6 @@
         <input type="button" value="초기화" class="btn btn-outline-secondary btn-sm" id="btn-reset">
     </div>
 </form>
-
-
 
         <div class="local_ov mart30">
             총 리뷰 수 : <b class="fc_red">${reviewList != null ? reviewList.size() : 0}</b>건
