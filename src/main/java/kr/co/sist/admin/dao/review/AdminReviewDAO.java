@@ -87,12 +87,20 @@ public class AdminReviewDAO {
         return result;
     }
 
-    // 리뷰 업데이트
-    public int updateReview(ReviewVO review) {
+ // 리뷰 업데이트
+    public int updateReview(ReviewDetailVO review) {
         logger.debug("updateReview called with review: {}", review);
         SqlSession session = myBatis.getMyBatisHandler(false);
-        int result = session.update("kr.co.sist.mapper.admin.review.AdminReviewMapper.updateReview", review);
-        myBatis.closeHandler(session);
+        int result = 0;
+        try {
+            result = session.update("kr.co.sist.mapper.admin.review.AdminReviewMapper.updateReview", review);
+            session.commit();  // 명시적으로 커밋 호출
+        } catch (Exception e) {
+            logger.error("Error occurred during updateReview", e);
+            session.rollback();  // 예외 발생 시 롤백
+        } finally {
+            myBatis.closeHandler(session);
+        }
         logger.debug("updateReview result: {}", result);
         return result;
     }
@@ -101,8 +109,16 @@ public class AdminReviewDAO {
     public int deleteReview(int reviewNum) {
         logger.debug("deleteReview called with reviewNum: {}", reviewNum);
         SqlSession session = myBatis.getMyBatisHandler(false);
-        int result = session.delete("kr.co.sist.mapper.admin.review.AdminReviewMapper.deleteReview", reviewNum);
-        myBatis.closeHandler(session);
+        int result = 0;
+        try {
+            result = session.delete("kr.co.sist.mapper.admin.review.AdminReviewMapper.deleteReview", reviewNum);
+            session.commit();  // 명시적으로 커밋 호출
+        } catch (Exception e) {
+            logger.error("Error occurred during deleteReview", e);
+            session.rollback();  // 예외 발생 시 롤백
+        } finally {
+            myBatis.closeHandler(session);
+        }
         logger.debug("deleteReview result: {}", result);
         return result;
     }

@@ -35,7 +35,7 @@ public class AdminReviewService {
         return adminReviewDAO.getReviewDetailsForUpdate(reviewNum);
     }
 
-    public void updateReview(ReviewVO review) {
+    public void updateReview(ReviewDetailVO review) {
         adminReviewDAO.updateReview(review);
     }
 

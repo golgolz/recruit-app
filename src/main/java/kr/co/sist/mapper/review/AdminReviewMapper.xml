@@ -87,8 +87,8 @@
         R.REVIEW_NUM = #{reviewNum}
 </select>
 
-  <!-- 리뷰 업데이트 -->
-  <update id="updateReview" parameterType="kr.co.sist.admin.vo.review.ReviewVO">
+ <!-- 리뷰 업데이트 -->
+<update id="updateReview" parameterType="kr.co.sist.admin.vo.review.ReviewDetailVO">
     UPDATE REVIEW
     SET 
         TITLE = #{title},
@@ -96,13 +96,13 @@
         INPUT_DATE = SYSDATE
     WHERE 
         REVIEW_NUM = #{reviewNum}
-  </update>
+</update>
 
-  <!-- 리뷰 삭제 -->
-  <delete id="deleteReview" parameterType="int">
+<!-- 리뷰 삭제 -->
+<delete id="deleteReview" parameterType="int">
     DELETE FROM REVIEW
     WHERE REVIEW_NUM = #{reviewNum}
-  </delete>
+</delete>
 
   <!-- 모든 리뷰 검색 -->
   <select id="getAllReviews" resultType="kr.co.sist.admin.vo.review.ReviewVO">

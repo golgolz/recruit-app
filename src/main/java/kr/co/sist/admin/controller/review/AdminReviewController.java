@@ -77,8 +77,8 @@ public class AdminReviewController {
 
     
  // 府轰 诀单捞飘
-    @PostMapping("/updateReview.do")
-    public String updateReview(ReviewVO review) {
+    @PostMapping("/manage/review/updateReview.do")
+    public String updateReview(ReviewDetailVO review) {
         logger.debug("updateReview method called with review: {}", review);
 
         try {
@@ -87,11 +87,11 @@ public class AdminReviewController {
             logger.error("Error occurred in updateReview method", e);
         }
 
-        return "redirect:/recruit-app/manage/review/review.do";
+        return "redirect:/manage/review/review.do";
     }
 
     // 府轰 昏力
-    @PostMapping("/deleteReview.do")
+    @PostMapping("/manage/review/deleteReview.do")
     public String deleteReview(@RequestParam("reviewNum") int reviewNum) {
         logger.debug("deleteReview method called with reviewNum: {}", reviewNum);
 
@@ -101,7 +101,7 @@ public class AdminReviewController {
             logger.error("Error occurred in deleteReview method", e);
         }
 
-        return "redirect:/recruit-app/manage/review/review.do";
+        return "redirect:/manage/review/review.do";
     }
     
 }
