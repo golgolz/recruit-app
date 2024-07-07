@@ -13,6 +13,7 @@
 	$(function(){
 		$("#company_menu").addClass("bg-gradient-primary");
 	});
+	
 </script>
 <style>
 .subtitle{
@@ -79,11 +80,14 @@ input{
 		<div class="container-fluid py-4">
 			<!-- golgolz start -->
 			<div id="contentcolumn" class="">
+				<form id="frmDelete" action="http://localhost/recruit-app/companyinfo/deleteHistory.do" method="post">
+				<input type="hidden" id="history" value="" name="hiddenValue"/>
+				</form>
 				<div class="contents">
 				<c:if test="${not empty requestScope.companyDetail}">
                     <c:set var="companyIntroDetail" value="${requestScope.companyDetail[0]}" />
                 </c:if>
-					<form id="dataForm" name="dataForm" action="http://localhost/online-shop/manage/goods/register_process.jsp" method="post" enctype="multipart/form-data">
+					<form id="dataForm" name="dataForm" action="" method="post" enctype="multipart/form-data">
 						<div class="subtitle" style="font-size:20px; margin-bottom: 50px">
 							<img src="http://localhost/recruit-app/assets/images/company/logo/<c:out value="${ companyIntroDetail.logo }"/>" style="height:50px; width:auto; margin-right:10px"/>
 							<strong><c:out value="${companyIntroDetail.companyName}"/></strong>
@@ -115,7 +119,7 @@ input{
 									<td class="box text">
 										<input type="text" id="historyContent" name="historyContent" value="" size="50" class="inputbox naver_shopping_prodName" />
 										<input type="button" id="btn-register" class="btn btn-outline-success btn-sm" value="추가" />
-										<input type="button" id="btn-register" class="btn btn-outline-danger btn-sm" value="삭제" />
+										<input type="button" id="historyDelete" class="btn btn-outline-danger btn-sm" value="삭제" />
 									</td>
 								</tr>
 								<tr>
@@ -147,7 +151,7 @@ input{
 										카테고리
 									</td>
 									<td class="box text">
-										<input type="text" name="name" value="" size="30" class="inputbox naver_shopping_prodName" />
+										<input type="text" id="welfareCategory" name="welfareCategory" value="" size="30" class="inputbox naver_shopping_prodName" />
 									</td>
 								</tr>
 								<tr>
@@ -155,7 +159,7 @@ input{
 										내용
 									</td>
 									<td class="box text">
-										<input type="text" name="name" value="" size="50" class="inputbox naver_shopping_prodName" />
+										<input type="text" id="welfareContent" name="welfareContent" value="" size="50" class="inputbox naver_shopping_prodName" />
 										<input type="button" id="btn-register" class="btn btn-outline-success btn-sm" value="추가" />
 										<input type="button" id="btn-register" class="btn btn-outline-danger btn-sm" value="삭제" />
 									</td>
@@ -164,7 +168,8 @@ input{
 									<td class="box text" colspan="2">
 										<ol id="benefits">
 											<c:forEach var="welfare" items="${ requestScope.welfare }" varStatus="i">
-											<li><strong><c:out value="${welfare.category}" /> </strong> : <c:out value="${welfare.welfareContent}" /></li>
+											<li onclick="fillWelfare('${welfare.category}', '${welfare.welfareContent}')">
+											<strong><c:out value="${welfare.category}" /> </strong> : <c:out value="${welfare.welfareContent}" /></li>
 											</c:forEach>
 										</ol>
 									</td>
@@ -191,12 +196,21 @@ input{
         $("#btn-register").click(function(){
             $("#dataForm").submit();
         });
+        $("#historyDelete").click(function(){
+            $("#frmDelete").submit();
+        });
     });
 
     function fillHistory(date, content) {
         $('#historyDate').val(date);
         $('#historyContent').val(content);
+        $('#history').val(date);
     }
+    function fillWelfare(category, wcontent) {
+        $('#welfareCategory').val(category);
+        $('#welfareContent').val(wcontent);
+    }
+    
 </script>
 </body>
 </html>

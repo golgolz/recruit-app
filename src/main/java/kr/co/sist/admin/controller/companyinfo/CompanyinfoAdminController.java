@@ -49,13 +49,17 @@ public class CompanyinfoAdminController {
         return "companyinfo/admin_company_detail_write";
     }
     @GetMapping("/companyinfo/adminHistoryWelfare.do")
-    public String selectHistoryWelfareDetail(String companyCode, Model model) {
+    public String selectHistoryWelfareDetail(String companyCode, Model model, HttpSession session) {
         List<SearchDomain> list=companyinfoAdminService.searchCompanyinfoDetail(companyCode);
         List<SearchDomain> list2=companyinfoAdminService.searchHistory(companyCode);
         List<SearchDomain> list3=companyinfoAdminService.searchWelfare(companyCode);
+        
+        session.setAttribute("companyCode", companyCode);
+        
         model.addAttribute("companyDetail",list);
         model.addAttribute("history",list2);
         model.addAttribute("welfare",list3);
+      
         return "companyinfo/admin_history_welfare";
     }
 
@@ -188,6 +192,12 @@ public class CompanyinfoAdminController {
         
         return "redirect:/companyinfo/adminCompanyinfoList.do";
     }//updateCompanyinfo
+    
+    @PostMapping("/companyinfo/deleteHistory.do")
+    public String deleteHistory(@RequestParam("hiddenValue") String date, HttpSession session) {
+        System.out.println("===========" + date + " ==============="+ session.getAttribute("companyCode"));
+        return "";
+    }
     
 //    @GetMapping("/companyinfo/search_test.do")
 //    public String SearchCompanyinfoList(Model model, @ModelAttribute SearchVO sVO) {
