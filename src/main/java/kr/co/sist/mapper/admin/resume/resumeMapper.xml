@@ -121,7 +121,7 @@
 		            AND apply.recruit_num = #{recruitId}
 		        </if>
 		        <if test="endSchool != null and endSchool != ''">
-		        	AND education.school_classification >= #{endSchool}
+		        	AND education.school_classification = #{endSchool}
 		        </if>
 		    </where>
 		)
