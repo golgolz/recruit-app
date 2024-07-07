@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import kr.co.sist.admin.vo.review.ReviewDetailVO;
 import kr.co.sist.admin.vo.review.ReviewVO;
 import kr.co.sist.properties.MyBatisConfig;
 
@@ -77,10 +78,10 @@ public class AdminReviewDAO {
     }
 
     // 리뷰 상세 조회
-    public ReviewVO getReviewDetailsForUpdate(int reviewNum) {
+    public ReviewDetailVO getReviewDetailsForUpdate(int reviewNum) {
         logger.debug("getReviewDetailsForUpdate called with reviewNum: {}", reviewNum);
         SqlSession session = myBatis.getMyBatisHandler(false);
-        ReviewVO result = session.selectOne("kr.co.sist.mapper.admin.review.AdminReviewMapper.getReviewDetailsForUpdate", reviewNum);
+        ReviewDetailVO result = session.selectOne("kr.co.sist.mapper.admin.review.AdminReviewMapper.getReviewDetailsForUpdate", reviewNum);
         myBatis.closeHandler(session);
         logger.debug("getReviewDetailsForUpdate result: {}", result);
         return result;

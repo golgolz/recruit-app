@@ -16,13 +16,16 @@
 <script type="text/javascript">
     $(function(){
         $("#review_menu").addClass("bg-gradient-primary");
+        
+        // 리뷰 행 클릭 시 상세 페이지로 이동
+        $('.list').on('click', 'tr', function() {
+            var reviewNum = $(this).data('review-num');
+            window.location.href = '/recruit-app/manage/review/reviewUpdate.do?reviewNum=' + reviewNum;
+        });
 
         // 초기화 버튼 클릭 이벤트 핸들러
         $("#btn-reset").click(function(){
-            // 현재 페이지로 리다이렉트하여 초기화
             window.location.href = window.location.pathname;
-            
-           
         });
     });
 
@@ -41,10 +44,7 @@
         paginatedReviews.forEach((review, index) => {
             console.log("Adding review:", review); // 디버그 로그 추가
             const row = document.createElement('tr');
-            row.style.cursor = "pointer"; // 커서 스타일 변경
-            row.onclick = function() {
-                window.location.href = '/recruit-app/manage/review/reviewDetails.do?reviewNum=' + review.reviewNum;
-            };
+            row.setAttribute('data-review-num', review.reviewNum);
 
             const reviewNumCell = document.createElement('td');
             reviewNumCell.textContent = startIndex + index + 1;
@@ -142,6 +142,7 @@
         }
     };
 </script>
+
 
 
 

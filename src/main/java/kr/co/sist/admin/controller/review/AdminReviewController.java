@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.co.sist.admin.service.review.AdminReviewService;
+import kr.co.sist.admin.vo.review.ReviewDetailVO;
 import kr.co.sist.admin.vo.review.ReviewVO;
 
 @Controller
@@ -59,26 +60,47 @@ public class AdminReviewController {
     }
     
     
-    // ¸®ºä »ó¼¼ Á¶È¸ È­¸é ÀÌµ¿
-    @GetMapping("/manage/review/reviewDetails.do")
-    public String reviewDetails(@RequestParam("reviewNum") int reviewNum, Model model) {
-        ReviewVO review = adminReviewService.getReviewDetailsForUpdate(reviewNum);
-        model.addAttribute("review", review);
-        return "manage/review/reviewsUpdate";
-    }
+ // ¸®ºä »ó¼¼ Á¶È¸
+    @GetMapping("/reviewsUpdate.do")
+    public String getReviewDetailsForUpdate(@RequestParam("reviewNum") int reviewNum, Model model) {
+        logger.debug("getReviewDetailsForUpdate method called with reviewNum: {}", reviewNum);
 
-    // ¸®ºä ¾÷µ¥ÀÌÆ® Ã³¸®
-    @PostMapping("/manage/review/updateReview.do")
+        try {
+            ReviewDetailVO review = adminReviewService.getReviewDetailsForUpdate(reviewNum);
+            model.addAttribute("review", review);
+        } catch (Exception e) {
+            logger.error("Error occurred in getReviewDetailsForUpdate method", e);
+        }
+
+        return "manage/review/reviewUpdate";
+    }
+    
+ // ¸®ºä ¾÷µ¥ÀÌÆ®
+    @PostMapping("/updateReview.do")
     public String updateReview(ReviewVO review) {
-        adminReviewService.updateReview(review);
-        return "redirect:/manage/review/review.do";
+        logger.debug("updateReview method called with review: {}", review);
+
+        try {
+            adminReviewService.updateReview(review);
+        } catch (Exception e) {
+            logger.error("Error occurred in updateReview method", e);
+        }
+
+        return "redirect:/recruit-app/manage/review/review.do";
     }
 
-    // ¸®ºä »èÁ¦ Ã³¸®
-    @PostMapping("/manage/review/deleteReview.do")
+    // ¸®ºä »èÁ¦
+    @PostMapping("/deleteReview.do")
     public String deleteReview(@RequestParam("reviewNum") int reviewNum) {
-        adminReviewService.deleteReview(reviewNum);
-        return "redirect:/manage/review/review.do";
+        logger.debug("deleteReview method called with reviewNum: {}", reviewNum);
+
+        try {
+            adminReviewService.deleteReview(reviewNum);
+        } catch (Exception e) {
+            logger.error("Error occurred in deleteReview method", e);
+        }
+
+        return "redirect:/recruit-app/manage/review/review.do";
     }
     
 }
