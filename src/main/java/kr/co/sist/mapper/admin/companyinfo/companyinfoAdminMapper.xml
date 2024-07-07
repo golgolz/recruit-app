@@ -64,7 +64,7 @@
     </select>
     
     <select id="selectCompanyinfoDetail" resultMap="companyInfoResultMap" parameterType="String">
-    	SELECT COMPANY_CODE,COMPANY_NAME,BUSINESS_NUMBER,LOGO,COMPANY_IMG,DESCRIPTION,HEADCOUNT,COMPANY_CLASSIFICATION,REVENUE,CEO_NAME,ADDR,ESTABLISHMENT_DATE,INPUT_DATE
+    	SELECT COMPANY_CODE,COMPANY_NAME,BUSINESS_NUMBER,LOGO,COMPANY_IMG,DESCRIPTION,HEADCOUNT,COMPANY_CLASSIFICATION,REVENUE,AVG_SAL,CEO_NAME,ADDR,ESTABLISHMENT_DATE,INPUT_DATE
     	FROM COMPANYINFO
     	WHERE COMPANY_CODE = #{companyCode}
     </select>
@@ -82,6 +82,12 @@
     	WHERE COMPANY_CODE = #{companyCode}
     </select>
     
+    <select id="selectWelfare" resultMap="companyInfoResultMap" parameterType="String">
+    	SELECT COMPANY_CODE,CATEGORY,WELFARE_CONTENT
+    	FROM WELFARE
+    	WHERE COMPANY_CODE = #{companyCode}
+    </select>
+    
     <select id="selectWelfareCategory" resultMap="companyInfoResultMap" parameterType="String">
     	SELECT COMPANY_CODE,CATEGORY
     	FROM WELFARE
@@ -89,7 +95,7 @@
     </select>
     
     <select id="selectWelfareContent" resultMap="companyInfoResultMap" parameterType="String">
-    	SELECT COMPANY_CODE,HISTORY_CONTENT
+    	SELECT COMPANY_CODE,WELFARE_CONTENT
     	FROM WELFARE
     	WHERE COMPANY_CODE = #{companyCode}
     </select>
@@ -99,13 +105,17 @@
 		VALUES(#{companyCode},#{companyName},#{description},#{logo},#{companyImg},#{avgSal},#{revenue},TO_DATE(#{establishmentDate}, 'YYYY'),#{headcount},#{businessNumber},#{addr},#{ceoName},#{companyClassification},SYSDATE)
     </insert>
     
-    <update id="updateCompanyinfoDetail">
+    <update id="updateCompanyinfoDetail" parameterType="kr.co.sist.vo.companyinfo.CompanyinfoVO">
     	UPDATE COMPANYINFO
     	SET COMPANY_NAME=#{companyName},
     		BUSINESS_NUMBER=#{businessNumber},
     		HEADCOUNT=#{headcount},
-    		ESTABLISHMENTDATE=#{establishmentDate},
+    		ESTABLISHMENT_DATE=#{establishmentDate},
     		REVENUE=#{revenue},
+    		ADDR=#{addr},
+    		CEO_NAME=#{ceoName},
+    		AVG_SAL=#{avgSal},
+    		COMPANY_CLASSIFICATION=#{companyClassification},
     		DESCRIPTION=#{description},
     		LOGO=#{logo},
     		COMPANY_IMG=#{companyImg}
