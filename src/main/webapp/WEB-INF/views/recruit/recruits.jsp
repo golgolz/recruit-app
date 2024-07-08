@@ -419,7 +419,12 @@
 	            row.append(titleCell);
 	            
 	            var dateCell = $("<td class='odd' style='font-size: 14px;'></td>");
-	            dateCell.append('<button type="button" class="tplBtn tplBtn_1 tplBtnOrg"><span>즉시지원</span></button>');
+	            // dateCell.append('<button type="button" class="tplBtn tplBtn_1 tplBtnOrg"><span>즉시지원</span></button>');
+	            var applyButton = $('<a>').attr({
+	                'href': 'http://localhost/recruit-app/resumes.do?recruit=' + recruit.id,
+	                'class': 'tplBtn tplBtn_1 tplBtnOrg'
+	            }).append($('<span>').text('즉시지원'));
+	            dateCell.append(applyButton);
 	            dateCell.append(recruit.inputDate + "<br>");
 	            dateCell.append("~ " + recruit.endDate);
 	            row.append(dateCell);
