@@ -115,23 +115,21 @@
 			});
 			
 			var resumeNum = "${resumeNum}";
-			console.log("resumeNum : ", resumeNum);
-			$.ajax({
-	            url: "${pageContext.request.contextPath}/api/manage/resumes/detail.do?id=" + resumeNum,
-	            method: 'GET',
-	            dataType: 'JSON',
-	            success: function(data) {
-	            	console.log(data);
-	            	if(data.size === 0){
-	            		isNoResult = true;
-	            		$("#recruit-list tbody").html('<tr><td colspan="4" style="font-size: 16px; font-weight: bold;">검색 결과가 없습니다.</td></tr>');
-	            	}
-	            },
-	            error: function(xhr, status, error) {
-	                console.error("Error fetching data: " + error);
-	                $("#recruit-list tbody").html('<tr><td colspan="4" style="font-size: 16px; font-weight: bold;">데이터를 불러오는 데 실패했습니다.</td></tr>');
-	            }
-	        });
+			
+			if (resumeNum) {
+				$.ajax({
+		            url: "${pageContext.request.contextPath}/api/manage/resumes/detail.do?id=" + resumeNum,
+		            method: 'GET',
+		            dataType: 'JSON',
+		            success: function(data) {
+		            	console.log(data);
+		            },
+		            error: function(xhr, status, error) {
+		                console.error("Error fetching data: " + error);
+		                $("#recruit-list tbody").html('<tr><td colspan="4" style="font-size: 16px; font-weight: bold;">데이터를 불러오는 데 실패했습니다.</td></tr>');
+		            }
+		        });
+		    }
 			<!-- golgolz end -->
 		});
 		

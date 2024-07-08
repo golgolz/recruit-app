@@ -50,19 +50,13 @@ String userId = (String)session.getAttribute("userId");
 	<script text="text/javascript">
 		$(function(){
 			<!-- golgolz start -->
+			var id = "<%= session.getAttribute("userId") %>";
+			var recruitNum = "${recruitNum}";
+			
 			$("#registerBtn").click(function(){
-				location.href = "http://localhost/recruit-app/resume/detail.jsp";
-			});
-
-			$("#updateBtn").click(function(){
-				location.href = "http://localhost/recruit-app/resume/detail.jsp";
-			});
-
-			$("#removeBtn").click(function(){
-				confirm("삭제하시겠습니까?");
+				location.href = "http://localhost/recruit-app/resume/detail.do";
 			});
 			
-			var id = 'lee@daum.net'
 			$.ajax({
 	            url: "${pageContext.request.contextPath}/api/resumes.do?id=" + id,
 	            method: 'GET',
@@ -79,34 +73,76 @@ String userId = (String)session.getAttribute("userId");
 	                $("#recruit-list tbody").html('<tr><td colspan="4" style="font-size: 16px; font-weight: bold;">데이터를 불러오는 데 실패했습니다.</td></tr>');
 	            }
 	        });
-			
-			function updateResumeList(data) {
-			    var mtuList = document.querySelector('.mtuList ul');
-			    mtuList.innerHTML = ''; // 기존 리스트 내용을 비웁니다.
-
-			    for (var i = 0; i < data.length; i++) {
-			        var resume = data[i];
-			        var li = document.createElement('li');
-			        li.innerHTML = 
-			            '<div class="col col01">' +
-			                '<div class="tit">' +
-			                    '<a href="http://localhost/recruit-app/resume/detail.do?id=' + resume.resumeNum + '">' + resume.title + '</a>' +
-			                '</div>' +
-			                '<div class="date">' + resume.inputDate + '</div>' +
-			            '</div>' +
-			            '<div class="col col02">' +
-			                '<div class="btnCell">' +
-			                    '<input type="button" id="updateBtn_' + resume.resumeNum + '" class="golgolBtn btn btn-outline-primary btn-sm" value="수정" />' +
-			                '</div>' +
-			                '<div class="btnCell">' +
-			                    '<input type="button" id="removeBtn_' + resume.resumeNum + '" class="golgolBtn btn btn-outline-primary btn-sm" value="삭제" />' +
-			                '</div>' +
-			            '</div>';
-			        mtuList.appendChild(li);
-			    }
-			}
 			<!-- golgolz end -->
 		});
+		
+		function updateResumeList(data) {
+		    var mtuList = document.querySelector('.mtuList ul');
+		    mtuList.innerHTML = '';
+
+		    for (var i = 0; i < data.length; i++) {
+		        var resume = data[i];
+		        var li = document.createElement('li');
+		        li.innerHTML = 
+		            '<div class="col col01">' +
+		                '<div class="tit">' +
+		                    '<a href="http://localhost/recruit-app/resume/detail.do?id=' + resume.resumeNum + '">' + resume.title + '</a>' +
+		                '</div>' +
+		                '<div class="date">' + resume.inputDate + '</div>' +
+		            '</div>' +
+		            '<div class="col col02">' +
+		                '<div class="btnCell">' +
+		                    '<input type="button" id="selectBtn" data-resume="' + resume.resumeNum + '" class="golgolBtn btn btn-outline-primary btn-sm" value="선택" />' +
+		                '</div>' +
+		                '<div class="btnCell">' +
+		                    '<input type="button" id="updateBtn" data-resume="' + resume.resumeNum + '" class="golgolBtn btn btn-outline-primary btn-sm" value="수정" />' +
+		                '</div>' +
+		                '<div class="btnCell">' +
+		                    '<input type="button" id="removeBtn" data-resume="' + resume.resumeNum + '" class="golgolBtn btn btn-outline-primary btn-sm" value="삭제" />' +
+		                '</div>' +
+		            '</div>';
+		        mtuList.appendChild(li);
+
+		        $("selectBtn").click(function(){
+		        	apply($(this).data('resume'));
+		        });
+		        
+				$("#updateBtn").click(function(){
+					var resumeNum = $(this).data('resume');
+			        window.location.href = 'http://localhost/recruit-app/resume/detail.do?id=' + resumeNum;
+				});
+
+				$("#removeBtn").click(function(){
+					confirm("삭제하시겠습니까?");
+				});
+		    }
+		}
+		
+		function apply(resumeNum){
+			if(confirm("해당 이력서로 지원하시겠습니까?")){
+        		$.ajax({
+    	            url: "${pageContext.request.contextPath}/api/apply.do",
+    	            method: 'POST',
+    	            data: createApplyVO(resumeNum),
+    	            dataType: 'JSON',
+    	            success: function(data) {
+						alert("지원 완료되었습니다.");
+    	            },
+    	            error: function(xhr, status, error) {
+    	                console.error("Error fetching data: " + error);
+    	                $("#recruit-list tbody").html('<tr><td colspan="4" style="font-size: 16px; font-weight: bold;">데이터를 불러오는 데 실패했습니다.</td></tr>');
+    	            }
+    	        });
+        	}
+		}
+		
+		function createApplyVO(resumeNum){
+			return{
+				userId: id,
+				recruitNum: recruitNum,
+				resumeNum: resumeNum
+			}
+		}
 	</script>
 </head>
 <body>
