@@ -148,7 +148,7 @@
             <c:forEach var="post" items="${recentJobPosts}">
               <div class="slick-slide" tabindex="-1" aria-hidden="false" style="outline: none; width: calc(25% - 10px); margin-right: 10px;">
                 <a href="../recruit/detail.jsp">
-                  <div class="JobCard_JobCard__thumb__iNW6E" style="height: 100px; width: 200px;">
+                  <div class="JobCard_JobCard__thumb__iNW6E" style="height: 134px; width: 200px;">
                     <img src="<c:url value='../assets/images/company/${post.companyImage}' />" alt="${post.companyName}" style="width: 100%; height: 100%; object-fit: cover;">
                   </div>
                   <div>
@@ -163,7 +163,7 @@
     <c:forEach begin="1" end="${4 - fn:length(recentJobPosts)}">
         <div class="slick-slide" tabindex="-1" aria-hidden="false" style="outline: none; width: calc(25% - 10px); margin-right: 10px;">
             <a href="#"> 
-                <div class="JobCard_JobCard__thumb__iNW6E" style="height: 100px; width: 200px; background-color: lightgray;"></div>
+                <div class="JobCard_JobCard__thumb__iNW6E" style="height: 134px; width: 200px; background-color: lightgray;"></div>
                 <div>
                     <p style="margin-bottom: 4px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; text-overflow: ellipsis; font-weight: 600; font-size: 16px; letter-spacing: .0057em; line-height: 24px;">&nbsp;</p> 
                     <p>&nbsp;</p> 
@@ -219,7 +219,7 @@
                     <c:forEach var="post" items="${interestedPositions}">
                       <div class="slick-slide" tabindex="-1" aria-hidden="false" style="outline: none; width: calc(25% - 10px); margin-right: 10px;">
                         <a href="../recruit/detail.jsp">
-                          <div class="JobCard_JobCard__thumb__iNW6E" style="height: 100px; width: 200px;">
+                          <div class="JobCard_JobCard__thumb__iNW6E" style="height: 134px; width: 200px;">
                             <img src="<c:url value='../assets/images/company/${post.companyImage}' />" alt="${post.companyName}" style="width: 100%; height: 100%; object-fit: cover;">
                           </div>
                           <div>
@@ -234,7 +234,7 @@
                       <c:forEach begin="1" end="${4 - fn:length(interestedPositions)}">
                         <div class="slick-slide" tabindex="-1" aria-hidden="false" style="outline: none; width: calc(25% - 10px); margin-right: 10px;">
                           <a href="#">
-                            <div class="JobCard_JobCard__thumb__iNW6E" style="height: 100px; width: 200px; background-color: lightgray;"></div>
+                            <div class="JobCard_JobCard__thumb__iNW6E" style="height: 134px; width: 200px; background-color: lightgray;"></div>
                             <div>
                               <p style="margin-bottom: 4px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; text-overflow: ellipsis; font-weight: 600; font-size: 16px; letter-spacing: .0057em; line-height: 24px;">&nbsp;</p>
                               <p>&nbsp;</p>
@@ -284,7 +284,7 @@
                         <c:forEach var="post" items="${highSalaryPositions}">
                             <div class="slick-slide" tabindex="-1" aria-hidden="false" style="outline: none; width: calc(25% - 10px); margin-right: 10px;">
                                 <a href="../recruit/detail.jsp">
-                                    <div class="JobCard_JobCard__thumb__iNW6E" style="height: 100px; width: 200px;">
+                                    <div class="JobCard_JobCard__thumb__iNW6E" style="height: 134pxpx; width: 200px;">
                                         <img src="<c:url value='../assets/images/company/${post.companyImage}' />" alt="${post.companyName}" style="width: 100%; height: 100%; object-fit: cover;">
                                     </div>
                                     <div>
@@ -299,7 +299,7 @@
     <c:forEach begin="1" end="${4 - fn:length(highSalaryPositions)}">
         <div class="slick-slide" tabindex="-1" aria-hidden="false" style="outline: none; width: calc(25% - 10px); margin-right: 10px;">
             <a href="#"> 
-                <div class="JobCard_JobCard__thumb__iNW6E" style="height: 100px; width: 200px; background-color: lightgray;"></div>
+                <div class="JobCard_JobCard__thumb__iNW6E" style="height: 134px; width: 200px; background-color: lightgray;"></div>
                 <div>
                     <p style="margin-bottom: 4px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; text-overflow: ellipsis; font-weight: 600; font-size: 16px; letter-spacing: .0057em; line-height: 24px;">&nbsp;</p> 
                     <p>&nbsp;</p> 
@@ -350,7 +350,7 @@
                         <c:forEach var="post" items="${viewHistory}">
                             <div class="slick-slide" tabindex="-1" aria-hidden="false" style="outline: none; width: calc(25% - 10px); margin-right: 10px;">
                                 <a href="../recruit/detail.jsp">
-                                    <div class="JobCard_JobCard__thumb__iNW6E" style="height: 100px; width: 200px;">
+                                    <div class="JobCard_JobCard__thumb__iNW6E" style="height: 134px; width: 200px;">
                                         <img src="<c:url value='../assets/images/company/${post.companyImage}' />" alt="${post.companyName}" style="width: 100%; height: 100%; object-fit: cover;">
                                     </div>
                                     <div>
@@ -366,7 +366,7 @@
     <c:forEach begin="1" end="${4 - fn:length(viewHistory)}">
         <div class="slick-slide" tabindex="-1" aria-hidden="false" style="outline: none; width: calc(25% - 10px); margin-right: 10px;">
             <a href="#"> 
-                <div class="JobCard_JobCard__thumb__iNW6E" style="height: 100px; width: 200px; background-color: lightgray;"></div>
+                <div class="JobCard_JobCard__thumb__iNW6E" style="height: 134px; width: 200px; background-color: lightgray;"></div>
                 <div>
                     <p style="margin-bottom: 4px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; text-overflow: ellipsis; font-weight: 600; font-size: 16px; letter-spacing: .0057em; line-height: 24px;">&nbsp;</p> 
                     <p>&nbsp;</p> 
