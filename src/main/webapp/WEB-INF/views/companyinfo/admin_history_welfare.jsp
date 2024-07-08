@@ -80,8 +80,12 @@ input{
 		<div class="container-fluid py-4">
 			<!-- golgolz start -->
 			<div id="contentcolumn" class="">
-				<form id="frmDelete" action="http://localhost/recruit-app/companyinfo/deleteHistory.do" method="post">
-				<input type="hidden" id="history" value="" name="hiddenValue"/>
+				<form id="frmDeleteHistory" action="http://localhost/recruit-app/companyinfo/deleteHistory.do" method="post">
+				<input type="hidden" id="history" value="history" name="hidHistory"/>
+				<input type="hidden" id="companyCode" name="companyCode" value="${companyIntroDetail.companyCode}"/>
+				</form>
+				<form id="frmDeleteWelfare" action="http://localhost/recruit-app/companyinfo/deleteWelfare.do" method="post">
+				<input type="hidden" id="welfare" value="" name="hidWelfare"/>
 				</form>
 				<div class="contents">
 				<c:if test="${not empty requestScope.companyDetail}">
@@ -106,7 +110,7 @@ input{
 								<tr>
 									<td class="label" rowspan="3">연혁</td>
 									<td class="box text">
-										년월
+										날짜
 									</td>
 									<td class="box text">
 										<input type="text" id="historyDate" name="historyDate" value="" size="30" class="inputbox naver_shopping_prodName" />
@@ -134,6 +138,8 @@ input{
 								</tr>
 							</tbody>
 						</table>
+						</form>
+						<form id="" name="" action="" method="post">
 						<div class="subtitle">
 							<img src="http://localhost/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
 							복리후생
@@ -161,7 +167,7 @@ input{
 									<td class="box text">
 										<input type="text" id="welfareContent" name="welfareContent" value="" size="50" class="inputbox naver_shopping_prodName" />
 										<input type="button" id="btn-register" class="btn btn-outline-success btn-sm" value="추가" />
-										<input type="button" id="btn-register" class="btn btn-outline-danger btn-sm" value="삭제" />
+										<input type="button" id="welfareDelete" class="btn btn-outline-danger btn-sm" value="삭제" />
 									</td>
 								</tr>
 								<tr>
@@ -176,6 +182,7 @@ input{
 								</tr>
 							</tbody>
 						</table>
+					</form>
 						<div class="alignCenter">
 							<% if(request.getParameter("code") == null){ %>
 								<input type="button" id="btn-register" class="btn btn-outline-dark btn-sm detail-control" value="뒤로" onClick="javascript:history.back();"/>
@@ -185,7 +192,6 @@ input{
 							<% } %>
 								<!-- <input type="button" id="btn-back" class="btn btn-outline-dark btn-sm detail-control" value="뒤로" onClick="javascript:history.back();"/> -->
 						</div>
-					</form>
 				</div>
 			</div>
 			<!-- golgolz end -->
@@ -197,18 +203,22 @@ input{
             $("#dataForm").submit();
         });
         $("#historyDelete").click(function(){
-            $("#frmDelete").submit();
+            $("#frmDeleteHistory").submit();
+        });
+        $("#welfareDelete").click(function(){
+            $("#frmDeleteWelfare").submit();
         });
     });
 
-    function fillHistory(date, content) {
-        $('#historyDate').val(date);
-        $('#historyContent').val(content);
-        $('#history').val(date);
+    function fillHistory(baseDate, historyContent) {
+        $('#historyDate').val(baseDate);
+        $('#historyContent').val(historyContent);
+        $('#history').val(baseDate);
     }
-    function fillWelfare(category, wcontent) {
+    function fillWelfare(category, welfareContent) {
         $('#welfareCategory').val(category);
-        $('#welfareContent').val(wcontent);
+        $('#welfareContent').val(welfareContent);
+        $('#welfare').val(category);
     }
     
 </script>
