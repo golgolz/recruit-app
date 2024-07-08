@@ -114,9 +114,9 @@ input{
 									</td>
 								</tr>
 								<tr>
-									<td class="label">설립년도(년)</td>
+									<td class="label">설립일</td>
 									<td class="box text">
-										<input type="text" name="establishmentDate" value="" size="13" class="inputbox naver_shopping_prodName" /> 년
+										<input type="text" name="establishmentDate" value="" size="13" class="inputbox naver_shopping_prodName" />
 									</td>
 								</tr>
 								<tr>

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,13 +41,64 @@ public class NoticeUserContoller {
         return response; // 공지사항 카테고리 검색
     }
 
-    @GetMapping("/notice/noticesbyKeyword.do")
-    public String searchNoticesbyKeyword(@RequestParam("keyword") String keyword, Model model) {
-        Object searchResult = noticeUserService.searchNoticesbyKeyword(keyword);
-        model.addAttribute("searchResult", searchResult);
-        return "/notice/notices";
-    }
+    // @ResponseBody
+    // @GetMapping("/notice/noticesbyKeyword.do")
+    // public ResponseEntity<Object> searchNoticesbyKeyword(@RequestParam("keyword") String keyword,
+    // @RequestParam("searchType") String searchType, Model model) {
+    // Object searchResult = noticeUserService.searchNoticesbyKeyword(keyword, searchType);
+    // model.addAttribute("searchResult", searchResult);
+    // System.out
+    // .println("-------------------------------Received search keyword: " + keyword + " and
+    // searchType: " + searchType);
+    // System.out.println("~~~~~~~~~~searchResult~~~~" + searchResult);
+    // return ResponseEntity.ok(searchResult);
+    // }
 
+
+    // @GetMapping("/notice/noticesbyKeyword.do")
+    // @ResponseBody
+    // public ResponseEntity<Map<String, Object>> searchNoticesbyKeyword(
+    // @RequestParam("keyword") String keyword,
+    // @RequestParam("searchType") String searchType) {
+    // System.out
+    // .println("Received search keyword: " + keyword + " and searchType: " + searchType);
+    // Object searchResult = noticeUserService.searchNoticesbyKeyword(keyword, searchType);
+    // List<NoticeUserDomain> noticeList;
+    // // 검색 결과를 리스트 형태로 변환
+    // if (searchResult instanceof NoticeUserDomain) {
+    // noticeList = Collections.singletonList((NoticeUserDomain) searchResult);
+    // } else if (searchResult instanceof List) {
+    // noticeList = (List<NoticeUserDomain>) searchResult;
+    // } else {
+    // noticeList = new ArrayList<>();
+    // }
+    // Map<String, Object> response = new HashMap<>();
+    // response.put("noticeList", noticeList);
+    //
+    // System.out.println("~~~~~~~~~~searchResult~~~~" + noticeList);
+    // return ResponseEntity.ok(response);
+    // }
+
+    @GetMapping("/notice/noticesbyKeyword.do")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> searchNoticesbyKeyword(
+            @RequestParam("keyword") String keyword,
+            @RequestParam("searchType") String searchType) {
+        System.out
+                .println("Received search keyword: " + keyword + " and searchType: " + searchType);
+        List<NoticeUserDomain> noticeList;
+        // 검색 옵션이 '선택'인 경우 전체 공지사항 리스트를 가져오도록 처리
+        if ("선택".equals(searchType)) {
+            noticeList = noticeUserService.searchNotices(); // 전체 공지사항 리스트를 가져오는 메서드 호출
+        } else {
+            // 기타 검색 타입에 따라 필요한 로직 수행
+            noticeList = noticeUserService.searchNoticesbyKeyword(keyword, searchType);
+        }
+        Map<String, Object> response = new HashMap<>();
+        response.put("noticeList", noticeList);
+        System.out.println("~~~~~~~~~~searchResult~~~~" + noticeList);
+        return ResponseEntity.ok(response);
+    }
 
     @GetMapping("/notice/detail.do")
     public String searchOneNotice(NoticeUserVO nVO, Model model) {

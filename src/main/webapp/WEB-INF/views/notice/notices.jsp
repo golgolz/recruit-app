@@ -33,41 +33,92 @@
 		$(function(){
 			<!-- golgolz start -->
 			$("#category").change(function() {
-	            var category = $("#category").val();
-	            
-	            $.ajax({
-	                url : "/recruit-app/notice/noticesByCategory.do",
-	                type : "GET", 
-	                dataType : "JSON", 
-	                data: {
-	                    "category" : category
-	                },
-	                error : function(xhr) {
-	                	console.error(xhr);
-	                    alert("일시적인 오류입니다. 잠시 후 다시 시도해주세요.");
-	                },
-	                success : function(data) {
-	                    var noticeList = data.noticeList;
-	                    var tableBody ="";
-	                    noticeList.forEach(function(notice) {
-	                        var date = new Date(notice.input_date);
-	                        var dateString = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);								
-	                        
-	                        tableBody += "<tr class='primary'>"+
-	                                        "<td class='sort'>" + notice.category + "</td>" +
-	                                        "<td class='alLeft'><span class='tit'><a href='http://localhost/recruit-app/notice/detail.do?notice_num=${notice.notice_num}'>" + notice.title + "</a></span></td>" +
-	                                        "<td class='date'>" + dateString + "</td>" +
-	                                    "</tr>";
-	                    });
-	                    $("table tbody").html(tableBody);
-	                }
-	            });
-	            
-	        });
-			
-			
+		        var category = $("#category").val();
+		        
+		        $.ajax({
+		            url : "/recruit-app/notice/noticesByCategory.do",
+		            type : "GET", 
+		            dataType : "JSON", 
+		            data: {
+		                "category" : category
+		            },
+		            error : function(xhr) {
+		                console.error(xhr);
+		                alert("일시적인 오류입니다. 잠시 후 다시 시도해주세요.");
+		            },
+		            success : function(data) {
+		                var noticeList = data.noticeList;
+		                var tableBody ="";
+		                noticeList.forEach(function(notice) {
+		                    var date = new Date(notice.input_date);
+		                    var dateString = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);								
+		                    
+		                    tableBody += "<tr class='primary'>"+
+		                                    "<td class='sort'>" + notice.category + "</td>" +
+		                                    "<td class='alLeft'><span class='tit'><a href='http://localhost/recruit-app/notice/detail.do?notice_num=" + notice.notice_num + "'>" + notice.title + "</a></span></td>" +
+		                                    "<td class='date'>" + dateString + "</td>" +
+		                                "</tr>";
+		                });
+		                $("table tbody").html(tableBody);
+		            }
+		        });
+		    });
+/////////////////////////
+		    // 검색 버튼 클릭 시
+		    $("#searchBtn").click(function() {
+		        searchNotices();
+		    });
+
+		    // 검색어 입력란에서 Enter 키 입력 시
+		    $("#lb_sch").keydown(function(event) {
+		        if (event.keyCode === 13) {
+		            searchNotices();
+		        }
+		    });
+
+		    function searchNotices() {
+		        var keyword = $("#lb_sch").val();
+		        var searchType = $("#lb_view_1").val(); // 선택한 검색 옵션 가져오기
+
+		        $.ajax({
+		            url: "/recruit-app/notice/noticesbyKeyword.do",
+		            type: "GET",
+		            dataType: "JSON",
+		            data: {
+		                "keyword": keyword,
+		                "searchType": searchType
+		            },
+		            error: function(xhr, status, errorThrown) {
+		                console.error("AJAX Error: ", status, errorThrown);
+		                console.error("Response: ", xhr.responseText);
+		                alert("일시적인 오류입니다. 잠시 후 다시 시도해주세요.");
+		            },
+		            success: function(data) {
+		                var noticeList = Array.isArray(data.noticeList) ? data.noticeList : (Array.isArray(data) ? data : []);
+		                var tableBody = "";
+
+		                noticeList.forEach(function(notice) {
+		                    if (!notice || !notice.input_date || !notice.notice_num || !notice.title || !notice.category) {
+		                        return;
+		                    }
+
+		                    var date = new Date(notice.input_date);
+		                    var dateString = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
+
+		                    tableBody += "<tr class='primary'>" +
+		                        "<td class='sort'>" + notice.category + "</td>" +
+		                        "<td class='alLeft'><span class='tit'><a href='http://localhost/recruit-app/notice/detail.do?notice_num=" + notice.notice_num + "'>" + notice.title + "</a></span></td>" +
+		                        "<td class='date'>" + dateString + "</td>" +
+		                        "</tr>";
+		                });
+
+		                $("table tbody").html(tableBody);
+		            }
+		        });
+		    }
 			<!-- golgolz end -->
 		});
+			
 	</script>
 	
 </head>
@@ -90,16 +141,16 @@
 						<span class="phTx"></span>
 						<input type="text" id="lb_sch" class="mtcSchInp" title="검색어 입력">
 						<!-- <input type="button" class="mtcBtnB mtcSchBtn" value="검색"/> -->
-						<button type="button" class="mtcBtnB mtcSchBtn"><span class="skip">검색</span></button>
+						<button type="button" id="searchBtn" class="mtcBtnB mtcSchBtn"><span class="skip">검색</span></button>
 					</div>
 
 									<select
-										style="width: 100px; height: 36px; border: 0.2px solid #ced4da; margin-right: 10px">
+										id="lb_view_1" style="width: 100px; height: 36px; border: 0.2px solid #ced4da; margin-right: 10px">
 										<!-- <select name="" id="lb_view_1" title="문의 종류 선택"> -->
 										<option value="선택" selected>선택</option>
-										<option value="내용+제목">내용+제목</option>
-										<option value="내용">내용</option>
 										<option value="제목">제목</option>
+										<option value="내용">내용</option>
+										<option value="제목+내용">제목+내용</option>
 									</select>
 								</fieldset>
 			</form>
