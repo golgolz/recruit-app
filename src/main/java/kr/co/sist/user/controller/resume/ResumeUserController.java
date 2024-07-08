@@ -26,9 +26,9 @@ public class ResumeUserController {
 
     @GetMapping("/resume/detail.do")
     public String showResumeDetailPage(
-            @RequestParam(value = "id", required = false) Integer resumeNum, Model model) {
+            @RequestParam(value = "id", required = false) String resumeNum, Model model) {
         model.addAttribute("resumeNum", resumeNum);
-        return "/resumes/detail";
+        return "/resume/detail";
     }
 
     @GetMapping("/api/resumes.do")
