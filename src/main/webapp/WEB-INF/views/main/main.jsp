@@ -315,6 +315,7 @@
     </div>
 </article>
 
+
 <!--  네 번째 테마: 조회 기록 -->
 
 <article class="ViewHistory_ViewHistory__xyz">
