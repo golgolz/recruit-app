@@ -244,7 +244,7 @@
 							</ul>
 							</td>
 							<td class="tableHeader"><input type="button" class="btn btn-outline-info btn-sm" 
-								value="상세보기" onclick="location.href='http://localhost/recruit-app/review/reviewResult.jsp?reviewNum=1'"></td>
+								value="상세보기" onclick="location.href='http://localhost/recruit-app/review/reviewResult.do?reviewNum=<%= urd.getReviewNum() %>'"></td>
 						</tr>
 						<%}//end for %>
 					</table>
@@ -252,7 +252,7 @@
                 <% }//end else %>
 				</div>
                 <!-- 페이지네이션 시작 -->
-						<div style="text-align:center;">
+						<!-- <div style="text-align:center;">
 					        <nav aria-label="...">
 					                <ul class="pagination pagination-lg" style="display: inline-flex;">
 					                       <li class="page-item disabled">
@@ -268,7 +268,7 @@
 					                        </li>
 						                 </ul>
 							         </nav>
-								</div>
+								</div> -->
 				<!-- 페이지네이션 끝 -->
             </div>
             </div>
@@ -276,7 +276,7 @@
         </div>
 			<!-- golgolz end -->
 			</section>
-			<jsp:include page="../../assets/layout/user/footer.jsp" />
+	  <jsp:include page="../../assets/layout/user/footer.jsp" />
 		</main>
 	</div>
 </body>

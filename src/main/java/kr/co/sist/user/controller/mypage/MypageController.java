@@ -4,7 +4,9 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import kr.co.sist.user.domain.basic.QuestionDomain;
@@ -16,6 +18,7 @@ import kr.co.sist.user.domain.mypage.UserReviewDomain;
 import kr.co.sist.user.service.basic.UserBasicService;
 import kr.co.sist.user.service.mypage.MypageService;
 import kr.co.sist.user.vo.mypage.QuestionVO;
+import kr.co.sist.user.vo.mypage.SearchVO;
 import kr.co.sist.user.vo.mypage.UpdateUserVO;
 
 @Controller
@@ -104,13 +107,28 @@ public class MypageController {
         return "user/mypage/modifyPass";
     }
 
-    @GetMapping("/user/mypage/mypageApply.do")
-    public String mypageApply(@SessionAttribute("userId") String userId, Model model) {
-        List<UserApplyDomain> applyList = ms.searchUserApply(userId);
-
-        model.addAttribute("applyList", applyList);
-
+    @GetMapping("/user/mypage/mypageApplyPage.do")
+    public String ApplyPage() {
         return "user/mypage/mypageApply";
+    }
+
+    @GetMapping("api/mypage/mypageApply.do")
+    @ResponseBody
+    public List<UserApplyDomain> mypageApply(@SessionAttribute("userId") String userId,
+            @ModelAttribute SearchVO sVO) {
+        sVO.setUserId(userId);
+        List<UserApplyDomain> applyList = ms.searchUserApply(sVO);
+
+        return applyList;
+    }
+
+    @GetMapping("api/mypage/applyCount.do")
+    @ResponseBody
+    public int applyCnt(@SessionAttribute("userId") String userId, @ModelAttribute SearchVO sVO) {
+        sVO.setUserId(userId);
+        int cnt = ms.searchApplyCnt(sVO);
+
+        return cnt;
     }
 
     @GetMapping("/user/mypage/mypageCareer.do")

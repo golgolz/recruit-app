@@ -233,7 +233,7 @@
 					<table>
 						<% for(UserCareerDomain ucd : careerList) { %>
 						<tr class="tableMiddle">
-							<td class="tableHeader"><img src="http://localhost/recruit-app/assets/images/company/<%= ucd.getLogo() %>" style="width: 70px; height: 70px;"></td>
+							<td class="tableHeader"><img src="http://localhost/recruit-app/assets/images/company/logo/<%= ucd.getLogo() %>" style="width: 70px; height: 70px;"></td>
 							<td class="companyInfo">
 							<h1 class="companyInfo" style="font-size: 18px;"><strong><%= ucd.getCompanyName() %></strong></h1>
 							<ul class="companyInfo">
@@ -242,14 +242,14 @@
 							</ul>
 							</td>
 							<td class="tableHeader"><input type="button" name="writeRivew" class="btn btn-outline-success btn-sm register-btn" 
-								value="리뷰 작성" onclick="location.href='http://localhost/recruit-app/review/reviewWrite.jsp';"></td>
+								value="리뷰 작성" onclick="location.href='http://localhost/recruit-app/review/reviewWrite.do';"></td>
 						</tr>
 						<% }//end for %>
 					</table>
 					<%}//end else %>
                 </div>
             		<!-- 페이지네이션 시작 -->
-						<div style="text-align:center;">
+						<!-- <div style="text-align:center;">
 					        <nav aria-label="...">
 					                <ul class="pagination pagination-lg" style="display: inline-flex;">
 					                       <li class="page-item disabled">
@@ -265,15 +265,15 @@
 					                        </li>
 						                 </ul>
 							         </nav>
-								</div>
+								</div> -->
 						<!-- 페이지네이션 끝 -->
 				</div>
             </div>
             </div>
           </div>
         </div>
-		 <jsp:include page="../../assets/layout/user/footer.jsp" />
 			<!-- golgolz end -->
+		 <jsp:include page="../../assets/layout/user/footer.jsp" />
 			</section>
 		</main>
 	</div>
