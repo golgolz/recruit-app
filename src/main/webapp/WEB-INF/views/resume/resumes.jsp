@@ -33,7 +33,7 @@ String userId = (String)session.getAttribute("userId");
 			min-width: 48px;
         }
         #container, .container, .content {
-        	width: 1300px;
+        	width: 1100px;
         }
 		<!-- golgolz end -->
 	</style>
@@ -51,6 +51,24 @@ String userId = (String)session.getAttribute("userId");
 			$("#removeBtn").click(function(){
 				confirm("삭제하시겠습니까?");
 			});
+			
+			$.ajax({
+	            url: "${pageContext.request.contextPath}/api/recruits.do",
+	            method: 'GET',
+	            data: searchVO,
+	            dataType: 'JSON',
+	            success: function(data) {
+	            	renderRecruitList(data);
+	            	if(data.size === 0){
+	            		isNoResult = true;
+	            		$("#recruit-list tbody").html('<tr><td colspan="4" style="font-size: 16px; font-weight: bold;">검색 결과가 없습니다.</td></tr>');
+	            	}
+	            },
+	            error: function(xhr, status, error) {
+	                console.error("Error fetching data: " + error);
+	                $("#recruit-list tbody").html('<tr><td colspan="4" style="font-size: 16px; font-weight: bold;">데이터를 불러오는 데 실패했습니다.</td></tr>');
+	            }
+	        });
 			<!-- golgolz end -->
 		});
 	</script>
