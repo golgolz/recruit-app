@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import kr.co.sist.admin.domain.user.UserApplyDomain;
 import kr.co.sist.admin.domain.user.UserDetailDomain;
 import kr.co.sist.admin.domain.user.UserInfoDomain;
+import kr.co.sist.admin.domain.user.UserQnaDomain;
 import kr.co.sist.admin.service.user.UserManageService;
 import kr.co.sist.admin.vo.user.SearchVO;
 
@@ -45,15 +47,18 @@ public class UserManageController {
     public String userDetail(@RequestParam("userId") String userId, Model model,
             RedirectAttributes redirectAttributes) {
         UserDetailDomain detailInfo = ums.searchUserDetail(userId);
+        List<UserApplyDomain> applyList = ums.searchUserApply(userId);
+        List<UserQnaDomain> qnaList = ums.searchUserQna(userId);
 
         if (detailInfo == null) {
             redirectAttributes.addAttribute("resultMsg",
                     "사용자 정보 조회 중 문제가 발생 했습니다. 잠시 후 다시 시도해주세요.");
             return "redirect:/manage/user/users.do";
         }
-        System.out.println(detailInfo.getRecentloginDate());
 
         model.addAttribute("detailInfo", detailInfo);
+        model.addAttribute("applyList", applyList);
+        model.addAttribute("qnaList", qnaList);
 
         return "manage/user/detail";
     }

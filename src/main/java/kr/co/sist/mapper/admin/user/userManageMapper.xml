@@ -19,6 +19,20 @@
 		<result property="birthDate" column="birth_date"/>
 		<result property="recentloginDate" column="recentlogin_date"/>
 	</resultMap>
+	<resultMap id="userApplyInfo" type="kr.co.sist.admin.domain.user.UserApplyDomain">
+		<result property="resumeNum" column="resume_num"/>
+		<result property="companyName" column="company_name"/>
+		<result property="applyDate" column="apply_date"/>
+		<result property="title" column="title"/>
+		<result property="progressState" column="progress_state"/>
+	</resultMap>
+	<resultMap id="userQnaInfo" type="kr.co.sist.admin.domain.user.UserQnaDomain">
+		<result property="qnaNum" column="qna_num"/>
+		<result property="category" column="category"/>
+		<result property="title" column="title"/>
+		<result property="inputDate" column="input_date"/>
+		<result property="flag" column="flag"/>
+	</resultMap>
  	<select id="selectUserList" resultMap="userInfoResultMap" parameterType="kr.co.sist.admin.vo.user.SearchVO">
   		select rnum,name,user_id,phone,signup_date
   		from (
@@ -80,6 +94,20 @@
   		select name,gender,user_id,phone,tel,signup_date,birth_date,recentlogin_date
 		from users
 		where user_id=#{ userId }
+  </select>
+  <select id="selectUserApply" resultMap="userApplyInfo" parameterType="String">
+  		select rs.resume_num,cpi.company_name,ap.apply_date,rs.title,ap.progress_state
+		from apply ap, resume rs, companyinfo cpi, career crr
+		where (ap.user_id=rs.user_id and crr.resume_num=ap.resume_num) and (crr.company_code=cpi.company_code) and ap.user_id=#{ userId }
+		order by ap.apply_date desc
+		fetch first 5 row only
+  </select>
+  <select id="selectUserQna" resultMap="userQnaInfo" parameterType="String">
+  		select qna_num,category,title,input_date,flag
+		from qna
+		where user_id=#{ userId }
+		order by input_date desc
+		fetch first 5 row only
   </select>
  
  </mapper>

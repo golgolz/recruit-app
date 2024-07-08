@@ -48,7 +48,7 @@ public class UserBasicController {
 
     @GetMapping("/main/mainPage.do")
     public String mainPage() {
-        return "main/main";
+        return "redirect:/main/main.do";
     }
 
     @GetMapping("/user/checkDuplId.do")

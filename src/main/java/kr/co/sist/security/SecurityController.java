@@ -113,7 +113,7 @@ public class SecurityController {
                 if (cnt > 0) {
                     model.addAttribute("userId", loginDomain.getUserId());
                     model.addAttribute("name", loginDomain.getName());
-                    return "main/main";
+                    return "redirect:/main/main.do";
                 } else {
                     resultMsg = "로그인 작업 수행 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.";
                 } // end else
@@ -131,7 +131,7 @@ public class SecurityController {
 
         ss.setComplete();
 
-        return "main/main";
+        return "redirect:/main/main.do";
     }
 
 
@@ -222,44 +222,4 @@ public class SecurityController {
         return "redirect:/user/mypage/modifyUserPage.do";
     }
 
-    /*
-     * public String generateTempPassword() { String uuid = UUID.randomUUID().toString(); return
-     * passwordEncoder.encode(uuid); }
-     */
-
-    // @PostMapping("manage/adminLogin.do")
-    // public String adminLoginProcess(AdminLoginVO lVO, Model model) {
-    //
-    // // 서비스를 사용하여 입력된 아이디와 비밀번호를 쿼리문에 넣어 실행하게 된다. ==> 현재는 임시로 컨트롤러에서 실행
-    //
-    // // 1.암호화 객체 생성
-    // PasswordEncoder pe = new BCryptPasswordEncoder();
-    // // 2.암호화
-    // String dbPass = "test1234";
-    // String cipherPass = pe.encode(dbPass); // 회원가입 시 insert
-    //
-    // boolean loginFlag = pe.matches(lVO.getPassword(), cipherPass);
-    // model.addAttribute("cipherPass", cipherPass);
-    // model.addAttribute("loginResult", loginFlag);
-    //
-    // return "adminLogin";
-    // }
-    //
-    // @PostMapping("/user/login.do")
-    // public String userLoginProcess(UserLoginVO lVO, Model model) {
-    //
-    // // 서비스를 사용하여 입력된 아이디와 비밀번호를 쿼리문에 넣어 실행하게 된다. ==> 현재는 임시로 컨트롤러에서 실행
-    //
-    // // 1.암호화 객체 생성
-    // PasswordEncoder pe = new BCryptPasswordEncoder();
-    // // 2.암호화
-    // String dbPass = "test1234";
-    // String cipherPass = pe.encode(dbPass); // 회원가입 시 insert
-    //
-    // boolean loginFlag = pe.matches(lVO.getPassword(), cipherPass);
-    // model.addAttribute("cipherPass", cipherPass);
-    // model.addAttribute("loginResult", loginFlag);
-    //
-    // return "login";
-    // }
 }

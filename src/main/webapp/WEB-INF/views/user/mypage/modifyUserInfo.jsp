@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<jsp:include page="../../../../assets/layout/user/lib.jsp" />  
+	<jsp:include page="../../assets/layout/user/lib.jsp" />  
 	<!-- golgolz start -->
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
@@ -238,7 +238,7 @@
 </head>
 <body>
     <div id="__next" data-reactroot="">
-		<jsp:include page="../../../../assets/layout/user/header.jsp" />
+		<jsp:include page="../../assets/layout/user/header.jsp" />
 		<main class="JobsFeed_Jobsfeed__DpeV9">  
 			<section class="Section_Section__P1hhc">
 			<!-- golgolz start -->
@@ -393,7 +393,7 @@
         </div>
 			<!-- golgolz end -->
 			</section>
-			<jsp:include page="../../../../assets/layout/user/footer.jsp" />
+			<jsp:include page="../../assets/layout/user/footer.jsp" />
 		</main>
 	</div>
 </body>
