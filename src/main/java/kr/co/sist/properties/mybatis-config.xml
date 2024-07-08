@@ -31,6 +31,7 @@
     <mapper resource="kr/co/sist/mapper/user/basic/userBasicMapper.xml"/>
     <mapper resource="kr/co/sist/mapper/user/recruit/recruitMapper.xml"/>
     <mapper resource="kr/co/sist/mapper/admin/resume/resumeMapper.xml"/>
+    <mapper resource="kr/co/sist/mapper/user/resume/resumeMapper.xml"/>
     <mapper resource="kr/co/sist/mapper/main/UserMainMapper.xml"/>
     <mapper resource="kr/co/sist/mapper/review/ReviewMapper.xml"/>
     <mapper resource="kr/co/sist/mapper/user/companyinfo/companyinfoUserMapper.xml"/>

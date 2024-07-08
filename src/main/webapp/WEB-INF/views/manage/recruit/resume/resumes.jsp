@@ -10,6 +10,13 @@
 <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
 <script src="http://localhost/recruit-app/assets/js/admin/datepicker-ko.js"></script>
 <script type="text/javascript">
+	var startNum = 1;
+	var endNum = startNum + itemsPerPage;
+	var itemsPerPage = 5;
+	var showPages = 3;
+	var totalPages = 0;
+	var currentPage = 1;
+	
 	$(function(){
 		$.datepicker.setDefaults($.datepicker.regional['ko']);
     	$("#recruit_menu").addClass("bg-gradient-primary");
@@ -41,28 +48,37 @@
     		resetForm();
     	});
     	
-    	updateResumeList();
-	});
-	
-	function updateResumeCount(){
-		$.ajax({
-    		url: "${pageContext.request.contextPath}/api/manage/resume/counts.do",
-            method: 'GET',
-            data: searchVO,
-            dataType: 'JSON',
-            success: function(data) {
-            	console.log(data);
-            	populateTable(data);
-                if(!(data && data.length > 0)){
-                    $("#sodr_list tbody").html('<tr><td colspan="10" style="font-size: 16px; font-weight: bold;">검색 결과가 없습니다.</td></tr>');
+    	$('.pagination').on('click', '.page-link', function(e) {
+            e.preventDefault();
+            var clickedPage = $(this).data('page');
+            if (clickedPage) {
+                currentPage = clickedPage;
+                startNum = itemsPerPage * (currentPage - 1) + 1;
+                updateResumeList();
+            	updateResumeCount();
+                updatePagination();
+            } else if ($(this).attr('id') === 'prev-page') {
+                if (currentPage > 1) {
+                    currentPage--;
+                    startNum = itemsPerPage * (currentPage - 1) + 1;
+                    updateResumeList();
+                	updateResumeCount();
+                    updatePagination();
                 }
-            },
-            error: function(xhr, status, error) {
-                console.error("Error fetching data: " + error);
-                $("#sodr_list tbody").html('<tr><td colspan="10" style="font-size: 16px; font-weight: bold;">데이터를 불러오는 데 실패했습니다.</td></tr>');
+            } else if ($(this).attr('id') === 'next-page') {
+                if (currentPage < Math.ceil(totalPages / itemsPerPage)) {
+                    currentPage++;
+                    startNum = itemsPerPage * (currentPage - 1) + 1;
+                    updateResumeList();
+                	updateResumeCount();
+                    updatePagination();
+                }
             }
-    	});
-	}
+        });
+    	
+    	updateResumeList();
+        updatePagination();
+	});
 	
 	function updateResumeList(){
     	var searchVO = createSearchVO();
@@ -78,6 +94,20 @@
                 if(!(data && data.length > 0)){
                     $("#sodr_list tbody").html('<tr><td colspan="10" style="font-size: 16px; font-weight: bold;">검색 결과가 없습니다.</td></tr>');
                 }
+            },
+            error: function(xhr, status, error) {
+                console.error("Error fetching data: " + error);
+                $("#sodr_list tbody").html('<tr><td colspan="10" style="font-size: 16px; font-weight: bold;">데이터를 불러오는 데 실패했습니다.</td></tr>');
+            }
+    	});
+		
+		$.ajax({
+    		url: "${pageContext.request.contextPath}/api/manage/resume/counts.do",
+            method: 'GET',
+            data: searchVO,
+            dataType: 'JSON',
+            success: function(data) {
+            	totalPages = data;
             },
             error: function(xhr, status, error) {
                 console.error("Error fetching data: " + error);
@@ -107,7 +137,7 @@
 	            "<td>" +
 	                "<input type='button' value='바로가기' class='btn btn-outline-secondary btn-sm' " +
 	                "style='font-weight: bold; margin: 0px auto;' " +
-	                "onclick='location.href=\"http://localhost/recruit-app/manage/recruit/resume/detail.jsp?id=" + item.resumeId + "\"' />" +
+	                "onclick='location.href=\"http://localhost/recruit-app/manage/resumes/detail.do?id=" + item.resumeId + "\"' />" +
 	            "</td>";
 	        
 	        tableBody.appendChild(row);
@@ -117,8 +147,8 @@
 	function createSearchVO() {
 	    var searchVO = {};
     	searchVO.recruitId = ${recruitNum};
-    	searchVO.startNum = 1;
-    	searchVO.endNum = 10;
+    	searchVO.startNum = startNum;
+    	searchVO.endNum = startNum + itemsPerPage - 1;
 	    searchVO.category = document.querySelector('select[name="category"]').value;
 	    searchVO.keyword = document.querySelector('input[name="keyword"]').value;
 	    searchVO.startDate = document.getElementById('start_date').value;
@@ -148,6 +178,31 @@
         $('#start_date, #end_date, #date').val('');
         $('input[name="delivery"][value="0"]').prop('checked', true);
         $('input[name="purchase"][value=""]').prop('checked', true);
+    }
+	
+	function updatePagination() { 
+ 		var currentGroup = Math.ceil(currentPage / showPages);
+    	var startPage = (currentGroup - 1) * showPages + 1;
+        var paginationHtml = '';
+        var endPage = Math.min(Math.ceil(totalPages / itemsPerPage) , startPage + showPages - 1);
+        console.log("end : ", endPage);
+        if(endPage == 0){
+        	return;
+        }
+        paginationHtml += '<li class="page-items' + (currentPage === 1 ? ' disabled' : '') + '">';
+        paginationHtml += '<a class="page-link" href="#" aria-label="Previous" id="prev-page">';
+        paginationHtml += '<span aria-hidden="true">&laquo;</span></a></li>';
+
+        for (var i = startPage; i <= endPage; i++) {
+            paginationHtml += '<li class="page-items' + (i === currentPage ? ' active' : '') + '">';
+            paginationHtml += '<a class="page-link" href="#" data-page="' + i + '">' + i + '</a></li>';
+        }
+
+        paginationHtml += '<li class="page-items' + (currentPage === Math.ceil(totalPages / itemsPerPage) ? ' disabled' : '') + '">';
+        paginationHtml += '<a class="page-link" href="#" aria-label="Next" id="next-page">';
+        paginationHtml += '<span aria-hidden="true">&raquo;</span></a></li>';
+
+        $('.pagination').html(paginationHtml);
     }
 </script>
 <!-- golgolz start -->
@@ -305,16 +360,22 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="alignCenter">
-					<div id="pageNation">
-						<ul class="pagination" style="justify-content: center;">
-							<li class="page-item"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
-						</ul>
-					</div>
+				<div class="alignCenter" style="margin-top:54px;">
+					<ul class="pagination" style="justify-content: center;">
+						<!-- <li class="page-items">
+							<a class="page-link" href="#" aria-label="Previous" id="prev-page">
+					            <span aria-hidden="true">&laquo;</span>
+					        </a>
+						</li>
+						<li class="page-items"><a class="page-link" href="#" data-page="1">1</a></li></li>
+						<li class="page-items"><a class="page-link" href="#" data-page="2">2</a></li></li>
+						<li class="page-items"><a class="page-link" href="#" data-page="3">3</a></li></li>
+						<li class="page-items">
+							<a class="page-link" href="#" aria-label="Next" id="next-page">
+					            <span aria-hidden="true">&raquo;</span>
+					        </a>
+						</li> -->
+					</ul>
 				</div>	
 			</div>
 		</div>

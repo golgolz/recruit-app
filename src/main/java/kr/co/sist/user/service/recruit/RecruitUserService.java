@@ -24,19 +24,19 @@ public class RecruitUserService {
         for (RecruitListDomain recruit : recruits) {
             switch (recruit.getEducation()) {
                 case "1":
-                    recruit.setEducation("°íµîÇĞ±³");
+                    recruit.setEducation("ê³ ë“±í•™êµ");
                     break;
                 case "2":
-                    recruit.setEducation("´ëÇĞ±³(2,3³âÁ¦)");
+                    recruit.setEducation("ëŒ€í•™êµ(2,3ë…„ì œ)");
                     break;
                 case "3":
-                    recruit.setEducation("´ëÇĞ±³(4³âÁ¦)");
+                    recruit.setEducation("ëŒ€í•™êµ(4ë…„ì œ)");
                     break;
                 case "4":
-                    recruit.setEducation("´ëÇĞ¿ø(¼®»ç)");
+                    recruit.setEducation("ëŒ€í•™ì›(ì„ì‚¬)");
                     break;
                 case "5":
-                    recruit.setEducation("´ëÇĞ¿ø(¹Ú»ç)");
+                    recruit.setEducation("ëŒ€í•™ì›(ë°•ì‚¬)");
                     break;
             }
         }

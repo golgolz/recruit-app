@@ -20,6 +20,7 @@ public class ResumeAdminDAO {
     }
 
     public List<ResumeListDomain> selectResumes(SearchVO searchVO) {
+        System.out.println(searchVO.toString());
         SqlSession session = myBatis.getMyBatisHandler(false);
         List<ResumeListDomain> resumes = new ArrayList<ResumeListDomain>();
         resumes = session.selectList("kr.co.sist.resume.admin.selectResumes", searchVO);

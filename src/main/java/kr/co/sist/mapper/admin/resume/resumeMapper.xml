@@ -108,18 +108,20 @@
 		            AND apply.apply_date <![CDATA[ <= ]]> #{endDate}
 		        </if>
 		        <if test="career != null and career != ''">
-		            AND (
-		                CASE
-		                    WHEN c.total_days IS NULL THEN '신입'
-		                    ELSE '경력'
-		                END
-		            ) = #{career}
-		        </if>
+				    AND (
+				        CASE 
+				            WHEN #{career} = '신입' AND c.total_days IS NULL THEN 1
+				            WHEN #{career} = '경력' AND c.total_days IS NOT NULL THEN 1
+				            WHEN #{career} != '신입' AND #{career} != '경력' THEN 1
+				            ELSE 0
+				        END
+				    ) = 1
+				</if>
 		        <if test="recruitId != null">
 		            AND apply.recruit_num = #{recruitId}
 		        </if>
 		        <if test="endSchool != null and endSchool != ''">
-		        	AND education.school_classification >= #{endSchool}
+		        	AND education.school_classification = #{endSchool}
 		        </if>
 		    </where>
 		)
@@ -128,26 +130,60 @@
 	<select id="selectResumeCount" resultType="int" parameterType="kr.co.sist.admin.vo.resume.SearchVO">
 		SELECT COUNT(*) AS total_count
 		FROM (
-		    SELECT apply.resume_num
+		    SELECT ROW_NUMBER() OVER (ORDER BY apply.apply_date ASC) AS rnum,
+		           recruit.title AS recruit_title,
+		           resume.resume_num,
+		           users.name,
+		           apply.apply_date,
+		           resume.title AS resume_title,
+		           CASE
+		               WHEN c.total_days IS NULL THEN '신입'
+		               ELSE '경력(' ||
+		                    CASE
+		                        WHEN FLOOR(c.total_days / 365) > 0 THEN FLOOR(c.total_days / 365) || '년'
+		                        ELSE ''
+		                    END ||
+		                    CASE
+		                        WHEN FLOOR(c.total_days / 365) > 0 AND FLOOR(MOD(c.total_days, 365) / 30) > 0 THEN ' '
+		                        ELSE ''
+		                    END ||
+		                    CASE
+		                        WHEN FLOOR(MOD(c.total_days, 365) / 30) > 0 THEN FLOOR(MOD(c.total_days, 365) / 30) || '개월'
+		                        WHEN c.total_days > 0 AND FLOOR(MOD(c.total_days, 365) / 30) = 0 THEN
+		                            CASE
+		                                WHEN FLOOR(c.total_days / 365) = 0 THEN '1개월 미만'
+		                                ELSE ''
+		                            END
+		                        ELSE ''
+		                    END || ')'
+		           END AS career,
+		           resume.addr,
+		           CASE
+		               WHEN apply.progress_state = '지원완료' THEN '미정'
+		               WHEN apply.progress_state = '불합격' THEN '불합격'
+		               ELSE '합격'
+		           END AS doc_pass_flag,
+		           CASE
+		               WHEN apply.progress_state = '불합격' THEN '불합격'
+		               WHEN apply.progress_state = '최종합격' THEN '합격'
+		               ELSE '미정'
+		           END AS final_pass_flag
 		    FROM apply
-		         LEFT JOIN resume ON apply.resume_num = resume.resume_num
-		         LEFT JOIN recruit ON recruit.recruit_num = apply.recruit_num
-		         LEFT JOIN users ON resume.user_id = users.user_id
-		         LEFT JOIN education ON resume.resume_num = education.resume_num
-		         LEFT JOIN (
-		            SELECT resume_num,
-		                   CASE
-		                       WHEN SUM(
-		                           CASE
-		                               WHEN resignation_date IS NULL THEN TRUNC(CURRENT_DATE) - join_date
-		                               ELSE resignation_date - join_date
-		                           END
-		                       ) IS NULL THEN 0
-		                       ELSE 1
-		                   END AS has_career
-		            FROM career
-		            GROUP BY resume_num
-		        ) c ON apply.resume_num = c.resume_num
+		             LEFT JOIN resume ON apply.resume_num = resume.resume_num
+		             LEFT JOIN recruit ON recruit.recruit_num = apply.recruit_num
+		             LEFT JOIN users ON resume.user_id = users.user_id
+		             LEFT JOIN education ON resume.resume_num = education.resume_num
+		             LEFT JOIN (
+		        SELECT resume_num,
+		               SUM(
+		                       CASE
+		                           WHEN resignation_date IS NULL THEN TRUNC(CURRENT_DATE) - join_date
+		                           ELSE resignation_date - join_date
+		                       END
+		                   ) AS total_days
+		        FROM career
+		        GROUP BY resume_num
+		    ) c ON apply.resume_num = c.resume_num
 		    <where>
 		        <choose>
 		            <when test="category == 0 and keyword != null and keyword != ''">
@@ -170,18 +206,20 @@
 		            AND apply.apply_date <![CDATA[ <= ]]> #{endDate}
 		        </if>
 		        <if test="career != null and career != ''">
-		            AND (
-		                CASE
-		                    WHEN c.has_career = 0 THEN '신입'
-		                    ELSE '경력'
-		                END
-		            ) = #{career}
-		        </if>
+				    AND (
+				        CASE 
+				            WHEN #{career} = '신입' AND c.total_days IS NULL THEN 1
+				            WHEN #{career} = '경력' AND c.total_days IS NOT NULL THEN 1
+				            WHEN #{career} != '신입' AND #{career} != '경력' THEN 1
+				            ELSE 0
+				        END
+				    ) = 1
+				</if>
 		        <if test="recruitId != null">
 		            AND apply.recruit_num = #{recruitId}
 		        </if>
 		        <if test="endSchool != null and endSchool != ''">
-		            AND education.school_classification >= #{endSchool}
+		        	AND education.school_classification = #{endSchool}
 		        </if>
 		    </where>
 		)
