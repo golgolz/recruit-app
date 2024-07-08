@@ -192,7 +192,8 @@
 								<td><c:out value="${ company.companyClassification }"/></td>
 								<td><c:out value="${ company.avgSal }"/>만</td>
 								<td>
-									<input type="button" value="바로가기" class="btn btn-outline-secondary btn-sm" style="font-weight: bold; margin: 0px auto;" onclick="location.href='http://localhost/recruit-app/companyinfo/adminCompanyinfoDetail.do?companyCode=${ company.companyCode }'"/>
+									<input type="button" value="연혁/복리후생" class="btn btn-outline-secondary btn-sm" style="font-weight: bold;" onclick="location.href='http://localhost/recruit-app/companyinfo/adminHistoryWelfare.do?companyCode=${ company.companyCode }'"/>
+									<input type="button" value="기업정보" class="btn btn-outline-secondary btn-sm" style="font-weight: bold;" onclick="location.href='http://localhost/recruit-app/companyinfo/adminCompanyinfoDetail.do?companyCode=${ company.companyCode }'"/>
 								</td>
 							</tr>
 							</c:forEach>

@@ -13,6 +13,11 @@
 	$(function(){
 		$("#company_menu").addClass("bg-gradient-primary");
 	});
+	function updateInfo(){
+    	alert("수정하기클릭")
+        $("#dataForm").submit();
+    	
+	}
 </script>
 <style>
 .subtitle{
@@ -83,7 +88,7 @@ input{
 				<c:if test="${not empty requestScope.companyDetail}">
                     <c:set var="companyIntroDetail" value="${requestScope.companyDetail[0]}" />
                 </c:if>
-					<form id="dataForm" name="dataForm" action="http://localhost/online-shop/manage/goods/register_process.jsp" method="post" enctype="multipart/form-data">
+					<form id="dataForm" name="dataForm" action="http://localhost/recruit-app/companyinfo/updateCompanyinfo.do" method="post" enctype="multipart/form-data">
 						<div class="subtitle">
 							<img src="http://localhost/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
 							기업정보
@@ -97,37 +102,61 @@ input{
 								<tr>
 									<td class="label">기업명</td>
 									<td class="box text">
-										<input type="text" name="name" value="<c:out value="${companyIntroDetail.companyName}" />" size="20" class="inputbox naver_shopping_prodName" />
+										<input type="text" name="companyName" value="<c:out value="${companyIntroDetail.companyName}" />" size="20" class="inputbox naver_shopping_prodName" />
 									</td>
 								</tr>
 								<tr>
 									<td class="label">사업자등록번호</td>
 									<td class="box text">
-										<input type="text" name="name" value="<c:out value="${companyIntroDetail.businessNumber}" />" size="20" class="inputbox naver_shopping_prodName" /> 입력 예시) 123-45-67890
+										<input type="text" name="businessNumber" value="<c:out value="${companyIntroDetail.businessNumber}" />" size="20" class="inputbox naver_shopping_prodName" />
 									</td>
 								</tr>
 								<tr>
 									<td class="label">사원수(명)</td>
 									<td class="box text">
-										<input type="text" name="name" value="<c:out value="${companyIntroDetail.headcount}" />" size="13" class="inputbox naver_shopping_prodName" /> 명
+										<input type="text" name="headcount" value="<c:out value="${companyIntroDetail.headcount}" />" size="13" class="inputbox naver_shopping_prodName" /> 명
 									</td>
 								</tr>
 								<tr>
 									<td class="label">설립일</td>
 									<td class="box text">
-										<input type="text" name="name" value="<c:out value="${companyIntroDetail.establishmentDate}" />" size="13" class="inputbox naver_shopping_prodName" />
+										<input type="text" name="establishmentDate" value="<c:out value="${companyIntroDetail.establishmentDate}" />" size="13" class="inputbox naver_shopping_prodName" />
 									</td>
 								</tr>
 								<tr>
 									<td class="label">매출액(억)</td>
 									<td class="box text">
-										<input type="text" name="name" value="<c:out value="${companyIntroDetail.revenue}" />" size="13" class="inputbox naver_shopping_prodName" /> 억
+										<input type="text" name="revenue" value="<c:out value="${companyIntroDetail.revenue}" />" size="13" class="inputbox naver_shopping_prodName" /> 억
+									</td>
+								</tr>
+								<tr>
+									<td class="label">평균연봉(만원)</td>
+									<td class="box text">
+										<input type="text" name="avgSal" value="<c:out value="${companyIntroDetail.avgSal}" />" size="13" class="inputbox naver_shopping_prodName" /> 만원
+									</td>
+								</tr>
+								<tr>
+									<td class="label">주소</td>
+									<td class="box text">
+										<input type="text" name="addr" value="<c:out value="${companyIntroDetail.addr}" />" size="20" class="inputbox naver_shopping_prodName" />
+									</td>
+								</tr>
+								<tr>
+									<td class="label">기업구분</td>
+									<td class="box text">
+										<input type="text" name="companyClassification" value="<c:out value="${companyIntroDetail.companyClassification}" />" size="20" class="inputbox naver_shopping_prodName" />
+									</td>
+								</tr>
+								<tr>
+									<td class="label">대표자</td>
+									<td class="box text">
+										<input type="text" name="ceoName" value="<c:out value="${companyIntroDetail.ceoName}" />" size="20" class="inputbox naver_shopping_prodName" />
 									</td>
 								</tr>
 								<tr>
 									<td class="label">기업소개</td>
 									<td class="box text">
-										<textarea id="companyIntro" rows="7" cols="90"><c:out value="${companyIntroDetail.description}" /></textarea>
+										<textarea id="companyIntro" name="description" rows="7" cols="90"><c:out value="${companyIntroDetail.description}" /></textarea>
 										<!-- <input type="text" name="name" value="" size="13" class="inputbox naver_shopping_prodName" /> -->
 									</td>
 								</tr>
@@ -154,8 +183,8 @@ input{
 										<td class="label">기본 이미지</td>
 										<td class="box text">
 											<div id="good_file_big_input_area">
-												<input type="hidden" name="defaultImageOrigin" value="" />
-												<input type="file" name="defaultImage" style="width: 300px" />
+												<input type="file" name="logo" style="width: 300px" />
+												<input type="text" name="existLogo" value="<c:out value="${companyIntroDetail.logo}" />" />
 											</div>
 										</td>
 									</tr>
@@ -183,102 +212,17 @@ input{
 										<td class="label">기본 이미지</td>
 										<td class="box text">
 											<div id="good_file_big_input_area">
-												<input type="hidden" name="defaultImageOrigin" value="" />
-												<input type="file" name="defaultImage" style="width: 300px" />
+												<input type="file" name="companyImg" style="width: 300px" />
+												<input type="text" name="existImg" value="<c:out value="${companyIntroDetail.companyImg}" />" />
 											</div>
 										</td>
 									</tr>
 								</tbody>
 							</table>
 						</div>
-						<div class="subtitle">
-							<img src="http://localhost/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
-							연혁
-						</div>
-						<table class="tbstyleB" width="100%">
-							<colgroup>
-								<col width="15%" />
-								<col width="10%" />
-								<col width="70%" />
-							</colgroup>
-							<tbody>
-								<tr>
-									<td class="label" rowspan="3">연혁</td>
-									<td class="box text">
-										년월
-									</td>
-									<td class="box text">
-										<input type="text" name="name" value="" size="30" class="inputbox naver_shopping_prodName" />
-									</td>
-								</tr>
-								<tr>
-									<td class="box text">
-										내용
-									</td>
-									<td class="box text">
-										<input type="text" name="name" value="" size="50" class="inputbox naver_shopping_prodName" />
-										<input type="button" id="btn-register" class="btn btn-outline-success btn-sm" value="추가" />
-										<input type="button" id="btn-register" class="btn btn-outline-danger btn-sm" value="삭제" />
-									</td>
-								</tr>
-								<tr>
-									<td class="box text" colspan="2">
-										<ol id="benefits">
-											<li><strong>2024.05 </strong> : 공기청정기 설치</li>
-											<li><strong>2020.09 </strong> : k-디지털 트레이닝 사업 등록</li>
-											<li><strong>2016.03 </strong> : 쌍용교육센터 설립</li>
-										</ol>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-						<div class="subtitle">
-							<img src="http://localhost/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
-							복리후생
-						</div>
-						<table class="tbstyleB" width="100%">
-							<colgroup>
-								<col width="15%" />
-								<col width="10%" />
-								<col width="70%" />
-							</colgroup>
-							<tbody>
-								<tr>
-									<td class="label" rowspan="3">복리후생</td>
-									<td class="box text">
-										카테고리
-									</td>
-									<td class="box text">
-										<input type="text" name="name" value="" size="30" class="inputbox naver_shopping_prodName" />
-									</td>
-								</tr>
-								<tr>
-									<td class="box text">
-										내용
-									</td>
-									<td class="box text">
-										<input type="text" name="name" value="" size="50" class="inputbox naver_shopping_prodName" />
-										<input type="button" id="btn-register" class="btn btn-outline-success btn-sm" value="추가" />
-										<input type="button" id="btn-register" class="btn btn-outline-danger btn-sm" value="삭제" />
-									</td>
-								</tr>
-								<tr>
-									<td class="box text" colspan="2">
-										<ol id="benefits">
-											<li><strong>연금/보험 </strong> : 국민연금, 고용보함, 산재보험, 건강보험</li>
-											<!-- <li><strong>휴무/휴가/행사</strong> : 연차제도, 월차제도, 경조휴가, 반차제도, 리프레시휴가</li>
-											<li><strong>보상/수당/지원</strong> : 퇴직금, 인센티브, 야간근로수당, 연장근로수당</li>
-											<li><strong>사내제도/성장</strong> : 님/닉네임 호칭, 수평적 문화, 유연근무제, 주40시간</li>
-											<li><strong>사내시설</strong> : 휴식공간, 헬스시설</li>
-											<li><strong>편의/여가/건강</strong> : 음료 및 간식제공</li> -->
-										</ol>
-									</td>
-								</tr>
-							</tbody>
-						</table>
 						<div class="alignCenter">
 							<% if(request.getParameter("code") == null){ %>
-								<input type="button" id="btn-register" class="btn btn-outline-warning btn-sm detail-control" value="수정하기" onclick="location.href='http://localhost/recruit-app/companyinfo/adminCompanyinfoDetail.do'"/>
+								<input type="button" id="btn-register" class="btn btn-outline-warning btn-sm detail-control" value="수정하기" onclick="updateInfo()"/>
 							<% } else { %>
 								<input type="button" id="btn-update" class="btn btn-outline-warning btn-sm detail-control" value="수정하기" />
 								<input type="button" id="btn-delete" class="btn btn-outline-danger btn-sm detail-control" value="삭제하기" />

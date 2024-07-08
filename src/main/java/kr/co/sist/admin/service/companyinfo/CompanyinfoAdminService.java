@@ -99,4 +99,19 @@ public class CompanyinfoAdminService {
         
     }
 
+    public boolean updateCompanyinfo(CompanyinfoVO cVO) {
+        boolean result=false;
+        int i=0;
+        i=companyinfoAdminDAO.updateCompanyinfo(cVO);
+        if(i == 0) {
+            result=false;
+        }else {
+            result=true;
+        }
+        
+        return result;
+    }
+
+    
+    
 }

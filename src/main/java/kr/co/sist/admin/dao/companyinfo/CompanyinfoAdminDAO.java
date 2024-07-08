@@ -75,7 +75,7 @@ public class CompanyinfoAdminDAO {
     
     public boolean insertCompanyinfoDetail(CompanyinfoVO companyinfoVO) {
         boolean result = true;
-        SqlSession ss = mbConfig.getMyBatisHandler(false);
+        SqlSession ss = mbConfig.getMyBatisHandler(true);
         try {
             int company = ss.insert("kr.co.sist.admin.companyinfo.insertCompanyinfoDetail", companyinfoVO);
 
@@ -102,5 +102,16 @@ public class CompanyinfoAdminDAO {
      
         return lastCompNum;
     }
+
+    public int updateCompanyinfo(CompanyinfoVO cVO)throws PersistenceException {
+        int result=0;
+        SqlSession ss=mbConfig.getMyBatisHandler(true);
+        result=ss.update("kr.co.sist.admin.companyinfo.updateCompanyinfoDetail", cVO);
+        mbConfig.closeHandler(ss);
+        
+        return result;
+    }
+    
+    
     
 }
