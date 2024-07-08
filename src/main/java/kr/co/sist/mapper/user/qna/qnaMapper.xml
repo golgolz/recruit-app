@@ -5,7 +5,7 @@
 <mapper namespace="kr.co.sist.qna.user">
 
 	<select id="selectMyQnas" resultType="kr.co.sist.user.domain.qna.UserQnaDomain">
-		select row_number() over (order by input_date) as qna_num, title, input_date
+		select row_number() over (order by input_date) as qna_num, title, input_date, flag
 		from qna
 		order by input_date desc
 	</select>
@@ -16,6 +16,7 @@
 	    qna.input_date,
 	    qna.title,
 	    qna.content,
+	    qna.flag,
 	    qna_answer.ans_title,
 	    qna_answer.reply_date,
 	    qna_answer.ans_content

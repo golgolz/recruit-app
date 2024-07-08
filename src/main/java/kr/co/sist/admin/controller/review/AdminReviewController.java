@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.co.sist.admin.service.review.AdminReviewService;
+import kr.co.sist.admin.vo.review.ReviewDetailVO;
 import kr.co.sist.admin.vo.review.ReviewVO;
 
 @Controller
@@ -56,4 +58,50 @@ public class AdminReviewController {
 
         return "manage/review/review";
     }
+    
+    
+ // 리뷰 상세 조회
+    @GetMapping("/manage/review/reviewUpdate.do")
+    public String getReviewDetailsForUpdate(@RequestParam("reviewNum") int reviewNum, Model model) {
+        logger.debug("getReviewDetailsForUpdate method called with reviewNum: {}", reviewNum);
+
+        try {
+            ReviewDetailVO review = adminReviewService.getReviewDetailsForUpdate(reviewNum);
+            model.addAttribute("review", review);
+        } catch (Exception e) {
+            logger.error("Error occurred in getReviewDetailsForUpdate method", e);
+        }
+
+        return "manage/review/reviewUpdate";
+    }
+
+    
+ // 리뷰 업데이트
+    @PostMapping("/manage/review/updateReview.do")
+    public String updateReview(ReviewDetailVO review) {
+        logger.debug("updateReview method called with review: {}", review);
+
+        try {
+            adminReviewService.updateReview(review);
+        } catch (Exception e) {
+            logger.error("Error occurred in updateReview method", e);
+        }
+
+        return "redirect:/manage/review/review.do";
+    }
+
+    // 리뷰 삭제
+    @PostMapping("/manage/review/deleteReview.do")
+    public String deleteReview(@RequestParam("reviewNum") int reviewNum) {
+        logger.debug("deleteReview method called with reviewNum: {}", reviewNum);
+
+        try {
+            adminReviewService.deleteReview(reviewNum);
+        } catch (Exception e) {
+            logger.error("Error occurred in deleteReview method", e);
+        }
+
+        return "redirect:/manage/review/review.do";
+    }
+    
 }

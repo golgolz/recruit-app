@@ -47,24 +47,6 @@ public class QnaAdminDAO {
         return oldDetail;
     }
 
-
-    // public QnaVO insertQnaAnswer(int user_id, int qna_num, String content)
-    // throws PersistenceException {
-    // SqlSession session = myBatis.getMyBatisHandler(true);
-    // QnaVO qnaAnswer = null;
-    //
-    // Map<String, Object> param = new HashMap<>();
-    // param.put("user_id", user_id);
-    // param.put("qna_num", qna_num);
-    // param.put("content", content);
-    //
-    // session.insert("kr.co.sist.qna.admin.insertQnaAnswer", param);
-    // myBatis.closeHandler(session);
-    // return qnaAnswer;
-    // }
-
-
-
     public int insertQnaAnswer(QnaVO qVO) {
         SqlSession session = myBatis.getMyBatisHandler(true);
         // System.out.println(qVO);
@@ -76,9 +58,9 @@ public class QnaAdminDAO {
     public int updateQnaFlag(int qna_num) {
         SqlSession session = myBatis.getMyBatisHandler(true);
         int result2 = session.update("kr.co.sist.qna.admin.updateQnaFlag", qna_num);
-        System.out.println("-------------업데이트플래그 돼쓰까??" + qna_num);
+        System.out.println("-------------updateflag" + qna_num);
         session.commit();
-        System.out.println("-------------커밋" + qna_num);
+        System.out.println("-------------com" + qna_num);
         myBatis.closeHandler(session);
         return result2;
     }

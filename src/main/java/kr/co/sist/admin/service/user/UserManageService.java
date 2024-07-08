@@ -3,6 +3,7 @@ package kr.co.sist.admin.service.user;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import kr.co.sist.admin.dao.user.UserManageDAO;
+import kr.co.sist.admin.domain.user.UserDetailDomain;
 import kr.co.sist.admin.domain.user.UserInfoDomain;
 import kr.co.sist.admin.vo.user.SearchVO;
 
@@ -25,5 +26,11 @@ public class UserManageService {
 
         return cnt;
     }// searchUserCnt
+
+    public UserDetailDomain searchUserDetail(String userId) {
+        UserDetailDomain detailInfo = umDAO.selectUserDetail(userId);
+
+        return detailInfo;
+    }// searchUserDetail
 
 }

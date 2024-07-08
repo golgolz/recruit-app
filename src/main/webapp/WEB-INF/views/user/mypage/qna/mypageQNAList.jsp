@@ -97,7 +97,7 @@ td{
 								<td><c:out value="${uesrqna.qna_num}"/></td>
 								<td class="alLeft"><span class="tit"><a href="http://localhost/recruit-app/user/mypage/qna/mypageQNADetail.do?qna_num=${uesrqna.qna_num}"><c:out value="${uesrqna.title}"/></a></span></td>
 								<td><c:out value="${uesrqna.input_date}"/></td>
-								<td class="">답변완료</td>
+								<td class=""><c:out value="${uesrqna.flag}"/></td>
 								</tr>
 							</c:forEach>
 						</tbody>

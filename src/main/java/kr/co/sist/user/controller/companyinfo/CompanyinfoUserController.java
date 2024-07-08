@@ -17,59 +17,56 @@ import kr.co.sist.vo.companyinfo.SearchVO;
 
 @Controller
 public class CompanyinfoUserController {
-    @Autowired(required = false)
-    private CompanyinfoUserService companyinfoUserService;
+     @Autowired(required=false)
+     private CompanyinfoUserService companyinfoUserService;
 
     @GetMapping("/companyinfo/companyinfoList.do")
     public String searchAllCompanyinfo(Model model) {
-        // System.out.println("�̰� ��Ʈ�ѷ���");
-        List<SearchDomain> list = companyinfoUserService.searchAllCompanyinfo();
-        model.addAttribute("listCompanyinfo", list);
-        // return "companyinfo/companyinfo_list";
+        System.out.println("이건 컨트롤러야");
+        List<SearchDomain> list=companyinfoUserService.searchAllCompanyinfo();
+        model.addAttribute("listCompanyinfo",list);
+//        return "companyinfo/companyinfo_list";
         return "companyinfo/user_company_info";
     }
-
+    
     @GetMapping("/companyinfo/search_test.do")
     public String SearchCompanyinfoList(Model model, @ModelAttribute SearchVO sVO) {
         List<SearchDomain> list = companyinfoUserService.searchCompanyinfoList(sVO);
         model.addAttribute("listCompanyinfo", list);
         return "companyinfo/search_test";
     }
-
+    
     @ResponseBody
     @PostMapping("/companyinfo/companySearchList.do")
-    public Map<String, Object> companyinfoSearchList(Model model,
-            @RequestParam(name = "companyName", defaultValue = "null") String companyName,
-            @RequestParam(name = "avgSal", defaultValue = "0") String strAvgSal,
-            @RequestParam(name = "selectedValue", defaultValue = "���þ���") String selectedValue) {
-        int avgSal = Integer.parseInt(strAvgSal);
-        // �˻� ������ HashMap�� ����
+    public Map<String, Object> companyinfoSearchList(Model model, @RequestParam(name = "companyName" , defaultValue ="null")String companyName, @RequestParam(name = "avgSal" , defaultValue ="0")String strAvgSal, @RequestParam(name = "selectedValue" , defaultValue ="선택안함")String selectedValue) {
+        int avgSal=Integer.parseInt(strAvgSal);
+     // 검색 조건을 HashMap에 저장
         Map<String, Object> params = new HashMap<>();
         params.put("companyName", companyName);
         params.put("avgSal", avgSal);
         params.put("companyClassification", selectedValue);
-        // System.out.println("�̰� controller�� params�� : "+params);
+        System.out.println("이건 controller의 params야 : "+params);
 
-        // ���� ������ �˻� ��û
+        // 서비스 계층에 검색 요청
         List<SearchDomain> companyList = companyinfoUserService.searchCompanyinfo(params);
 
-        // ��� �����Ϳ� ���¸� ���� Map ����
+        // 결과 데이터와 상태를 담을 Map 생성
         Map<String, Object> response = new HashMap<>();
         response.put("companyList", companyList);
-        response.put("status", "success"); // ���� ���� �߰�
+        response.put("status", "success"); // 성공 상태 추가
 
         return response;
     }
-
+    
     @GetMapping("/companyinfo/companyinfoDetail.do")
     public String searchCompanyinfoDetail(String companyCode, Model model) {
-        List<SearchDomain> list = companyinfoUserService.searchCompanyinfoDetail(companyCode);
-        List<SearchDomain> list2 = companyinfoUserService.searchHistory(companyCode);
-        List<SearchDomain> list3 = companyinfoUserService.searchWelfare(companyCode);
-        model.addAttribute("companyDetail", list);
-        model.addAttribute("history", list2);
-        model.addAttribute("welfare", list3);
-        // return "companyinfo/companyinfo_list";
+        List<SearchDomain> list=companyinfoUserService.searchCompanyinfoDetail(companyCode);
+        List<SearchDomain> list2=companyinfoUserService.searchHistory(companyCode);
+        List<SearchDomain> list3=companyinfoUserService.searchWelfare(companyCode);
+        model.addAttribute("companyDetail",list);
+        model.addAttribute("history",list2);
+        model.addAttribute("welfare",list3);
+//        return "companyinfo/companyinfo_list";
         return "companyinfo/user_company_detail";
     }
 

@@ -63,7 +63,7 @@
 				<a
 					id="qna_menu"
 					class="nav-link text-white"
-					href="http://localhost/recruit-app/manage/qna/qnas.jsp">
+					href="http://localhost/recruit-app/manage/qna/qnas.do">
 					<span class="nav-link-text ms-1">문의 관리</span>
 				</a>
 			</li>
@@ -71,7 +71,7 @@
 				<a
 					id="notice_menu"
 					class="nav-link text-white"
-					href="http://localhost/recruit-app/manage/notice/notice.do">
+					href="http://localhost/recruit-app/manage/notice/notices.do">
 					<span class="nav-link-text ms-1">공지사항 관리</span>
 				</a>
 			</li>

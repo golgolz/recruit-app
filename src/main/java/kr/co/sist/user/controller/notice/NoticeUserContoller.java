@@ -22,36 +22,12 @@ public class NoticeUserContoller {
         this.noticeUserService = noticeUserService;
     }
 
-    // @ResponseBody
-    // @GetMapping("/notice/notices.do")
-    // public String getNotices(@RequestParam(value = "category", required = false) String category,
-    // Model model) {
-    // List<NoticeUserDomain> noticeList;
-    // if (category != null && !category.equals("전체")) {
-    // noticeList = noticeUserService.searchNoticesByCategory(category);
-    // } else {
-    // noticeList = noticeUserService.searchNotices();
-    // }
-    //
-    // model.addAttribute("noticeList", noticeList);
-    // return "notice/notices";
-    // }
-
     @GetMapping("/notice/notices.do")
     public String searchNotices(Model model) {
         List<NoticeUserDomain> noticeList = noticeUserService.searchNotices();
         model.addAttribute("noticeList", noticeList);
         return "/notice/notices";
     } // 공지사항 리스트 불러오기
-
-    // @GetMapping("/notice/notices.do")
-    // public String searchNoticesBtCategory(@RequestParam("category") String category, Model
-    // model)
-    // {
-    // List<NoticeUserDomain> noticeList = noticeUserService.searchNoticesByCategory(category);
-    // model.addAttribute("noticeList", noticeList);
-    // return "notice/notices";
-    // }
 
     @GetMapping("/notice/noticesByCategory.do")
     @ResponseBody

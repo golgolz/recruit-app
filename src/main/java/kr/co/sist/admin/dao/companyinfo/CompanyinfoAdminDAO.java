@@ -8,7 +8,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import kr.co.sist.domain.companyinfo.SearchDomain;
+import kr.co.sist.exceptions.UnexpectedRowCountException;
 import kr.co.sist.properties.MyBatisConfig;
+import kr.co.sist.vo.companyinfo.CompanyinfoVO;
 import kr.co.sist.vo.companyinfo.SearchVO;
 
 @Component
@@ -53,6 +55,52 @@ public class CompanyinfoAdminDAO {
         mbConfig.closeHandler(ss);
         
         return list;
+    }
+    public List<SearchDomain> selectHistory(String companyCode)throws PersistenceException{
+        List<SearchDomain> list=null;
+        SqlSession ss=mbConfig.getMyBatisHandler(false);
+        list=ss.selectList("kr.co.sist.admin.companyinfo.selectHistory", companyCode);
+        mbConfig.closeHandler(ss);
+        
+        return list;
+    }
+    public List<SearchDomain> selectWelfare(String companyCode)throws PersistenceException{
+        List<SearchDomain> list=null;
+        SqlSession ss=mbConfig.getMyBatisHandler(false);
+        list=ss.selectList("kr.co.sist.admin.companyinfo.selectWelfare", companyCode);
+        mbConfig.closeHandler(ss);
+        
+        return list;
+    }
+    
+    public boolean insertCompanyinfoDetail(CompanyinfoVO companyinfoVO) {
+        boolean result = true;
+        SqlSession ss = mbConfig.getMyBatisHandler(false);
+        try {
+            int company = ss.insert("kr.co.sist.admin.companyinfo.insertCompanyinfoDetail", companyinfoVO);
+
+            if (company != 1) {
+                throw new UnexpectedRowCountException(1, company);
+            }
+
+            ss.commit();
+        } catch (UnexpectedRowCountException e) {
+            ss.rollback();
+            result = false;
+        } finally {
+            mbConfig.closeHandler(ss);
+        }
+        return result;
+    }
+
+    public String selectLastCompNum() throws PersistenceException {
+        
+        String lastCompNum="";
+        SqlSession ss=mbConfig.getMyBatisHandler(false);
+        lastCompNum=ss.selectOne("kr.co.sist.admin.companyinfo.lastCompNum");
+        mbConfig.closeHandler(ss);
+     
+        return lastCompNum;
     }
     
 }

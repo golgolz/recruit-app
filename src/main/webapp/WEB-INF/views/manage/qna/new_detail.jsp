@@ -42,7 +42,7 @@
 		$("#qna_menu").addClass("bg-gradient-primary");
 		$('#ans_content').summernote(
 				{
-					placeholder : 'Hello stand alone ui',
+					placeholder : '답변을 등록해주세요.',
 					tabsize : 2,
 					width : 1435,
 					height : 500,
@@ -163,14 +163,14 @@
 				<tr>
 					<th scope="row">제목</th>
 					<td><input id="title" name="ans_title" class="inputTypeText"
-						placeholder="" maxLength="125" style="width: 100%"  value="${newDetail.ans_title}" type="text" /></td> <!--qna title에서 re:가 붙어야 함. -->
+						placeholder="" maxLength="125" style="width: 100%"  value="RE:${newDetail.title}" type="text" /></td> <!--qna title에서 re:가 붙어야 함. -->
 				</tr>
 				<tr>
 					<th scope="row">송신 이메일</th>
 					<td><input id="user_id" name="user_id" class="inputTypeText"
 						style="width: 100%" placeholder="" maxLength="125" value="${newDetail.user_id}" type="text" />
 					<input id="reply_date" name="qna_num"  value="${param.qna_num}" type="hidden" /> <!-- sysdate-->
-						</td> <!-- requestScope.어쩌구 ??? -->
+						</td>
 				</tr>
 			</tbody>
 		</table>
@@ -180,8 +180,7 @@
 		<div id="emailButtonArea" style="margin-top: 20px; padding-bottom: 40px">
 			<input type="button" value="취소" class="btn btn-outline-danger " style="float:right ; margin-right : 40px" onclick="location.href='http://localhost/recruit-app/manage/qna/new_qnas.do';">
 			<input type="button" value="전송하기" class="btn btn-outline-secondary " style="float:right ; margin-right : 10px" id="btnSend">
-			<!-- <input type="button" class="btn btn-info btn-sm" value="전송" /> 
-			<input type="button" class="btn btn-info btn-sm" value="취소" /> -->
+			
 		</div>
 		</div>
 					<!-- 내 제안내역 보기 상세 //-->

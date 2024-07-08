@@ -6,14 +6,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import kr.co.sist.admin.vo.review.ReviewDetailVO;
 import kr.co.sist.admin.vo.review.ReviewVO;
 import kr.co.sist.properties.MyBatisConfig;
 
 @Repository
 public class AdminReviewDAO {
-    
+
     private static final Logger logger = LoggerFactory.getLogger(AdminReviewDAO.class);
-    
+
     private final MyBatisConfig myBatis;
 
     @Autowired
@@ -21,6 +22,11 @@ public class AdminReviewDAO {
         this.myBatis = myBatis;
     }
 
+    /**
+     * ID로 리뷰 검색
+     * @param userId 사용자 ID
+     * @return 해당 사용자 ID를 가진 리뷰 리스트
+     */
     public List<ReviewVO> searchReviewById(String userId) {
         logger.debug("searchReviewById called with userId: {}", userId);
         SqlSession session = myBatis.getMyBatisHandler(false);
@@ -30,6 +36,11 @@ public class AdminReviewDAO {
         return result;
     }
 
+    /**
+     * 이름으로 리뷰 검색
+     * @param name 사용자 이름
+     * @return 해당 사용자 이름을 가진 리뷰 리스트
+     */
     public List<ReviewVO> searchReviewByName(String name) {
         logger.debug("searchReviewByName called with name: {}", name);
         SqlSession session = myBatis.getMyBatisHandler(false);
@@ -39,6 +50,11 @@ public class AdminReviewDAO {
         return result;
     }
 
+    /**
+     * 제목 또는 내용으로 리뷰 검색
+     * @param keyword 검색 키워드
+     * @return 해당 키워드를 포함한 제목 또는 내용을 가진 리뷰 리스트
+     */
     public List<ReviewVO> searchReviewByTitleOrContent(String keyword) {
         logger.debug("searchReviewByTitleOrContent called with keyword: {}", keyword);
         SqlSession session = myBatis.getMyBatisHandler(false);
@@ -48,6 +64,10 @@ public class AdminReviewDAO {
         return result;
     }
 
+    /**
+     * 전체 리뷰 조회
+     * @return 모든 리뷰 리스트
+     */
     public List<ReviewVO> getAllReviews() {
         logger.debug("getAllReviews called");
         SqlSession session = myBatis.getMyBatisHandler(false);
@@ -57,29 +77,48 @@ public class AdminReviewDAO {
         return result;
     }
 
-    public ReviewVO getReviewDetailsForUpdate(int reviewNum) {
+    // 리뷰 상세 조회
+    public ReviewDetailVO getReviewDetailsForUpdate(int reviewNum) {
         logger.debug("getReviewDetailsForUpdate called with reviewNum: {}", reviewNum);
         SqlSession session = myBatis.getMyBatisHandler(false);
-        ReviewVO result = session.selectOne("kr.co.sist.mapper.admin.review.AdminReviewMapper.getReviewDetailsForUpdate", reviewNum);
+        ReviewDetailVO result = session.selectOne("kr.co.sist.mapper.admin.review.AdminReviewMapper.getReviewDetailsForUpdate", reviewNum);
         myBatis.closeHandler(session);
         logger.debug("getReviewDetailsForUpdate result: {}", result);
         return result;
     }
 
-    public int updateReview(ReviewVO review) {
+ // 리뷰 업데이트
+    public int updateReview(ReviewDetailVO review) {
         logger.debug("updateReview called with review: {}", review);
         SqlSession session = myBatis.getMyBatisHandler(false);
-        int result = session.update("kr.co.sist.mapper.admin.review.AdminReviewMapper.updateReview", review);
-        myBatis.closeHandler(session);
+        int result = 0;
+        try {
+            result = session.update("kr.co.sist.mapper.admin.review.AdminReviewMapper.updateReview", review);
+            session.commit();  // 명시적으로 커밋 호출
+        } catch (Exception e) {
+            logger.error("Error occurred during updateReview", e);
+            session.rollback();  // 예외 발생 시 롤백
+        } finally {
+            myBatis.closeHandler(session);
+        }
         logger.debug("updateReview result: {}", result);
         return result;
     }
 
+    // 리뷰 삭제
     public int deleteReview(int reviewNum) {
         logger.debug("deleteReview called with reviewNum: {}", reviewNum);
         SqlSession session = myBatis.getMyBatisHandler(false);
-        int result = session.delete("kr.co.sist.mapper.admin.review.AdminReviewMapper.deleteReview", reviewNum);
-        myBatis.closeHandler(session);
+        int result = 0;
+        try {
+            result = session.delete("kr.co.sist.mapper.admin.review.AdminReviewMapper.deleteReview", reviewNum);
+            session.commit();  // 명시적으로 커밋 호출
+        } catch (Exception e) {
+            logger.error("Error occurred during deleteReview", e);
+            session.rollback();  // 예외 발생 시 롤백
+        } finally {
+            myBatis.closeHandler(session);
+        }
         logger.debug("deleteReview result: {}", result);
         return result;
     }

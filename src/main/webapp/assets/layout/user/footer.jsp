@@ -16,7 +16,7 @@
               </a>
               <div class="BrandNewNavLinks_BrandNewNavLinks__links__M1n_a">
                 <a
-                  href="https://www.wantedlab.com/"
+                  href="http://localhost/recruit-app/notice/notices.do"
                   class=""
                   target="_blank"
                   rel="noopener noreferrer"
@@ -29,7 +29,7 @@
                     공지사항
                   </p></a
                 ><a
-                  href="https://ad.wantedlab.com/"
+                  href="http://localhost/recruit-app/user/mypage/qna/mypageQnaForm.do"
                   class=""
                   target="_blank"
                   rel="noopener noreferrer"

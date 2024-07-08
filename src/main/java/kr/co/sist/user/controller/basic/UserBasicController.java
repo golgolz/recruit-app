@@ -22,7 +22,7 @@ public class UserBasicController {
     }
 
     @GetMapping("/user/loginPage.do")
-    public String LoginPage() {
+    public String loginPage() {
         return "user/login";
     }
 

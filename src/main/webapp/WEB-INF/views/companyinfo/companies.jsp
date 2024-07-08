@@ -40,7 +40,7 @@
 	                                '<td>' + company.companyName + '</td>' +
 	                                '<td>' + company.companyClassification + '</td>' +
 	                                '<td>' + company.avgSal + '만</td>' +
-	                                '<td><input type="button" value="바로가기" class="btn btn-outline-secondary btn-sm" style="font-weight: bold; margin: 0px auto;" onclick="location.href=\'http://localhost/recruit-app/manage/company/detail.jsp\'" /></td></tr>';
+	                                '<td><input type="button" value="바로가기" class="btn btn-outline-secondary btn-sm" style="font-weight: bold; margin: 0px auto;" onclick="location.href=\'http://localhost/recruit-app/companyinfo/adminCompanyinfoDetail.do\'" /></td></tr>';
 
 	                            $list.append(listItem);
 	                        });//each
@@ -192,7 +192,7 @@
 								<td><c:out value="${ company.companyClassification }"/></td>
 								<td><c:out value="${ company.avgSal }"/>만</td>
 								<td>
-									<input type="button" value="바로가기" class="btn btn-outline-secondary btn-sm" style="font-weight: bold; margin: 0px auto;" onclick="location.href='http://localhost/recruit-app/manage/company/detail.jsp'"/>
+									<input type="button" value="바로가기" class="btn btn-outline-secondary btn-sm" style="font-weight: bold; margin: 0px auto;" onclick="location.href='http://localhost/recruit-app/companyinfo/adminCompanyinfoDetail.do?companyCode=${ company.companyCode }'"/>
 								</td>
 							</tr>
 							</c:forEach>
@@ -207,7 +207,7 @@
 									<div id="pageNation"></div>
 								</td>
 								<td align="right">
-									<input type="button" value="등록하기" class="btn btn-outline-success btn-sm float-right" style="font-weight: bold; margin: 10px auto;" onclick="location.href='http://localhost/recruit-app/manage/company/detail.jsp'" />
+									<input type="button" value="등록하기" class="btn btn-outline-success btn-sm float-right" style="font-weight: bold; margin: 10px auto;" onclick="location.href='http://localhost/recruit-app/companyinfo/adminCompanyinfoWrite.do'" />
 								</td>
 							</tr>
 						</tbody>
