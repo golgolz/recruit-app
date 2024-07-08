@@ -114,7 +114,7 @@ public class CompanyinfoAdminDAO {
     
     public int deleteHistory(Map<String, Object> param)throws PersistenceException {
         int result=0;
-        SqlSession ss=mbConfig.getMyBatisHandler(false);
+        SqlSession ss=mbConfig.getMyBatisHandler(true);
         result=ss.update("kr.co.sist.admin.companyinfo.deleteHistory", param);
         mbConfig.closeHandler(ss);
         
@@ -124,7 +124,7 @@ public class CompanyinfoAdminDAO {
     public int deleteWelfare(Map<String, Object> param)throws PersistenceException {
         int result=0;
         SqlSession ss=mbConfig.getMyBatisHandler(false);
-        result=ss.update("kr.co.sist.admin.companyinfo.deleteWelfare", param);
+        result=ss.delete("kr.co.sist.admin.companyinfo.deleteWelfare", param);
         mbConfig.closeHandler(ss);
         
         return result;

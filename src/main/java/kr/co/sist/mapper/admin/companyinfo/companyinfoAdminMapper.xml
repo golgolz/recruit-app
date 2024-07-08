@@ -123,8 +123,8 @@
     </update>
     
     <insert id="insertHistory" parameterType="kr.co.sist.vo.companyinfo.CompanyinfoVO">
-	    INSERT INTO WELFARE(COMPANY_CODE, CATEGORY, CONTENT)
-	    VALUES(#{companyCode},#{category},#{content});
+	    INSERT INTO WELFARE(COMPANY_CODE, BASE_DATE, HISTORY_CONTENT)
+	    VALUES(#{companyCode},#{baseDate},#{historyContent});
     </insert>
     
     <delete id="deleteHistory" parameterType="map">
@@ -133,8 +133,8 @@
     </delete>
     
     <insert id="insertWelfare" parameterType="kr.co.sist.vo.companyinfo.CompanyinfoVO">
-	    INSERT INTO HISTORY(COMPANY_CODE, BASE_DATE, CONTENT)
-	    VALUES(#{companyCode},#{baseDate},#{content});
+	    INSERT INTO HISTORY(COMPANY_CODE, BASE_DATE, WELFARE_CONTENT)
+	    VALUES(#{companyCode},#{category},#{welfareContent});
     </insert>
     
     <delete id="deleteWelfare" parameterType="map">
