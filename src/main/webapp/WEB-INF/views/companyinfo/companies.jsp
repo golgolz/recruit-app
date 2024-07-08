@@ -156,8 +156,8 @@
 						<input type="submit" value="초기화" class="btn btn-outline-secondary btn-sm"/>
 					</div>
 				</form>
-				<div class="local_ov mart30">
-					전체 : <b class="fc_red">3</b> 건 조회
+				<div class="local_ov mart30"  align="right">
+					<input type="button" value="등록하기" class="btn btn-outline-success btn-sm float-right" style="font-weight: bold; margin: 10px auto;" onclick="location.href='http://localhost/recruit-app/companyinfo/adminCompanyinfoWrite.do'" />
 				</div>
 				<form name="forderlist" id="forderlist" method="post">
 					<input type="hidden" name="q1" value="code=list"> <input
@@ -208,7 +208,6 @@
 									<div id="pageNation"></div>
 								</td>
 								<td align="right">
-									<input type="button" value="등록하기" class="btn btn-outline-success btn-sm float-right" style="font-weight: bold; margin: 10px auto;" onclick="location.href='http://localhost/recruit-app/companyinfo/adminCompanyinfoWrite.do'" />
 								</td>
 							</tr>
 						</tbody>

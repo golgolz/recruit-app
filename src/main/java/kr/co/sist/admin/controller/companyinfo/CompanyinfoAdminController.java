@@ -48,6 +48,7 @@ public class CompanyinfoAdminController {
     public String insertCompanyinfoPage() {
         return "companyinfo/admin_company_detail_write";
     }
+  
     @GetMapping("/companyinfo/adminHistoryWelfare.do")
     public String selectHistoryWelfareDetail(String companyCode, Model model, HttpSession session) {
         List<SearchDomain> list=companyinfoAdminService.searchCompanyinfoDetail(companyCode);
@@ -109,7 +110,7 @@ public class CompanyinfoAdminController {
         
         companyinfoAdminService.addCompanyinfoDetail(cVO);
         
-        return "companyinfo/admin_company_detail_write";
+        return "redirect:/companyinfo/adminCompanyinfoList.do";
     }
     
     @PostMapping("/companyinfo/addCompanyinfoDetail.do")
@@ -194,9 +195,27 @@ public class CompanyinfoAdminController {
     }//updateCompanyinfo
     
     @PostMapping("/companyinfo/deleteHistory.do")
-    public String deleteHistory(@RequestParam("hiddenValue") String date, HttpSession session) {
-        System.out.println("===========" + date + " ==============="+ session.getAttribute("companyCode"));
-        return "";
+    public String deleteHistory(@RequestParam("hidHistory") String baseDate, HttpSession session) {
+        Map<String, Object> param=new HashMap<String, Object>();
+        String companyCode=(String) session.getAttribute("companyCode");
+        param.put("baseDate", baseDate);
+        param.put("companyCode", companyCode);
+        
+        companyinfoAdminService.deleteHistory(param);
+        
+        return "redirect:/companyinfo/adminHistoryWelfare.do";
+    }
+    
+    @PostMapping("/companyinfo/deleteWelfare.do")
+    public String deleteWelfare(@RequestParam("hidWelfare") String category, HttpSession session) {
+        Map<String, Object> param=new HashMap<String, Object>();
+        String companyCode=(String) session.getAttribute("companyCode");
+        param.put("category", category);
+        param.put("companyCode", companyCode);
+        
+        companyinfoAdminService.deleteWelfare(param);
+        
+        return "redirect:/companyinfo/adminHistoryWelfare.do";
     }
     
 //    @GetMapping("/companyinfo/search_test.do")

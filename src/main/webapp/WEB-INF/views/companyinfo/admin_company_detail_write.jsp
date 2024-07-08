@@ -14,7 +14,7 @@
 	
 	});
 		function addInfo(){
-	    	alert("등록하기클릭")
+	    	alert("기업이 등록되었습니다.")
 	        $("#dataForm").submit();
 		}
 </script>
