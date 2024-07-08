@@ -127,8 +127,9 @@
 	    VALUES(#{companyCode},#{category},#{content});
     </insert>
     
-    <delete id="deleteHistory">
-    
+    <delete id="deleteHistory" parameterType="map">
+    	DELETE FROM HISTORY
+		WHERE COMPANY_CODE=#{companyCode} AND BASE_DATE=#{baseDate}
     </delete>
     
     <insert id="insertWelfare" parameterType="kr.co.sist.vo.companyinfo.CompanyinfoVO">
@@ -136,8 +137,9 @@
 	    VALUES(#{companyCode},#{baseDate},#{content});
     </insert>
     
-    <delete id="deleteWelfare">
-    
+    <delete id="deleteWelfare" parameterType="map">
+    	DELETE FROM WELFARE
+		WHERE COMPANY_CODE=#{companyCode} AND CATEGORY=#{category}
     </delete>
 
     

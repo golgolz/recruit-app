@@ -14,7 +14,7 @@
 		$("#company_menu").addClass("bg-gradient-primary");
 	});
 	function updateInfo(){
-    	alert("수정하기클릭")
+    	alert("기업정보가 수정되었습니다.")
         $("#dataForm").submit();
     	
 	}
