@@ -5,49 +5,52 @@
 <mapper namespace="kr.co.sist.user.dao.main.UserMainDAO">
 
     <!-- 1. 최근 등록된 공고(1달 내) -->
-    <select id="selectRecentJobPosts" resultType="kr.co.sist.user.vo.main.MainVO">
-        SELECT
-            R.TITLE AS title,
-            C.COMPANY_NAME AS companyName,
-            C.COMPANY_IMG AS companyImage
-        FROM
-            RECRUIT R
-        JOIN
-            COMPANYINFO C ON R.COMPANY_CODE = C.COMPANY_CODE
-        WHERE
-            R.INPUT_DATE >= TRUNC(SYSDATE) - INTERVAL '1' MONTH
-        ORDER BY
-            R.INPUT_DATE DESC
-    </select>
+<select id="selectRecentJobPosts" resultType="kr.co.sist.user.vo.main.MainVO">
+    SELECT
+        R.RECRUIT_NUM AS recruitNum,
+        R.TITLE AS title,
+        C.COMPANY_NAME AS companyName,
+        C.COMPANY_IMG AS companyImage
+    FROM
+        RECRUIT R
+    JOIN
+        COMPANYINFO C ON R.COMPANY_CODE = C.COMPANY_CODE
+    WHERE
+        R.INPUT_DATE >= TRUNC(SYSDATE) - INTERVAL '1' MONTH
+    ORDER BY
+        R.INPUT_DATE DESC
+</select>
 
      <!-- 2. 내가 관심있을만한 포지션 (내 스택과 공고 비교) -->
-    <select id="selectInterestedPositions" parameterType="String" resultType="kr.co.sist.user.vo.main.MainVO">
-        SELECT DISTINCT
-            R.TITLE AS title,
-            C.COMPANY_NAME AS companyName,
-            C.COMPANY_IMG AS companyImage,
-            R.INPUT_DATE AS inputDate,
-            P.POSITION_NAME AS positionName,
-            CR.JOB_DESCRIPTION AS jobDescription
-        FROM
-            RECRUIT R
-        JOIN
-            COMPANYINFO C ON R.COMPANY_CODE = C.COMPANY_CODE
-        JOIN
-            POSITION_LIST P ON R.POSITION_CODE = P.POSITION_CODE
-        JOIN
-            CAREER CR ON P.POSITION_NAME = CR.JOB_DESCRIPTION
-        JOIN
-            RESUME RS ON CR.RESUME_NUM = RS.RESUME_NUM
-        WHERE
-            RS.USER_ID = #{userId}
-        ORDER BY
-            R.INPUT_DATE DESC
-    </select>
+<select id="selectInterestedPositions" resultType="kr.co.sist.user.vo.main.MainVO">
+    SELECT DISTINCT
+        R.RECRUIT_NUM AS recruitNum,
+        R.TITLE AS title,
+        C.COMPANY_NAME AS companyName,
+        C.COMPANY_IMG AS companyImage,
+        R.INPUT_DATE AS inputDate,
+        P.POSITION_NAME AS positionName,
+        CR.JOB_DESCRIPTION AS jobDescription
+    FROM
+        RECRUIT R
+    JOIN
+        COMPANYINFO C ON R.COMPANY_CODE = C.COMPANY_CODE
+    JOIN
+        POSITION_LIST P ON R.POSITION_CODE = P.POSITION_CODE
+    JOIN
+        CAREER CR ON P.POSITION_NAME = CR.JOB_DESCRIPTION
+    JOIN
+        RESUME RS ON CR.RESUME_NUM = RS.RESUME_NUM
+    WHERE
+        RS.USER_ID = #{userId}
+    ORDER BY
+        R.INPUT_DATE DESC
+</select>
 
     <!-- 2.5. 기본 관심 포지션 (로그인하지 않은 경우) -->
     <select id="selectDefaultInterestedPositions" resultType="kr.co.sist.user.vo.main.MainVO">
         SELECT DISTINCT
+        	R.RECRUIT_NUM AS recruitNum,
             R.TITLE AS title,
             C.COMPANY_NAME AS companyName,
             C.COMPANY_IMG AS companyImage,
@@ -70,40 +73,48 @@
 
     <!-- 3. 고연봉 포지션 -->
     <select id="selectHighSalaryPositions" resultType="kr.co.sist.user.vo.main.MainVO">
-        SELECT
-            C.COMPANY_IMG AS companyImage,
-            P.POSITION_NAME AS positionName,
-            C.COMPANY_NAME AS companyName
-        FROM
-            RECRUIT R
-        JOIN
-            COMPANYINFO C ON R.COMPANY_CODE = C.COMPANY_CODE
-        JOIN
-            POSITION_LIST P ON R.POSITION_CODE = P.POSITION_CODE
-        ORDER BY
-            R.SAL DESC
-        FETCH FIRST 4 ROWS ONLY
-    </select>
+   SELECT
+  R.RECRUIT_NUM AS recruitNum, 
+  C.COMPANY_IMG AS companyImage,
+  P.POSITION_NAME AS positionName,
+  C.COMPANY_NAME AS companyName
+FROM
+  RECRUIT R
+JOIN
+  COMPANYINFO C ON R.COMPANY_CODE = C.COMPANY_CODE
+JOIN
+  POSITION_LIST P ON R.POSITION_CODE = P.POSITION_CODE
+ORDER BY
+  R.SAL DESC
+FETCH FIRST 4 ROWS ONLY
+
+</select>
 
     <!-- 4. 조회 기록 -->
-    <select id="selectViewHistory" resultType="kr.co.sist.user.vo.main.MainVO">
-        SELECT
-            C.COMPANY_IMG AS companyImage,
-            P.POSITION_NAME AS positionName,
-            C.COMPANY_NAME AS companyName,
-            PVH.VIEW_DATE AS viewDate
-        FROM
-            POSITION_VIEW_HISTORY PVH
-        JOIN
-            RECRUIT R ON PVH.RECRUIT_NUM = R.RECRUIT_NUM
-        JOIN
-            COMPANYINFO C ON R.COMPANY_CODE = C.COMPANY_CODE
-        JOIN
-            POSITION_LIST P ON R.POSITION_CODE = P.POSITION_CODE
-        WHERE
-            PVH.USER_ID = 'jeong@sist.com'
-        ORDER BY
-            PVH.VIEW_DATE DESC
-        FETCH FIRST 5 ROWS ONLY
-    </select>
+    <select id="selectViewHistory" parameterType="string" resultType="kr.co.sist.user.vo.main.MainVO">
+ SELECT
+    PVH.RECRUIT_NUM AS recruitNum,
+    C.COMPANY_IMG AS companyImage,
+    P.POSITION_NAME AS positionName,
+    C.COMPANY_NAME AS companyName,
+    PVH.VIEW_DATE AS viewDate
+FROM
+    POSITION_VIEW_HISTORY PVH
+JOIN
+    RECRUIT R ON PVH.RECRUIT_NUM = R.RECRUIT_NUM
+JOIN
+    COMPANYINFO C ON R.COMPANY_CODE = C.COMPANY_CODE
+JOIN
+    POSITION_LIST P ON R.POSITION_CODE = P.POSITION_CODE
+WHERE
+    PVH.USER_ID = 'jeong@sist.com' -- 파라미터 사용
+ORDER BY
+    PVH.VIEW_DATE DESC
+FETCH FIRST 5 ROWS ONLY
+
+
+</select>
+    
+    
+    
 </mapper>

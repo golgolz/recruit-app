@@ -13,6 +13,7 @@ import lombok.ToString;
 @ToString
 public class MainVO {
 
+    private String recruitNum;
     private String title;
     private String companyName;
     private String companyImage;
@@ -20,5 +21,4 @@ public class MainVO {
     private String jobDescription;
     private String inputDate;
     private String viewDate;
-
 }
