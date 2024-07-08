@@ -40,7 +40,7 @@ if (!Boolean.TRUE.equals(isLoggedIn)) {
 		});//click
 		$("#btnCancel").click(function(){
 			alert("글작성을 취소합니다.");
-			location.href="http://localhost/manage/notice/notice.jsp";
+			location.href="https://doberman-ready-termite.ngrok-free.app/manage/notice/notice.jsp";
 		});//click */
 		$('#content').summernote({
 	        placeholder: 'Hello stand alone ui',
@@ -159,8 +159,8 @@ System.out.print("공지사항 아이디: "+notice_id);
 
 <div class="ec-base-button ">
             <span class="gRight">
-            	<input type="button" value="수정" class="btn btn-outline-warning btn-sm" id="btnWrite" name="btnWrite" onclick="location.href='http://localhost/recruit-app/manage/notice/notices.do'"/>
-            	<input type="button" value="취소" class="btn btn-outline-dark btn-sm detail-control" id="btnCancel" name="btnCancel" onclick="location.href='http://localhost/recruit-app/manage/notice/noticesDetail.do'"/>
+            	<input type="button" value="수정" class="btn btn-outline-warning btn-sm" id="btnWrite" name="btnWrite" onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/notice/notices.do'"/>
+            	<input type="button" value="취소" class="btn btn-outline-dark btn-sm detail-control" id="btnCancel" name="btnCancel" onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/notice/noticesDetail.do'"/>
             	
             	
                <!--  <a href="#none" class="btnSubmitFix sizeS" onclick=";">등록</a>

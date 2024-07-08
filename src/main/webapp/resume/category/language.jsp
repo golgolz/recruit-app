@@ -6,7 +6,7 @@
 		<div id="language_containers">
 		</div>
 		<button type="button" class="button buttonAddField">
-			<img src="http://localhost/recruit-app/assets/images/btns/plus_btn.png"" style="width: 25px; height: 25px;"/>
+			<img src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/btns/plus_btn.png"" style="width: 25px; height: 25px;"/>
 			<span>어학 추가</span>
 		</button>
 	</div>
@@ -247,4 +247,4 @@
 		<button type="button" class="button buttonDeleteField"></button>
 	</div>
 </script>
-<script type="text/javascript"src="http://localhost/recruit-app/assets/js/user/resume/language.js"></script>
+<script type="text/javascript"src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/js/user/resume/language.js"></script>

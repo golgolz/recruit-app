@@ -8,7 +8,7 @@
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
-<script src="http://localhost/recruit-app/assets/js/admin/datepicker-ko.js"></script>
+<script src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/js/admin/datepicker-ko.js"></script>
 <script type="text/javascript">
 	$(function(){
 		$.datepicker.setDefaults($.datepicker.regional['ko']);
@@ -44,11 +44,11 @@
 	});
 </script>
 <!-- golgolz start -->
-<link href="http://localhost//recruit-app/assets/css/pagenation.css" rel="stylesheet" />
-<link href="http://localhost//recruit-app/assets/css/manage/order/admin.css" rel="stylesheet" />
-<link href="http://localhost//recruit-app/assets/css/manage/order/reset.css" rel="stylesheet" />
-<link href="http://localhost/recruit-app/assets/css/manage/goods/goods.css" rel="stylesheet" />
-<link href="http://localhost/recruit-app/assets/css/manage/goods/default.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app//recruit-app/assets/css/pagenation.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app//recruit-app/assets/css/manage/order/admin.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app//recruit-app/assets/css/manage/order/reset.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/manage/goods/goods.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/manage/goods/default.css" rel="stylesheet" />
 <!-- golgolz end -->
 
 </head>
@@ -148,7 +148,7 @@
 								<td>010-****-0000</td>
 								<td>2018-05-01</td>
 								<td><input type="button" value="상세조회" class="btn btn-outline-secondary btn-sm" 
-									style="font-weight: bold;margin:0px auto;" onclick="location.href='http://localhost/recruit-app/manage/user/detail.jsp';"/></td>
+									style="font-weight: bold;margin:0px auto;" onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/user/detail.jsp';"/></td>
 							</tr>
 							<tr class="list0">
 								<td>2</td>
@@ -157,7 +157,7 @@
 								<td>010-****-1234</td>
 								<td>2021-03-22</td>
 								<td><input type="button" value="상세조회" class="btn btn-outline-secondary btn-sm" 
-									style="font-weight: bold;margin:0px auto;" onclick="location.href='http://localhost/recruit-app/manage/user/detail.jsp';"/></td>
+									style="font-weight: bold;margin:0px auto;" onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/user/detail.jsp';"/></td>
 							</tr>
 							<tr class="list0">
 								<td>3</td>
@@ -166,7 +166,7 @@
 								<td>010-****-3333</td>
 								<td>2019-12-21</td>
 								<td><input type="button" value="상세조회" class="btn btn-outline-secondary btn-sm" 
-									style="font-weight: bold;margin:0px auto;" onclick="location.href='http://localhost/recruit-app/manage/user/detail.jsp';"/></td>
+									style="font-weight: bold;margin:0px auto;" onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/user/detail.jsp';"/></td>
 							</tr>
 							<tr class="list0">
 								<td>4</td>
@@ -175,7 +175,7 @@
 								<td>010-****-5555</td>
 								<td>2022-05-05</td>
 								<td><input type="button" value="상세조회" class="btn btn-outline-secondary btn-sm" 
-									style="font-weight: bold;margin:0px auto;" onclick="location.href='http://localhost/recruit-app/manage/user/detail.jsp';"/></td>
+									style="font-weight: bold;margin:0px auto;" onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/user/detail.jsp';"/></td>
 							</tr>
 							<tr class="list0">
 								<td>5</td>
@@ -184,7 +184,7 @@
 								<td>010-****-1111</td>
 								<td>2018-02-11</td>
 								<td><input type="button" value="상세조회" class="btn btn-outline-secondary btn-sm" 
-									style="font-weight: bold;margin:0px auto;" onclick="location.href='http://localhost/recruit-app/manage/user/detail.jsp';"/></td>
+									style="font-weight: bold;margin:0px auto;" onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/user/detail.jsp';"/></td>
 							</tr>
 						</tbody>
 					</table>

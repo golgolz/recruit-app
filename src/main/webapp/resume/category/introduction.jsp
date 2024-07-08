@@ -42,4 +42,4 @@
 </div>
 <script type="text/template" id="tplIntroduceItem"></script>
 <!-- <script type="text/javascript"
-	src="http://localhost/recruit-app/assets/js/user/resume/introduction.js"></script> -->
+	src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/js/user/resume/introduction.js"></script> -->

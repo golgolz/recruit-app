@@ -5,9 +5,9 @@
 <head>
 <jsp:include page="../../../assets/layout/admin/lib.jsp" />
 <!-- golgolz start -->
-<link href="http://localhost/recruit-app/assets/css/manage/goods/general.css" rel="stylesheet" />
-<link href="http://localhost/recruit-app/assets/css/manage/goods/goods.css" rel="stylesheet" />
-<link href="http://localhost/recruit-app/assets/css/manage/goods/default.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/manage/goods/general.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/manage/goods/goods.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/manage/goods/default.css" rel="stylesheet" />
 <style>
 	table{
 		margin-top: 10px;
@@ -48,7 +48,7 @@
 	    $('#tel').text(data.tel);
 	    $('#phone').text(data.phone);
 	    $('#addr').text(data.addr);
-	    //$('#profileTable img').attr('src', `http://localhost/recruit-app/assets/images/${data.profile}`);
+	    //$('#profileTable img').attr('src', `https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/${data.profile}`);
 	}
 	
 	function updateSkillsInfo(skillsData) {
@@ -180,7 +180,7 @@
 	    });
 	}
 </script>
-<link href="http://localhost/recruit-app/assets/css/manage/resume/detail.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/manage/resume/detail.css" rel="stylesheet" />
 <!-- golgolz end -->
 </head>
 <body>
@@ -224,10 +224,10 @@
 			<!-- golgolz start -->
 			<div id="contentcolumn" class="">
 				<div class="contents" style="margin-top: 125px;">
-					<form id="dataForm" name="dataForm" action="http://localhost/recruit-app/manage/common_process.jsp" method="post" enctype="multipart/form-data">
+					<form id="dataForm" name="dataForm" action="https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/common_process.jsp" method="post" enctype="multipart/form-data">
 						<div class="subtitle">
 							<img
-								src="http://localhost/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
+								src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
 							인적사항
 						</div>
 						<table class="tbstyleB" id="profileTable" width="100%">
@@ -245,7 +245,7 @@
 										<span id="name"></span>
 									</td>
 									<td rowspan="4">
-										<img src="http://localhost/recruit-app/assets/images/default.png" />
+										<img src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/default.png" />
 									</td>
 								</tr>
 								<tr>
@@ -287,7 +287,7 @@
 							</tbody>
 						</table>
 						<div class="subtitle">
-							<img src="http://localhost/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
+							<img src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
 							스킬
 						</div>
 						<table id="skill_table" cellpadding="0" cellspacing="1" border="0" class="tbstyleB" width="100%">
@@ -299,7 +299,7 @@
 						</table>
 						<div class="subtitle">
 							<img
-								src="http://localhost/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
+								src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
 							학력
 						</div>
 						<table id="school_table" class="table table-striped table-bordered horizontal_arrange" width="100%">
@@ -318,7 +318,7 @@
 						</table>
 						<div class="subtitle">
 							<img
-								src="http://localhost/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
+								src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
 							경력
 						</div>
 						<table id="career_table" class="table table-striped table-bordered horizontal_arrange" width="100%">
@@ -335,7 +335,7 @@
 						</table>
 						<div class="subtitle">
 							<img
-								src="http://localhost/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
+								src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
 							자격증
 						</div>
 						<table id="certification_table" class="table table-striped table-bordered horizontal_arrange">
@@ -350,7 +350,7 @@
 						</table>
 						<div class="subtitle">
 							<img
-								src="http://localhost/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
+								src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
 							어학
 						</div>
 						<table id="language_table" class="table table-striped table-bordered horizontal_arrange">
@@ -367,7 +367,7 @@
 						</table>
 						<div class="subtitle">
 							<img
-								src="http://localhost/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
+								src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
 							자기소개서
 						</div>
 						<p id="introduceContent">열정맨 우미연입니다.</p>

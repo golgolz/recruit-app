@@ -5,10 +5,10 @@
 <html>
 <head> 
 	<!-- golgolz start -->
-    <link href="http://localhost/recruit-app/assets/css/resume/write-sv-202405231305.css" rel="stylesheet" type="text/css"/>
-    <link href="http://localhost/recruit-app/assets/css/resume/flow.css" />
-    <link href="http://localhost/recruit-app/assets/css/resume/layout-sv-202401301659.css" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="http://localhost/recruit-app/assets/css/layout/user/btn-bootstrap.css" />
+    <link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/resume/write-sv-202405231305.css" rel="stylesheet" type="text/css"/>
+    <link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/resume/flow.css" />
+    <link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/resume/layout-sv-202401301659.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/layout/user/btn-bootstrap.css" />
     <style>
       .autocomplete .list .hover {
         background-color: #f5f5f5;
@@ -36,15 +36,15 @@
       };
     </script>
 	<jsp:include page="../assets/layout/user/lib.jsp" /> 
-    <script src="http://localhost/recruit-app/assets/js/user/resume/json2.js"></script>
-    <script src="http://localhost/recruit-app/assets/js/user/resume/jquery"></script>
-    <script src="http://localhost/recruit-app/assets/js/user/resume/itemtemplate.js"></script>
-    <script src="http://localhost/recruit-app/assets/js/user/resume/JK_Cookie.js"></script>
-    <script src="http://localhost/recruit-app/assets/js/user/resume/JK5cript.js"></script>
-    <script src="http://localhost/recruit-app/assets/js/user/resume/ResumeReg"></script>
+    <script src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/js/user/resume/json2.js"></script>
+    <script src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/js/user/resume/jquery"></script>
+    <script src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/js/user/resume/itemtemplate.js"></script>
+    <script src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/js/user/resume/JK_Cookie.js"></script>
+    <script src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/js/user/resume/JK5cript.js"></script>
+    <script src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/js/user/resume/ResumeReg"></script>
 	<!-- golgolz end -->
-	<script type="text/javascript" src="http://localhost/recruit-app/assets/js/user/resume/edu.js"></script>
-    <link rel="stylesheet" href="http://localhost/recruit-app/assets/css/resume/detail.css" />
+	<script type="text/javascript" src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/js/user/resume/edu.js"></script>
+    <link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/resume/detail.css" />
 	<style text="text/css">
 		<!-- golgolz start -->
 		<!-- golgolz end -->
@@ -178,9 +178,9 @@
 					</form>
 				</div>
 				<div id="healthLayer" style="display: none"></div>
-				<script src="http://localhost/recruit-app/assets/js/user/resume/countdown.js"></script>
-				<script src="http://localhost/recruit-app/assets/js/user/resume/LoginWatcher.js"></script>
-				<script type="text/javascript" src="http://localhost/recruit-app/assets/js/user/resume/page_leave.js"></script>
+				<script src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/js/user/resume/countdown.js"></script>
+				<script src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/js/user/resume/LoginWatcher.js"></script>
+				<script type="text/javascript" src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/js/user/resume/page_leave.js"></script>
 				<script type="text/template" id="tplKeywordCheckBox"></script>
 				<script type="text/template" id="tplCommonDirectInput"></script>
 				<script type="text/template" id="tplCommonNotFound"></script>

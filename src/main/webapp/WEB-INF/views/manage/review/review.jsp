@@ -11,7 +11,7 @@
 
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
-<script src="http://localhost/recruit-app/assets/js/admin/datepicker-ko.js"></script>
+<script src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/js/admin/datepicker-ko.js"></script>
 
 <script type="text/javascript">
     $(function(){
@@ -148,9 +148,9 @@
 
 <!-- golgolz start -->
 
-<link href="http://localhost/recruit-app/assets/css/pagenation.css" rel="stylesheet" />
-<link href="http://localhost/recruit-app/assets/css/manage/order/admin.css" rel="stylesheet" />
-<link href="http://localhost/recruit-app/assets/css/manage/order/reset.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/pagenation.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/manage/order/admin.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/manage/order/reset.css" rel="stylesheet" />
 <!-- golgolz end -->
 </head>
 <body>

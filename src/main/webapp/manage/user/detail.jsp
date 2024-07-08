@@ -12,12 +12,12 @@
 	});
 </script>
 <!-- golgolz start -->
-<link href="http://localhost//recruit-app/assets/css/pagenation.css" rel="stylesheet" />
-<link href="http://localhost//recruit-app/assets/css/manage/order/admin.css" rel="stylesheet" />
-<link href="http://localhost//recruit-app/assets/css/manage/order/reset.css" rel="stylesheet" />
-<link href="http://localhost/recruit-app/assets/css/manage/goods/general.css" rel="stylesheet" />
-<link href="http://localhost/recruit-app/assets/css/manage/goods/goods.css" rel="stylesheet" />
-<link href="http://localhost/recruit-app/assets/css/manage/goods/default.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app//recruit-app/assets/css/pagenation.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app//recruit-app/assets/css/manage/order/admin.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app//recruit-app/assets/css/manage/order/reset.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/manage/goods/general.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/manage/goods/goods.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/manage/goods/default.css" rel="stylesheet" />
 
 <style>
 .subtitle{
@@ -83,9 +83,9 @@
 			<!-- golgolz start -->
 			<div id="contentcolumn" class="">
 				<div class="contents">
-					<form id="dataForm" name="dataForm" action="http://localhost/online-shop/manage/goods/register_process.jsp" method="post" enctype="multipart/form-data">
+					<form id="dataForm" name="dataForm" action="https://doberman-ready-termite.ngrok-free.app/online-shop/manage/goods/register_process.jsp" method="post" enctype="multipart/form-data">
 						<div class="subtitle">
-							<img src="http://localhost/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
+							<img src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
 							기본정보
 						</div>
 						<table class="tbstyleB" width="100%">
@@ -132,7 +132,7 @@
 							</tbody>
 						</table>
 						<div class="subtitle">
-							<img src="http://localhost/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
+							<img src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
 							기타 인적사항
 						</div>
 						<table class="tbstyleB" width="100%">
@@ -239,35 +239,35 @@
 							<tr class="list0">
 								<td>1</td>
 								<td>기업</td>
-								<td><a href="http://localhost/recruit-app/manage/qna/old_qnas_detail.jsp?qna_num=1">여기어때</a></td>
+								<td><a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/qna/old_qnas_detail.jsp?qna_num=1">여기어때</a></td>
 								<td>2024-05-11</td>
 								<td>답변완료</td>
 							</tr>
 							<tr class="list0">
 								<td>2</td>
 								<td>기업</td>
-								<td><a href="http://localhost/recruit-app/manage/qna/old_qnas_detail.jsp?qna_num=2">지원취소 안되나요?</a></td>
+								<td><a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/qna/old_qnas_detail.jsp?qna_num=2">지원취소 안되나요?</a></td>
 								<td>2024-05-20</td>
 								<td>답변완료</td>
 							</tr>
 							<tr class="list0">
 								<td>3</td>
 								<td>민원</td>
-								<td><a href="http://localhost/recruit-app/manage/qna/old_qnas_detail.jsp?qna_num=3">신고접수합니다.</a></td>
+								<td><a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/qna/old_qnas_detail.jsp?qna_num=3">신고접수합니다.</a></td>
 								<td>2024-05-29</td>
 								<td>답변완료</td>
 							</tr>
 							<tr class="list0">
 								<td>4</td>
 								<td>민원</td>
-								<td><a href="http://localhost/recruit-app/manage/qna/old_qnas_detail.jsp?qna_num=4">민원 처리가 늦어요.</a></td>
+								<td><a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/qna/old_qnas_detail.jsp?qna_num=4">민원 처리가 늦어요.</a></td>
 								<td>2024-06-01</td>
 								<td>답변대기</td>
 							</tr>
 							<tr class="list0">
 								<td>5</td>
 								<td>기업</td>
-								<td><a href="http://localhost/recruit-app/manage/qna/old_qnas_detail.jsp?qna_num=5">지원 공고 찾는 법</a></td>
+								<td><a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/qna/old_qnas_detail.jsp?qna_num=5">지원 공고 찾는 법</a></td>
 								<td>2024-06-11</td>
 								<td>답변대기</td>
 							</tr>

@@ -8,7 +8,7 @@
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
-<script src="http://localhost/recruit-app/assets/js/admin/datepicker-ko.js"></script>
+<script src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/js/admin/datepicker-ko.js"></script>
 <script type="text/javascript">
 	$(function(){
 		
@@ -87,7 +87,7 @@
 	                
 	                var form = $('<form>')
 	                  .attr('method', 'POST')
-	                  .attr('action', 'http://localhost/recruit-app/manage/userDetail.do');
+	                  .attr('action', 'https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/userDetail.do');
 
 	                var hiddenInput = $('<input>')
 	                  .attr('type', 'hidden')
@@ -206,11 +206,11 @@
 	});//ready
 </script>
 <!-- golgolz start -->
-<link href="http://localhost//recruit-app/assets/css/pagenation.css" rel="stylesheet" />
-<link href="http://localhost//recruit-app/assets/css/manage/order/admin.css" rel="stylesheet" />
-<link href="http://localhost//recruit-app/assets/css/manage/order/reset.css" rel="stylesheet" />
-<link href="http://localhost/recruit-app/assets/css/manage/goods/goods.css" rel="stylesheet" />
-<link href="http://localhost/recruit-app/assets/css/manage/goods/default.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app//recruit-app/assets/css/pagenation.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app//recruit-app/assets/css/manage/order/admin.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app//recruit-app/assets/css/manage/order/reset.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/manage/goods/goods.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/manage/goods/default.css" rel="stylesheet" />
 <!-- golgolz end -->
 
 </head>

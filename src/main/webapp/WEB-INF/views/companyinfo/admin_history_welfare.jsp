@@ -6,9 +6,9 @@
 <head>
 <jsp:include page="../assets/layout/admin/lib.jsp" />
 <!-- golgolz start -->
-<link href="http://localhost/recruit-app/assets/css/manage/goods/general.css" rel="stylesheet" />
-<link href="http://localhost/recruit-app/assets/css/manage/goods/goods.css" rel="stylesheet" />
-<link href="http://localhost/recruit-app/assets/css/manage/goods/default.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/manage/goods/general.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/manage/goods/goods.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/manage/goods/default.css" rel="stylesheet" />
 <script type="text/javascript">
 	$(function(){
 		$("#company_menu").addClass("bg-gradient-primary");
@@ -80,7 +80,7 @@ input{
 		<div class="container-fluid py-4">
 			<!-- golgolz start -->
 			<div id="contentcolumn" class="">
-				<form id="frmDelete" action="http://localhost/recruit-app/companyinfo/deleteHistory.do" method="post">
+				<form id="frmDelete" action="https://doberman-ready-termite.ngrok-free.app/recruit-app/companyinfo/deleteHistory.do" method="post">
 				<input type="hidden" id="history" value="" name="hiddenValue"/>
 				</form>
 				<div class="contents">
@@ -89,11 +89,11 @@ input{
                 </c:if>
 					<form id="dataForm" name="dataForm" action="" method="post" enctype="multipart/form-data">
 						<div class="subtitle" style="font-size:20px; margin-bottom: 50px">
-							<img src="http://localhost/recruit-app/assets/images/company/logo/<c:out value="${ companyIntroDetail.logo }"/>" style="height:50px; width:auto; margin-right:10px"/>
+							<img src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/company/logo/<c:out value="${ companyIntroDetail.logo }"/>" style="height:50px; width:auto; margin-right:10px"/>
 							<strong><c:out value="${companyIntroDetail.companyName}"/></strong>
 						</div>
 						<div class="subtitle">
-							<img src="http://localhost/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
+							<img src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
 							연혁
 						</div>
 						<table class="tbstyleB" width="100%">
@@ -135,7 +135,7 @@ input{
 							</tbody>
 						</table>
 						<div class="subtitle">
-							<img src="http://localhost/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
+							<img src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
 							복리후생
 						</div>
 						<table class="tbstyleB" width="100%">

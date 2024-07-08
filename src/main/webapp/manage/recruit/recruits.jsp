@@ -7,7 +7,7 @@
 <jsp:include page="../../assets/layout/admin/lib.jsp" />
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
-<script src="http://localhost/recruit-app/assets/js/admin/datepicker-ko.js"></script>
+<script src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/js/admin/datepicker-ko.js"></script>
 <script type="text/javascript">
 	$(function(){
 		$.datepicker.setDefaults($.datepicker.regional['ko']);
@@ -42,18 +42,18 @@
   		});
     	
     	$(".goResumes").click(function(){
-    		location.href = "http://localhost/recruit-app/manage/recruit/resume/resumes.jsp";
+    		location.href = "https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/recruit/resume/resumes.jsp";
     	});
     	
     	$(".goRegist").click(function(){
-    		location.href = "http://localhost/recruit-app/manage/recruit/detail.jsp";
+    		location.href = "https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/recruit/detail.jsp";
     	});
 	});
 </script>
 <!-- golgolz start -->
-<link href="http://localhost//recruit-app/assets/css/pagenation.css" rel="stylesheet" />
-<link href="http://localhost//recruit-app/assets/css/manage/order/admin.css" rel="stylesheet" />
-<link href="http://localhost//recruit-app/assets/css/manage/order/reset.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app//recruit-app/assets/css/pagenation.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app//recruit-app/assets/css/manage/order/admin.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app//recruit-app/assets/css/manage/order/reset.css" rel="stylesheet" />
 <!-- golgolz end -->
 </head>
 <body>
@@ -240,7 +240,7 @@
               				<tr>
                 				<td align="right">
 									<input type="button" value="등록하기" class="btn btn-outline-success btn-sm float-right goRegist" style="font-weight: bold; margin: 10px auto;" 
-									onclick="location.href='http://localhost/recruit-app/manage/recruit/resume/detail.jsp'"/>
+									onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/recruit/resume/detail.jsp'"/>
                 				</td>
               				</tr>
             			</tbody>

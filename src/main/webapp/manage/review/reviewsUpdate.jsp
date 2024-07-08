@@ -71,7 +71,7 @@
 <div class="xans-element- xans-board xans-board-write-4 xans-board-write xans-board-4">
 </form>
 <div class="ec-base-box typeProduct  ">
-            <p class="thumbnail"><a href=""><img id="iPrdIm" src="http://localhost/assets/images/goods/<c:out value=''/>" onerror="this.src='//img.echosting.cafe24.com/thumb/75x75.gif'" alt=""/></a></p>
+            <p class="thumbnail"><a href=""><img id="iPrdIm" src="https://doberman-ready-termite.ngrok-free.app/assets/images/goods/<c:out value=''/>" onerror="this.src='//img.echosting.cafe24.com/thumb/75x75.gif'" alt=""/></a></p>
             <div class="information" style="padding-left:30px">
 				<h3><a href="#void" id="aPrdNameLink">
 				<span id="sPrdName"></span></a></h3>

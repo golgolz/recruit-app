@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="http://localhost/recruit-app/assets/css/layout/user/common-sv-202405271315.css" rel="stylesheet" type="text/css" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/layout/user/common-sv-202405271315.css" rel="stylesheet" type="text/css" />
 <link href="//i.jobkorea.kr/content/css/ver_2/event/banner.promotion-sv-202401301659.css" rel="stylesheet" type="text/css" />
 <!-- <link href="view-source:https://www.jobkorea.co.kr/help/inquiry" rel="stylesheet" type="text/css" /> -->
 <link href="https://i.jobkorea.kr/deploy/pc/dist/css/personal/common/gnb-sv-202405231305.css" rel="stylesheet" type="text/css" />
@@ -141,8 +141,8 @@
 
 						
 							<!-- <div class="btnListExDn">
-							<input type="button" value="목록" class="btn btn-outline-dark btn-sm detail-control" onclick="location.href='http://localhost/recruit-app/manage/qna/new_qnas.jsp'">
-							<input type="button" value="답변하기" class="btn btn-outline-success btn-sm float-right" onclick="location.href='http://localhost/recruit-app/manage/qna/answer_frm.jsp'"style="float:right">
+							<input type="button" value="목록" class="btn btn-outline-dark btn-sm detail-control" onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/qna/new_qnas.jsp'">
+							<input type="button" value="답변하기" class="btn btn-outline-success btn-sm float-right" onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/qna/answer_frm.jsp'"style="float:right">
 								<a href="new_qnas.jsp" class="btnMtcTpl">목록</a> 
 								<a href="answer_frm.jsp" class="btnMtcTpl">답변하기</a>
 							</div> -->
@@ -178,7 +178,7 @@
 		
 		<textarea  id="ans_content" name="ans_content" style="margin-left: 600px">${newDetail.ans_content}</textarea>
 		<div id="emailButtonArea" style="margin-top: 20px; padding-bottom: 40px">
-			<input type="button" value="취소" class="btn btn-outline-danger " style="float:right ; margin-right : 40px" onclick="location.href='http://localhost/recruit-app/manage/qna/new_qnas.do';">
+			<input type="button" value="취소" class="btn btn-outline-danger " style="float:right ; margin-right : 40px" onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/qna/new_qnas.do';">
 			<input type="button" value="전송하기" class="btn btn-outline-secondary " style="float:right ; margin-right : 10px" id="btnSend">
 			
 		</div>

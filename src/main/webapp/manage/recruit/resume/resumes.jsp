@@ -28,9 +28,9 @@
 </script>
 <!-- golgolz start -->
 <jsp:include page="../../../assets/layout/admin/lib.jsp" />
-<link href="http://localhost//recruit-app/assets/css/pagenation.css" rel="stylesheet" />
-<link href="http://localhost//recruit-app/assets/css/manage/order/admin.css" rel="stylesheet" />
-<link href="http://localhost//recruit-app/assets/css/manage/order/reset.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app//recruit-app/assets/css/pagenation.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app//recruit-app/assets/css/manage/order/admin.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app//recruit-app/assets/css/manage/order/reset.css" rel="stylesheet" />
 <style>
 	#status{
 		margin-top : 5px;
@@ -202,7 +202,7 @@
 								<td>합격</td>
 								<td>
 									<input type="button" value="바로가기" class="btn btn-outline-secondary btn-sm" style="font-weight: bold; margin: 0px auto;" 
-									onclick="location.href='http://localhost/recruit-app/manage/recruit/resume/detail.jsp'" />
+									onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/recruit/resume/detail.jsp'" />
 								</td>
 							</tr>
 							<tr class="list0">
@@ -216,7 +216,7 @@
 								<td>합격</td>
 								<td>
 									<input type="button" value="바로가기" class="btn btn-outline-secondary btn-sm" style="font-weight: bold; margin: 0px auto;" 
-									onclick="location.href='http://localhost/recruit-app/manage/recruit/resume/detail.jsp'" />
+									onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/recruit/resume/detail.jsp'" />
 								</td>
 							</tr>
 							<tr class="list0">
@@ -230,7 +230,7 @@
 								<td>합격</td>
 								<td>
 									<input type="button" value="바로가기" class="btn btn-outline-secondary btn-sm" style="font-weight: bold; margin: 0px auto;" 
-									onclick="location.href='http://localhost/recruit-app/manage/recruit/resume/detail.jsp'" />
+									onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/recruit/resume/detail.jsp'" />
 								</td>
 							</tr>
 						</tbody>
@@ -244,7 +244,7 @@
                 				</td>
                 				<td align="right">
 									<input type="button" value="등록하기" class="btn btn-outline-success btn-sm float-right" style="font-weight: bold; margin: 10px auto;" 
-									onclick="location.href='http://localhost/recruit-app/manage/recruit/resume/detail.jsp'" />
+									onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/recruit/resume/detail.jsp'" />
                 				</td>
               				</tr>
             			</tbody>

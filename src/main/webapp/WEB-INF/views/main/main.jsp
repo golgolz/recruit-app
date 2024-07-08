@@ -8,28 +8,28 @@
   <link rel="stylesheet" href="global_user.css">
   <script type="text/javascript" async src="https://snap.licdn.com/li.lms-analytics/insight.min.js"></script>
   <script async src="https://connect.facebook.net/en_US/fbevents.js"></script>
-  <link rel="preload" href="http://localhost/recruit-app/assets/css/main/c76e012c05e1318d.css" as="style" crossorigin="anonymous">
-  <link rel="stylesheet" href="http://localhost/recruit-app/assets/css/main/c76e012c05e1318d.css" crossorigin="anonymous" data-n-g="">
-  <link rel="stylesheet" href="http://localhost/recruit-app/assets/css/main/31749fc30b2cee78.css" crossorigin="anonymous" data-n-p="">
-  <link rel="preload" href="http://localhost/recruit-app/assets/css/main/105b10ca0c5005ca.css" as="style" crossorigin="anonymous">
-  <link rel="stylesheet" href="http://localhost/recruit-app/assets/css/main/105b10ca0c5005ca.css" crossorigin="anonymous" data-n-p="">
-  <link rel="preload" href="http://localhost/recruit-app/assets/css/main/d78e318892fb698f.css" as="style" crossorigin="anonymous">
-  <link rel="stylesheet" href="http://localhost/recruit-app/assets/css/main/abbebb70674a7a53.css" crossorigin="anonymous" data-n-p="">
-  <link rel="preload" href="http://localhost/recruit-app/assets/css/main/6c9e71f92bc24580.css" as="style" crossorigin="anonymous">
-  <link rel="stylesheet" href="http://localhost/recruit-app/assets/css/main/6c9e71f92bc24580.css" crossorigin="anonymous" data-n-p="">
-  <link rel="preload" href="http://localhost/recruit-app/assets/css/main/6b7b4649561ccba8.css" as="style" crossorigin="anonymous">
-  <link rel="stylesheet" href="http://localhost/recruit-app/assets/css/main/6b7b4649561ccba8.css" crossorigin="anonymous" data-n-p="">
+  <link rel="preload" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/main/c76e012c05e1318d.css" as="style" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/main/c76e012c05e1318d.css" crossorigin="anonymous" data-n-g="">
+  <link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/main/31749fc30b2cee78.css" crossorigin="anonymous" data-n-p="">
+  <link rel="preload" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/main/105b10ca0c5005ca.css" as="style" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/main/105b10ca0c5005ca.css" crossorigin="anonymous" data-n-p="">
+  <link rel="preload" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/main/d78e318892fb698f.css" as="style" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/main/abbebb70674a7a53.css" crossorigin="anonymous" data-n-p="">
+  <link rel="preload" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/main/6c9e71f92bc24580.css" as="style" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/main/6c9e71f92bc24580.css" crossorigin="anonymous" data-n-p="">
+  <link rel="preload" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/main/6b7b4649561ccba8.css" as="style" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/main/6b7b4649561ccba8.css" crossorigin="anonymous" data-n-p="">
   <noscript data-n-css=""></noscript>
   <script defer crossorigin="anonymous" nomodule="" src="https://asset.wanted.co.kr/userweb/www/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script>
-  <link rel="stylesheet" type="text/css" href="http://localhost/recruit-app/assets/css/main/slick.css">
-  <link rel="stylesheet" type="text/css" href="http://localhost/recruit-app/assets/css/main/slick-theme.css">
-  <link rel="stylesheet" href="http://localhost/recruit-app/assets/css/main/all.min.css">
+  <link rel="stylesheet" type="text/css" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/main/slick.css">
+  <link rel="stylesheet" type="text/css" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/main/slick-theme.css">
+  <link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/main/all.min.css">
   <meta charset="utf-8">
-  <link rel="preload" as="style" crossorigin="anonymous" href="http://localhost/recruit-app/assets/css/main/pretendardvariable-dynamic-subset.min.css">
-  <link rel="preload" as="style" crossorigin="anonymous" href="http://localhost/recruit-app/assets/css/main/pretendardvariable-jp-dynamic-subset.min.css">
-  <link rel="stylesheet" href="http://localhost/recruit-app/assets/css/main/slick.css" media="screen">
-  <link rel="stylesheet" href="http://localhost/recruit-app/assets/css/main/pretendardvariable-dynamic-subset.min.css">
-  <link rel="stylesheet" href="http://localhost/recruit-app/assets/css/main/pretendardvariable-jp-dynamic-subset.min.css">
+  <link rel="preload" as="style" crossorigin="anonymous" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/main/pretendardvariable-dynamic-subset.min.css">
+  <link rel="preload" as="style" crossorigin="anonymous" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/main/pretendardvariable-jp-dynamic-subset.min.css">
+  <link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/main/slick.css" media="screen">
+  <link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/main/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/main/pretendardvariable-jp-dynamic-subset.min.css">
   <link rel="search" href="/opensearch.xml" type="application/opensearchdescription+xml" title="Wanted">
 
   <script>

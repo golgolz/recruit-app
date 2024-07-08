@@ -103,12 +103,12 @@
       
     /* light 모드 이미지 */
 	img.mb-4 {
-	  content: url("http://localhost/recruit-app/assets/images/admin/adminLoginIcoDay.png");
+	  content: url("https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/admin/adminLoginIcoDay.png");
 	}
 	
 	/* dark 모드 이미지 */
 	[data-bs-theme="dark"] img.mb-4 {
-	  content: url("http://localhost/recruit-app/assets/images/admin/adminLoginIcoNight.png");
+	  content: url("https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/admin/adminLoginIcoNight.png");
 	} 
     </style>
     
@@ -181,8 +181,8 @@
 
     
 <main class="form-signin w-100 m-auto">
-  <form id="adminLoginFrm" action="http://localhost/recruit-app/manage/adminLogin/adminLogin.do" method="post">
-    <img class="mb-4" src="http://localhost/recruit-app/assets/images/admin/adminLoginIcoNight.png" alt="" width="80" height="80">
+  <form id="adminLoginFrm" action="https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/adminLogin/adminLogin.do" method="post">
+    <img class="mb-4" src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/admin/adminLoginIcoNight.png" alt="" width="80" height="80">
     <h1 class="h3 mb-3 fw-normal"><strong>Admin Login</strong></h1>
 
     <div class="form-floating">

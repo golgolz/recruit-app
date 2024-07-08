@@ -12,7 +12,7 @@
 			<!-- content will be added -->
 		</div>
 		<button type="button" class="button buttonAddField" id="school_addbutton">
-			<img src="http://localhost/recruit-app/assets/images/btns/plus_btn.png"" style="width: 25px; height: 25px;"/>
+			<img src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/btns/plus_btn.png"" style="width: 25px; height: 25px;"/>
 			<span>추가</span>
 		</button>
 		<div class="popup popupMajor hidden" aria-hidden="true"

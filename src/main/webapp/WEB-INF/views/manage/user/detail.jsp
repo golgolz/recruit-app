@@ -16,12 +16,12 @@
 	});
 </script>
 <!-- golgolz start -->
-<link href="http://localhost//recruit-app/assets/css/pagenation.css" rel="stylesheet" />
-<link href="http://localhost//recruit-app/assets/css/manage/order/admin.css" rel="stylesheet" />
-<link href="http://localhost//recruit-app/assets/css/manage/order/reset.css" rel="stylesheet" />
-<link href="http://localhost/recruit-app/assets/css/manage/goods/general.css" rel="stylesheet" />
-<link href="http://localhost/recruit-app/assets/css/manage/goods/goods.css" rel="stylesheet" />
-<link href="http://localhost/recruit-app/assets/css/manage/goods/default.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app//recruit-app/assets/css/pagenation.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app//recruit-app/assets/css/manage/order/admin.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app//recruit-app/assets/css/manage/order/reset.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/manage/goods/general.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/manage/goods/goods.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/manage/goods/default.css" rel="stylesheet" />
 
 <style>
 .subtitle{
@@ -87,9 +87,9 @@
 			<!-- golgolz start -->
 			<div id="contentcolumn" class="">
 				<div class="contents">
-					<form id="dataForm" name="dataForm" action="http://localhost/online-shop/manage/goods/register_process.jsp" method="post" enctype="multipart/form-data">
+					<form id="dataForm" name="dataForm" action="https://doberman-ready-termite.ngrok-free.app/online-shop/manage/goods/register_process.jsp" method="post" enctype="multipart/form-data">
 						<div class="subtitle">
-							<img src="http://localhost/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
+							<img src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
 							기본정보
 						</div>
 						<table class="tbstyleB" width="100%">
@@ -136,7 +136,7 @@
 							</tbody>
 						</table>
 						<div class="subtitle">
-							<img src="http://localhost/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
+							<img src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
 							기타 인적사항
 						</div>
 						<table class="tbstyleB" width="100%">
@@ -209,7 +209,7 @@
 								<td><%= applyInfo.getCompanyName() %></td>
 								<td><%= applyInfo.getApplyDate() %></td>
 								<td><%= applyInfo.getTitle() %>.</td>
-								<td><input type="button" value="바로가기" class="btn btn-outline-secondary btn-sm" style="font-weight: bold;margin:0px auto;" onclick="location.href='http://localhost/recruit-app/manage/resumes/detail.do?<%= applyInfo.getResumeNum() %>'" /></td>
+								<td><input type="button" value="바로가기" class="btn btn-outline-secondary btn-sm" style="font-weight: bold;margin:0px auto;" onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/resumes/detail.do?<%= applyInfo.getResumeNum() %>'" /></td>
 								<td><%= applyInfo.getProgressState() %></td>
 							</tr>
 							<%
@@ -258,7 +258,7 @@
 							<tr class="list0">
 								<td><%= i+1 %></td>
 								<td><%= qnaInfo.getCategory() %></td>
-								<td><a href="http://localhost/recruit-app/manage/qna/new_detail.do?qna_num=<%= qnaInfo.getQnaNum() %>"><%= qnaInfo.getTitle() %></a></td>
+								<td><a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/qna/new_detail.do?qna_num=<%= qnaInfo.getQnaNum() %>"><%= qnaInfo.getTitle() %></a></td>
 								<td><%= qnaInfo.getInputDate() %></td>
 								<td><%= qnaInfo.getFlag() %></td>
 							</tr>

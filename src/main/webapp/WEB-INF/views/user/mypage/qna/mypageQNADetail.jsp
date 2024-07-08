@@ -11,10 +11,10 @@
 	<!-- 파비콘 -->
     <link rel="shortcut icon" href="https://static.wanted.co.kr/favicon/new/favicon.ico"/>
     <link rel="stylesheet" href="https://asset.wanted.co.kr/userweb/www/_next/static/css/c76e012c05e1318d.css" crossorigin="anonymous" data-n-g=""/>
-	<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/mypage.css"/>
-	<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/signup.css"/>
+	<link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/mypage.css"/>
+	<link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/signup.css"/>
 	<!-- bootstrap -->
-	<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/layout/user/btn-bootstrap.css" />	
+	<link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/layout/user/btn-bootstrap.css" />	
 	<!-- bootstrap -->
 	
 	<!-- golgolz end -->
@@ -68,7 +68,7 @@
 		
 				<div class="listBtmArea" style="margin-bottom:30px">
 				<div class="btnListExDn">
-					<a href="http://localhost/recruit-app/user/mypage/qna/mypageQNAList.do" class="btnMtcTpl">목록</a>
+					<a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/user/mypage/qna/mypageQNAList.do" class="btnMtcTpl">목록</a>
 					<!-- <input type="btton" value="목록" class="btn btn-outline-dark btn-sm detail-control"> -->
 				</div>
 					<!-- <button type="button" onclick="javascript:window.scrollTo(0,0);" class="btnMtcTpl">TOP</button> -->

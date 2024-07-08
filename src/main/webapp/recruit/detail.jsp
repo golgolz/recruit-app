@@ -6,7 +6,7 @@
 <head>
 	<jsp:include page="../assets/layout/user/lib.jsp" />  
 	<!-- golgolz start -->
-    <link href="http://localhost/recruit-app/assets/css/recruit/view-sv-202405201324.css" rel="stylesheet" type="text/css"/>
+    <link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/recruit/view-sv-202405201324.css" rel="stylesheet" type="text/css"/>
 	<!-- golgolz end -->
 	<style text="text/css">
 		<!-- golgolz start -->

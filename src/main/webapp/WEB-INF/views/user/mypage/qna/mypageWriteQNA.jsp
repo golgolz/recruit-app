@@ -8,9 +8,9 @@
     <link href="https://i.jobkorea.kr/content/css/ver_2/help/help-sv-202402231655.css" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="https://static.wanted.co.kr/favicon/new/favicon.ico"/>
     <link rel="stylesheet" href="https://asset.wanted.co.kr/userweb/www/_next/static/css/c76e012c05e1318d.css" crossorigin="anonymous" data-n-g=""/>
-    <link rel="stylesheet" href="http://localhost/recruit-app/assets/css/mypage.css"/>
-    <link rel="stylesheet" href="http://localhost/recruit-app/assets/css/signup.css"/>
-    <link rel="stylesheet" href="http://localhost/recruit-app/assets/css/layout/user/btn-bootstrap.css" />
+    <link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/mypage.css"/>
+    <link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/signup.css"/>
+    <link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/layout/user/btn-bootstrap.css" />
     <style type="text/css">
     </style>
     <script type="text/javascript">
@@ -57,8 +57,8 @@
                                     <div class="inquiryFormWrap">
                                         <div class="mtcTplTab">
                                             <ul class="tabItems">
-                                                <li class="on"><a href="http://localhost/recruit-app/user/mypage/qna/mypageQnaForm.do">문의</a></li>
-                                                <li class=""><a href="http://localhost/recruit-app/user/mypage/qna/mypageQNAList.do">문의 내역</a></li>
+                                                <li class="on"><a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/user/mypage/qna/mypageQnaForm.do">문의</a></li>
+                                                <li class=""><a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/user/mypage/qna/mypageQNAList.do">문의 내역</a></li>
                                             </ul>
                                         </div>
                                         <div class="inquiryForm inquiryForm--selection">

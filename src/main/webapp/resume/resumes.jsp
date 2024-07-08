@@ -5,8 +5,8 @@
 <html>
 <head>
 	<!-- golgolz start -->
-    <link href="http://localhost/recruit-app/assets/css/resume/mtu_common-sv-202405081446.css" rel="stylesheet" type="text/css" />
-    <link href="http://localhost/recruit-app/assets/css/resume/mtu_style-sv-202405161357.css" rel="stylesheet" type="text/css"  />
+    <link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/resume/mtu_common-sv-202405081446.css" rel="stylesheet" type="text/css" />
+    <link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/resume/mtu_style-sv-202405161357.css" rel="stylesheet" type="text/css"  />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 	<!-- golgolz end -->
@@ -38,11 +38,11 @@
 		$(function(){
 			<!-- golgolz start -->
 			$("#registerBtn").click(function(){
-				location.href = "http://localhost/recruit-app/resume/detail.jsp";
+				location.href = "https://doberman-ready-termite.ngrok-free.app/recruit-app/resume/detail.jsp";
 			});
 
 			$("#updateBtn").click(function(){
-				location.href = "http://localhost/recruit-app/resume/detail.jsp";
+				location.href = "https://doberman-ready-termite.ngrok-free.app/recruit-app/resume/detail.jsp";
 			});
 
 			$("#removeBtn").click(function(){
@@ -81,7 +81,7 @@
 	                        					<li>
 	                          						<div class="col col01">
 		                            					<div class="tit">
-		                              						<a href="http://localhost/recruit-app/resume/detail.jsp" target="_blank">기본 이력서 2</a>
+		                              						<a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/resume/detail.jsp" target="_blank">기본 이력서 2</a>
 	                            						</div>
 	                            						<div class="date">2024.06.02</div>
 	                          						</div>
@@ -97,7 +97,7 @@
 	                        					<li>
 	                          						<div class="col col01">
 		                            					<div class="tit">
-		                              						<a href="http://localhost/recruit-app/resume/detail.jsp" target="_blank">기본 이력서 2</a>
+		                              						<a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/resume/detail.jsp" target="_blank">기본 이력서 2</a>
 	                            						</div>
 	                            						<div class="date">2024.06.02</div>
 	                          						</div>

@@ -11,61 +11,61 @@ http://scripts.sil.org/OFL
 	font-family: 'Pretendard';
 	font-weight: 900;
 	font-display: swap;
-	src: local('Pretendard Black'), url(http://localhost/recruit-app/assets/css/review/Pretendard-Black.woff2) format('woff2'), url(http://localhost/recruit-app/assets/css/review/Pretendard-Black.woff) format('woff');
+	src: local('Pretendard Black'), url(https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/review/Pretendard-Black.woff2) format('woff2'), url(https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/review/Pretendard-Black.woff) format('woff');
 }
 
 @font-face {
 	font-family: 'Pretendard';
 	font-weight: 800;
 	font-display: swap;
-	src: local('Pretendard ExtraBold'), url(http://localhost/recruit-app/assets/css/review/Pretendard-ExtraBold.woff2) format('woff2'), url(http://localhost/recruit-app/assets/css/review/Pretendard-ExtraBold.woff) format('woff');
+	src: local('Pretendard ExtraBold'), url(https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/review/Pretendard-ExtraBold.woff2) format('woff2'), url(https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/review/Pretendard-ExtraBold.woff) format('woff');
 }
 
 @font-face {
 	font-family: 'Pretendard';
 	font-weight: 700;
 	font-display: swap;
-	src: local('Pretendard Bold'), url(http://localhost/recruit-app/assets/css/review/Pretendard-Bold.woff2) format('woff2'), url(http://localhost/recruit-app/assets/css/review/Pretendard-Bold.woff) format('woff');
+	src: local('Pretendard Bold'), url(https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/review/Pretendard-Bold.woff2) format('woff2'), url(https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/review/Pretendard-Bold.woff) format('woff');
 }
 
 @font-face {
 	font-family: 'Pretendard';
 	font-weight: 600;
 	font-display: swap;
-	src: local('Pretendard SemiBold'), url(http://localhost/recruit-app/assets/css/review/Pretendard-SemiBold.woff2) format('woff2'), url(http://localhost/recruit-app/assets/css/review/Pretendard-SemiBold.woff) format('woff');
+	src: local('Pretendard SemiBold'), url(https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/review/Pretendard-SemiBold.woff2) format('woff2'), url(https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/review/Pretendard-SemiBold.woff) format('woff');
 }
 
 @font-face {
 	font-family: 'Pretendard';
 	font-weight: 500;
 	font-display: swap;
-	src: local('Pretendard Medium'), url(http://localhost/recruit-app/assets/css/review/Pretendard-Medium.woff2) format('woff2'), url(http://localhost/recruit-app/assets/css/review/Pretendard-Medium.woff) format('woff');
+	src: local('Pretendard Medium'), url(https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/review/Pretendard-Medium.woff2) format('woff2'), url(https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/review/Pretendard-Medium.woff) format('woff');
 }
 
 @font-face {
 	font-family: 'Pretendard';
 	font-weight: 400;
 	font-display: swap;
-	src: local('Pretendard Regular'), url(http://localhost/recruit-app/assets/css/review/Pretendard-Regular.woff2) format('woff2'), url(http://localhost/recruit-app/assets/css/review/Pretendard-Regular.woff) format('woff');
+	src: local('Pretendard Regular'), url(https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/review/Pretendard-Regular.woff2) format('woff2'), url(https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/review/Pretendard-Regular.woff) format('woff');
 }
 
 @font-face {
 	font-family: 'Pretendard';
 	font-weight: 300;
 	font-display: swap;
-	src: local('Pretendard Light'), url(http://localhost/recruit-app/assets/css/review/Pretendard-Light.woff2) format('woff2'), url(http://localhost/recruit-app/assets/css/review/Pretendard-Light.woff) format('woff');
+	src: local('Pretendard Light'), url(https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/review/Pretendard-Light.woff2) format('woff2'), url(https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/review/Pretendard-Light.woff) format('woff');
 }
 
 @font-face {
 	font-family: 'Pretendard';
 	font-weight: 200;
 	font-display: swap;
-	src: local('Pretendard ExtraLight'), url(http://localhost/recruit-app/assets/css/review/Pretendard-ExtraLight.woff2) format('woff2'), url(http://localhost/recruit-app/assets/css/review/Pretendard-ExtraLight.woff) format('woff');
+	src: local('Pretendard ExtraLight'), url(https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/review/Pretendard-ExtraLight.woff2) format('woff2'), url(https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/review/Pretendard-ExtraLight.woff) format('woff');
 }
 
 @font-face {
 	font-family: 'Pretendard';
 	font-weight: 100;
 	font-display: swap;
-	src: local('Pretendard Thin'), url(http://localhost/recruit-app/assets/css/review/Pretendard-Thin.woff2) format('woff2'), url(http://localhost/recruit-app/assets/css/review/Pretendard-Thin.woff) format('woff');
+	src: local('Pretendard Thin'), url(https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/review/Pretendard-Thin.woff2) format('woff2'), url(https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/review/Pretendard-Thin.woff) format('woff');
 }

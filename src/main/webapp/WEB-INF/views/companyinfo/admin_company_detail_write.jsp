@@ -5,9 +5,9 @@
 <head>
 <jsp:include page="../assets/layout/admin/lib.jsp" />
 <!-- golgolz start -->
-<link href="http://localhost/recruit-app/assets/css/manage/goods/general.css" rel="stylesheet" />
-<link href="http://localhost/recruit-app/assets/css/manage/goods/goods.css" rel="stylesheet" />
-<link href="http://localhost/recruit-app/assets/css/manage/goods/default.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/manage/goods/general.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/manage/goods/goods.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/manage/goods/default.css" rel="stylesheet" />
 <script type="text/javascript">
 	$(function(){
 		$("#company_menu").addClass("bg-gradient-primary");
@@ -84,9 +84,9 @@ input{
 			<!-- golgolz start -->
 			<div id="contentcolumn" class="">
 				<div class="contents">
-					<form id="dataForm" name="dataForm" action="http://localhost/recruit-app/companyinfo/addCompanyinfoWrite.do" method="post" enctype="multipart/form-data">
+					<form id="dataForm" name="dataForm" action="https://doberman-ready-termite.ngrok-free.app/recruit-app/companyinfo/addCompanyinfoWrite.do" method="post" enctype="multipart/form-data">
 						<div class="subtitle">
-							<img src="http://localhost/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
+							<img src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
 							기업정보
 						</div>
 						<table class="tbstyleB" width="100%">
@@ -160,7 +160,7 @@ input{
 						</table>
 						<!--이미지등록-->
 						<div class="subtitle">
-							<img src="http://localhost/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
+							<img src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
 							기업 로고 이미지
 						</div>
 						<div id="area_file" style="display: block">
@@ -189,7 +189,7 @@ input{
 						</div>
 						<!--이미지등록-->
 						<div class="subtitle">
-							<img src="http://localhost/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
+							<img src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
 							기업 프로필 대표 이미지
 						</div>
 
@@ -217,7 +217,7 @@ input{
 							</table>
 						</div>
 						<!-- <div class="subtitle">
-							<img src="http://localhost/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
+							<img src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
 							연혁
 						</div>
 						<table class="tbstyleB" width="100%">
@@ -258,7 +258,7 @@ input{
 							</tbody>
 						</table>
 						<div class="subtitle">
-							<img src="http://localhost/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
+							<img src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
 							복리후생
 						</div>
 						<table class="tbstyleB" width="100%">

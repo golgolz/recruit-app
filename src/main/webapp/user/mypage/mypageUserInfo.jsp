@@ -11,8 +11,8 @@
     <!-- 파비콘 -->
     <link rel="shortcut icon" href="https://static.wanted.co.kr/favicon/new/favicon.ico"/>
     <link rel="stylesheet" href="https://asset.wanted.co.kr/userweb/www/_next/static/css/c76e012c05e1318d.css" crossorigin="anonymous" data-n-g=""/>
-	<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/mypage.css"/>
-	<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/signup.css"/>
+	<link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/mypage.css"/>
+	<link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/signup.css"/>
 	
 	<!-- golgolz end -->
 	<style type="text/css">
@@ -68,7 +68,7 @@
                             <div class="Avatar_Avatar__bg__MRkK0">
                               <img
                                 alt="프로필 이미지"
-                                src="http://localhost/recruit-app/assets/images/mypage/user_default.png"
+                                src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/mypage/user_default.png"
                                 class="Avatar_Avatar__img__kcubw"
                               />
                             </div>

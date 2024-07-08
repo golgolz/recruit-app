@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="http://localhost/recruit-app/assets/css/layout/user/common-sv-202405271315.css" rel="stylesheet" type="text/css" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/layout/user/common-sv-202405271315.css" rel="stylesheet" type="text/css" />
 <link href="//i.jobkorea.kr/content/css/ver_2/event/banner.promotion-sv-202401301659.css" rel="stylesheet" type="text/css" />
 <link href="view-source:https://www.jobkorea.co.kr/help/inquiry" rel="stylesheet" type="text/css" />
 <link href="https://i.jobkorea.kr/deploy/pc/dist/css/personal/common/gnb-sv-202405231305.css" rel="stylesheet" type="text/css" />
@@ -69,8 +69,8 @@
 					<!--// tap menu -->
 					<div class="mtcTplTab">
 						<ul class="tabItems">
-							<li class="on"><a href="http://localhost/recruit-app/manage/qna/qnas.do">문의 내역</a></li>
-							<li class=""><a href="http://localhost/recruit-app/manage/qna/new_qnas.do">새로운 문의</a></li>
+							<li class="on"><a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/qna/qnas.do">문의 내역</a></li>
+							<li class=""><a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/qna/new_qnas.do">새로운 문의</a></li>
 						</ul>
 					</div>
 					<!-- tap menu //-->
@@ -101,7 +101,7 @@
 										<tr>
 											<td><c:out value="${qna.qna_num}"/></td>
 											<td class="alLeft"><span class="tit"><a
-													href="http://localhost/recruit-app/manage/qna/old_detail.do?qna_num=${qna.qna_num }"><c:out value="${qna.title}"/></a></span></td>
+													href="https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/qna/old_detail.do?qna_num=${qna.qna_num }"><c:out value="${qna.title}"/></a></span></td>
 											<td><fmt:formatDate value="${qna.input_date}" pattern="yy-MM-dd HH:mm:ss" /></td>
 											<td class="">답변완료</td>
 										</tr>

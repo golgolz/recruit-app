@@ -5,7 +5,7 @@
 	class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl fixed-start bg-gradient-dark ps bg-white"
 	id="sidenav-main">
 	<div class="sidenav-header">
-		<a class="navbar-brand m-0" href="http://localhost/recruit-app/manage/dashboard/dashboard.jsp">
+		<a class="navbar-brand m-0" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/dashboard/dashboard.jsp">
 			<span class="ms-1 font-weight-bold text-white">채용 관리 시스템</span>
 		</a>
 	</div>
@@ -15,7 +15,7 @@
 				<a
 					id="dashboard_menu"
 					class="nav-link text-white"
-					href="http://localhost/recruit-app/manage/dashboard/dashboard.do">
+					href="https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/dashboard/dashboard.do">
 					<span class="nav-link-text ms-1">대시보드</span>
 				</a>
 			</li>
@@ -23,7 +23,7 @@
 				<a
 					id="admin_menu"
 					class="nav-link text-white"
-					href="http://localhost/recruit-app/manage/admin/admins.do">
+					href="https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/admin/admins.do">
 					<span class="nav-link-text ms-1">관리자 관리</span>
 				</a>
 			</li>
@@ -31,7 +31,7 @@
 				<a 
 					id="user_menu"
 					class="nav-link text-white"
-					href="http://localhost/recruit-app/manage/user/users.do">
+					href="https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/user/users.do">
 					<span class="nav-link-text ms-1">사용자 관리</span>
 				</a>
 			</li>
@@ -39,7 +39,7 @@
 				<a
 					id="company_menu"
 					class="nav-link text-white"
-					href="http://localhost/recruit-app/companyinfo/adminCompanyinfoList.do">
+					href="https://doberman-ready-termite.ngrok-free.app/recruit-app/companyinfo/adminCompanyinfoList.do">
 					<span class="nav-link-text ms-1">기업 관리</span>
 				</a>
 			</li>
@@ -47,7 +47,7 @@
 				<a 
 					id="recruit_menu"
 					class="nav-link text-white"
-					href="http://localhost/recruit-app/manage/recruit/recruits.jsp">
+					href="https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/recruit/recruits.jsp">
 					<span class="nav-link-text ms-1">공고 관리</span>
 				</a>
 			</li>
@@ -55,7 +55,7 @@
 				<a
 					id="review_menu"
 					class="nav-link text-white"
-					href="http://localhost/recruit-app/manage/review/reviews.do">
+					href="https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/review/reviews.do">
 					<span class="nav-link-text ms-1">리뷰 관리</span>
 				</a>
 			</li>
@@ -63,7 +63,7 @@
 				<a
 					id="qna_menu"
 					class="nav-link text-white"
-					href="http://localhost/recruit-app/manage/qna/qnas.do">
+					href="https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/qna/qnas.do">
 					<span class="nav-link-text ms-1">문의 관리</span>
 				</a>
 			</li>
@@ -71,7 +71,7 @@
 				<a
 					id="notice_menu"
 					class="nav-link text-white"
-					href="http://localhost/recruit-app/manage/notice/notices.do">
+					href="https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/notice/notices.do">
 					<span class="nav-link-text ms-1">공지사항 관리</span>
 				</a>
 			</li>

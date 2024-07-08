@@ -18,8 +18,8 @@
 	<!-- golgolz start -->
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="shortcut icon" href="https://static.wanted.co.kr/favicon/new/favicon.ico">
-	<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/signup.css"/>
-	<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/find_user_info.css"/>
+	<link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/signup.css"/>
+	<link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/find_user_info.css"/>
 	<!-- golgolz end -->
 	<style type="text/css">
 		<!-- golgolz start -->
@@ -52,7 +52,7 @@
 			});
 			
 			$('#backBtn').click(function(){
-				location.href='http://localhost/recruit-app/user/loginPage.do';
+				location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/user/loginPage.do';
 			});//click
 			
 			// 전체 동의 체크박스 상태 업데이트

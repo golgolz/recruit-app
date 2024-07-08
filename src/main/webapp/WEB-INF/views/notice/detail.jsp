@@ -13,7 +13,7 @@
 <link href="https://i.jobkorea.kr/deploy/pc/dist/css/personal/pages/main/auto_search-sv-202405231305.css" rel="stylesheet" type="text/css" />
 
 <!-- bootstrap -->
-	<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/layout/user/btn-bootstrap.css" />
+	<link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/layout/user/btn-bootstrap.css" />
 <!-- bootstrap -->
 	
 	<jsp:include page="../assets/layout/user/lib.jsp" />  
@@ -63,7 +63,7 @@
             <div class="listBtmArea" style="margin-bottom:30px">
                 <div class="btnListExDn">
                <!--  <input type="btton" value="목록" class="btn btn-outline-dark btn-sm detail-control"> -->
-                    <a href="http://localhost/recruit-app/notice/notices.do" class="btnMtcTpl">목록</a>
+                    <a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/notice/notices.do" class="btnMtcTpl">목록</a>
                 </div>
                 <!-- <button type="button" onclick="javascript: window.scrollTo(0,0);" class="btnMtcTpl">TOP</button> -->
             </div>

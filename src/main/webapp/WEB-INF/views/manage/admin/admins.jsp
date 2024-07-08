@@ -8,7 +8,7 @@
 <%
 	String adminId = (String)session.getAttribute("adminId");
 	if(adminId == null || adminId == ""){
-	    response.sendRedirect("http://localhost/recruit-app/manage/adminLogin/adminLoginPage.do");
+	    response.sendRedirect("https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/adminLogin/adminLoginPage.do");
 	    return;
 	}
 %>
@@ -324,7 +324,7 @@
 	                var row = $('<tr>')
 	                    .addClass('list0')
 	                    .attr('data-admin-id',adminInfo.adminId);
-	                    //.attr('data-href', 'http://localhost/recruit-app/manage/recruits/detail.do?id=' + recruit.id);
+	                    //.attr('data-href', 'https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/recruits/detail.do?id=' + recruit.id);
 	                row.append($('<td>').text(index + startNum))
 	                   .append($('<td>').text(adminInfo.position))
 	                   .append($('<td>').text(adminInfo.adminId))
@@ -427,11 +427,11 @@
 	});//ready
 </script>
 <!-- golgolz start -->
-<link href="http://localhost//recruit-app/assets/css/pagenation.css" rel="stylesheet" />
-<link href="http://localhost//recruit-app/assets/css/manage/order/admin.css" rel="stylesheet" />
-<link href="http://localhost//recruit-app/assets/css/manage/order/reset.css" rel="stylesheet" />
-<link href="http://localhost/recruit-app/assets/css/manage/goods/goods.css" rel="stylesheet" />
-<link href="http://localhost/recruit-app/assets/css/manage/goods/default.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app//recruit-app/assets/css/pagenation.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app//recruit-app/assets/css/manage/order/admin.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app//recruit-app/assets/css/manage/order/reset.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/manage/goods/goods.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/manage/goods/default.css" rel="stylesheet" />
 <!-- golgolz end -->
 </head>
 <body>

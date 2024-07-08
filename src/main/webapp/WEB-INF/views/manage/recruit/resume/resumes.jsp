@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
-<script src="http://localhost/recruit-app/assets/js/admin/datepicker-ko.js"></script>
+<script src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/js/admin/datepicker-ko.js"></script>
 <script type="text/javascript">
 	var startNum = 1;
 	var endNum = startNum + itemsPerPage;
@@ -137,7 +137,7 @@
 	            "<td>" +
 	                "<input type='button' value='바로가기' class='btn btn-outline-secondary btn-sm' " +
 	                "style='font-weight: bold; margin: 0px auto;' " +
-	                "onclick='location.href=\"http://localhost/recruit-app/manage/resumes/detail.do?id=" + item.resumeId + "\"' />" +
+	                "onclick='location.href=\"https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/resumes/detail.do?id=" + item.resumeId + "\"' />" +
 	            "</td>";
 	        
 	        tableBody.appendChild(row);
@@ -206,9 +206,9 @@
     }
 </script>
 <!-- golgolz start -->
-<link href="http://localhost//recruit-app/assets/css/pagenation.css" rel="stylesheet" />
-<link href="http://localhost//recruit-app/assets/css/manage/order/admin.css" rel="stylesheet" />
-<link href="http://localhost//recruit-app/assets/css/manage/order/reset.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app//recruit-app/assets/css/pagenation.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app//recruit-app/assets/css/manage/order/admin.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app//recruit-app/assets/css/manage/order/reset.css" rel="stylesheet" />
 <style>
 	#status{
 		margin-top : 5px;

@@ -57,9 +57,9 @@
 			                <!-- 공지사항 내용 //-->
 			            </div>
 			            <div>
-			                <input type="button" class="btn btn-outline-dark btn-sm detail-control" value="뒤로" onclick="location.href='http://localhost/recruit-app/manage/notice/notices.do'">
-			                <input type="button" class="btn btn-outline-warning btn-sm" value="수정" onclick="location.href='http://localhost/recruit-app/manage/notice/noticesUpdate.do'">
-			                <input type="button" class="btn btn-outline-danger btn-sm" value="삭제" onclick="location.href='http://localhost/recruit-app/manage/notice/notices.do'">
+			                <input type="button" class="btn btn-outline-dark btn-sm detail-control" value="뒤로" onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/notice/notices.do'">
+			                <input type="button" class="btn btn-outline-warning btn-sm" value="수정" onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/notice/noticesUpdate.do'">
+			                <input type="button" class="btn btn-outline-danger btn-sm" value="삭제" onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/notice/notices.do'">
 			            </div>
 			        </div>
 			    </div>

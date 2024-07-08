@@ -16,9 +16,9 @@
 	<!-- golgolz start -->
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="shortcut icon" href="https://static.wanted.co.kr/favicon/new/favicon.ico">
-	<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/user_login.css"/>
-	<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/find_user_info.css"/>
-	<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/signup.css"/>
+	<link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/user_login.css"/>
+	<link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/find_user_info.css"/>
+	<link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/signup.css"/>
 	<!-- golgolz end -->
 	<style type="text/css">
 		<!-- golgolz start -->
@@ -49,7 +49,7 @@
 			});
 			
 			$('#backBtn').click(function(){
-				location.href ='http://localhost/recruit-app/user/loginPage.do';
+				location.href ='https://doberman-ready-termite.ngrok-free.app/recruit-app/user/loginPage.do';
 			});
 			
 			
@@ -88,7 +88,7 @@
 				
 				if(resultFlag){
 					$("#signupFrm").submit();
-					//location.href="http://localhost/recruit-app/user/signup2.do"
+					//location.href="https://doberman-ready-termite.ngrok-free.app/recruit-app/user/signup2.do"
 				}else{
 					alert('입력 정보를 다시 확인해주세요.');
 					return;

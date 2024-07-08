@@ -11,13 +11,13 @@
           <nav class="MainBar_MainBarNav__pVhal">
             <div class="MainBar_MainBarNavLogo__caIek">
               <a
-                href="http://localhost/recruit-app/main/main.do"
+                href="https://doberman-ready-termite.ngrok-free.app/recruit-app/main/main.do"
                 aria-label="Wanted"
                 data-attribute-id="gnb"
                 data-gnb-kind="jobsfeed"
               >
                 <img
-                  src="http://localhost/recruit-app/assets/images/logo.png"
+                  src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/logo.png"
                   style="max-width: 100%; margin-top: 7px; padding-right: 20px"
                 />
               </a>
@@ -28,7 +28,7 @@
                 data-attribute-id="gnb"
                 data-gnb-kind="event"
               >
-                <a href="http://localhost/recruit-app/recruit/recruits.jsp"
+                <a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/recruit/recruits.jsp"
                   ><span>채용공고</span></a
                 >
               </li>
@@ -37,14 +37,14 @@
                 data-attribute-id="gnb"
                 data-gnb-kind="event"
               >
-                <a href="http://localhost/recruit-app/companyInfo/user_company_info.jsp"><span>기업</span></a>
+                <a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/companyInfo/user_company_info.jsp"><span>기업</span></a>
               </li>
               <li
                 class="Menu_MenuItem__wI1yA"
                 data-attribute-id="gnb"
                 data-gnb-kind="community"
               >
-                <a href="http://localhost/recruit-app/resume/resumes.jsp"
+                <a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/resume/resumes.jsp"
                   ><span>이력서관리</span></a
                 >
               </li>
@@ -53,7 +53,7 @@
                 data-attribute-id="gnb"
                 data-gnb-kind="resume"
               >
-                <a href="http://localhost/recruit-app/notice/notices.do"
+                <a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/notice/notices.do"
                   ><span>공지사항</span></a
                 >
               </li>
@@ -63,7 +63,7 @@
                 data-gnb-kind="freelancer"
               >
                 <a
-                  href="http://localhost/recruit-app/user/mypage/qna/mypageQnaForm.do"
+                  href="https://doberman-ready-termite.ngrok-free.app/recruit-app/user/mypage/qna/mypageQnaForm.do"
                   target="_blank"
                   rel="noopener noreferrer"
                   ><span>문의사항</span></a
@@ -116,7 +116,7 @@
                     id = "signupBtn"
                     data-attribute-id="gnb"
                     data-gnb-kind="signupLogin"
-                    onclick="location.href = 'http://localhost/recruit-app/user/loginPage.do'"
+                    onclick="location.href = 'https://doberman-ready-termite.ngrok-free.app/recruit-app/user/loginPage.do'"
                   >
                     <span class="Button_Button__label__1Kk0v"
                       ><span

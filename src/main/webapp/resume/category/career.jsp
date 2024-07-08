@@ -14,7 +14,7 @@
 			<!-- content will be added -->
 		</div>
 		<button type="button" class="button buttonAddField">
-			<img src="http://localhost/recruit-app/assets/images/btns/plus_btn.png"" style="width: 25px; height: 25px;"/>
+			<img src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/btns/plus_btn.png"" style="width: 25px; height: 25px;"/>
 			<span>추가</span>
 		</button>
 	</div>
@@ -70,6 +70,6 @@
 <script type="text/template" id="tplKeywordAutocomplete"></script>
 <script type="text/template" id="tplFrgnWorkItem"></script>
 <script type="text/template" id="tplSelectedJobType"></script>
-<script type="text/javascript" src="http://localhost/recruit-app/assets/js/user/resume/career1.js"></script>
-<script type="text/javascript" src="http://localhost/recruit-app/assets/js/user/resume/career2.js"></script>
-<script type="text/javascript" src="http://localhost/recruit-app/assets/js/user/resume/career3.js"></script>
+<script type="text/javascript" src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/js/user/resume/career1.js"></script>
+<script type="text/javascript" src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/js/user/resume/career2.js"></script>
+<script type="text/javascript" src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/js/user/resume/career3.js"></script>

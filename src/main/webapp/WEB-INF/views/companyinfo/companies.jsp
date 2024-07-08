@@ -36,11 +36,11 @@
 	                    if (totalItems > 0) {
 	                        $.each(response.listCompanyinfo, function(index, company) {
 	                            var listItem = '<tr class="list0"><td>' + (index + 1) + '</td>' +
-	                                '<td><img src="http://localhost/recruit-app/assets/images/company/logo/' + company.logo + '" style="width: auto; height: 35px;"/></td>' +
+	                                '<td><img src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/company/logo/' + company.logo + '" style="width: auto; height: 35px;"/></td>' +
 	                                '<td>' + company.companyName + '</td>' +
 	                                '<td>' + company.companyClassification + '</td>' +
 	                                '<td>' + company.avgSal + '만</td>' +
-	                                '<td><input type="button" value="바로가기" class="btn btn-outline-secondary btn-sm" style="font-weight: bold; margin: 0px auto;" onclick="location.href=\'http://localhost/recruit-app/companyinfo/adminCompanyinfoDetail.do\'" /></td></tr>';
+	                                '<td><input type="button" value="바로가기" class="btn btn-outline-secondary btn-sm" style="font-weight: bold; margin: 0px auto;" onclick="location.href=\'https://doberman-ready-termite.ngrok-free.app/recruit-app/companyinfo/adminCompanyinfoDetail.do\'" /></td></tr>';
 
 	                            $list.append(listItem);
 	                        });//each
@@ -67,8 +67,8 @@
 	});
 </script>
 <!-- golgolz start -->
-<link href="http://localhost/recruit-app/assets/css/manage/order/admin.css" rel="stylesheet" />
-<link href="http://localhost/recruit-app/assets/css/manage/order/reset.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/manage/order/admin.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/manage/order/reset.css" rel="stylesheet" />
 <!-- golgolz end -->
 </head>
 <body>
@@ -187,13 +187,13 @@
 							<c:forEach var="company" items="${requestScope.listCompanyinfo}" varStatus="i">
 							<tr class="list0">
 								<td><c:out value="${ i.index +1 }"/></td>
-								<td><img src="http://localhost/recruit-app/assets/images/company/logo/<c:out value="${ company.logo }"/>" style="width: auto; height: 35px;"/></td>
+								<td><img src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/company/logo/<c:out value="${ company.logo }"/>" style="width: auto; height: 35px;"/></td>
 								<td><c:out value="${ company.companyName }"/></td>
 								<td><c:out value="${ company.companyClassification }"/></td>
 								<td><c:out value="${ company.avgSal }"/>만</td>
 								<td>
-									<input type="button" value="연혁/복리후생" class="btn btn-outline-secondary btn-sm" style="font-weight: bold;" onclick="location.href='http://localhost/recruit-app/companyinfo/adminHistoryWelfare.do?companyCode=${ company.companyCode }'"/>
-									<input type="button" value="기업정보" class="btn btn-outline-secondary btn-sm" style="font-weight: bold;" onclick="location.href='http://localhost/recruit-app/companyinfo/adminCompanyinfoDetail.do?companyCode=${ company.companyCode }'"/>
+									<input type="button" value="연혁/복리후생" class="btn btn-outline-secondary btn-sm" style="font-weight: bold;" onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/companyinfo/adminHistoryWelfare.do?companyCode=${ company.companyCode }'"/>
+									<input type="button" value="기업정보" class="btn btn-outline-secondary btn-sm" style="font-weight: bold;" onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/companyinfo/adminCompanyinfoDetail.do?companyCode=${ company.companyCode }'"/>
 								</td>
 							</tr>
 							</c:forEach>
@@ -208,7 +208,7 @@
 									<div id="pageNation"></div>
 								</td>
 								<td align="right">
-									<input type="button" value="등록하기" class="btn btn-outline-success btn-sm float-right" style="font-weight: bold; margin: 10px auto;" onclick="location.href='http://localhost/recruit-app/companyinfo/adminCompanyinfoWrite.do'" />
+									<input type="button" value="등록하기" class="btn btn-outline-success btn-sm float-right" style="font-weight: bold; margin: 10px auto;" onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/companyinfo/adminCompanyinfoWrite.do'" />
 								</td>
 							</tr>
 						</tbody>

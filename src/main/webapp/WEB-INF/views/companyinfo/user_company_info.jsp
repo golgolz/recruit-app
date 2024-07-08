@@ -62,10 +62,10 @@
 	                    if (response.companyList.length > 0) {
 	                        $.each(response.companyList, function(index, company) {
 	                            var listItem = $("<li>").attr("id", "companyinfoList_" + (index + 1));
-	                            var link = $("<a>").attr("href", "http://localhost/recruit-app/companyInfo/user_company_detail.jsp").attr("target", "_blank");
+	                            var link = $("<a>").attr("href", "https://doberman-ready-termite.ngrok-free.app/recruit-app/companyInfo/user_company_detail.jsp").attr("target", "_blank");
 
 	                            var thumbnail = $("<div>").addClass("thumbnail");
-	                            var img = $("<img>").attr("src", "http://localhost/recruit-app/assets/images/company/logo/" + company.logo);
+	                            var img = $("<img>").attr("src", "https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/company/logo/" + company.logo);
 	                            var innerThumbnail = $("<div>").addClass("inner").text(company.companyName);
 	                            thumbnail.append(img).append(innerThumbnail);
 
@@ -195,9 +195,9 @@
                 <ul class="list" id="listCompany" style="padding-top:30px" >
                     <c:forEach var="company" items="${ requestScope.listCompanyinfo }" varStatus="i">
                     <li id="companyinfoList">
-                        <a href="http://localhost/recruit-app/companyinfo/companyinfoDetail.do?companyCode=${ company.companyCode }">
+                        <a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/companyinfo/companyinfoDetail.do?companyCode=${ company.companyCode }">
                             <div class="thumbnail">
-                                <img src="http://localhost/recruit-app/assets/images/company/logo/<c:out value="${ company.logo }"/>" />
+                                <img src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/company/logo/<c:out value="${ company.logo }"/>" />
                                 <div class="inner"><c:out value="${ company.logo }"/></div>
                             </div>
                             <div class="headers">

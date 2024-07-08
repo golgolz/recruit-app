@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="http://localhost/recruit-app/assets/css/layout/user/common-sv-202405271315.css" rel="stylesheet" type="text/css" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/layout/user/common-sv-202405271315.css" rel="stylesheet" type="text/css" />
 <link href="//i.jobkorea.kr/content/css/ver_2/event/banner.promotion-sv-202401301659.css" rel="stylesheet" type="text/css" />
 <link href="view-source:https://www.jobkorea.co.kr/help/inquiry" rel="stylesheet" type="text/css" />
 <link href="https://i.jobkorea.kr/deploy/pc/dist/css/personal/common/gnb-sv-202405231305.css" rel="stylesheet" type="text/css" />
@@ -80,7 +80,7 @@
 						<div class="listBtmArea">
 							<div class="btnListExDn">
 								<!-- <a href="qnas.jsp" class="btnMtcTpl">목록</a> -->
-								<input type="button" value="목록" class="btn btn-outline-dark btn-sm detail-control" onclick="location.href='http://localhost/recruit-app/manage/qna/qnas.do'">
+								<input type="button" value="목록" class="btn btn-outline-dark btn-sm detail-control" onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/qna/qnas.do'">
 							</div>
 							<!-- <button type="button" onclick="javascript:window.scrollTo(0,0);" class="btnMtcTpl">TOP</button> -->
 						</div>

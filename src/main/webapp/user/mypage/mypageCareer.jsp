@@ -20,9 +20,9 @@
     <!-- 파비콘 -->
     <link rel="shortcut icon" href="https://static.wanted.co.kr/favicon/new/favicon.ico"/>
     <link rel="stylesheet" href="https://asset.wanted.co.kr/userweb/www/_next/static/css/c76e012c05e1318d.css" crossorigin="anonymous" data-n-g=""/>
-	<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/mypage.css"/>
-	<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/signup.css"/>
-	<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/layout/user/btn-bootstrap.css" />
+	<link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/mypage.css"/>
+	<link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/signup.css"/>
+	<link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/layout/user/btn-bootstrap.css" />
 	<!-- golgolz end -->
 	<style>
 	@media (min-width: 1000px) {
@@ -212,7 +212,7 @@
 				<div class="container">
 					<table>
 						<tr class="tableMiddle">
-							<td class="tableHeader"><img src="http://localhost/recruit-app/assets/images/mypage/user_default.png" style="width: 70px; height: 70px;"></td>
+							<td class="tableHeader"><img src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/mypage/user_default.png" style="width: 70px; height: 70px;"></td>
 							<td class="companyInfo">
 							<h1 class="companyInfo" style="font-size: 18px;"><strong>쿠팡</strong></h1>
 							<ul class="companyInfo">
@@ -221,10 +221,10 @@
 							</ul>
 							</td>
 							<td class="tableHeader"><input type="button" name="writeRivew" class="btn btn-outline-success btn-sm register-btn" 
-								value="리뷰 작성" onclick="location.href='http://localhost/recruit-app/review/reviewWrite.jsp';"></td>
+								value="리뷰 작성" onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/review/reviewWrite.jsp';"></td>
 						</tr>
 						<tr class="tableMiddle">
-							<td class="tableHeader"><img src="http://localhost/recruit-app/assets/images/mypage/user_default.png" style="width: 70px; height: 70px;"></td>
+							<td class="tableHeader"><img src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/mypage/user_default.png" style="width: 70px; height: 70px;"></td>
 							<td class="companyInfo">
 							<h1 class="companyInfo" style="font-size: 18px;"><strong>배달의 민족</strong></h1>
 							<ul class="companyInfo">
@@ -233,10 +233,10 @@
 							</ul>
 							</td>
 							<td class="tableHeader"><input type="button" name="writeRivew" class="btn btn-outline-success btn-sm register-btn" 
-								value="리뷰 작성" onclick="location.href='http://localhost/recruit-app/review/reviewWrite.jsp';"></td>
+								value="리뷰 작성" onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/review/reviewWrite.jsp';"></td>
 						</tr>
 						<tr class="tableMiddle">
-							<td class="tableHeader"><img src="http://localhost/recruit-app/assets/images/mypage/user_default.png" style="width: 70px; height: 70px;"></td>
+							<td class="tableHeader"><img src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/mypage/user_default.png" style="width: 70px; height: 70px;"></td>
 							<td class="companyInfo">
 							<h1 class="companyInfo" style="font-size: 18px;"><strong>LG전자</strong></h1>
 							<ul class="companyInfo">
@@ -245,10 +245,10 @@
 							</ul>
 							</td>
 							<td class="tableHeader"><input type="button" name="writeRivew" class="btn btn-outline-success btn-sm register-btn" 
-								value="리뷰 작성" onclick="location.href='http://localhost/recruit-app/review/reviewWrite.jsp';"></td>
+								value="리뷰 작성" onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/review/reviewWrite.jsp';"></td>
 						</tr>
 						<tr class="tableMiddle">
-							<td class="tableHeader"><img src="http://localhost/recruit-app/assets/images/mypage/user_default.png" style="width: 70px; height: 70px;"></td>
+							<td class="tableHeader"><img src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/mypage/user_default.png" style="width: 70px; height: 70px;"></td>
 							<td class="companyInfo">
 							<h1 class="companyInfo" style="font-size: 18px;"><strong>넥슨 유니버스</strong></h1>
 							<ul class="companyInfo">
@@ -257,7 +257,7 @@
 							</ul>
 							</td>
 							<td class="tableHeader"><input type="button" name="writeRivew" class="btn btn-outline-success btn-sm register-btn" 
-								value="리뷰 작성" onclick="location.href='http://localhost/recruit-app/review/reviewWrite.jsp';"></td>
+								value="리뷰 작성" onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/review/reviewWrite.jsp';"></td>
 						</tr>
 					</table>
                 </div>

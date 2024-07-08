@@ -8,8 +8,8 @@ String userId = (String)session.getAttribute("userId");
 <html>
 <head>
 	<!-- golgolz start -->
-    <link href="http://localhost/recruit-app/assets/css/resume/mtu_common-sv-202405081446.css" rel="stylesheet" type="text/css" />
-    <link href="http://localhost/recruit-app/assets/css/resume/mtu_style-sv-202405161357.css" rel="stylesheet" type="text/css"  />
+    <link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/resume/mtu_common-sv-202405081446.css" rel="stylesheet" type="text/css" />
+    <link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/resume/mtu_style-sv-202405161357.css" rel="stylesheet" type="text/css"  />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 	<!-- golgolz end -->
@@ -54,7 +54,7 @@ String userId = (String)session.getAttribute("userId");
 			var recruitNum = "${recruitNum}";
 			
 			$("#registerBtn").click(function(){
-				location.href = "http://localhost/recruit-app/resume/detail.do";
+				location.href = "https://doberman-ready-termite.ngrok-free.app/recruit-app/resume/detail.do";
 			});
 			
 			$.ajax({
@@ -86,7 +86,7 @@ String userId = (String)session.getAttribute("userId");
 		        li.innerHTML = 
 		            '<div class="col col01">' +
 		                '<div class="tit">' +
-		                    '<a href="http://localhost/recruit-app/resume/detail.do?id=' + resume.resumeNum + '">' + resume.title + '</a>' +
+		                    '<a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/resume/detail.do?id=' + resume.resumeNum + '">' + resume.title + '</a>' +
 		                '</div>' +
 		                '<div class="date">' + resume.inputDate + '</div>' +
 		            '</div>' +
@@ -109,7 +109,7 @@ String userId = (String)session.getAttribute("userId");
 		        
 				$("#updateBtn").click(function(){
 					var resumeNum = $(this).data('resume');
-			        window.location.href = 'http://localhost/recruit-app/resume/detail.do?id=' + resumeNum;
+			        window.location.href = 'https://doberman-ready-termite.ngrok-free.app/recruit-app/resume/detail.do?id=' + resumeNum;
 				});
 
 				$("#removeBtn").click(function(){

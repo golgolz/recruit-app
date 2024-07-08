@@ -7,9 +7,9 @@
 	 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 기존 CSS 파일들 -->
-    <link href="http://localhost/recruit-app/assets/css/recruit/part-sv-202405271315.css" rel="stylesheet" type="text/css"/>
-    <link href="http://localhost/recruit-app/assets/css/recruit/rcr-sv-202405271315.css" rel="stylesheet" type="text/css"/>
-    <!--  <link rel="stylesheet" href="http://localhost/recruit-app/assets/css/global_user.css"> -->
+    <link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/recruit/part-sv-202405271315.css" rel="stylesheet" type="text/css"/>
+    <link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/recruit/rcr-sv-202405271315.css" rel="stylesheet" type="text/css"/>
+    <!--  <link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/global_user.css"> -->
 	<!-- golgolz end -->
 	<style text="text/css">
 		<!-- golgolz start -->
@@ -127,12 +127,12 @@
 														<th scope="row"><span class="tplChkRect tplChkRect_1"></span></th>
 														<td class="tplCo">
 															<!--app.svcFunc.clickCnt--> 
-															<a href="http://localhost/recruit-app/recruit/detail.jsp" class="link normalLog" data-clickctgrcode="B01">아르네코리아㈜</a>
+															<a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/recruit/detail.jsp" class="link normalLog" data-clickctgrcode="B01">아르네코리아㈜</a>
 															<div class="typ"></div>
 														</td>
 														<td class="tplTit">
 															<div class="titBx">
-																<strong><a href="http://localhost/recruit-app/recruit/detail.jsp" class="link normalLog" title="[아르네코리아㈜] 개발팀 정규직 채용(광주)" data-clickctgrcode="B02">[아르네코리아㈜] 개발팀 정규직 채용(광주)</a></strong>
+																<strong><a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/recruit/detail.jsp" class="link normalLog" title="[아르네코리아㈜] 개발팀 정규직 채용(광주)" data-clickctgrcode="B02">[아르네코리아㈜] 개발팀 정규직 채용(광주)</a></strong>
 																<p class="etc">
 																	<span class="cell">신입·경력</span> 
 																	<span class="cell">학력무관</span>
@@ -159,14 +159,14 @@
 											<div class="tplPagination newVer">
 												<ul>
 													<li><span class="now" data-page="1">1</span></li>
-													<li><a href="http://localhost/recruit-app/recruit/recruits.jsp" data-page="2">2</a></li>
-													<li><a href="http://localhost/recruit-app/recruit/recruits.jsp" data-page="3">3</a></li>
-													<li><a href="http://localhost/recruit-app/recruit/recruits.jsp" data-page="4">4</a></li>
-													<li><a href="http://localhost/recruit-app/recruit/recruits.jsp" data-page="5">5</a></li>
+													<li><a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/recruit/recruits.jsp" data-page="2">2</a></li>
+													<li><a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/recruit/recruits.jsp" data-page="3">3</a></li>
+													<li><a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/recruit/recruits.jsp" data-page="4">4</a></li>
+													<li><a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/recruit/recruits.jsp" data-page="5">5</a></li>
 													<li>
 												</ul>
 												<p>
-													<a href="http://localhost/recruit-app/recruit/recruits.jsp" class="tplBtn btnPgnNext" data-page="11">다음<i class="ico"></i></a>
+													<a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/recruit/recruits.jsp" class="tplBtn btnPgnNext" data-page="11">다음<i class="ico"></i></a>
 												</p>
 											</div>
 										</div>

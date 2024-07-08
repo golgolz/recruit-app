@@ -9,8 +9,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- 파비콘 -->
 <link rel="shortcut icon" href="https://static.wanted.co.kr/favicon/new/favicon.ico">
-<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/user_login.css"/>
-<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/find_user_info.css"/>
+<link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/user_login.css"/>
+<link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/find_user_info.css"/>
 <!-- golgolz end -->
 <style>
 <!-- golgolz start -->
@@ -37,7 +37,7 @@
 			
 			// 회원가입 페이지 이동
 			$('#signupBtn').click(function(){
-				location.href='http://localhost/recruit-app/user/signup.jsp';
+				location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/user/signup.jsp';
 			});
 
 		    // 로그인 조건 충족 여부 확인 / 로그인 버튼 활성화, 비활성화
@@ -147,22 +147,22 @@
 												<p data-testid="Typography" color="#000000"
 													class="css-1q5pm8j">또는</p>
 												<div class="button-group" style="margin-bottom: 80px;">
-													<button type="button" class="css-1akojk6" onclick="location.href='http://localhost/recruit-app/user/signup.jsp'">
+													<button type="button" class="css-1akojk6" onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/user/signup.jsp'">
 														<span data-testid="Typography" color="#000000"
 															class="css-kfktv3">
-															<a href="http://localhost/recruit-app/user/signup.jsp">회원가입</a></span>
+															<a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/user/signup.jsp">회원가입</a></span>
 													</button>
 													<button type="button" data-testid="Button"
 														class="css-zzrlz5">
 														<span data-testid="Typography" color="#000000"
 															class="css-1nosfqs">
-															<a href="http://localhost/recruit-app/user/findMail.jsp">계정 찾기</a></span>
+															<a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/user/findMail.jsp">계정 찾기</a></span>
 													</button>
 													<button type="button" data-testid="Button"
 														class="css-zzrlz5">
 														<span data-testid="Typography" color="#000000"
 															class="css-1nosfqs">
-															<a href="http://localhost/recruit-app/user/findPass.jsp">비밀번호 찾기</a></span>
+															<a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/user/findPass.jsp">비밀번호 찾기</a></span>
 													</button>
 												</div>
 											</div>

@@ -5,11 +5,11 @@
  <head> 
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
   <title>구지직 GoojzzK</title> 
-  <link rel="stylesheet" href="http://localhost/recruit-app/assets/css/review/c76e012c05e1318d.css" crossorigin="anonymous" data-n-g=""> 
-  <link rel="stylesheet" href="http://localhost/recruit-app/assets/css/review/pretendardvariable-dynamic-subset.min.css"> 
-  <link rel="stylesheet" href="http://localhost/recruit-app/assets/css/review/layout.css"> 
-  <link href="http://localhost/recruit-app/assets/css/review/common-sv-202405271315.css" rel="stylesheet" type="text/css"> 
-  <link rel="stylesheet" href="http://localhost/recruit-app/assets/css/review/pretendard.css">
+  <link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/review/c76e012c05e1318d.css" crossorigin="anonymous" data-n-g=""> 
+  <link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/review/pretendardvariable-dynamic-subset.min.css"> 
+  <link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/review/layout.css"> 
+  <link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/review/common-sv-202405271315.css" rel="stylesheet" type="text/css"> 
+  <link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/review/pretendard.css">
   
     <link href="../assets/css/company/company-info-detail-3.css" rel="stylesheet" type="text/css" />
     <link href="../assets/css/company/company-info-detail-4.css" rel="stylesheet" type="text/css" />
@@ -22,15 +22,15 @@
   
   <style>
     </style> <!-- golgolz start --> <!--bootstrap 시작--> 
-  <link href="http://localhost/recruit-app/assets/css/review/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> 
+  <link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/review/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> 
   <title>(주)커리어앤스카우트 2024년 기업정보|기업리뷰 3건,5.0 리뷰평점|잡플래닛</title>
-  <link rel="stylesheet" media="all" href="http://localhost/recruit-app/assets/css/review/desktop_any_language_newtemp-d32b6cf831bb4740bce993bfd96c569c6baeaf94d7f80f1fd4e9067b626891fe.css" data-turbolinks-track="true">
-  <link rel="stylesheet" media="all" href="http://localhost/recruit-app/assets/css/review/jpcommon_desktop-d7d02c5d04814f9edee3ac58d449a441ba65aefc82944a890cddcc312ac1ad73.css" data-turbolinks-track="true">
-  <link rel="stylesheet" media="all" href="http://localhost/recruit-app/assets/css/review/desktop_common_v2-174463b871c8b1f684e874f394980fc8267d7f870a87bb3185b66ed659e8287e.css" data-turbolinks-track="true">
-  <link rel="stylesheet" media="all" href="http://localhost/recruit-app/assets/css/review/desktop_ko-KR_newtemp-f550b8856ce3e095f203010a136d24dd3b4391f319743678ad50c02ac602f35c.css" data-turbolinks-track="true">
-  <link rel="stylesheet" media="all" href="http://localhost/recruit-app/assets/css/review/desktop_front-fe3c4b71d9e9065f7509e7887570cca6902a467a78a1a74aad66c8f140ccd872.css" data-turbolinks-track="true">
-  <link rel="stylesheet" media="all" href="http://localhost/recruit-app/assets/css/review/desktop_jply_style-5722c441eee9f7605fda329c4150d3eb40981b085c777dd037842f553e51eaf5.css" data-turbolinks-track="true">
-  <link rel="stylesheet" href="http://localhost/recruit-app/assets/css/review/7f85a56ba4.css">
+  <link rel="stylesheet" media="all" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/review/desktop_any_language_newtemp-d32b6cf831bb4740bce993bfd96c569c6baeaf94d7f80f1fd4e9067b626891fe.css" data-turbolinks-track="true">
+  <link rel="stylesheet" media="all" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/review/jpcommon_desktop-d7d02c5d04814f9edee3ac58d449a441ba65aefc82944a890cddcc312ac1ad73.css" data-turbolinks-track="true">
+  <link rel="stylesheet" media="all" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/review/desktop_common_v2-174463b871c8b1f684e874f394980fc8267d7f870a87bb3185b66ed659e8287e.css" data-turbolinks-track="true">
+  <link rel="stylesheet" media="all" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/review/desktop_ko-KR_newtemp-f550b8856ce3e095f203010a136d24dd3b4391f319743678ad50c02ac602f35c.css" data-turbolinks-track="true">
+  <link rel="stylesheet" media="all" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/review/desktop_front-fe3c4b71d9e9065f7509e7887570cca6902a467a78a1a74aad66c8f140ccd872.css" data-turbolinks-track="true">
+  <link rel="stylesheet" media="all" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/review/desktop_jply_style-5722c441eee9f7605fda329c4150d3eb40981b085c777dd037842f553e51eaf5.css" data-turbolinks-track="true">
+  <link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/review/7f85a56ba4.css">
   
   <style text="text/css">
 		<!-- golgolz start -->
@@ -56,7 +56,7 @@
    
    <main class="JobsFeed_Jobsfeed__DpeV9"> 
     <section class="Section_Section__P1hhc"> <!-- golgolz start --> 
-     <link rel="stylesheet" media="all" href="http://localhost/recruit-app/assets/css/review/companies-afa4d7b5c5b020895de3ce30935faf8c1cc0ae8954ef59a46484c2edbc9108d5.css" data-turbolinks-track="true"> 
+     <link rel="stylesheet" media="all" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/review/companies-afa4d7b5c5b020895de3ce30935faf8c1cc0ae8954ef59a46484c2edbc9108d5.css" data-turbolinks-track="true"> 
     <div class="company-header-container">
     <div class="company-header-branding background-type4">
         <div class="company-header-branding-container ">

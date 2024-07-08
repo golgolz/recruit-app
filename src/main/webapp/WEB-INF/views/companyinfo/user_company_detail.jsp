@@ -42,7 +42,7 @@
                                 <input type="hidden" id="cId" value="" />
                                 <input type="hidden" id="jkcId" value="nexonhr" />
                                 <input type="hidden" id="devPath" value="https://www.jobkorea.co.kr">
-                                <div class="logo"><img src="http://localhost/recruit-app/assets/images/company/logo/<c:out value="${ companyIntroDetail.logo }"/>" style="width:100px; height:auto;"></div>
+                                <div class="logo"><img src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/company/logo/<c:out value="${ companyIntroDetail.logo }"/>" style="width:100px; height:auto;"></div>
                                 <div class="company-header-branding-body">
                                     <div class="special-feature"></div>
                                     <div class="name">
@@ -55,21 +55,21 @@
                         </div>
                         <div class="company-nav" role="navigation">
                             <div class="company-nav-container">
-                                <a href="http://localhost/recruit-app/companyinfo/companyinfoDetail.do?companyCode=${ companyIntroDetail.companyCode }" class="company-nav-item active">
+                                <a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/companyinfo/companyinfoDetail.do?companyCode=${ companyIntroDetail.companyCode }" class="company-nav-item active">
                                     <div class="name">기업정보</div>
                                     <div class="post">
                                         <div class="header screen-out">게시물</div>
                                         <div class="value"></div>
                                     </div>
                                 </a>
-                                <a href="http://localhost/recruit-app/review/reviewResult.do?companyCode=${ companyIntroDetail.companyCode }" class="company-nav-item ">
+                                <a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/review/reviewResult.do?companyCode=${ companyIntroDetail.companyCode }" class="company-nav-item ">
                                     <div class="name">기업리뷰</div>
                                     <div class="post">
                                         <div class="header screen-out">게시물</div>
                                         <div class="value">${totalReviewCount}</div>
                                     </div>
                                 </a>
-                                <a href="http://localhost/recruit-app/recruit/detail.do?companyCode=${ companyIntroDetail.companyCode }" class="company-nav-item ">
+                                <a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/recruit/detail.do?companyCode=${ companyIntroDetail.companyCode }" class="company-nav-item ">
                                     <div class="name">채용공고</div>
                                     <div class="post">
                                         <div class="header screen-out">게시물</div>

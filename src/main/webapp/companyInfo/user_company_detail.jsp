@@ -65,21 +65,21 @@
             </div>
             <div class="company-nav" role="navigation">
                 <div class="company-nav-container">
-                    <a href="http://localhost/recruit-app/companyInfo/user_company_detail.jsp" class="company-nav-item active">
+                    <a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/companyInfo/user_company_detail.jsp" class="company-nav-item active">
                         <div class="name">기업정보</div>
                         <div class="post">
                             <div class="header screen-out">게시물</div>
                             <div class="value"></div>
                         </div>
                     </a>
-                    <a href="http://localhost/recruit-app/review/reviewResult.jsp" class="company-nav-item ">
+                    <a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/review/reviewResult.jsp" class="company-nav-item ">
                         <div class="name">기업리뷰</div>
                         <div class="post">
                             <div class="header screen-out">게시물</div>
                             <div class="value">53</div>
                         </div>
                     </a>
-                    <a href="http://localhost/recruit-app/recruit/detail.jsp" class="company-nav-item ">
+                    <a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/recruit/detail.jsp" class="company-nav-item ">
                         <div class="name">채용공고</div>
                         <div class="post">
                             <div class="header screen-out">게시물</div>

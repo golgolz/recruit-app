@@ -10,8 +10,8 @@
 	<!-- golgolz start -->
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="shortcut icon" href="https://static.wanted.co.kr/favicon/new/favicon.ico">
-	<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/user_login.css"/>
-	<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/find_user_info.css"/>
+	<link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/user_login.css"/>
+	<link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/find_user_info.css"/>
 	<!-- golgolz end -->
 	<style type="text/css">
 		<!-- golgolz start -->

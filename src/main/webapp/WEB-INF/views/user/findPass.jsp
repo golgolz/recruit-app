@@ -9,8 +9,8 @@
 	<!-- golgolz start -->
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="shortcut icon" href="https://static.wanted.co.kr/favicon/new/favicon.ico">
-	<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/user_login.css"/>
-	<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/find_user_info.css"/>
+	<link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/user_login.css"/>
+	<link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/find_user_info.css"/>
 	<!-- golgolz end -->
 	<style>
 		<!-- golgolz start -->
@@ -71,7 +71,7 @@
 					if(isSearchPass){ // 정보가 존재할 경우
 						findResult.hide();
 						alert('비밀번호 찾기 성공!');
-						location.href='http://localhost/recruit-app/user/findPassComplete.jsp';
+						location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/user/findPassComplete.jsp';
 						
 					}else { // 조회 정보 없음
 						msg ='입력하신 정보로 조회된 정보가 없습니다.';

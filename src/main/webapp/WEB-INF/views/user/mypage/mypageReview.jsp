@@ -21,9 +21,9 @@
 	<!-- 파비콘 -->
     <link rel="shortcut icon" href="https://static.wanted.co.kr/favicon/new/favicon.ico"/>
     <link rel="stylesheet" href="https://asset.wanted.co.kr/userweb/www/_next/static/css/c76e012c05e1318d.css" crossorigin="anonymous" data-n-g=""/>
-	<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/mypage.css"/>
-	<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/signup.css"/>
-	<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/layout/user/btn-bootstrap.css" />
+	<link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/mypage.css"/>
+	<link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/signup.css"/>
+	<link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/layout/user/btn-bootstrap.css" />
 	<!-- golgolz end -->
 	<style>
 	@media (min-width: 1000px) {
@@ -244,7 +244,7 @@
 							</ul>
 							</td>
 							<td class="tableHeader"><input type="button" class="btn btn-outline-info btn-sm" 
-								value="상세보기" onclick="location.href='http://localhost/recruit-app/review/reviewResult.jsp?reviewNum=1'"></td>
+								value="상세보기" onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/review/reviewResult.jsp?reviewNum=1'"></td>
 						</tr>
 						<%}//end for %>
 					</table>

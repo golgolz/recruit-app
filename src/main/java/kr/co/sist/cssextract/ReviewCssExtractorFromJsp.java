@@ -19,60 +19,60 @@ import org.jsoup.select.Elements;
 public class ReviewCssExtractorFromJsp {
 
     public static void main(String[] args) {
-        String jspFileUrl = "http://localhost/recruit-app/review/reviewResult.jsp";  // JSP ÆÄÀÏ URL (Àý´ë °æ·Î ´ëÀÔ)
-        String outputDirectory = "C:/dev/recruit-app/src/main/webapp/assets/css/review";// ¾Æ¿ôÇ² ÆÄÀÏ ÀúÀå °æ·Î (¼öÁ¤ ÇÊ¿ä)
-        String updatedJspFilePath = "C:/dev/recruit-app/src/main/webapp/main/reviewResult_updated.jsp"; // ¾÷µ¥ÀÌÆ® ÆÄÀÏ ÀúÀå °æ·Î+ ÀúÀå¸í ÁöÁ¤ (¼öÁ¤ ÇÊ¿ä)
-        String baseUrl = "http://localhost/recruit-app/assets/css/review/"; //CSS ÆÄÀÏ³»ºÎ ¸®¼Ò½º ÆÄÀÏÀÇ »ó´ë °æ·Î¸¦ Àý´ë °æ·Î·Î º¯°æÇÒ ¶§ »ç¿ëµÇ´Â ±âº» URL
-        //(CSS ÆÄÀÏ ÀúÀå °æ·Î¿Í °°¾Æ¾ß ÇÔ)
+        String jspFileUrl = "https://doberman-ready-termite.ngrok-free.app/recruit-app/review/reviewResult.jsp";  // JSP ï¿½ï¿½ï¿½ï¿½ URL (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
+        String outputDirectory = "C:/dev/recruit-app/src/main/webapp/assets/css/review";// ï¿½Æ¿ï¿½Ç² ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½)
+        String updatedJspFilePath = "C:/dev/recruit-app/src/main/webapp/main/reviewResult_updated.jsp"; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½+ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½)
+        String baseUrl = "https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/review/"; //CSS ï¿½ï¿½ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ò½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½âº» URL
+        //(CSS ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½Æ¾ï¿½ ï¿½ï¿½)
 
         try {
-            // URL¿¡¼­ HTML ·Îµå
+            // URLï¿½ï¿½ï¿½ï¿½ HTML ï¿½Îµï¿½
             Document doc = Jsoup.connect(jspFileUrl)
-                                .timeout(60000) // Å¸ÀÓ¾Æ¿ô ¼³Á¤ (60ÃÊ)
+                                .timeout(60000) // Å¸ï¿½Ó¾Æ¿ï¿½ ï¿½ï¿½ï¿½ï¿½ (60ï¿½ï¿½)
                                 .header("Content-Type", "text/html; charset=UTF-8")
                                 .get();
 
-            // CSS ÆÄÀÏ ¸µÅ© ÃßÃâ
+            // CSS ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å© ï¿½ï¿½ï¿½ï¿½
             Elements links = doc.select("link[rel=stylesheet], link[as=style]");
 
-            // Ãâ·Â µð·ºÅä¸® »ý¼º
+            // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ä¸® ï¿½ï¿½ï¿½ï¿½
             File dir = new File(outputDirectory);
             if (!dir.exists()) {
                 dir.mkdirs();
             }
 
-            // CSS ÆÄÀÏ ´Ù¿î·Îµå ¹× ÀúÀå, ¸µÅ© ¼öÁ¤
+            // CSS ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¿ï¿½Îµï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½Å© ï¿½ï¿½ï¿½ï¿½
             for (Element link : links) {
                 String cssUrl = link.attr("href");
                 String fileName = cssUrl.substring(cssUrl.lastIndexOf('/') + 1);
                 File outputFile = new File(dir, fileName);
 
-                // ÆÄÀÏ ´Ù¿î·Îµå
+                // ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¿ï¿½Îµï¿½
                 FileUtils.copyURLToFile(new URL(cssUrl), outputFile);
                 System.out.println("Downloaded: " + cssUrl + " to " + outputFile.getAbsolutePath());
 
-                // ÆÄÀÏ Á¸Àç ¿©ºÎ È®ÀÎ
+                // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
                 if (outputFile.exists()) {
                     System.out.println("File exists: " + outputFile.getAbsolutePath());
 
-                    // CSS ÆÄÀÏ ³»ºÎÀÇ °æ·Î ¼öÁ¤ ¹× ¸®¼Ò½º ´Ù¿î·Îµå
+                    // CSS ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Ò½ï¿½ ï¿½Ù¿ï¿½Îµï¿½
                     String cssContent = new String(Files.readAllBytes(outputFile.toPath()), StandardCharsets.UTF_8);
                     Pattern pattern = Pattern.compile("url\\(([^)]+)\\)");
                     Matcher matcher = pattern.matcher(cssContent);
                     while (matcher.find()) {
                         String resourceUrl = matcher.group(1).replace("\"", "").replace("'", "");
-                        // »ó´ë °æ·Î¿Í Àý´ë °æ·Î ¸ðµÎ Ã³¸®
+                        // ï¿½ï¿½ï¿½ ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
                         if (!resourceUrl.startsWith("http")) {
                             try {
-                                // Äõ¸® ½ºÆ®¸µ Á¦°Å
+                                // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                                 String resourceFileName = resourceUrl.contains("?") ? resourceUrl.substring(resourceUrl.lastIndexOf('/') + 1, resourceUrl.indexOf('?')) : resourceUrl.substring(resourceUrl.lastIndexOf('/') + 1);
                                 File resourceOutputFile = new File(dir, resourceFileName);
 
-                                // ¸®¼Ò½º ´Ù¿î·Îµå
+                                // ï¿½ï¿½ï¿½Ò½ï¿½ ï¿½Ù¿ï¿½Îµï¿½
                                 FileUtils.copyURLToFile(new URL(new URL(cssUrl), resourceUrl.split("\\?")[0]), resourceOutputFile);
                                 System.out.println("Downloaded resource: " + resourceUrl + " to " + resourceOutputFile.getAbsolutePath());
 
-                                // CSS ³»¿ë ¼öÁ¤
+                                // CSS ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                                 String absoluteResourceUrl = baseUrl + resourceFileName;
                                 cssContent = cssContent.replace(resourceUrl, absoluteResourceUrl);
                             } catch (IOException e) {
@@ -81,7 +81,7 @@ public class ReviewCssExtractorFromJsp {
                         }
                     }
 
-                    // ¼öÁ¤µÈ CSS ÆÄÀÏ ¾²±â
+                    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ CSS ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                     try (BufferedWriter cssWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile), StandardCharsets.UTF_8))) {
                         cssWriter.write(cssContent);
                     }
@@ -89,12 +89,12 @@ public class ReviewCssExtractorFromJsp {
                     System.out.println("File does not exist: " + outputFile.getAbsolutePath());
                 }
 
-                // ¸µÅ©¸¦ Àý´ë °æ·Î·Î ¼öÁ¤
+                // ï¿½ï¿½Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î·ï¿½ ï¿½ï¿½ï¿½ï¿½
                 String localCssPath = baseUrl + fileName;
                 link.attr("href", localCssPath);
             }
 
-            // ¼öÁ¤µÈ JSP ³»¿ëÀ» »õ·Î¿î ÆÄÀÏ¿¡ ÀúÀå
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ JSP ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½
             try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(updatedJspFilePath), StandardCharsets.UTF_8))) {
                 writer.write("<%@ page language=\"java\" contentType=\"text/html; charset=UTF-8\"\r\n"
                         + "    pageEncoding=\"UTF-8\"%>\r\n");

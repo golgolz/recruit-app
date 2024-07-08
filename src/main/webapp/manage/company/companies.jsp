@@ -10,8 +10,8 @@
 	});
 </script>
 <!-- golgolz start -->
-<link href="http://localhost/recruit-app/assets/css/manage/order/admin.css" rel="stylesheet" />
-<link href="http://localhost/recruit-app/assets/css/manage/order/reset.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/manage/order/admin.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/manage/order/reset.css" rel="stylesheet" />
 <!-- golgolz end -->
 </head>
 <body>
@@ -142,7 +142,7 @@
 								<td>대기업</td>
 								<td>5,361만</td>
 								<td>
-									<input type="button" value="바로가기" class="btn btn-outline-secondary btn-sm" style="font-weight: bold; margin: 0px auto;" onclick="location.href='http://localhost/recruit-app/manage/company/detail.jsp'"/>
+									<input type="button" value="바로가기" class="btn btn-outline-secondary btn-sm" style="font-weight: bold; margin: 0px auto;" onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/company/detail.jsp'"/>
 								</td>
 							</tr>
 							<tr class="list0">
@@ -152,7 +152,7 @@
 								<td>중소기업</td>
 								<td>5,361만</td>
 								<td>
-									<input type="button" value="바로가기" class="btn btn-outline-secondary btn-sm" style="font-weight: bold; margin: 0px auto;" onclick="location.href='http://localhost/recruit-app/manage/company/detail.jsp'"/>
+									<input type="button" value="바로가기" class="btn btn-outline-secondary btn-sm" style="font-weight: bold; margin: 0px auto;" onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/company/detail.jsp'"/>
 								</td>
 							</tr>
 							<tr class="list0">
@@ -162,7 +162,7 @@
 								<td>중견기업</td>
 								<td>5,361만</td>
 								<td>
-									<input type="button" value="바로가기" class="btn btn-outline-secondary btn-sm" style="font-weight: bold; margin: 0px auto;" onclick="location.href='http://localhost/recruit-app/manage/company/detail.jsp'"/>
+									<input type="button" value="바로가기" class="btn btn-outline-secondary btn-sm" style="font-weight: bold; margin: 0px auto;" onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/company/detail.jsp'"/>
 								</td>
 							</tr>
 						</tbody>
@@ -176,7 +176,7 @@
 									<div id="pageNation"></div>
 								</td>
 								<td align="right">
-									<input type="button" value="등록하기" class="btn btn-outline-success btn-sm float-right" style="font-weight: bold; margin: 10px auto;" onclick="location.href='http://localhost/recruit-app/manage/company/detail.jsp'" />
+									<input type="button" value="등록하기" class="btn btn-outline-success btn-sm float-right" style="font-weight: bold; margin: 10px auto;" onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/company/detail.jsp'" />
 								</td>
 							</tr>
 						</tbody>

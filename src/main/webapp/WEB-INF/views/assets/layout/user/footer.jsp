@@ -10,13 +10,13 @@
                 data-attribute-id="fnb"
                 data-fnb-kind="home"
                 data-page-path="/"
-                href="http://localhost/recruit-app/main/main.do"
+                href="https://doberman-ready-termite.ngrok-free.app/recruit-app/main/main.do"
               >
-                <img src="http://localhost/recruit-app/assets/images/logo.png" style="max-width: 35%" />
+                <img src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/logo.png" style="max-width: 35%" />
               </a>
               <div class="BrandNewNavLinks_BrandNewNavLinks__links__M1n_a">
                 <a
-                  href="http://localhost/recruit-app/notice/notices.do"
+                  href="https://doberman-ready-termite.ngrok-free.app/recruit-app/notice/notices.do"
                   class=""
                   target="_blank"
                   rel="noopener noreferrer"
@@ -29,7 +29,7 @@
                     공지사항
                   </p></a
                 ><a
-                  href="http://localhost/recruit-app/user/mypage/qna/mypageQnaForm.do"
+                  href="https://doberman-ready-termite.ngrok-free.app/recruit-app/user/mypage/qna/mypageQnaForm.do"
                   class=""
                   target="_blank"
                   rel="noopener noreferrer"

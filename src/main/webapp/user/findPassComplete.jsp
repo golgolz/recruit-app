@@ -9,8 +9,8 @@
 	<!-- golgolz start -->
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="shortcut icon" href="https://static.wanted.co.kr/favicon/new/favicon.ico">
-	<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/user_login.css"/>
-	<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/find_user_info.css"/>
+	<link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/user_login.css"/>
+	<link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/find_user_info.css"/>
 	<!-- golgolz end -->
 	<style>
 		<!-- golgolz start -->
@@ -51,7 +51,7 @@
 								<p class="css-14qpgc6" style="font-size: 16px; font-weight: normal;">l240523@Njh#</p>										
 							</div>
 							<div data-testid="Typography" color="#000000" class="css-ng7qrx" style="text-align: center;">
-								<a href="http://localhost/recruit-app/user/mypage/modifyPass.jsp"><strong>비밀번호 변경하러 가기</strong></a>
+								<a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/user/mypage/modifyPass.jsp"><strong>비밀번호 변경하러 가기</strong></a>
 							</div>
 						</div>
 					</div>

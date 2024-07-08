@@ -11,12 +11,12 @@
 	<jsp:include page="../assets/layout/user/lib.jsp" />  
 	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 	<script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
-	<script src="http://localhost/recruit-app/assets/js/admin/datepicker-ko.js"></script>
-    <link href="http://localhost/recruit-app/assets/css/recruit/part-sv-202405271315.css" rel="stylesheet" type="text/css"/>
-    <link href="http://localhost/recruit-app/assets/css/recruit/rcr-sv-202405271315.css" rel="stylesheet" type="text/css"/>
-	<link href="http://localhost/recruit-app/assets/css/recruit/recruits.css" rel="stylesheet" type="text/css" />
-	<link href="http://localhost/recruit-app/assets/css/layout/user/btn-bootstrap.css" rel="stylesheet" type="text/css" />
-    <!--  <link rel="stylesheet" href="http://localhost/recruit-app/assets/css/global_user.css"> -->
+	<script src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/js/admin/datepicker-ko.js"></script>
+    <link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/recruit/part-sv-202405271315.css" rel="stylesheet" type="text/css"/>
+    <link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/recruit/rcr-sv-202405271315.css" rel="stylesheet" type="text/css"/>
+	<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/recruit/recruits.css" rel="stylesheet" type="text/css" />
+	<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/layout/user/btn-bootstrap.css" rel="stylesheet" type="text/css" />
+    <!--  <link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/global_user.css"> -->
 	<!-- golgolz end -->
 	<style text="text/css">
 		<!-- golgolz start -->
@@ -377,7 +377,7 @@
 	            
 	            var companyCell = $("<td class='tplCo'></td>");
 	            companyCell.append($('<a>').attr({
-	                'href': 'http://localhost/recruit-app/company/detail.do?id=' + recruit.id,
+	                'href': 'https://doberman-ready-termite.ngrok-free.app/recruit-app/company/detail.do?id=' + recruit.id,
 	                'class': 'link normalLog'
 	            }).text(recruit.company));
 	            companyCell.append('<div class="typ"></div>');
@@ -386,7 +386,7 @@
 	            var titleCell = $("<td class='tplTit'></td>");
 	            var titleBox = $("<div class='titBx'></div>");
 	            titleBox.append($('<strong>').append($('<a>').attr({
-	                'href': 'http://localhost/recruit-app/recruit/detail.do?id=' + recruit.id,
+	                'href': 'https://doberman-ready-termite.ngrok-free.app/recruit-app/recruit/detail.do?id=' + recruit.id,
 	                'class': 'link normalLog',
 	                'title': recruit.title,
 	                'data-clickctgrcode': 'B02'

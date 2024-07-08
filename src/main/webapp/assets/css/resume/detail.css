@@ -40,7 +40,7 @@
 
 .buttonDeleteField {
 	background-image:
-		url("http://localhost/recruit-app/assets/images/btns/remove_btn.png");
+		url("https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/btns/remove_btn.png");
 	/* 이미지 경로 지정 */
 	background-size: contain;
 }

@@ -6,7 +6,7 @@
 <head>
 	<jsp:include page="../../../assets/layout/user/lib.jsp" />  
 	<!-- bootstrap -->
-	<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/layout/user/btn-bootstrap.css" />
+	<link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/layout/user/btn-bootstrap.css" />
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 	<!-- bootstrap -->
@@ -16,8 +16,8 @@
 	<!-- 파비콘 -->
     <link rel="shortcut icon" href="https://static.wanted.co.kr/favicon/new/favicon.ico"/>
     <link rel="stylesheet" href="https://asset.wanted.co.kr/userweb/www/_next/static/css/c76e012c05e1318d.css" crossorigin="anonymous" data-n-g=""/>
-	<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/mypage.css"/>
-	<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/signup.css"/>
+	<link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/mypage.css"/>
+	<link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/signup.css"/>
 	
 	<!--jQuery CDN 시작-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -64,8 +64,8 @@ td{
 			<!--// tap menu -->
 			<div class="mtcTplTab">
 				<ul class="tabItems">
-					<li class=""><a href="http://localhost/recruit-app/user/mypage/qna/mypageQnaForm.do">문의</a></li>
-					<li class="on"><a href="http://localhost/recruit-app/user/mypage/qna/mypageQNAList.do">문의 내역</a></li>
+					<li class=""><a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/user/mypage/qna/mypageQnaForm.do">문의</a></li>
+					<li class="on"><a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/user/mypage/qna/mypageQNAList.do">문의 내역</a></li>
 				</ul>
 			</div>
 			<!-- tap menu //-->
@@ -95,7 +95,7 @@ td{
 							<c:forEach var="uesrqna" items="${qnaList}">
 								<tr>
 								<td><c:out value="${uesrqna.qna_num}"/></td>
-								<td class="alLeft"><span class="tit"><a href="http://localhost/recruit-app/user/mypage/qna/mypageQNADetail.do?qna_num=${uesrqna.qna_num}"><c:out value="${uesrqna.title}"/></a></span></td>
+								<td class="alLeft"><span class="tit"><a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/user/mypage/qna/mypageQNADetail.do?qna_num=${uesrqna.qna_num}"><c:out value="${uesrqna.title}"/></a></span></td>
 								<td><c:out value="${uesrqna.input_date}"/></td>
 								<td class=""><c:out value="${uesrqna.flag}"/></td>
 								</tr>

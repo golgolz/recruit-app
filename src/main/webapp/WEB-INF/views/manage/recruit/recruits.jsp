@@ -7,7 +7,7 @@
 <jsp:include page="../../assets/layout/admin/lib.jsp" />
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
-<script src="http://localhost/recruit-app/assets/js/admin/datepicker-ko.js"></script>
+<script src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/js/admin/datepicker-ko.js"></script>
 <script type="text/javascript">
 	var startNum = 1;
 	var endNum = startNum + itemsPerPage;
@@ -141,7 +141,7 @@
         $.each(recruits, function(index, recruit) {
             var row = $('<tr>')
                 .addClass('list0')
-                .attr('data-href', 'http://localhost/recruit-app/manage/recruits/detail.do?id=' + recruit.id);
+                .attr('data-href', 'https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/recruits/detail.do?id=' + recruit.id);
             
             row.append($('<td>').text(index + startNum))
                .append($('<td>').text(recruit.companyCode))
@@ -166,7 +166,7 @@
         $('.goResumes').on('click', function(e) {
             e.stopPropagation();
             var recruitId = $(this).data('recruit-id');
-            location.href = "http://localhost/recruit-app/manage/resumes.do?recruitNum=" + recruitId;
+            location.href = "https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/resumes.do?recruitNum=" + recruitId;
         });
 
         var totalCount = tableBody.children().length;
@@ -264,9 +264,9 @@
     }
 </script>
 <!-- golgolz start -->
-<link href="http://localhost//recruit-app/assets/css/pagenation.css" rel="stylesheet" />
-<link href="http://localhost//recruit-app/assets/css/manage/order/admin.css" rel="stylesheet" />
-<link href="http://localhost//recruit-app/assets/css/manage/order/reset.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app//recruit-app/assets/css/pagenation.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app//recruit-app/assets/css/manage/order/admin.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app//recruit-app/assets/css/manage/order/reset.css" rel="stylesheet" />
 <style>
 .list0 {
 	cursor: pointer;

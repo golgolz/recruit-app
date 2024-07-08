@@ -55,7 +55,7 @@
 	                        
 	                        tableBody += "<tr class='primary'>"+
 	                                        "<td class='sort'>" + notice.category + "</td>" +
-	                                        "<td class='alLeft'><span class='tit'><a href='http://localhost/recruit-app/notice/detail.do?notice_num=${notice.notice_num}'>" + notice.title + "</a></span></td>" +
+	                                        "<td class='alLeft'><span class='tit'><a href='https://doberman-ready-termite.ngrok-free.app/recruit-app/notice/detail.do?notice_num=${notice.notice_num}'>" + notice.title + "</a></span></td>" +
 	                                        "<td class='date'>" + dateString + "</td>" +
 	                                    "</tr>";
 	                    });
@@ -131,7 +131,7 @@
 						<c:forEach var="notice" items="${noticeList}">
 								<tr class=primary>
 									<td class="sort"><c:out value="${notice.category}"/></td>
-									<td class="alLeft"><span class="tit"><a href="http://localhost/recruit-app/notice/detail.do?notice_num=${notice.notice_num}"><c:out value="${notice.title}"/></a></span></td>
+									<td class="alLeft"><span class="tit"><a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/notice/detail.do?notice_num=${notice.notice_num}"><c:out value="${notice.title}"/></a></span></td>
 									<td class="date"><fmt:formatDate value="${notice.input_date}" pattern="yy-MM-dd"/></td>
 								</tr>
 						</c:forEach>

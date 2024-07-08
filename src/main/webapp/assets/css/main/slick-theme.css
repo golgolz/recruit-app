@@ -2,7 +2,7 @@
 /* Slider */
 .slick-loading .slick-list
 {
-    background: #fff url('http://localhost/recruit-app/assets/css/main/ajax-loader.gif') center center no-repeat;
+    background: #fff url('https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/main/ajax-loader.gif') center center no-repeat;
 }
 
 /* Icons */
@@ -12,8 +12,8 @@
     font-weight: normal;
     font-style: normal;
 
-    src: url('http://localhost/recruit-app/assets/css/main/slick.eot');
-    src: url('http://localhost/recruit-app/assets/css/main/slick.eot?#iefix') format('embedded-opentype'), url('http://localhost/recruit-app/assets/css/main/slick.woff') format('woff'), url('http://localhost/recruit-app/assets/css/main/slick.ttf') format('truetype'), url('http://localhost/recruit-app/assets/css/main/slick.svg#slick') format('svg');
+    src: url('https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/main/slick.eot');
+    src: url('https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/main/slick.eot?#iefix') format('embedded-opentype'), url('https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/main/slick.woff') format('woff'), url('https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/main/slick.ttf') format('truetype'), url('https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/main/slick.svg#slick') format('svg');
 }
 /* Arrows */
 .slick-prev,

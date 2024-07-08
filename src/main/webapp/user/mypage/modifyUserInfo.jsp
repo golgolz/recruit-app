@@ -12,9 +12,9 @@
     <link rel="shortcut icon" href="https://static.wanted.co.kr/favicon/new/favicon.ico"/>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://asset.wanted.co.kr/userweb/www/_next/static/css/c76e012c05e1318d.css" crossorigin="anonymous" data-n-g=""/>
-	<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/mypage.css"/>
-	<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/signup.css"/>
-	<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/layout/user/btn-bootstrap.css" />
+	<link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/mypage.css"/>
+	<link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/signup.css"/>
+	<link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/layout/user/btn-bootstrap.css" />
 	<!-- golgolz end -->
 <style>
 	@media (max-width: 767px) {
@@ -173,7 +173,7 @@
 	      	    var flag = false;
 	      	    
 	      	    if(chkAll){
-	      	    	location.href='http://localhost/recruit-app/user/mypage/modifyPass.jsp';
+	      	    	location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/user/mypage/modifyPass.jsp';
 		      	    // 필드 초기화 후 닫기
 					$("#questionSelect").val('0');
 					$("#answerInput").val('');
@@ -294,7 +294,7 @@
                             <div class="Avatar_Avatar__bg__MRkK0" style="text-align: center;">
                               <img
                                 alt="프로필 이미지"
-                                src="http://localhost/recruit-app/assets/images/mypage/user_default.png"
+                                src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/mypage/user_default.png"
                                 class="Avatar_Avatar__img__kcubw"
                                 style="text-align: center;"
                               />

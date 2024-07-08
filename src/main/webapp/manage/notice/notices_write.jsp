@@ -19,7 +19,7 @@ if (!Boolean.TRUE.equals(isLoggedIn)) {
 <head>
 <link rel="stylesheet" type="text/css" href="https://img.echosting.cafe24.com/editors/froala/css/froala_style_ec.min.css?vs=2404180600" charset="UTF-8"/>
 <link rel="stylesheet" type="text/css" href="https://insideobject.com/ind-script/optimizer.php?filename=nZExDgIxDAT7KC3vsOAJPIEfOMFwJxJv5DgS_J6jggYJ0o52doulBVVofzBqhqtxJZOOYVko904Xgzpl1AqNG9jRL3nJoaMMX6Eh4T4pDvfZ0cIPsTnVORWZVNFCWVVCYtWv-9waHcF2ptNn3YZjeuGYCvJtVjZpMP_Pft_7BA&type=css&k=ecd691e0c80070ef935d0e961272742f67437a3c&t=1681776733" />
-<link rel="stylesheet" type="text/css" href="http://localhost/recruit-app/assets/css/manage/notice/optimizer_user.css" />
+<link rel="stylesheet" type="text/css" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/manage/notice/optimizer_user.css" />
 <jsp:include page="../../assets/layout/admin/lib.jsp" />
 <!-- summernote -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -38,7 +38,7 @@ if (!Boolean.TRUE.equals(isLoggedIn)) {
 		});//click
 		$("#btnCancel").click(function(){
 			alert("글작성을 취소합니다.");
-			location.href="http://localhost/manage/notice/notice.jsp";
+			location.href="https://doberman-ready-termite.ngrok-free.app/manage/notice/notice.jsp";
 		});//click */
 		$('#content').summernote({
 	        placeholder: 'Hello stand alone ui',
@@ -160,11 +160,11 @@ System.out.print("공지사항 아이디: "+notice_id);
 
 <div class="ec-base-button ">
             <!-- <span class="gLeft">
-                <input type="button" value="목록" class="btnNormalFix sizeS" id="btnList" name="btnList" onclick="location.href='http://localhost/recruit-app/manage/notice/notices.jsp'"/>
+                <input type="button" value="목록" class="btnNormalFix sizeS" id="btnList" name="btnList" onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/notice/notices.jsp'"/>
             </span> -->
             <span class="gRight">
-            	<input type="button" value="등록" class="btn btn-outline-success btn-sm float-right" id="btnWrite" name="btnWrite" onclick="location.href='http://localhost/recruit-app/manage/notice/notices.jsp'"/>
-            	<input type="button" value="취소" class="btn btn-outline-dark btn-sm detail-control" id="btnCancel" name="btnCancel" onclick="location.href='http://localhost/recruit-app/manage/notice/notices.jsp'"/>
+            	<input type="button" value="등록" class="btn btn-outline-success btn-sm float-right" id="btnWrite" name="btnWrite" onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/notice/notices.jsp'"/>
+            	<input type="button" value="취소" class="btn btn-outline-dark btn-sm detail-control" id="btnCancel" name="btnCancel" onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/notice/notices.jsp'"/>
             	
             	
                <!--  <a href="#none" class="btnSubmitFix sizeS" onclick=";">등록</a>

@@ -5,13 +5,13 @@
 <head>
 <jsp:include page="../../assets/layout/admin/lib.jsp" />
 <!-- golgolz start -->
-<link href="http://localhost/recruit-app/assets/css/manage/goods/general.css" rel="stylesheet" />
-<link href="http://localhost/recruit-app/assets/css/manage/goods/goods.css" rel="stylesheet" />
-<link href="http://localhost/recruit-app/assets/css/manage/goods/default.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/manage/goods/general.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/manage/goods/goods.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/manage/goods/default.css" rel="stylesheet" />
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
-<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/manage/recruit/recruit.css">
+<link rel="stylesheet" href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/manage/recruit/recruit.css">
 <script type="text/javascript">
 	
 	$(function() {
@@ -83,9 +83,9 @@
 			<!-- golgolz start -->
 			<div id="contentcolumn" class="">
 				<div class="contents">
-					<form id="dataForm" name="dataForm" action="http://localhost/recruit-app/manage/common_process.jsp" method="post" enctype="multipart/form-data">
+					<form id="dataForm" name="dataForm" action="https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/common_process.jsp" method="post" enctype="multipart/form-data">
 						<div class="subtitle">
-							<img src="http://localhost/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
+							<img src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
 							공고 정보
 						</div>
 						<table class="tbstyleB" width="100%">
@@ -137,7 +137,7 @@
 							</tbody>
 						</table>
 						<div class="subtitle">
-							<img src="http://localhost/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
+							<img src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
 							근무 조건
 						</div>
 						<table class="tbstyleB" width="100%">
@@ -192,7 +192,7 @@
 							</tbody>
 						</table>
 						<div class="subtitle">
-							<img src="http://localhost/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
+							<img src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
 							지원 조건
 						</div>
 						<table class="tbstyleB" width="100%">
@@ -223,7 +223,7 @@
 							</tbody>
 						</table>
 						<div class="subtitle">
-							<img src="http://localhost/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
+							<img src="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
 							공고상세
 						</div>
 						<div id="summernote"></div>

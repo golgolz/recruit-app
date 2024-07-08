@@ -7,7 +7,7 @@
 <script type="text/javascript">
 	$(function(){
     	$("#dashboard_menu").addClass("bg-gradient-primary");
-    	location.href="http://localhost/recruit-app/manage/adminLogin/adminLoginPage.do";
+    	location.href="https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/adminLogin/adminLoginPage.do";
 	});
 </script>
 <!-- golgolz start -->

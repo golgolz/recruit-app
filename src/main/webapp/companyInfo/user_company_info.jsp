@@ -135,7 +135,7 @@
                 </div>
                 <ul class="list" id="listCompany" style="padding-top:30px" >
                     <li id="companyinfoList_1">
-                        <a href="http://localhost/recruit-app/companyInfo/user_company_detail.jsp" target="_blank">
+                        <a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/companyInfo/user_company_detail.jsp" target="_blank">
                             <div class="thumbnail">
                                 <img src="//imgs.jobkorea.co.kr/img1/_whitebg/200X80/Co_Logo/Logo/2011/10/2w1aj007Pm_gWzi2y3i2jm0djMcSj_ldjm.gif?v=202406041618&amp;hash=r&amp;serviceCode=CL" onerror="companylogoOnError('/salary/logourl?ucono=1882711' , this)">
                                 <div class="inner">넥슨코리아</div>
@@ -153,7 +153,7 @@
                         </a>
                     </li>
                     <li id="companyinfoList_2">
-                        <a href="http://localhost/recruit-app/companyInfo/user_company_detail.jsp" target="_blank">
+                        <a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/companyInfo/user_company_detail.jsp" target="_blank">
                             <div class="thumbnail">
                                 <img src="//imgs.jobkorea.co.kr/img1/_whitebg/200X80/Co_Logo/Logo/2011/10/2w1aj007Pm_gWzi2y3i2jm0djMcSj_ldjm.gif?v=202406041618&amp;hash=r&amp;serviceCode=CL" onerror="companylogoOnError('/salary/logourl?ucono=1882711' , this)">
                                 <div class="inner">넥슨코리아</div>
@@ -171,7 +171,7 @@
                         </a>
                     </li>
                     <li id="companyinfoList_3">
-                        <a href="http://localhost/recruit-app/companyInfo/user_company_detail.jsp" target="_blank">
+                        <a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/companyInfo/user_company_detail.jsp" target="_blank">
                             <div class="thumbnail">
                                 <img src="//imgs.jobkorea.co.kr/img1/_whitebg/200X80/Co_Logo/Logo/2011/10/2w1aj007Pm_gWzi2y3i2jm0djMcSj_ldjm.gif?v=202406041618&amp;hash=r&amp;serviceCode=CL" onerror="companylogoOnError('/salary/logourl?ucono=1882711' , this)">
                                 <div class="inner">넥슨코리아</div>
@@ -189,7 +189,7 @@
                         </a>
                     </li>
                     <li id="companyinfoList_4">
-                        <a href="http://localhost/recruit-app/companyInfo/user_company_detail.jsp" target="_blank">
+                        <a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/companyInfo/user_company_detail.jsp" target="_blank">
                             <div class="thumbnail">
                                 <img src="//imgs.jobkorea.co.kr/img1/_whitebg/200X80/Co_Logo/Logo/2011/10/2w1aj007Pm_gWzi2y3i2jm0djMcSj_ldjm.gif?v=202406041618&amp;hash=r&amp;serviceCode=CL" onerror="companylogoOnError('/salary/logourl?ucono=1882711' , this)">
                                 <div class="inner">넥슨코리아</div>
@@ -207,7 +207,7 @@
                         </a>
                     </li>
                     <li id="companyinfoList_5">
-                        <a href="http://localhost/recruit-app/companyInfo/user_company_detail.jsp" target="_blank">
+                        <a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/companyInfo/user_company_detail.jsp" target="_blank">
                             <div class="thumbnail">
                                 <img src="//imgs.jobkorea.co.kr/img1/_whitebg/200X80/Co_Logo/Logo/2011/10/2w1aj007Pm_gWzi2y3i2jm0djMcSj_ldjm.gif?v=202406041618&amp;hash=r&amp;serviceCode=CL" onerror="companylogoOnError('/salary/logourl?ucono=1882711' , this)">
                                 <div class="inner">넥슨코리아</div>
@@ -225,7 +225,7 @@
                         </a>
                     </li>
                     <li id="companyinfoList">
-                        <a href="http://localhost/recruit-app/companyInfo/user_company_detail.jsp" target="_blank">
+                        <a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/companyInfo/user_company_detail.jsp" target="_blank">
                             <div class="thumbnail">
                                 <img src="//imgs.jobkorea.co.kr/img1/_whitebg/200X80/Co_Logo/Logo/2011/10/2w1aj007Pm_gWzi2y3i2jm0djMcSj_ldjm.gif?v=202406041618&amp;hash=r&amp;serviceCode=CL" onerror="companylogoOnError('/salary/logourl?ucono=1882711' , this)">
                                 <div class="inner">넥슨코리아</div>
@@ -243,7 +243,7 @@
                         </a>
                     </li>
                     <li id="companyinfoList">
-                        <a href="http://localhost/recruit-app/companyInfo/user_company_detail.jsp" target="_blank">
+                        <a href="https://doberman-ready-termite.ngrok-free.app/recruit-app/companyInfo/user_company_detail.jsp" target="_blank">
                             <div class="thumbnail">
                                 <img src="//imgs.jobkorea.co.kr/img1/_whitebg/200X80/Co_Logo/Logo/2011/10/2w1aj007Pm_gWzi2y3i2jm0djMcSj_ldjm.gif?v=202406041618&amp;hash=r&amp;serviceCode=CL" onerror="companylogoOnError('/salary/logourl?ucono=1882711' , this)">
                                 <div class="inner">넥슨코리아</div>

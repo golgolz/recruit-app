@@ -6,8 +6,8 @@
 <style type="text/css">
 </style>
 <!-- golgolz start -->
-<link href="http://localhost/recruit-app/assets/css/manage/order/admin.css" rel="stylesheet" />
-<link href="http://localhost/recruit-app/assets/css/manage/order/reset.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/manage/order/admin.css" rel="stylesheet" />
+<link href="https://doberman-ready-termite.ngrok-free.app/recruit-app/assets/css/manage/order/reset.css" rel="stylesheet" />
 <!-- golgolz end -->
 <jsp:include page="../../assets/layout/admin/lib.jsp" />
 <script type="text/javascript">
@@ -113,7 +113,7 @@
 								<td>[시스템 점검 공지] 3/28(목) AM 01시-05시</td>
 								<td>2024.03.19</td>
 								<td>
-									<input type="button" value="바로가기" class="btn btn-outline-secondary btn-sm" style="font-weight: bold; margin: 0px auto;" onclick="location.href='http://localhost/recruit-app/manage/notice/noticesDetail.do'"/>
+									<input type="button" value="바로가기" class="btn btn-outline-secondary btn-sm" style="font-weight: bold; margin: 0px auto;" onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/notice/noticesDetail.do'"/>
 								</td>
 							</tr>
 							<tr class="list0">
@@ -122,7 +122,7 @@
 								<td>[서비스] 기업회원 인재검색 무료 문자 발송 서비스</td>
 								<td>2024.02.26</td>
 								<td>
-									<input type="button" value="바로가기" class="btn btn-outline-secondary btn-sm" style="font-weight: bold; margin: 0px auto;" onclick="location.href='http://localhost/recruit-app/manage/notice/noticesDetail.do'"/>
+									<input type="button" value="바로가기" class="btn btn-outline-secondary btn-sm" style="font-weight: bold; margin: 0px auto;" onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/notice/noticesDetail.do'"/>
 								</td>
 							</tr>
 							<tr class="list0">
@@ -131,7 +131,7 @@
 								<td>[이벤트] 원픽 채용 약정형 상품 출시</td>
 								<td>2024.02.16</td>
 								<td>
-									<input type="button" value="바로가기" class="btn btn-outline-secondary btn-sm" style="font-weight: bold; margin: 0px auto;" onclick="location.href='http://localhost/recruit-app/manage/notice/noticesDetail.do'"/>
+									<input type="button" value="바로가기" class="btn btn-outline-secondary btn-sm" style="font-weight: bold; margin: 0px auto;" onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/notice/noticesDetail.do'"/>
 								</td>
 							</tr>
 						</tbody>
@@ -145,7 +145,7 @@
 									<div id="pageNation"></div>
 								</td>
 								<td align="right">
-									<input type="button" value="등록하기" class="btn btn-outline-success btn-sm float-right" style="font-weight: bold; margin: 10px auto;" onclick="location.href='http://localhost/recruit-app/manage/notice/noticesWrite.do'" />
+									<input type="button" value="등록하기" class="btn btn-outline-success btn-sm float-right" style="font-weight: bold; margin: 10px auto;" onclick="location.href='https://doberman-ready-termite.ngrok-free.app/recruit-app/manage/notice/noticesWrite.do'" />
 								</td>
 							</tr>
 						</tbody>

@@ -59,7 +59,7 @@
                                 <div class="ec-base-box typeProduct">
                                     <p class="thumbnail">
                                         <a href="">
-                                            <img id="iPrdIm" src="http://localhost/assets/images/goods/${review.logo}" onerror="this.src='//img.echosting.cafe24.com/thumb/75x75.gif'" alt=""/>
+                                            <img id="iPrdIm" src="https://doberman-ready-termite.ngrok-free.app/assets/images/goods/${review.logo}" onerror="this.src='//img.echosting.cafe24.com/thumb/75x75.gif'" alt=""/>
                                         </a>
                                     </p>
                                     <div class="information" style="padding-left:30px">
