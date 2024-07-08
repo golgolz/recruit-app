@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<jsp:include page="../../../assets/layout/user/lib.jsp" />
+<jsp:include page="../assets/layout/user/lib.jsp" />
 <!-- golgolz start -->
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -89,7 +89,7 @@
 </head>
 <body>
 	<div id="__next" data-reactroot="">
-		<jsp:include page="../../../assets/layout/user/header.jsp" />
+		<jsp:include page="../assets/layout/user/header.jsp" />
 		<main class="JobsFeed_Jobsfeed__DpeV9">
 			<section class="Section_Section__P1hhc">
 				<!-- golgolz start -->
@@ -173,7 +173,7 @@
 				<!-- golgolz end -->
 			</section>
 		</main>
-			<jsp:include page="../../../assets/layout/user/footer.jsp" />
+			<jsp:include page="../assets/layout/user/footer.jsp" />
 	</div>
 </body>
 </html>

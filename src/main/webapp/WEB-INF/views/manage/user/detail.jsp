@@ -1,3 +1,6 @@
+<%@page import="kr.co.sist.admin.domain.user.UserQnaDomain"%>
+<%@page import="kr.co.sist.admin.domain.user.UserApplyDomain"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" info=""%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -162,8 +165,20 @@
 						<div style="margin:30px 0px 30px 0px;">
 							<label style="font-size: 20px; font-weight: bold; margin: 5px 0px 5px 0px;">최근 활동 기록</label>
 						</div>
+					<%
+						List<UserApplyDomain> applyList = (List)request.getAttribute("applyList");
+					%>
 					<label style="font-size: 15px; font-weight: bold; margin: 5px 0px 5px 0px;">최근 지원현황</label>
 					<div class="tbl_head01" style="margin-bottom: 50px;">
+					<%
+						if(applyList == null || applyList.size() == 0){
+					%>
+					<div style="text-align: center;">
+						<h5>현황 정보가 존재하지 않습니다.</h5>
+					</div>
+					<%
+						}else {
+					%>
 					<table id="sodr_list">
 						<colgroup>
 							<col class="w90">
@@ -185,35 +200,39 @@
 						</tr>
 						</thead>
 						<tbody>
+							<%
+							for(int i=0; i<applyList.size(); i++){
+							    UserApplyDomain applyInfo = applyList.get(i);
+							%>
 							<tr class="list0">
-								<td>1</td>
-								<td>SIST</td>
-								<td>2023-12-29</td>
-								<td>떠오르는 백엔드 신입 이명화입니다.</td>
-								<td><input type="button" value="바로가기" class="btn btn-outline-secondary btn-sm" style="font-weight: bold;margin:0px auto;" /></td>
-								<td>최종합격</td>
+								<td><%= i+1 %></td>
+								<td><%= applyInfo.getCompanyName() %></td>
+								<td><%= applyInfo.getApplyDate() %></td>
+								<td><%= applyInfo.getTitle() %>.</td>
+								<td><input type="button" value="바로가기" class="btn btn-outline-secondary btn-sm" style="font-weight: bold;margin:0px auto;" onclick="location.href='http://localhost/recruit-app/manage/resumes/detail.do?<%= applyInfo.getResumeNum() %>'" /></td>
+								<td><%= applyInfo.getProgressState() %></td>
 							</tr>
-							<tr class="list0">
-								<td>2</td>
-								<td>삼성전자</td>
-								<td>2023-12-29</td>
-								<td>재능있는 백엔드 신입 장원영입니다.</td>
-								<td><input type="button" value="바로가기" class="btn btn-outline-secondary btn-sm" style="font-weight: bold;margin:0px auto;" /></td>
-								<td>서류지원</td>
-							</tr>
-							<tr class="list0">
-								<td>3</td>
-								<td>야놀자</td>
-								<td>2023-12-29</td>
-								<td>센스있는 백엔드 신입 난원영입니다.</td>
-								<td><input type="button" value="바로가기" class="btn btn-outline-secondary btn-sm" style="font-weight: bold;margin:0px auto;" /></td>
-								<td>불합격</td>
-							</tr>
+							<%
+							}//end for
+						}//end else
+							%>
 						</tbody>
 					</table>
 				</div>
 					<label style="font-size: 15px; font-weight: bold; margin: 5px 0px 5px 0px;">최근 문의사항</label>
 					<div class="tbl_head01" style="margin-bottom: 50px;">
+					<%
+						List<UserQnaDomain> qnaList = (List)request.getAttribute("qnaList");
+					%>
+					<%
+						if(qnaList == null || qnaList.size() == 0){
+					%>
+					<div style="text-align: center;">
+						<h5>문의 내역이 존재하지 않습니다.</h5>
+					</div>
+					<%
+						}else {
+					%>
 					<table id="sodr_list">
 						<colgroup>
 							<col class="w90">
@@ -232,52 +251,25 @@
 						</tr>
 						</thead>
 						<tbody>
+							<%
+							for(int i=0; i<qnaList.size(); i++){
+							    UserQnaDomain qnaInfo = qnaList.get(i);
+							%>
 							<tr class="list0">
-								<td>1</td>
-								<td>기업</td>
-								<td><a href="http://localhost/recruit-app/manage/qna/old_qnas_detail.jsp?qna_num=1">여기어때</a></td>
-								<td>2024-05-11</td>
-								<td>답변완료</td>
+								<td><%= i+1 %></td>
+								<td><%= qnaInfo.getCategory() %></td>
+								<td><a href="http://localhost/recruit-app/manage/qna/new_detail.do?qna_num=<%= qnaInfo.getQnaNum() %>"><%= qnaInfo.getTitle() %></a></td>
+								<td><%= qnaInfo.getInputDate() %></td>
+								<td><%= qnaInfo.getFlag() %></td>
 							</tr>
-							<tr class="list0">
-								<td>2</td>
-								<td>기업</td>
-								<td><a href="http://localhost/recruit-app/manage/qna/old_qnas_detail.jsp?qna_num=2">지원취소 안되나요?</a></td>
-								<td>2024-05-20</td>
-								<td>답변완료</td>
-							</tr>
-							<tr class="list0">
-								<td>3</td>
-								<td>민원</td>
-								<td><a href="http://localhost/recruit-app/manage/qna/old_qnas_detail.jsp?qna_num=3">신고접수합니다.</a></td>
-								<td>2024-05-29</td>
-								<td>답변완료</td>
-							</tr>
-							<tr class="list0">
-								<td>4</td>
-								<td>민원</td>
-								<td><a href="http://localhost/recruit-app/manage/qna/old_qnas_detail.jsp?qna_num=4">민원 처리가 늦어요.</a></td>
-								<td>2024-06-01</td>
-								<td>답변대기</td>
-							</tr>
-							<tr class="list0">
-								<td>5</td>
-								<td>기업</td>
-								<td><a href="http://localhost/recruit-app/manage/qna/old_qnas_detail.jsp?qna_num=5">지원 공고 찾는 법</a></td>
-								<td>2024-06-11</td>
-								<td>답변대기</td>
-							</tr>
+							<%}//end for%>
 						</tbody>
 					</table>
+					<%}//end else %>
 				</div>
 						<div class="alignCenter">
-							<% if(request.getParameter("code") == null){ %>
-								<input type="button" id="btn-register" class="btn btn-outline-warning btn-sm" value="저장" />
-							<% } else { %>
-								<input type="button" id="btn-update" class="btn btn-outline-warning btn-sm" value="수정하기" />
-								<input type="button" id="btn-delete" class="btn btn-outline-danger btn-sm" value="삭제하기" />
-							<% } %>
-								<input type="button" id="btn-back" class="btn btn-outline-dark btn-sm detail-control" value="취소" onClick="javascript:history.back();"/>
+								<!-- <input type="button" id="btn-register" class="btn btn-outline-warning btn-sm" value="저장" /> -->
+								<input type="button" id="btn-back" class="btn btn-outline-dark btn-sm detail-control" value="닫기" onClick="javascript:history.back();"/>
 						</div>
 					</form>
 				</div>

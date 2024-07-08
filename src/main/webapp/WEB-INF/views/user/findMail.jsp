@@ -49,17 +49,6 @@
 				if(ResultFlag){
 					findMailFrm.submit();
 					findResult.hide();
-					// 메일 조회 결과에 따른 처리 로직 추가 예정
-					//var isMailFlag = searchMail();
-					/* var resultMsg = '${ requestScope.resultMsg }';
-					if(resultMsg !== null || resultMsg !==''){
-						msg = resultMsg;
-						findResult.text(msg);
-						findResult.addClass('error');
-						findResult.show();
-						/* alert('계정 찾기 성공!');
-						location.href='http://localhost/recruit-app/user/findMailComplete.jsp'; 
-					}*/
 					return;
 				}else{
 					alert('문제가 발생 했습니다. 잠시 후 다시 시도해주세요.');
@@ -88,14 +77,6 @@
 				  var isValid = /^(010|011)\d{7,8}$/.test(chkPhoneNumber); 
 				  return isValid;
 			}//function
-			
-			/* function searchMail(){
-				
-				//DB 조회 결과 확인
-				var flag = true; // 임시 설정
-				
-				return flag;
-			} */
 			
 			//초기 로딩
 			chkNull();

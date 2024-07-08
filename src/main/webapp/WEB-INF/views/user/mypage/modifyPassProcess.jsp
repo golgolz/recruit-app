@@ -5,12 +5,6 @@
 <!DOCTYPE html>
 <html>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<%-- <%
-	String resultMsg = (String)request.getAttribute("resultMsg");
-	if(resultMsg == null || resultMsg.isEmpty()){
-	    response.sendRedirect("../mypage/mypageUserInfo.do");
-	}
-%>  --%>
 <script type="text/javascript">
     $(function() {
         <c:if test="${empty resultMsg}">
