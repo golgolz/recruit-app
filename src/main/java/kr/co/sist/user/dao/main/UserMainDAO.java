@@ -17,10 +17,15 @@ public class UserMainDAO {
         SqlSession ss = myBatis.getMyBatisHandler(false);
         return ss.selectList("kr.co.sist.user.dao.main.UserMainDAO.selectRecentJobPosts");
     }
-    
-    public List<MainVO> selectInterestedPositions() {
+
+    public List<MainVO> selectInterestedPositions(String userId) {
         SqlSession ss = myBatis.getMyBatisHandler(false);
-        return ss.selectList("kr.co.sist.user.dao.main.UserMainDAO.selectInterestedPositions");
+        return ss.selectList("kr.co.sist.user.dao.main.UserMainDAO.selectInterestedPositions", userId);
+    }
+
+    public List<MainVO> selectDefaultInterestedPositions() {
+        SqlSession ss = myBatis.getMyBatisHandler(false);
+        return ss.selectList("kr.co.sist.user.dao.main.UserMainDAO.selectDefaultInterestedPositions");
     }
 
     public List<MainVO> selectHighSalaryPositions() {

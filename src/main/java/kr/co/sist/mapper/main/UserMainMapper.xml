@@ -20,8 +20,8 @@
             R.INPUT_DATE DESC
     </select>
 
-    <!-- 2. 내가 관심있을만한 포지션 (내 스택과 공고 비교) -->
-    <select id="selectInterestedPositions" resultType="kr.co.sist.user.vo.main.MainVO">
+     <!-- 2. 내가 관심있을만한 포지션 (내 스택과 공고 비교) -->
+    <select id="selectInterestedPositions" parameterType="String" resultType="kr.co.sist.user.vo.main.MainVO">
         SELECT DISTINCT
             R.TITLE AS title,
             C.COMPANY_NAME AS companyName,
@@ -40,7 +40,30 @@
         JOIN
             RESUME RS ON CR.RESUME_NUM = RS.RESUME_NUM
         WHERE
-            RS.USER_ID = 'jeong@sist.com'
+            RS.USER_ID = #{userId}
+        ORDER BY
+            R.INPUT_DATE DESC
+    </select>
+
+    <!-- 2.5. 기본 관심 포지션 (로그인하지 않은 경우) -->
+    <select id="selectDefaultInterestedPositions" resultType="kr.co.sist.user.vo.main.MainVO">
+        SELECT DISTINCT
+            R.TITLE AS title,
+            C.COMPANY_NAME AS companyName,
+            C.COMPANY_IMG AS companyImage,
+            R.INPUT_DATE AS inputDate,
+            P.POSITION_NAME AS positionName,
+            CR.JOB_DESCRIPTION AS jobDescription
+        FROM
+            RECRUIT R
+        JOIN
+            COMPANYINFO C ON R.COMPANY_CODE = C.COMPANY_CODE
+        JOIN
+            POSITION_LIST P ON R.POSITION_CODE = P.POSITION_CODE
+        JOIN
+            CAREER CR ON P.POSITION_NAME = CR.JOB_DESCRIPTION
+        WHERE
+            R.INPUT_DATE >= TRUNC(SYSDATE) - INTERVAL '1' MONTH
         ORDER BY
             R.INPUT_DATE DESC
     </select>
