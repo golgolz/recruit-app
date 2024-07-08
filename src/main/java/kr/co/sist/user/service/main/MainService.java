@@ -17,15 +17,19 @@ public class MainService {
     public List<MainVO> getRecentJobPosts() {
         return userMainDAO.selectRecentJobPosts();
     }
-    
-    public List<MainVO> getInterestedPositions() {
-        return userMainDAO.selectInterestedPositions();
+
+    public List<MainVO> getInterestedPositions(String userId) {
+        return userMainDAO.selectInterestedPositions(userId);
     }
-    
+
+    public List<MainVO> getDefaultInterestedPositions() {
+        return userMainDAO.selectDefaultInterestedPositions();
+    }
+
     public List<MainVO> getHighSalaryPositions() {
         return userMainDAO.selectHighSalaryPositions();
     }
-    
+
     public List<MainVO> getViewHistory() {
         return userMainDAO.selectViewHistory();
     }

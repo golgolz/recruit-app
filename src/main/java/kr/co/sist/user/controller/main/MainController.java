@@ -1,6 +1,7 @@
 package kr.co.sist.user.controller.main;
 
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,16 +30,25 @@ public class MainController {
     
     
     @GetMapping("/main/main.do")
-    public String main(Model model) {
+    public String main(HttpSession session, Model model) {
         List<MainVO> recentJobPosts = mainService.getRecentJobPosts();
-        List<MainVO> interestedPositions = mainService.getInterestedPositions();
         List<MainVO> highSalaryPositions = mainService.getHighSalaryPositions();
         List<MainVO> viewHistory = mainService.getViewHistory();
-        
+
+        String userId = (String) session.getAttribute("userId");
+        List<MainVO> interestedPositions;
+
+        if (userId != null) {
+            interestedPositions = mainService.getInterestedPositions(userId);
+        } else {
+            interestedPositions = mainService.getDefaultInterestedPositions();
+        }
+
         model.addAttribute("recentJobPosts", recentJobPosts);
         model.addAttribute("interestedPositions", interestedPositions);
         model.addAttribute("highSalaryPositions", highSalaryPositions);
         model.addAttribute("viewHistory", viewHistory);
+
         return "main/main"; // "WEB-INF/views/main/main.jsp" 경로에 매핑
     }
     
