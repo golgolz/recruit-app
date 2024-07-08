@@ -5,7 +5,7 @@
 	class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl fixed-start bg-gradient-dark ps bg-white"
 	id="sidenav-main">
 	<div class="sidenav-header">
-		<a class="navbar-brand m-0" href="http://localhost/recruit-app/manage/dashboard/dashboard.jsp">
+		<a class="navbar-brand m-0" href="http://localhost/recruit-app/manage/dashboard/dashboard.do">
 			<span class="ms-1 font-weight-bold text-white">채용 관리 시스템</span>
 		</a>
 	</div>

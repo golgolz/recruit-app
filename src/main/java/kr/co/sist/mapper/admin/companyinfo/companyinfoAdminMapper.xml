@@ -123,21 +123,23 @@
     </update>
     
     <insert id="insertHistory" parameterType="kr.co.sist.vo.companyinfo.CompanyinfoVO">
-	    INSERT INTO WELFARE(COMPANY_CODE, CATEGORY, CONTENT)
-	    VALUES(#{companyCode},#{category},#{content});
+	    INSERT INTO WELFARE(COMPANY_CODE, BASE_DATE, HISTORY_CONTENT)
+	    VALUES(#{companyCode},#{baseDate},#{historyContent});
     </insert>
     
-    <delete id="deleteHistory">
-    
+    <delete id="deleteHistory" parameterType="map">
+    	DELETE FROM HISTORY
+		WHERE COMPANY_CODE=#{companyCode} AND BASE_DATE=#{baseDate}
     </delete>
     
     <insert id="insertWelfare" parameterType="kr.co.sist.vo.companyinfo.CompanyinfoVO">
-	    INSERT INTO HISTORY(COMPANY_CODE, BASE_DATE, CONTENT)
-	    VALUES(#{companyCode},#{baseDate},#{content});
+	    INSERT INTO HISTORY(COMPANY_CODE, BASE_DATE, WELFARE_CONTENT)
+	    VALUES(#{companyCode},#{category},#{welfareContent});
     </insert>
     
-    <delete id="deleteWelfare">
-    
+    <delete id="deleteWelfare" parameterType="map">
+    	DELETE FROM WELFARE
+		WHERE COMPANY_CODE=#{companyCode} AND CATEGORY=#{category}
     </delete>
 
     

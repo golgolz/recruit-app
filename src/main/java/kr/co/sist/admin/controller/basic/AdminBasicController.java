@@ -65,7 +65,7 @@ public class AdminBasicController {
 
         model.addAttribute("adminId", adminId);
 
-        return "manage/dashboard/dashboard";
+        return "redirect:/manage/dashboard/dashboard.do";
     }
 
     @GetMapping("manage/logout.do")

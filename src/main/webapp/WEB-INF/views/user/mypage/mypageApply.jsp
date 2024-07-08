@@ -235,7 +235,7 @@ dl {
 	border-bottom: 1px solid #dedede;
 	width: 95%;
 	text-align: center;
-	height: 200px;
+	height: 120px;
 	font-size: 15px;
 	margin-top: 50px;
 	margin-bottom: 50px;
@@ -256,13 +256,170 @@ dl {
 <script type="text/javascript">
 		$(function(){
 			<!-- golgolz start -->
+			
+			var startNum = 1;
+			var endNum = startNum + itemsPerPage;
+			var itemsPerPage = 5;
+			var showPages = 3;
+			var totalPages = 0;
+			var currentPage = 1;
+			
+			var menuItems = document.querySelectorAll('.Summary_Summary_list__AyGdy');
+
+			updateApplyList(true);
+			
+        	menuItems.forEach(item => {
+        		  item.addEventListener('click', function() {
+        		    menuItems.forEach(item => item.classList.remove('Summary_Summary_list_active__qwfF0'));
+        		    this.classList.add('Summary_Summary_list_active__qwfF0');
+        		  });
+        		});
+			
+			 menuItems.forEach(item => {
+				  item.addEventListener('click', function(event) {
+				    event.preventDefault();
+				    var selectedStatus = this.dataset.status; // data 속성에서 상태 값 가져오기
+				    $("#progressState").val(selectedStatus);
+				    updateApplyList(false);
+				  });
+				});
+ 
+			function getSearchVO() {
+        	    return {
+        	        keyword: $("input[name='keyword']").val(),
+        	        progressState: $("#progressState").val(),
+        	        startNum: startNum,
+        	        endNum: startNum + itemsPerPage - 1
+        	    };
+        	}//function
+        	
+        	
+        	function updateApplyList(isFirst) {
+				var searchVO = {};
+			    
+			    if (isFirst) {
+			        searchVO = {
+			            startNum: 1,
+			            endNum: itemsPerPage
+			        };
+			    } else {
+			        searchVO = getSearchVO();
+			    }
+			    
+			    $.ajax({
+		            url: "${pageContext.request.contextPath}/api/mypage/mypageApply.do",
+		            method: 'GET',
+		            data: searchVO,
+		            dataType: 'JSON',
+		            success: function(data) {
+		                populateTable(data);
+		                countApplyList(isFirst);
+		                updatePagination();
+		               if(!(data && data.length > 0)){
+		                    $("#applyTable tbody").html('<tr><td colspan="4">요청하신 결과가 없습니다.</td></tr>');
+		                } 
+		            },
+		            error: function(xhr, status, error) {
+		                console.error("Error fetching data: " + error);
+		                $("#applyTable tbody").html('<tr><td colspan="4">데이터를 불러오는 데 실패했습니다.</td></tr>');
+		            }
+		        });
+		    }//function
+		    
+		    function populateTable(applyList) {
+	            var tableBody = $("#applyTable tbody");
+	            tableBody.empty();
+	            $.each(applyList, function(index, applyInfo) {
+	            	
+	            	var row = $('<tr>');
+
+	                row.append($('<td>').text(applyInfo.companyName))
+	                   .append($('<td>').text(applyInfo.title))
+	                   .append($('<td>').text(applyInfo.applyDate))
+	                   .append($('<td>').text(applyInfo.progressState));
+
+	                tableBody.append(row);
+	            });//each
+	    	}//function
+	    	
+		    function countApplyList(searchVO){
+        		$.ajax({
+                    url: "${pageContext.request.contextPath}/api/mypage/applyCount.do",
+                    method: 'GET',
+                    data: searchVO,
+                    dataType: 'JSON',
+                    async: false,
+                    success: function(data) {
+                    	totalPages = data;
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error fetching data: " + error);
+                    }
+                });//ajax
+        	}//function
+        	
+        	/* $("#btn-search").click(function(e){
+        		e.preventDefault();
+        		updateApplyList(false);
+        	});//click */
+        	
+        	keywordInput = $("input[name='keyword']");
+        	
+        	keywordInput.on('keyup', function(event) {
+        	    if (event.keyCode === 13) {
+        	      updateApplyList(false); 
+        	    }
+        	  });
+        	
+        	$('.pagination').on('click', '.page-link', function(e) {
+                
+                e.preventDefault();
+                var clickedPage = $(this).data('page');
+                if (clickedPage) {
+                    currentPage = clickedPage;
+                    startNum = itemsPerPage * (currentPage - 1) + 1;
+                    updateApplyList(false);
+                } else if ($(this).attr('id') === 'prev-page') {
+                    if (currentPage > 1) {
+                        currentPage--;
+                        startNum = itemsPerPage * (currentPage - 1) + 1;
+                        updateApplyList(false);
+                    }
+                } else if ($(this).attr('id') === 'next-page') {
+                    if (currentPage < Math.ceil(totalPages / itemsPerPage)) {
+                        currentPage++;
+                        startNum = itemsPerPage * (currentPage - 1) + 1;
+                        updateApplyList(false);
+                    }
+                }
+        	
+    	});//function
+    	
+    	function updatePagination() {
+     		var currentGroup = Math.ceil(currentPage / showPages);
+        	var startPage = (currentGroup - 1) * showPages + 1;
+            var paginationHtml = '';
+            var endPage = Math.min(Math.ceil(totalPages / itemsPerPage) , startPage + showPages - 1);
+            paginationHtml += '<li class="page-items' + (currentPage === 1 ? ' disabled' : '') + '">';
+            paginationHtml += '<a class="page-link" href="#" aria-label="Previous" id="prev-page">';
+            paginationHtml += '<span aria-hidden="true">&laquo;</span></a></li>';
+
+            for (var i = startPage; i <= endPage; i++) {
+                paginationHtml += '<li class="page-items' + (i === currentPage ? ' active' : '') + '">';
+                paginationHtml += '<a class="page-link" href="#" data-page="' + i + '">' + i + '</a></li>';
+            }
+
+            paginationHtml += '<li class="page-items' + (currentPage === Math.ceil(totalPages / itemsPerPage) ? ' disabled' : '') + '">';
+            paginationHtml += '<a class="page-link" href="#" aria-label="Next" id="next-page">';
+            paginationHtml += '<span aria-hidden="true">&raquo;</span></a></li>';
+
+            $('.pagination').html(paginationHtml);
+        }//function
+        	
 			<!-- golgolz end -->
 		});
 	</script>
 </head>
-<%
-	List<UserApplyDomain> applyList = (List)request.getAttribute("applyList");
-%>
 <body>
 	<div id="__next" data-reactroot="">
 		<jsp:include page="../../assets/layout/user/header.jsp" />
@@ -275,29 +432,30 @@ dl {
 					<section class="Body_Body__MlgY5">
 					<div style="text-align: left;  margin-bottom:15px; margin-left:15px;"><h1 style="font-size: 25px;"><strong>지원 현황</strong></h1></div>
 						<ul class="Summary_Summary__AO8Mn" >
-							<li class="Summary_Summary_list__AyGdy">
-							<a href="#void" class="Summary_Summary_list__AyGdy Summary_Summary_list_active__qwfF0"><dl>
+							<input type="hidden" id="progressState" value="">
+							<li class="Summary_Summary_list__AyGdy Summary_Summary_list_active__qwfF0">
+							<a href="#"><dl>
 										<dt>0</dt>
 										<dd>전체</dd>
 									</dl></a></li>
-							<li class="Summary_Summary_list__AyGdy" ><a
-								href="#void" class=""><dl>
+							<li class="Summary_Summary_list__AyGdy" data-status="지원완료"><a
+								href="#"><dl>
 										<dt>0</dt>
-										<dd>지원 완료</dd>
+										<dd>지원완료</dd>
 									</dl></a></li>
-							<li class="Summary_Summary_list__AyGdy" ><a
-								href="#void" class=""><dl>
+							<li class="Summary_Summary_list__AyGdy" data-status="서류합격"><a
+								href="#"><dl>
 										<dt>0</dt>
-										<dd>서류 합격</dd>
+										<dd>서류합격</dd>
 									</dl></a></li>
 							<li
-								class="Summary_Summary_list__AyGdy"><a
-								href="#void" class=""><dl>
+								class="Summary_Summary_list__AyGdy" data-status="최종합격"><a
+								href="#"><dl>
 										<dt>0</dt>
-										<dd>최종 합격</dd>
+										<dd>최종합격</dd>
 									</dl></a></li>
-							<li class="Summary_Summary_list__AyGdy"><a
-								href="#void" class=""><dl>
+							<li class="Summary_Summary_list__AyGdy" data-status="불합격"><a
+								href="#"><dl>
 										<dt>0</dt>
 										<dd>불합격</dd>
 									</dl></a></li>
@@ -311,39 +469,26 @@ dl {
 										<path fill-rule="evenodd" clip-rule="evenodd" 
 											d="M9.99961 2.1001C5.63656 2.1001 2.09961 5.63705 2.09961 10.0001C2.09961 14.3631 5.63656 17.9001 9.99961 17.9001C11.8569 17.9001 13.5645 17.2592 14.9133 16.1864L19.8634 21.1365C20.2148 21.4879 20.7847 21.4879 21.1362 21.1365C21.4876 20.785 21.4876 20.2151 21.1362 19.8637L16.1861 14.9136C17.2587 13.5648 17.8996 11.8573 17.8996 10.0001C17.8996 5.63705 14.3627 2.1001 9.99961 2.1001ZM3.89961 10.0001C3.89961 6.63116 6.63067 3.9001 9.99961 3.9001C13.3685 3.9001 16.0996 6.63116 16.0996 10.0001C16.0996 13.369 13.3685 16.1001 9.99961 16.1001C6.63067 16.1001 3.89961 13.369 3.89961 10.0001Z"></path></svg>
 											</span>
-										<input type="text" placeholder="회사명 검색" value="" style="width: 145px;" maxlength="10">
+										<input type="text" class="frm_input" size="30" name="keyword" placeholder="회사명 검색" value="${ param.keyword }" style="width: 145px;" maxlength="10">
 									</div>
+										<!-- <button type="button" class="btn btn-secondary" id="btn-search" style="margin-left:10px; width: 50px;">검색</button> -->
 								</div>
 							</div>
 						</div>
 						<div>
-						<% if(applyList == null || applyList.isEmpty()) { %>
-							<div class="List_List_table__K2VFf">
-								<ul>
-									<dl class="List_List_empty__pphW6">
-										<dd>요청하신 결과가 없습니다.</dd>
-									</dl>
-								</ul>
-							</div>
-						<%}else {%>
 							<table class="apply_table" id="applyTable">
-								<tr>
-									<th>지원회사</th>
-									<th>지원공고</th>
-									<th>지원일자</th>
-									<th>진행상태</th>
-								</tr>
-							<% for(UserApplyDomain uad : applyList){%>
-								<tr>
-									<td><%= uad.getCompanyName() %></td>
-									<td><%= uad.getTitle() %></td>
-									<td><%= uad.getApplyDate() %></td>
-									<td><%= uad.getProgressState() %></td>
-								</tr>
-							<%}//end for %> 
+								<thead>
+									<tr>
+										<th>지원회사</th>
+										<th>지원공고</th>
+										<th>지원일자</th>
+										<th>진행상태</th>
+									</tr>
+								</thead>
+								<tbody>
+								</tbody>
 							</table>
 						</div>
-							<% }//end else %>
 						<!-- 페이지네이션 시작 -->
 						<div style="text-align:center;">
 					        <nav aria-label="...">
