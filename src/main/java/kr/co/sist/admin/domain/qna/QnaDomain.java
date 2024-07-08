@@ -18,6 +18,7 @@ public class QnaDomain {
     private String title;
     private String content;
     private String user_id;
+    private String flag;
     private Date input_date;
 
     private String ans_title;

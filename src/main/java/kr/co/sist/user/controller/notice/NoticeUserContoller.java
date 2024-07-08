@@ -33,51 +33,13 @@ public class NoticeUserContoller {
     @GetMapping("/notice/noticesByCategory.do")
     @ResponseBody
     public Map<String, Object> searhNoticesByCategory(@RequestParam("category") String category) {
-        System.out.println("-----------------" + category);
+        // System.out.println("-----------------" + category);
         List<NoticeUserDomain> noticeList = noticeUserService.searchNoticesByCategory(category);
-        System.out.println("---------????--------" + noticeList);
+        // System.out.println("---------????--------" + noticeList);
         Map<String, Object> response = new HashMap<>();
         response.put("noticeList", noticeList);
         return response; // 공지사항 카테고리 검색
     }
-
-    // @ResponseBody
-    // @GetMapping("/notice/noticesbyKeyword.do")
-    // public ResponseEntity<Object> searchNoticesbyKeyword(@RequestParam("keyword") String keyword,
-    // @RequestParam("searchType") String searchType, Model model) {
-    // Object searchResult = noticeUserService.searchNoticesbyKeyword(keyword, searchType);
-    // model.addAttribute("searchResult", searchResult);
-    // System.out
-    // .println("-------------------------------Received search keyword: " + keyword + " and
-    // searchType: " + searchType);
-    // System.out.println("~~~~~~~~~~searchResult~~~~" + searchResult);
-    // return ResponseEntity.ok(searchResult);
-    // }
-
-
-    // @GetMapping("/notice/noticesbyKeyword.do")
-    // @ResponseBody
-    // public ResponseEntity<Map<String, Object>> searchNoticesbyKeyword(
-    // @RequestParam("keyword") String keyword,
-    // @RequestParam("searchType") String searchType) {
-    // System.out
-    // .println("Received search keyword: " + keyword + " and searchType: " + searchType);
-    // Object searchResult = noticeUserService.searchNoticesbyKeyword(keyword, searchType);
-    // List<NoticeUserDomain> noticeList;
-    // // 검색 결과를 리스트 형태로 변환
-    // if (searchResult instanceof NoticeUserDomain) {
-    // noticeList = Collections.singletonList((NoticeUserDomain) searchResult);
-    // } else if (searchResult instanceof List) {
-    // noticeList = (List<NoticeUserDomain>) searchResult;
-    // } else {
-    // noticeList = new ArrayList<>();
-    // }
-    // Map<String, Object> response = new HashMap<>();
-    // response.put("noticeList", noticeList);
-    //
-    // System.out.println("~~~~~~~~~~searchResult~~~~" + noticeList);
-    // return ResponseEntity.ok(response);
-    // }
 
     @GetMapping("/notice/noticesbyKeyword.do")
     @ResponseBody
@@ -96,7 +58,7 @@ public class NoticeUserContoller {
         }
         Map<String, Object> response = new HashMap<>();
         response.put("noticeList", noticeList);
-        System.out.println("~~~~~~~~~~searchResult~~~~" + noticeList);
+        // System.out.println("~~~~~~~~~~searchResult~~~~" + noticeList);
         return ResponseEntity.ok(response);
     }
 
