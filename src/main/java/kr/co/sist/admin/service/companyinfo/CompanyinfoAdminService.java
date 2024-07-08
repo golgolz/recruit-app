@@ -111,6 +111,32 @@ public class CompanyinfoAdminService {
         
         return result;
     }
+    
+    public boolean deleteHistory(Map<String, Object> param) {
+        boolean result=false;
+        int i=0;
+        i=companyinfoAdminDAO.deleteHistory(param);
+        if(i == 0) {
+            result=false;
+        }else {
+            result=true;
+        }
+        
+        return result;
+    }
+    
+    public boolean deleteWelfare(Map<String, Object> param) {
+        boolean result=false;
+        int i=0;
+        i=companyinfoAdminDAO.deleteWelfare(param);
+        if(i == 0) {
+            result=false;
+        }else {
+            result=true;
+        }
+        
+        return result;
+    }
 
     
     
