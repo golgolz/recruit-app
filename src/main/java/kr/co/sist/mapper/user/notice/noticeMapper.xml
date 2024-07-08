@@ -20,15 +20,19 @@
 	    ]]>
     </select>
     
-    <select id="selectNoticesbyKeyword" resultType="kr.co.sist.user.domain.notice.NoticeUserDomain" >
+    <select id="selectNoticesbyKeyword" resultType="kr.co.sist.user.domain.notice.NoticeUserDomain" parameterType="java.util.Map">
 	    select category, title, input_date, notice_num
 	    from notice
 	    where blind_flag = 'N'
-	        and (
-	            title like '%' || #{keyword} || '%'
-	            or (title like '%' || #{keyword} || '%' and content like '%' || #{keyword} || '%')
-	            or content like '%' || #{keyword} || '%'
-	        )
+	    <if test="searchType == '제목'">
+	        and title like '%' || #{keyword} || '%'
+	    </if>
+	    <if test="searchType == '내용'">
+	        and content like '%' || #{keyword} || '%'
+	    </if>
+	    <if test="searchType == '제목+내용'">
+	        and (title like '%' || #{keyword} || '%' or content like '%' || #{keyword} || '%')
+	    </if>
 	    order by input_date desc
     </select>
   	
