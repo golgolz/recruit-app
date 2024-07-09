@@ -108,7 +108,12 @@ public class MypageService {
     }
 
     public String formatNumber(String phoneNumber) {
-        String formatNum = phoneNumber.replaceFirst("(\\d{3})(\\d{3,4})(\\d{4})", "$1-$2-$3");
+        String formatNum = "";
+        if (phoneNumber.length() == 10) {
+            formatNum = phoneNumber.replaceFirst("(\\d{2})(\\d{3,4})(\\d{4})", "$1-$2-$3");
+        } else {
+            formatNum = phoneNumber.replaceFirst("(\\d{3})(\\d{3,4})(\\d{4})", "$1-$2-$3");
+        }
         return formatNum;
     }
 
