@@ -246,7 +246,6 @@
 	    	        url: "${pageContext.request.contextPath}/api/manage/admin/modifyAdmin.do",
 	    	        method: 'GET',
 	    	        data: adminData,
-	    	        //dataType: 'JSON',
 	    	        success: function(response) {
 	    	            if(response.resultMsg === 'success'){
 	    	            	alert('저장 되었습니다.');
