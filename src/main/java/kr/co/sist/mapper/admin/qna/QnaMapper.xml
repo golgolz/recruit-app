@@ -5,22 +5,7 @@
   
 <mapper namespace="kr.co.sist.qna.admin">
   <select id="selectNewQnas" resultType="kr.co.sist.admin.domain.qna.QnaDomain">
-	 <!-- select   row_number() over (order by input_date) as qna_num,
-        category, title, content, user_id, input_date
-    from  qna
-    where  flag = '답변대기'
-    order by  input_date desc -->
-    
-   <!--  select qna_num, category, title, content, user_id, input_date
-    from (
-        select qna_num, category, title, content, user_id, input_date,
-               row_number() over (order by input_date desc) as rnum
-        from qna
-        where flag = '답변대기'
-    ) qnas
-    order by input_date desc -->
-    
-    select
+    <!-- select
         row_number() over (order by input_date desc) as view_num,
         qna_num,
         category,
@@ -30,9 +15,33 @@
         input_date
     from qna
     where flag = '답변대기'
-    order by input_date desc
-    
+    order by input_date desc -->
+     <![CDATA[
+    SELECT *
+    FROM (
+        SELECT rownum rnum, q.*
+        FROM (
+            SELECT
+                row_number() over (order by input_date desc) as view_num,
+                qna_num,
+                category,
+                title,
+                content,
+                user_id,
+                input_date
+            FROM qna
+            WHERE flag = '답변대기'
+            ORDER BY input_date DESC
+        ) q
+        WHERE rownum <= #{endItemIndex}
+    )
+    WHERE rnum >= #{startItemIndex}
+    ]]>
   </select>
+  
+  <select id="countNewQnas" resultType="int">
+    select count(*) from qna where flag = '답변대기'
+</select>
   
   <select id="selectOneNewQna" resultType="kr.co.sist.admin.domain.qna.QnaDomain">
   select 
@@ -50,10 +59,6 @@
   </select>
   
   <select id="selectOldQnas" resultType="kr.co.sist.admin.domain.qna.QnaDomain">
-  	<!-- select   row_number() over (order by input_date desc) as qna_num, category, title, input_date
-    from  qna
-    where  flag = '답변완료'
-    order by  input_date desc -->
     select
         row_number() over (order by input_date desc) as view_num,
         qna_num,
@@ -93,11 +98,4 @@
     where qna_num = #{qna_num} and flag = '답변대기'
   </update>
 	
-	<select id="selectQnaPagenation" resultType="kr.co.sist.admin.domain.qna.QnaDomain">
-	select qna_num, category, title, content, user_id, input_date
-    from qna
-    where flag = '답변대기'
-    order by input_date desc
-    LIMIT #{startItemIndex}, #{itemsPerPage}
-	</select>
 </mapper>

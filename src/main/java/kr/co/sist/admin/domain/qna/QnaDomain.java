@@ -14,6 +14,7 @@ import lombok.ToString;
 @ToString
 public class QnaDomain {
     private int qna_num;
+    private int view_num;
     private String category;
     private String title;
     private String content;
