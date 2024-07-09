@@ -11,7 +11,9 @@ import kr.co.sist.domain.companyinfo.SearchDomain;
 import kr.co.sist.exceptions.UnexpectedRowCountException;
 import kr.co.sist.properties.MyBatisConfig;
 import kr.co.sist.vo.companyinfo.CompanyinfoVO;
+import kr.co.sist.vo.companyinfo.HistoryVO;
 import kr.co.sist.vo.companyinfo.SearchVO;
+import kr.co.sist.vo.companyinfo.WelfareVO;
 
 @Component
 public class CompanyinfoAdminDAO {
@@ -112,6 +114,17 @@ public class CompanyinfoAdminDAO {
         return result;
     }
     
+    public int insertHistory(HistoryVO hVO) throws PersistenceException {
+
+        int result=0;
+        SqlSession ss = mbConfig.getMyBatisHandler(true);
+        ss.insert("kr.co.sist.admin.companyinfo.insertHistory", hVO);
+        mbConfig.closeHandler(ss);
+
+        return result;
+      }
+
+    
     public int deleteHistory(Map<String, Object> param)throws PersistenceException {
         int result=0;
         SqlSession ss=mbConfig.getMyBatisHandler(true);
@@ -120,6 +133,15 @@ public class CompanyinfoAdminDAO {
         
         return result;
     }
+    
+    public int insertWelfare(WelfareVO wVO) throws PersistenceException {
+        int result=0;
+        SqlSession ss = mbConfig.getMyBatisHandler(true);
+        ss.insert("kr.co.sist.admin.companyinfo.insertWelfare", wVO);
+        mbConfig.closeHandler(ss);
+
+        return result;
+      }
     
     public int deleteWelfare(Map<String, Object> param)throws PersistenceException {
         int result=0;

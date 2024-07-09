@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import kr.co.sist.admin.dao.companyinfo.CompanyinfoAdminDAO;
 import kr.co.sist.domain.companyinfo.SearchDomain;
 import kr.co.sist.vo.companyinfo.CompanyinfoVO;
+import kr.co.sist.vo.companyinfo.HistoryVO;
 import kr.co.sist.vo.companyinfo.SearchVO;
+import kr.co.sist.vo.companyinfo.WelfareVO;
 
 @Service
 public class CompanyinfoAdminService {
@@ -112,6 +114,18 @@ public class CompanyinfoAdminService {
         return result;
     }
     
+    public boolean addHistory(HistoryVO hVO) {
+        boolean result=false;
+        int i=0;
+        i=companyinfoAdminDAO.insertHistory(hVO);
+        if(i==0) {
+            result=false;
+        }else {
+            result=true;
+        }
+        return result;
+    }
+    
     public boolean deleteHistory(Map<String, Object> param) {
         boolean result=false;
         int i=0;
@@ -122,6 +136,18 @@ public class CompanyinfoAdminService {
             result=true;
         }
         
+        return result;
+    }
+    
+    public boolean addWelfare(WelfareVO wVO) {
+        boolean result=false;
+        int i=0;
+        i=companyinfoAdminDAO.insertWelfare(wVO);
+        if(i==0) {
+            result=false;
+        }else {
+            result=true;
+        }
         return result;
     }
     
