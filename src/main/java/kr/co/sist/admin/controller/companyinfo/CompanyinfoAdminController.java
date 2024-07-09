@@ -215,7 +215,7 @@ public class CompanyinfoAdminController {
         
         companyinfoAdminService.deleteWelfare(param);
         
-        return "redirect:/companyinfo/adminHistoryWelfare.do";
+        return "redirect:/companyinfo/adminHistoryWelfare.do?companyCode=" + companyCode;
     }
     
 //    @GetMapping("/companyinfo/search_test.do")
