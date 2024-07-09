@@ -123,7 +123,7 @@ public class CompanyinfoAdminDAO {
     
     public int deleteWelfare(Map<String, Object> param)throws PersistenceException {
         int result=0;
-        SqlSession ss=mbConfig.getMyBatisHandler(false);
+        SqlSession ss=mbConfig.getMyBatisHandler(true);
         result=ss.delete("kr.co.sist.admin.companyinfo.deleteWelfare", param);
         mbConfig.closeHandler(ss);
         
