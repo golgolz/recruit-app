@@ -358,11 +358,6 @@ dl {
                 });//ajax
         	}//function
         	
-        	/* $("#btn-search").click(function(e){
-        		e.preventDefault();
-        		updateApplyList(false);
-        	});//click */
-        	
         	keywordInput = $("input[name='keyword']");
         	
         	keywordInput.on('keyup', function(event) {

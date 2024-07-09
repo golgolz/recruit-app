@@ -17,6 +17,7 @@ import kr.co.sist.user.domain.mypage.UserInfoDomain;
 import kr.co.sist.user.domain.mypage.UserReviewDomain;
 import kr.co.sist.user.service.basic.UserBasicService;
 import kr.co.sist.user.service.mypage.MypageService;
+import kr.co.sist.user.vo.mypage.CareerVO;
 import kr.co.sist.user.vo.mypage.QuestionVO;
 import kr.co.sist.user.vo.mypage.SearchVO;
 import kr.co.sist.user.vo.mypage.UpdateUserVO;
@@ -132,21 +133,60 @@ public class MypageController {
     }
 
     @GetMapping("/user/mypage/mypageCareer.do")
-    public String mypageCareer(@SessionAttribute("userId") String userId, Model model) {
-        List<UserCareerDomain> careerList = ms.searchUserCareer(userId);
-
-        model.addAttribute("careerList", careerList);
+    public String mypageCareer() {
+        /*
+         * List<UserCareerDomain> careerList = ms.searchUserCareer(userId);
+         * 
+         * model.addAttribute("careerList", careerList);
+         */
 
         return "user/mypage/mypageCareer";
     }
 
-    @GetMapping("/user/mypage/mypageReview.do")
-    public String mypageReview(@SessionAttribute("userId") String userId, Model model) {
-        List<UserReviewDomain> reviewList = ms.searchUserReview(userId);
+    @GetMapping("/api/mypage/getCareer.do")
+    @ResponseBody
+    public List<UserCareerDomain> getCareerList(@SessionAttribute("userId") String userId,
+            @ModelAttribute CareerVO cVO) {
+        cVO.setUserId(userId);
+        List<UserCareerDomain> careerList = ms.searchUserCareer(cVO);
 
-        model.addAttribute("reviewList", reviewList);
+        return careerList;
+    }
+
+    @GetMapping("/api/mypage/careerCount.do")
+    @ResponseBody
+    public int careerCnt(@SessionAttribute("userId") String userId, @ModelAttribute CareerVO cVO) {
+        cVO.setUserId(userId);
+        int cnt = ms.searchCareerCnt(cVO);
+
+        return cnt;
+    }
+
+    @GetMapping("/user/mypage/mypageReview.do")
+    public String mypageReview(Model model) {
 
         return "user/mypage/mypageReview";
+    }
+
+    @GetMapping("/api/mypage/getReviews.do")
+    @ResponseBody
+    public List<UserReviewDomain> getReviewList(@SessionAttribute("userId") String userId,
+            @ModelAttribute CareerVO cVO) {
+        cVO.setUserId(userId);
+
+        List<UserReviewDomain> reviewList = ms.searchUserReview(cVO);
+
+        return reviewList;
+    }
+
+    @GetMapping("/api/mypage/reviewCount.do")
+    @ResponseBody
+    public int reviewCnt(@SessionAttribute("userId") String userId, @ModelAttribute CareerVO cVO) {
+        cVO.setUserId(userId);
+
+        int cnt = ms.searchReviewCnt(cVO);
+
+        return cnt;
     }
 
 }
