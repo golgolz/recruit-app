@@ -69,16 +69,15 @@ public class CompanyinfoAdminController {
     @PostMapping("/companyinfo/addCompanyinfoWrite.do")
     public String insertCompanyinfoPage(CompanyinfoVO cVO,HttpServletRequest request) throws IOException {
         String nextCompNum=companyinfoAdminService.searchNextCompNum();
-        String uploadLogoPath = "C:/dev/recruit-app/src/main/webapp/WEB-INF/views/assets/images/company/logo";
+        File uploadLogoPath = new File("C:/dev/recruit-app/src/main/webapp/assets/images/company/logo");
 
-        File logoDir = new File(uploadLogoPath);
 
-        if (!logoDir.exists()) {
-            logoDir.mkdirs();
+        if (!uploadLogoPath.exists()) {
+            uploadLogoPath.mkdirs();
         }
 
         int maxSize = 100 * 1024 * 1024; // 100MB
-        MultipartRequest mrLogo = new MultipartRequest(request, uploadLogoPath, maxSize, "UTF-8", new DefaultFileRenamePolicy());
+        MultipartRequest mrLogo = new MultipartRequest(request, uploadLogoPath.getAbsolutePath(), maxSize, "UTF-8", new DefaultFileRenamePolicy());
 
         String companyName = mrLogo.getParameter("companyName");
         String businessNumber = mrLogo.getParameter("businessNumber");
@@ -111,7 +110,6 @@ public class CompanyinfoAdminController {
         System.out.println("cVO.toString() : " + cVO.toString());
         
         companyinfoAdminService.addCompanyinfoDetail(cVO);
-        
         return "redirect:/companyinfo/adminCompanyinfoList.do";
     }
     
@@ -128,7 +126,7 @@ public class CompanyinfoAdminController {
     public String updateCompanyinfo(CompanyinfoVO cVO ,HttpServletRequest request, HttpSession session) throws IOException {
         
         
-        String uploadLogoPath = "C:/dev/recruit-app/src/main/webapp/WEB-INF/views/assets/images/company/logo";
+        String uploadLogoPath = "C:/dev/recruit-app/src/main/webapp/assets/images/company/logo";
 
         File logoDir = new File(uploadLogoPath);
         //경로가 없을 시 예외를 던진다.
