@@ -10,6 +10,7 @@ import kr.co.sist.user.domain.mypage.UserCareerDomain;
 import kr.co.sist.user.domain.mypage.UserInfoDomain;
 import kr.co.sist.user.domain.mypage.UserReviewDomain;
 import kr.co.sist.user.vo.basic.UpdatePassVO;
+import kr.co.sist.user.vo.mypage.CareerVO;
 import kr.co.sist.user.vo.mypage.QuestionVO;
 import kr.co.sist.user.vo.mypage.SearchVO;
 import kr.co.sist.user.vo.mypage.UpdateUserVO;
@@ -130,26 +131,47 @@ public class MypageDAO {
         return cnt;
     }
 
-    public List<UserCareerDomain> selectUserCareer(String userId) {
+    public List<UserCareerDomain> selectUserCareer(CareerVO cVO) {
         SqlSession ss = myBatis.getMyBatisHandler(false);
 
         List<UserCareerDomain> careerList =
-                ss.selectList("kr.co.sist.mapper.user.mypage.mypageMapper.selectCareer", userId);
+                ss.selectList("kr.co.sist.mapper.user.mypage.mypageMapper.selectCareer", cVO);
 
         myBatis.closeHandler(ss);
 
         return careerList;
     }
 
-    public List<UserReviewDomain> selectUserReview(String userId) {
+    public int selectCareerCnt(CareerVO cVO) {
+        SqlSession ss = myBatis.getMyBatisHandler(false);
+
+        int cnt = ss.selectOne("kr.co.sist.mapper.user.mypage.mypageMapper.selectCareerCnt", cVO);
+
+        myBatis.closeHandler(ss);
+
+        return cnt;
+    }
+
+    public List<UserReviewDomain> selectUserReview(CareerVO cVO) {
         SqlSession ss = myBatis.getMyBatisHandler(false);
 
         List<UserReviewDomain> reviewList =
-                ss.selectList("kr.co.sist.mapper.user.mypage.mypageMapper.selectReview", userId);
+                ss.selectList("kr.co.sist.mapper.user.mypage.mypageMapper.selectReview", cVO);
 
         myBatis.closeHandler(ss);
 
         return reviewList;
     }
+
+    public int selectReviewCnt(CareerVO cVO) {
+        SqlSession ss = myBatis.getMyBatisHandler(false);
+
+        int cnt = ss.selectOne("kr.co.sist.mapper.user.mypage.mypageMapper.selectReviewCnt", cVO);
+
+        myBatis.closeHandler(ss);
+
+        return cnt;
+    }
+
 
 }

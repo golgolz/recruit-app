@@ -12,6 +12,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class UserCareerDomain {
+    private String companyCode;
     private String logo;
     private String companyName;
     private int revenue;

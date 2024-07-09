@@ -10,6 +10,7 @@ import kr.co.sist.user.domain.mypage.UserCareerDomain;
 import kr.co.sist.user.domain.mypage.UserInfoDomain;
 import kr.co.sist.user.domain.mypage.UserReviewDomain;
 import kr.co.sist.user.vo.basic.UpdatePassVO;
+import kr.co.sist.user.vo.mypage.CareerVO;
 import kr.co.sist.user.vo.mypage.QuestionVO;
 import kr.co.sist.user.vo.mypage.SearchVO;
 import kr.co.sist.user.vo.mypage.UpdateUserVO;
@@ -91,16 +92,28 @@ public class MypageService {
         return cnt;
     }
 
-    public List<UserCareerDomain> searchUserCareer(String userId) {
-        List<UserCareerDomain> careerList = mDAO.selectUserCareer(userId);
+    public List<UserCareerDomain> searchUserCareer(CareerVO cVO) {
+        List<UserCareerDomain> careerList = mDAO.selectUserCareer(cVO);
 
         return careerList;
     }
 
-    public List<UserReviewDomain> searchUserReview(String userId) {
-        List<UserReviewDomain> reviewList = mDAO.selectUserReview(userId);
+    public int searchCareerCnt(CareerVO cVO) {
+        int cnt = mDAO.selectCareerCnt(cVO);
+
+        return cnt;
+    }
+
+    public List<UserReviewDomain> searchUserReview(CareerVO cVO) {
+        List<UserReviewDomain> reviewList = mDAO.selectUserReview(cVO);
 
         return reviewList;
+    }
+
+    public int searchReviewCnt(CareerVO cVO) {
+        int cnt = mDAO.selectReviewCnt(cVO);
+
+        return cnt;
     }
 
     public String replaceDash(String phoneNumber) {
