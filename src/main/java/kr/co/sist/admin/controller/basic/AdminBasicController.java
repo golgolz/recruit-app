@@ -108,8 +108,9 @@ public class AdminBasicController {
 
         Map<String, Object> response = new HashMap<String, Object>();
         String resultId = abs.chkDuplAdminId(insertAdminVO.getAdminId());
+        System.out.println(resultId);
 
-        if (resultId != null || resultId != "") {
+        if (resultId != null && resultId != "") {
             response.put("resultMsg", "duplication");
             return response;
         }

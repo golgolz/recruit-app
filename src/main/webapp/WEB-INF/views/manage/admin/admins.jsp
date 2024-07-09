@@ -147,8 +147,8 @@
 		  			 alert("새로운 관리자가 등록 되었습니다.");
 		  			 updateAdminList(false);
 		  			 resetForm();
-	  			    }else if(response.resultMsg === 'duplication') {
-    	            	alert('이미 존재하는 ID로는 변경이 불가합니다.');
+	  			    }else if(response.resultMsg == 'duplication') {
+    	            	alert('이미 존재하는 ID로는 등록이 불가합니다.');
     	            }else {
 	  			      alert("문제가 발생 했습니다. 잠시 후 다시 시도해주세요.");
 	  			      resetForm();

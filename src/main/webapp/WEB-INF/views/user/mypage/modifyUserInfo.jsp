@@ -145,7 +145,7 @@
 				  alert('잘못된 휴대폰번호 형식입니다.');
 				  return;
 			  }else if(!isValidateTel){
-			      alert('전화번호는 숫자로 최대 11자까지만 입력이 가능합니다.');
+			      alert('잘못된 전화번호 형식입니다.');
 				  return;
 			  }
       	  	  
@@ -219,7 +219,7 @@
 		    function validateTelNumber() {
 				  var chkTelNumber = tel.val().trim().replace(/-/g, '');
 				  // 전화번호 유효성 정규식 : 숫자 10-11자로 구성
-				  var isValid = /^\d{10,11}$/.test(chkTelNumber); 
+				  var isValid = /^(02|032)\d{7,8}$/.test(chkTelNumber);
 				  return isValid;
 			}//function
 			
