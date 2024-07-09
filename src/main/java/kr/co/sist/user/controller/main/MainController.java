@@ -23,45 +23,35 @@ public class MainController {
     @Autowired(required = false)
     private MainService mainService;
 
-    
-    
-   
     @GetMapping("/")
     public String redirectToMain() {
         return "redirect:/main/main.do";
     }
-    
-    
+
     @GetMapping("/main.do")
     public String main(HttpSession session, HttpServletRequest request, Model model) throws UnsupportedEncodingException {
         List<MainVO> recentJobPosts = mainService.getRecentJobPosts();
         List<MainVO> highSalaryPositions = mainService.getHighSalaryPositions();
 
         String userId = (String) session.getAttribute("userId");
-        List<MainVO> interestedPositions;
+        List<MainVO> interestedPositions = (userId != null) ? mainService.getInterestedPositions(userId) : mainService.getDefaultInterestedPositions();
         List<MainVO> viewHistory;
 
-        if (userId != null) {
-            interestedPositions = mainService.getInterestedPositions(userId);
-            viewHistory = mainService.getViewHistory(userId);
-        } else {
-            interestedPositions = mainService.getDefaultInterestedPositions();
-            Cookie[] cookies = request.getCookies();
-            String viewHistoryCookie = null;
-            if (cookies != null) {
-                for (Cookie cookie : cookies) {
-                    if (cookie.getName().equals("viewHistory")) {
-                        viewHistoryCookie = URLDecoder.decode(cookie.getValue(), "UTF-8");
-                        break;
-                    }
+        Cookie[] cookies = request.getCookies();
+        String viewHistoryCookie = null;
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("viewHistory")) {
+                    viewHistoryCookie = URLDecoder.decode(cookie.getValue(), "UTF-8");
+                    break;
                 }
             }
-
-            // 로그 추가
-            System.out.println("쿠키에서 불러온 viewHistoryCookie: " + viewHistoryCookie);
-
-            viewHistory = mainService.getViewHistoryFromCookie(viewHistoryCookie);
         }
+
+        // 로그 추가
+        System.out.println("쿠키에서 불러온 viewHistoryCookie: " + viewHistoryCookie);
+
+        viewHistory = mainService.getViewHistoryFromCookie(viewHistoryCookie);
 
         model.addAttribute("recentJobPosts", recentJobPosts);
         model.addAttribute("interestedPositions", interestedPositions);
@@ -113,5 +103,4 @@ public class MainController {
 
         return "recruit/detail"; // 공고 상세 페이지 JSP 경로
     }
-    
 }
