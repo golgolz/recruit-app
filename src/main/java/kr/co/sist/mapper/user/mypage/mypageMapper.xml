@@ -47,10 +47,41 @@
 		set name=#{ name }, phone=#{ phone }, tel=#{ tel }
 		where user_id=#{ userId }
   	</update>
-  	<select id="selectApply" parameterType="String" resultMap="userApplyList">
-	  	select cpi.company_name, rc.title, ap.apply_date, ap.progress_state
-		from apply ap, recruit rc, companyinfo cpi
-		where ((ap.recruit_num=rc.recruit_num) and (rc.company_code=cpi.company_code)) and ap.user_id=#{ userId }
+  	<select id="selectApply" parameterType="kr.co.sist.user.vo.mypage.SearchVO" resultMap="userApplyList">
+  		select rnum,company_name,title,apply_date,progress_state
+	  	from (select row_number() over(order by ap.apply_date desc) as rnum, cpi.company_name, rc.title, ap.apply_date, ap.progress_state
+			  from apply ap, recruit rc, companyinfo cpi
+			<where>
+			  	((ap.recruit_num=rc.recruit_num) and (rc.company_code=cpi.company_code)) and ap.user_id=#{ userId }
+				<if test="progressState != null and progressState != ''">
+					and progress_state=#{ progressState }
+				</if>			
+				<if test="keyword != null and keyword != ''">
+					and company_name like '%'||#{ keyword }||'%'
+				</if>
+			</where>
+			  )
+		<where>
+			<if test="startNum != 0 and endNum != 0">
+				and rnum between #{startNum} and #{endNum}
+			</if>
+		</where>
+  	</select>
+  	<select id="selectApplyCnt" parameterType="kr.co.sist.user.vo.mypage.SearchVO" resultType="int">
+  		select count(*) as total_count
+	  	from (
+	  		  select row_number() over(order by ap.apply_date desc) as rnum, cpi.company_name, rc.title, ap.apply_date, ap.progress_state
+			  from apply ap, recruit rc, companyinfo cpi
+			<where>
+			  	((ap.recruit_num=rc.recruit_num) and (rc.company_code=cpi.company_code)) and ap.user_id=#{ userId }
+				<if test="progressState != null and progressState != ''">
+					and progress_state=#{ progressState }
+				</if>			
+				<if test="keyword != null and keyword != ''">
+					and company_name like '%'||#{ keyword }||'%'
+				</if>
+			</where>
+			  )
   	</select>
   	<select id="selectCareer" parameterType="String" resultMap="userCareerList">
 	  	select cpi.logo,cpi.company_name,cpi.revenue,cpi.headcount

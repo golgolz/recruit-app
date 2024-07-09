@@ -11,6 +11,7 @@ import kr.co.sist.user.domain.mypage.UserInfoDomain;
 import kr.co.sist.user.domain.mypage.UserReviewDomain;
 import kr.co.sist.user.vo.basic.UpdatePassVO;
 import kr.co.sist.user.vo.mypage.QuestionVO;
+import kr.co.sist.user.vo.mypage.SearchVO;
 import kr.co.sist.user.vo.mypage.UpdateUserVO;
 
 @Service
@@ -78,10 +79,16 @@ public class MypageService {
         return qrd;
     }
 
-    public List<UserApplyDomain> searchUserApply(String userId) {
-        List<UserApplyDomain> applyList = mDAO.selectUserApply(userId);
+    public List<UserApplyDomain> searchUserApply(SearchVO sVO) {
+        List<UserApplyDomain> applyList = mDAO.selectUserApply(sVO);
 
         return applyList;
+    }
+
+    public int searchApplyCnt(SearchVO sVO) {
+        int cnt = mDAO.selectApplyCnt(sVO);
+
+        return cnt;
     }
 
     public List<UserCareerDomain> searchUserCareer(String userId) {
@@ -101,7 +108,12 @@ public class MypageService {
     }
 
     public String formatNumber(String phoneNumber) {
-        String formatNum = phoneNumber.replaceFirst("(\\d{3})(\\d{3,4})(\\d{4})", "$1-$2-$3");
+        String formatNum = "";
+        if (phoneNumber.length() == 10) {
+            formatNum = phoneNumber.replaceFirst("(\\d{2})(\\d{3,4})(\\d{4})", "$1-$2-$3");
+        } else {
+            formatNum = phoneNumber.replaceFirst("(\\d{3})(\\d{3,4})(\\d{4})", "$1-$2-$3");
+        }
         return formatNum;
     }
 

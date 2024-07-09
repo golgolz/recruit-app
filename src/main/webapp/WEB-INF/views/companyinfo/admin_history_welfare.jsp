@@ -86,6 +86,7 @@ input{
 				</form>
 				<form id="frmDeleteWelfare" action="http://localhost/recruit-app/companyinfo/deleteWelfare.do" method="post">
 				<input type="hidden" id="welfare" value="" name="hidWelfare"/>
+				<input type="hidden" id="companyCode" name="companyCode" value="${companyIntroDetail.companyCode}"/>
 				</form>
 				<div class="contents">
 				<c:if test="${not empty requestScope.companyDetail}">
@@ -185,7 +186,7 @@ input{
 					</form>
 						<div class="alignCenter">
 							<% if(request.getParameter("code") == null){ %>
-								<input type="button" id="btn-register" class="btn btn-outline-dark btn-sm detail-control" value="뒤로" onClick="javascript:history.back();"/>
+								<input type="button" id="btn-register" class="btn btn-outline-dark btn-sm detail-control" value="뒤로" onclick="location.href='http://localhost/recruit-app/companyinfo/adminCompanyinfoList.do'"/>
 							<% } else { %>
 								<input type="button" id="btn-update" class="btn btn-outline-warning btn-sm detail-control" value="수정하기" />
 								<input type="button" id="btn-delete" class="btn btn-outline-danger btn-sm detail-control" value="삭제하기" />

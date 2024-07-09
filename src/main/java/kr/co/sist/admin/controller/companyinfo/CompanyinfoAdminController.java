@@ -203,8 +203,8 @@ public class CompanyinfoAdminController {
         
         companyinfoAdminService.deleteHistory(param);
         
-        return "redirect:/companyinfo/adminHistoryWelfare.do";
-    }
+       return "redirect:/companyinfo/adminHistoryWelfare.do?companyCode=" + companyCode;  
+       }
     
     @PostMapping("/companyinfo/deleteWelfare.do")
     public String deleteWelfare(@RequestParam("hidWelfare") String category, HttpSession session) {
@@ -215,7 +215,7 @@ public class CompanyinfoAdminController {
         
         companyinfoAdminService.deleteWelfare(param);
         
-        return "redirect:/companyinfo/adminHistoryWelfare.do";
+        return "redirect:/companyinfo/adminHistoryWelfare.do?companyCode=" + companyCode;
     }
     
 //    @GetMapping("/companyinfo/search_test.do")

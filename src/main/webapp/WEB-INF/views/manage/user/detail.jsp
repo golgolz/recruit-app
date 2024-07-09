@@ -79,7 +79,14 @@
 					<h6 class="font-weight-bolder mb-0">회원정보 상세</h6>
 				</nav>
 				<p style="font-size: 15px; text-align: right;">
-							<strong>최근 로그인 일시: ${ detailInfo.recentloginDate }</strong>
+							<strong>최근 로그인 일시: 
+								<c:if test="${ detailInfo.recentloginDate == null }">
+									오래 전
+								</c:if>
+								<c:if test="${ detailInfo.recentloginDate != null }">
+									${ detailInfo.recentloginDate }
+								</c:if>
+							</strong>
 							</p>
 			</div>
 		</nav>
@@ -102,35 +109,30 @@
 									<td class="label">회원명</td>
 									<td class="box text">
 										${ detailInfo.name }
-										<!-- <input type="text" name="name" value="이*화" size="20" class="inputbox naver_shopping_prodName" /> -->
 									</td>
 								</tr>
 								<tr>
 									<td class="label">성별</td>
 									<td class="box text">
 										${ detailInfo.gender }
-										<!-- <input type="text" name="name" value="여자" size="20" class="inputbox naver_shopping_prodName" /> -->
 									</td>
 								</tr>
 								<tr>
 									<td class="label">아이디</td>
 									<td class="box text">
 										${ detailInfo.userId }
-										<!-- <input type="text" name="name" value="l**@daum.net" size="20" class="inputbox naver_shopping_prodName" /> -->
 									</td>
 								</tr>
 								<tr>
 									<td class="label">휴대폰번호</td>
 									<td class="box text">
 									${ detailInfo.phone }
-										<!-- <input type="text" name="name" value="010-****-1234" size="20" class="inputbox naver_shopping_prodName" /> -->
 									</td>
 								</tr>
 								<tr>
 									<td class="label">전화번호</td>
 									<td class="box text">
 									${ detailInfo.tel }
-										<!-- <input type="text" name="name" value="02-***-5678" size="20" class="inputbox naver_shopping_prodName" /> -->
 									</td>
 								</tr>
 							</tbody>
@@ -149,14 +151,12 @@
 									<td class="label">가입일자</td>
 									<td class="box text">
 									${ detailInfo.signupDate }
-										<!-- <input type="text" name="name" value="2021-03-22" size="20" class="inputbox naver_shopping_prodName" /> -->
 									</td>
 								</tr>
 								<tr>
 									<td class="label">생년월일</td>
 									<td class="box text">
 									${ detailInfo.birthDate }
-										<!-- <input type="text" name="name" value="" size="20" class="inputbox naver_shopping_prodName" /> -->
 									</td>
 								</tr>
 							</tbody>
@@ -209,7 +209,7 @@
 								<td><%= applyInfo.getCompanyName() %></td>
 								<td><%= applyInfo.getApplyDate() %></td>
 								<td><%= applyInfo.getTitle() %>.</td>
-								<td><input type="button" value="바로가기" class="btn btn-outline-secondary btn-sm" style="font-weight: bold;margin:0px auto;" onclick="location.href='http://localhost/recruit-app/manage/resumes/detail.do?<%= applyInfo.getResumeNum() %>'" /></td>
+								<td><input type="button" value="바로가기" class="btn btn-outline-secondary btn-sm" style="font-weight: bold;margin:0px auto;" onclick="location.href='http://localhost/recruit-app/manage/resumes/detail.do?id=<%= applyInfo.getResumeNum() %>'" /></td>
 								<td><%= applyInfo.getProgressState() %></td>
 							</tr>
 							<%
@@ -258,7 +258,7 @@
 							<tr class="list0">
 								<td><%= i+1 %></td>
 								<td><%= qnaInfo.getCategory() %></td>
-								<td><a href="http://localhost/recruit-app/manage/qna/new_detail.do?qna_num=<%= qnaInfo.getQnaNum() %>"><%= qnaInfo.getTitle() %></a></td>
+								<td><a href="http://localhost/recruit-app/manage/qna/old_detail.do?qna_num=<%= qnaInfo.getQnaNum() %>"><%= qnaInfo.getTitle() %></a></td>
 								<td><%= qnaInfo.getInputDate() %></td>
 								<td><%= qnaInfo.getFlag() %></td>
 							</tr>

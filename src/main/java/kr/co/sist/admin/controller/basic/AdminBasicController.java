@@ -65,7 +65,7 @@ public class AdminBasicController {
 
         model.addAttribute("adminId", adminId);
 
-        return "manage/dashboard/dashboard";
+        return "redirect:/manage/dashboard/dashboard.do";
     }
 
     @GetMapping("manage/logout.do")
@@ -108,8 +108,9 @@ public class AdminBasicController {
 
         Map<String, Object> response = new HashMap<String, Object>();
         String resultId = abs.chkDuplAdminId(insertAdminVO.getAdminId());
+        System.out.println(resultId);
 
-        if (resultId != null || resultId != "") {
+        if (resultId != null && resultId != "") {
             response.put("resultMsg", "duplication");
             return response;
         }
@@ -145,14 +146,12 @@ public class AdminBasicController {
     public Map<String, Object> modifyAdminInfo(String adminId, UpdateAdminInfoVO adminInfo) {
 
         Map<String, Object> response = new HashMap<String, Object>();
-        String resultId = abs.chkDuplAdminId(adminId);
+        String resultId = abs.chkDuplAdminId(adminInfo.getModifyAdminId());
 
-        if (resultId != null || resultId != "") {
+        if (resultId != null && !adminId.equals(resultId)) {
             response.put("resultMsg", "duplication");
             return response;
         }
-
-        adminInfo.setAdminId(adminId);
 
         int cnt = abs.modifyAdminInfo(adminInfo);
         if (cnt > 0) {

@@ -11,6 +11,7 @@ import kr.co.sist.user.domain.mypage.UserInfoDomain;
 import kr.co.sist.user.domain.mypage.UserReviewDomain;
 import kr.co.sist.user.vo.basic.UpdatePassVO;
 import kr.co.sist.user.vo.mypage.QuestionVO;
+import kr.co.sist.user.vo.mypage.SearchVO;
 import kr.co.sist.user.vo.mypage.UpdateUserVO;
 
 @Component
@@ -104,15 +105,29 @@ public class MypageDAO {
         return qrd;
     }
 
-    public List<UserApplyDomain> selectUserApply(String userId) {
+    public List<UserApplyDomain> selectUserApply(SearchVO sVO) {
         SqlSession ss = myBatis.getMyBatisHandler(false);
 
         List<UserApplyDomain> applyList =
-                ss.selectList("kr.co.sist.mapper.user.mypage.mypageMapper.selectApply", userId);
+                ss.selectList("kr.co.sist.mapper.user.mypage.mypageMapper.selectApply", sVO);
 
+        for (UserApplyDomain uad : applyList) {
+            System.out.println(uad.getProgressState());
+        }
+        System.out.println(sVO.getProgressState());
         myBatis.closeHandler(ss);
 
         return applyList;
+    }
+
+    public int selectApplyCnt(SearchVO sVO) {
+        SqlSession ss = myBatis.getMyBatisHandler(false);
+
+        int cnt = ss.selectOne("kr.co.sist.mapper.user.mypage.mypageMapper.selectApplyCnt", sVO);
+
+        myBatis.closeHandler(ss);
+
+        return cnt;
     }
 
     public List<UserCareerDomain> selectUserCareer(String userId) {
