@@ -93,7 +93,7 @@ public class MainController {
 
         String encodedCookieValue = URLEncoder.encode(viewHistoryCookie, "UTF-8");
         Cookie newCookie = new Cookie("viewHistory", encodedCookieValue);
-        newCookie.setMaxAge(60 * 60 * 24 * 1); // 쿠키 유효기간 1일
+        newCookie.setMaxAge(60 * 60 * 1 * 1); // 쿠키 유효기간 1시간
         newCookie.setPath("/");
 
         // 쿠키 설정 후 로그 출력
