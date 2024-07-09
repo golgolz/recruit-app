@@ -114,6 +114,44 @@ FETCH FIRST 5 ROWS ONLY
 
 
 </select>
+
+<!-- 5. 공고 번호로 공고 상세 정보 조회 -->
+<select id="selectRecruitByNum" resultType="kr.co.sist.user.vo.main.MainVO">
+    SELECT
+        R.RECRUIT_NUM AS recruitNum,
+        C.COMPANY_IMG AS companyImage,
+        P.POSITION_NAME AS positionName,
+        C.COMPANY_NAME AS companyName,
+        R.INPUT_DATE AS inputDate
+    FROM
+        RECRUIT R
+    JOIN
+        COMPANYINFO C ON R.COMPANY_CODE = C.COMPANY_CODE
+    JOIN
+        POSITION_LIST P ON R.POSITION_CODE = P.POSITION_CODE
+    WHERE
+        R.RECRUIT_NUM = #{recruitNum}
+</select>
+
+<select id="selectViewHistoryFromCookie" resultType="kr.co.sist.user.vo.main.MainVO">
+    SELECT
+        R.RECRUIT_NUM AS recruitNum,
+        C.COMPANY_IMG AS companyImage,
+        P.POSITION_NAME AS positionName,
+        C.COMPANY_NAME AS companyName,
+        SYSDATE AS viewDate  -- 조회일을 현재 날짜로 설정
+    FROM
+        RECRUIT R
+    JOIN
+        COMPANYINFO C ON R.COMPANY_CODE = C.COMPANY_CODE
+    JOIN
+        POSITION_LIST P ON R.POSITION_CODE = P.POSITION_CODE
+    WHERE
+        R.RECRUIT_NUM IN
+        <foreach item="recruitNum" index="index" collection="array" open="(" separator="," close=")">
+            #{recruitNum}
+        </foreach>
+</select>
     
     
     
