@@ -65,13 +65,21 @@
                     <td colspan="2" class="clear">
                         <link rel="stylesheet" href="https://img.echosting.cafe24.com/editors/froala/3.2.2/css/froala_editor.pkgd.min.css">
                         <script type="text/javascript" src="https://img.echosting.cafe24.com/editors/froala/3.2.2/js/froala_editor.pkgd.min.js"></script>
-                        <textarea name="content" id="content" style="width: 100%; height: 400px;">${review.content}</textarea>
-                        <script>
-                            new FroalaEditor('#content', {
-                                heightMin: 300,
-                                language: 'ko'
-                            });
-                        </script>
+<textarea name="content" id="content" style="width: 100%; height: 400px;">${review.content}</textarea>
+<script>
+    new FroalaEditor('#content', {
+        heightMin: 300,
+        language: 'ko',
+        events: {
+            'contentChanged': function () {
+                // 현재 에디터의 HTML 내용을 가져와서 텍스트만 추출
+                var textContent = this.$el.get(0).innerText;
+                // 추출한 텍스트를 다시 에디터에 설정
+                this.$el.get(0).innerText = textContent;
+            }
+        }
+    });
+</script>
                     </td>
                 </tr>
             </tbody>

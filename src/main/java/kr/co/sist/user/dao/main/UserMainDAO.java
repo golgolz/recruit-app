@@ -32,9 +32,21 @@ public class UserMainDAO {
         SqlSession ss = myBatis.getMyBatisHandler(false);
         return ss.selectList("kr.co.sist.user.dao.main.UserMainDAO.selectHighSalaryPositions");
     }
-
-    public List<MainVO> selectViewHistory() {
+    
+    public List<MainVO> selectViewHistory(String userId) {
         SqlSession ss = myBatis.getMyBatisHandler(false);
-        return ss.selectList("kr.co.sist.user.dao.main.UserMainDAO.selectViewHistory");
+        return ss.selectList("kr.co.sist.user.dao.main.UserMainDAO.selectViewHistory", userId);
     }
+    
+    // ÄíÅ° »ç¿ë 
+    public MainVO selectRecruitByNum(String recruitNum) {
+        SqlSession ss = myBatis.getMyBatisHandler(false);
+        return ss.selectOne("kr.co.sist.user.dao.main.UserMainDAO.selectRecruitByNum", recruitNum);
+    }
+    
+    public List<MainVO> selectViewHistoryFromCookie(String[] recruitNums) {
+        SqlSession ss = myBatis.getMyBatisHandler(false);
+        return ss.selectList("kr.co.sist.user.dao.main.UserMainDAO.selectViewHistoryFromCookie", recruitNums);
+    }
+
 }

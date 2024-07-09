@@ -64,55 +64,78 @@
         <div>
           <section class="Section_Section__P1hhc">
 
-            <!-- 기업 홍보란 -->
-            <div class="custom-page-wrapper" style="position:relative;">
-              <div class="custom-post-slider">
-                <i class="fas fa-chevron-left custom-prev"></i>
-                <i class="fas fa-chevron-right custom-next"></i>
-                <div class="custom-post-wrapper">
+           <!-- 기업 홍보란 -->
+<div class="custom-page-wrapper" style="position:relative;">
+  <div class="custom-post-slider">
+    <i class="fas fa-chevron-left custom-prev"></i>
+    <i class="fas fa-chevron-right custom-next"></i>
+    <div class="custom-post-wrapper">
 
-                  <div class="custom-post">
-                    <div class="custom-slider-image-container"  style="width: 150 %;">
-                      <img src="${pageContext.request.contextPath}/assets/images/ads/2.webp" class="custom-slider-image" >
-                      <div class="custom-image-text">
-                        <strong>클라썸은 지금도 전 직원 채용중.</strong> <br/>
-                        <span style="font-size: 15px;">어서 지원하세요!</span>
-                      </div>
-                    </div>
-                    <div class="custom-post-info">
-                    </div>
-                  </div>
+      <div class="custom-post">
+        <div class="custom-slider-image-container" style="width: 150%;">
+          <img src="${pageContext.request.contextPath}/assets/images/ads/2.webp" class="custom-slider-image">
+          <div class="custom-image-text">
+            <strong>클라썸은 지금도 전 직원 채용중.</strong> <br/>
+            <span style="font-size: 15px;">어서 지원하세요!</span>
+          </div>
+        </div>
+        <div class="custom-post-info">
+        </div>
+      </div>
 
-                  <div class="custom-post">
-                    <div class="custom-slider-image-container" style="width: 150%;">
-                      <img src="${pageContext.request.contextPath}/assets/images/ads/1.webp" class="custom-slider-image">
-                      <div class="custom-image-text">
-                        <strong>인공지능 (AI)포지션.</strong> <br/>
-                        <span style="font-size: 15px;">눈여겨볼 인공지능 (AI) 공고를 소개합니다</span>
-                      </div>
-                    </div>
-                    <div class="custom-post-info">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-            <script>
-              $(document).ready(function(){
-                $('.custom-post-wrapper').slick({
-                  prevArrow: $('.custom-prev'),
-                  nextArrow: $('.custom-next'),
-                  slidesToShow: 1,
-                  slidesToScroll: 1,
-                  infinite: true,
-                  adaptiveHeight: true
-                });
-              });
-            </script>
+      <div class="custom-post">
+        <div class="custom-slider-image-container" style="width: 150%;">
+          <img src="${pageContext.request.contextPath}/assets/images/ads/1.webp" class="custom-slider-image">
+          <div class="custom-image-text">
+            <strong>인공지능 (AI)포지션.</strong> <br/>
+            <span style="font-size: 15px;">눈여겨볼 인공지능 (AI) 공고를 소개합니다</span>
+          </div>
+        </div>
+        <div class="custom-post-info">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $('.custom-post-wrapper').slick({
+      prevArrow: $('.custom-prev'),
+      nextArrow: $('.custom-next'),
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      infinite: true,
+      adaptiveHeight: true
+    });
+
+    // 스타일 적용
+    $('.custom-prev, .custom-next').css({
+      'background': 'none',
+      'border': 'none',
+      'cursor': 'pointer',
+      'padding': '0',
+      'margin': '0',
+      'color': '#70737C', // 폰트 아이콘의 색상
+      'font-size': '24px', // 폰트 아이콘의 크기
+      'position': 'absolute', // 위치 설정
+      'top': '50%', // 중간에 위치하게 설정
+      'transform': 'translateY(-50%)' // 수직 정렬
+    });
+
+    $('.custom-prev').css({
+      'transform': 'rotate(90deg) translateY(-50%)' // 왼쪽 화살표를 올바른 방향으로 설정
+    });
+
+    $('.custom-next').css({
+      'transform': 'rotate(180deg) translateY(-50%)' // 오른쪽 화살표를 올바른 방향으로 설정
+    });
+  });
+</script>
+
+
 
             <!-- 첫 번째 테마: 최근 등록된 공고 -->
 <article class="MatchedJobArea_MatchedJobArea__vFPPT">
@@ -147,7 +170,7 @@
                     <div class="slick-track" id="slick-track-1" style="width: 100%; opacity: 1; transform: translate3d(0px, 0px, 0px);">
                         <c:forEach var="post" items="${recentJobPosts}">
                             <div class="slick-slide" tabindex="-1" aria-hidden="false" style="outline: none; width: calc(25% - 10px); margin-right: 10px;">
-                                <a href="../recruit/detail.do?id=${post.recruitNum}">
+                                 <a href="<c:url value='/main/detail.do?id=${post.recruitNum}' />">
                                     <div class="JobCard_JobCard__thumb__iNW6E" style="height: 135px; width: 200px;">
                                         <img src="<c:url value='../assets/images/company/${post.companyImage}' />" alt="${post.companyName}" style="width: 100%; height: 100%; object-fit: cover;">
                                     </div>
@@ -217,7 +240,7 @@
                     <div class="slick-track" id="slick-track-2" style="width: 100%; opacity: 1; transform: translate3d(0px, 0px, 0px);">
                         <c:forEach var="post" items="${interestedPositions}">
                             <div class="slick-slide" tabindex="-1" aria-hidden="false" style="outline: none; width: calc(25% - 10px); margin-right: 10px;">
-                                <a href="../recruit/detail.do?id=${post.recruitNum}">
+                                 <a href="<c:url value='/main/detail.do?id=${post.recruitNum}' />">
                                     <div class="JobCard_JobCard__thumb__iNW6E" style="height: 135px; width: 200px;">
                                         <img src="<c:url value='../assets/images/company/${post.companyImage}' />" alt="${post.companyName}" style="width: 100%; height: 100%; object-fit: cover;">
                                     </div>
@@ -283,7 +306,7 @@
                     <div class="slick-track" id="slick-track-2" style="width: 100%; opacity: 1; transform: translate3d(0px, 0px, 0px);">
                         <c:forEach var="post" items="${highSalaryPositions}">
                             <div class="slick-slide" tabindex="-1" aria-hidden="false" style="outline: none; width: calc(25% - 10px); margin-right: 10px;">
-                                <a href="../recruit/detail.do?id=${post.recruitNum}">
+                                 <a href="<c:url value='/main/detail.do?id=${post.recruitNum}' />">
                                     <div class="JobCard_JobCard__thumb__iNW6E" style="height: 134pxpx; width: 200px;">
                                         <img src="<c:url value='../assets/images/company/${post.companyImage}' />" alt="${post.companyName}" style="width: 100%; height: 100%; object-fit: cover;">
                                     </div>
@@ -316,7 +339,7 @@
 </article>
 
 
-<!--  네 번째 테마: 조회 기록 -->
+<!-- 네 번째 테마: 조회 기록 -->
 
 <article class="ViewHistory_ViewHistory__xyz">
     <div class="CarouselContainer_CarouselContainer__95CM6">
@@ -357,33 +380,33 @@
                                     <div>
                                         <p style="margin-bottom: 4px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; text-overflow: ellipsis; font-weight: 600; font-size: 16px; letter-spacing: .0057em; line-height: 24px;">${post.positionName}</p>
                                         <p>${post.companyName}</p>
-                                        <p>${post.viewDate}</p>
+                                        
                                     </div>
                                 </a>
                             </div>
                         </c:forEach>
                         <!-- 더미 컨텐츠 -->
                         <c:if test="${fn:length(viewHistory) < 4}">
-    <c:forEach begin="1" end="${4 - fn:length(viewHistory)}">
-        <div class="slick-slide" tabindex="-1" aria-hidden="false" style="outline: none; width: calc(25% - 10px); margin-right: 10px;">
-            <a href="#"> 
-                <div class="JobCard_JobCard__thumb__iNW6E" style="height: 134px; width: 200px; background-color: lightgray;"></div>
-                <div>
-                    <p style="margin-bottom: 4px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; text-overflow: ellipsis; font-weight: 600; font-size: 16px; letter-spacing: .0057em; line-height: 24px;">&nbsp;</p> 
-                    <p>&nbsp;</p> 
-                    <p>&nbsp;</p> <div style="height: 24px;"></div>
-                </div>
-            </a>
-        </div>
-    </c:forEach>
-</c:if>
-
+                            <c:forEach begin="1" end="${4 - fn:length(viewHistory)}">
+                                <div class="slick-slide" tabindex="-1" aria-hidden="false" style="outline: none; width: calc(25% - 10px); margin-right: 10px;">
+                                    <a href="#"> 
+                                        <div class="JobCard_JobCard__thumb__iNW6E" style="height: 134px; width: 200px; background-color: lightgray;"></div>
+                                        <div>
+                                            <p style="margin-bottom: 4px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; text-overflow: ellipsis; font-weight: 600; font-size: 16px; letter-spacing: .0057em; line-height: 24px;">&nbsp;</p> 
+                                            <p>&nbsp;</p> 
+                                            <p>&nbsp;</p> <div style="height: 24px;"></div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </c:forEach>
+                        </c:if>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </article>
+
       
     </section>
     </section>
