@@ -19,6 +19,8 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import kr.co.sist.admin.service.companyinfo.CompanyinfoAdminService;
 import kr.co.sist.domain.companyinfo.SearchDomain;
 import kr.co.sist.vo.companyinfo.CompanyinfoVO;
+import kr.co.sist.vo.companyinfo.HistoryVO;
+import kr.co.sist.vo.companyinfo.WelfareVO;
 
 @Controller
 public class CompanyinfoAdminController {
@@ -194,12 +196,56 @@ public class CompanyinfoAdminController {
         return "redirect:/companyinfo/adminCompanyinfoList.do";
     }//updateCompanyinfo
     
+    @PostMapping("/companyinfo/insertHistory.do")
+    public String insertHistory(HttpServletRequest request, HttpSession session) {
+        String companyCode= (String) session.getAttribute("companyCode");
+        String baseDate = request.getParameter("hidHistoryDate");
+        String historyContent = request.getParameter("hidInHistoryContent");
+
+        System.out.println("================Received data================");
+        System.out.println("Company Code: " + companyCode);
+        System.out.println("Base Date: " + baseDate);
+        System.out.println("History Content: " + historyContent);
+        
+        HistoryVO hVO = new HistoryVO();
+        hVO.setCompanyCode(companyCode);
+        hVO.setBaseDate(baseDate);
+        hVO.setHistoryContent(historyContent);
+
+        companyinfoAdminService.addHistory(hVO);
+
+        return "redirect:/companyinfo/adminHistoryWelfare.do?companyCode=" + companyCode;
+    }
+
+    @PostMapping("/companyinfo/insertWelfare.do")
+    public String insertWelfare(HttpServletRequest request, HttpSession session) {
+        String companyCode= (String) session.getAttribute("companyCode");
+        String category = request.getParameter("hidWelfareCategory");
+        String welfareContent = request.getParameter("hidWelfareContent");
+
+        System.out.println("================Received data================");
+        System.out.println("Company Code: " + companyCode);
+        System.out.println("category: " + category);
+        System.out.println("welfare Content: " + welfareContent);
+        
+        WelfareVO wVO = new WelfareVO();
+        wVO.setCompanyCode(companyCode);
+        wVO.setCategory(category);
+        wVO.setWelfareContent(welfareContent);
+
+        companyinfoAdminService.addWelfare(wVO);
+
+        return "redirect:/companyinfo/adminHistoryWelfare.do?companyCode=" + companyCode;
+    }
+    
     @PostMapping("/companyinfo/deleteHistory.do")
     public String deleteHistory(@RequestParam("hidHistory") String baseDate, HttpSession session) {
         Map<String, Object> param=new HashMap<String, Object>();
         String companyCode=(String) session.getAttribute("companyCode");
         param.put("baseDate", baseDate);
         param.put("companyCode", companyCode);
+        
+        System.out.println("base date: "+baseDate);
         
         companyinfoAdminService.deleteHistory(param);
         
