@@ -17,6 +17,12 @@
 	<!-- golgolz end -->
 	<style type="text/css">
 		<!-- golgolz start -->
+		#profileImageContainer {
+		    background-image: url('http://localhost/recruit-app/assets/images/mypage/uploadImg/loading.gif'); /* 로딩 이미지 배경으로 설정 */
+		    background-size: cover;
+		    background-position: center;
+		}
+		
 		<!-- golgolz end -->
 	</style>
 	<script type="text/javascript">
@@ -24,8 +30,31 @@
 			<!-- golgolz start -->
 			$("#modifyUser").click(function(){
       		  location.href = "http://localhost/recruit-app/user/mypage/checkPass.do";
-      	  });
+      	  	});//click
 			<!-- golgolz end -->
+		});
+		
+		document.addEventListener('DOMContentLoaded', function() {
+
+		    var updatedProfileImg = '${ userInfo.profileImg }';
+		    if (updatedProfileImg) {
+		    	var profileImage = document.getElementById("profileImage");
+		        var profileImageContainer = document.getElementById("profileImageContainer");
+		        
+		        function handleImageLoad() {
+		            profileImageContainer.style.backgroundImage = "none";
+		          }
+
+		        var xhr = new XMLHttpRequest();
+			    xhr.open('HEAD', "http://localhost/recruit-app/assets/images/mypage/uploadImg/" + updatedProfileImg, true);
+			    xhr.onload = function() {
+			      if (xhr.status === 200) { // 이미지 파일이 존재하는 경우
+			    	  profileImage.onload = handleImageLoad;
+				      profileImage.src = "http://localhost/recruit-app/assets/images/mypage/uploadImg/" + updatedProfileImg + "?timestamp=" + Date.now();
+			      }
+			    };
+			    xhr.send();
+		    }
 		});
 	</script>
 </head>
@@ -65,10 +94,11 @@
                           <div
                             class="Avatar_Avatar__root__5Xq6z Avatar_Avatar__sizeXlarge__cwS_g ProfileViewHeaderAvatar_ProfileViewHeaderAvatar__avatar__d0_38"
                           >
-                            <div class="Avatar_Avatar__bg__MRkK0">
+                            <div id="profileImageContainer" class="Avatar_Avatar__bg__MRkK0">
                               <img
+                              	id="profileImage"
                                 alt="프로필 이미지"
-                                src="http://localhost/recruit-app/assets/images/mypage/${ userInfo.profileImg }"
+                                src="http://localhost/recruit-app/assets/images/mypage/uploadImg/loading.gif"
                                 class="Avatar_Avatar__img__kcubw"
                               />
                             </div>
