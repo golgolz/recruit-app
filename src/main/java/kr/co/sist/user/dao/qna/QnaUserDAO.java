@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import kr.co.sist.properties.MyBatisConfig;
 import kr.co.sist.user.domain.qna.UserQnaDomain;
+import kr.co.sist.user.vo.qna.SearchVO;
 import kr.co.sist.user.vo.qna.UserQnaVO;
 
 @Component
@@ -17,12 +18,19 @@ public class QnaUserDAO {
         this.myBatis = myBatis;
     }
 
-    public List<UserQnaDomain> selectMyQnas() {
+    public List<UserQnaDomain> selectMyQnas(SearchVO sVO) {// searchVOÃß°¡
         SqlSession session = myBatis.getMyBatisHandler(false);
-        List<UserQnaDomain> qnaList = null;
-        qnaList = session.selectList("kr.co.sist.qna.user.selectMyQnas");
+        List<UserQnaDomain> qna = null;
+        qna = session.selectList("kr.co.sist.qna.user.selectMyQnas", sVO);
         myBatis.closeHandler(session);
-        return qnaList;
+        return qna;
+    }
+
+    public int countMyQnas() {
+        SqlSession session = myBatis.getMyBatisHandler(false);
+        int count = session.selectOne("kr.co.sist.qna.user.countMyQnas");
+        myBatis.closeHandler(session);
+        return count;
     }
 
     public UserQnaDomain selectOneQna(int qna_num) {

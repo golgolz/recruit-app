@@ -6,24 +6,24 @@
  <mapper namespace="kr.co.sist.notice.user">
  	<!-- 전체 공지사항 리스트 조회, 페이지네이션 -->
  	<select id="selectNotices" resultType="kr.co.sist.user.domain.notice.NoticeUserDomain">
- 		select category, title, input_date, notice_num
+ 		<!-- select category, title, input_date, notice_num
  		from notice
  		where blind_flag='N'
- 		order by input_date desc
-		 <!-- <![CDATA[
-		    select category, title, input_date, notice_num
-		    from (
-		        select rownum as rnum, category, title, input_date, notice_num
-		        from (
-		            select category, title, input_date, notice_num
-		            from notice
-		            where blind_flag='N'
-		            order by input_date desc
-		        )
-		        where rownum <= #{enditemindex}
-		    )
-		    where rnum >= #{startitemindex}
-	    ]]> -->
+ 		order by input_date desc -->
+		<![CDATA[
+		    SELECT category, title, input_date, notice_num
+				FROM (
+				    SELECT rownum AS rnum, category, title, input_date, notice_num
+				    FROM (
+				        SELECT category, title, input_date, notice_num
+				        FROM notice
+				        WHERE blind_flag = 'N'
+				        ORDER BY input_date DESC
+				    )
+				    WHERE rownum <= #{endItemIndex}
+				)
+				WHERE rnum >= #{startItemIndex};
+	    ]]>
  	</select> 
  	
  	<!-- 공지사항 수 전체 얻기 -->

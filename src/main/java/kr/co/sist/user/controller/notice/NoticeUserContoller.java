@@ -33,9 +33,7 @@ public class NoticeUserContoller {
     @GetMapping("/notice/noticesByCategory.do")
     @ResponseBody
     public Map<String, Object> searhNoticesByCategory(@RequestParam("category") String category) {
-        // System.out.println("-----------------" + category);
         List<NoticeUserDomain> noticeList = noticeUserService.searchNoticesByCategory(category);
-        // System.out.println("---------????--------" + noticeList);
         Map<String, Object> response = new HashMap<>();
         response.put("noticeList", noticeList);
         return response; // 공지사항 카테고리 검색

@@ -14,7 +14,7 @@ import lombok.ToString;
 @AllArgsConstructor
 public class UserQnaVO {
 
-    private int qna_num;
+    private int qna_num, view_num;
     private String category, title, content, user_id, flag;
     private Date input_date;
 
