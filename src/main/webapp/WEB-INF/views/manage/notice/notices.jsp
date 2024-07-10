@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" info=""%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -107,33 +108,17 @@
 							</tr>
 						</thead>
 						<tbody>
+						<c:forEach var="notice" items="${requestScope.listNotice}" varStatus="i">
 							<tr class="list0">
-								<td>1</td>
-								<td>일반공지</td>
-								<td>[시스템 점검 공지] 3/28(목) AM 01시-05시</td>
-								<td>2024.03.19</td>
+								<td><c:out value="${ i.index +1 }"/></td>
+								<td><c:out value="${ notice.category }"/></td>
+								<td><c:out value="${ notice.title }"/></td>
+								<td><c:out value="${ notice.inputDate }"/></td>
 								<td>
 									<input type="button" value="바로가기" class="btn btn-outline-secondary btn-sm" style="font-weight: bold; margin: 0px auto;" onclick="location.href='http://localhost/recruit-app/manage/notice/noticesDetail.do'"/>
 								</td>
 							</tr>
-							<tr class="list0">
-								<td>2</td>
-								<td>서비스</td>
-								<td>[서비스] 기업회원 인재검색 무료 문자 발송 서비스</td>
-								<td>2024.02.26</td>
-								<td>
-									<input type="button" value="바로가기" class="btn btn-outline-secondary btn-sm" style="font-weight: bold; margin: 0px auto;" onclick="location.href='http://localhost/recruit-app/manage/notice/noticesDetail.do'"/>
-								</td>
-							</tr>
-							<tr class="list0">
-								<td>3</td>
-								<td>이벤트</td>
-								<td>[이벤트] 원픽 채용 약정형 상품 출시</td>
-								<td>2024.02.16</td>
-								<td>
-									<input type="button" value="바로가기" class="btn btn-outline-secondary btn-sm" style="font-weight: bold; margin: 0px auto;" onclick="location.href='http://localhost/recruit-app/manage/notice/noticesDetail.do'"/>
-								</td>
-							</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>
