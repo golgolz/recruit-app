@@ -5,9 +5,11 @@ import java.util.List;
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import kr.co.sist.admin.vo.notice.SearchVO;
 import kr.co.sist.properties.MyBatisConfig;
 
+@Component
 public class NoticeAdminDAO {
 
     @Autowired(required=false)

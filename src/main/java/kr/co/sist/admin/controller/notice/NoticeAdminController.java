@@ -1,5 +1,7 @@
 package kr.co.sist.admin.controller.notice;
 
+import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,8 +16,8 @@ public class NoticeAdminController {
     
     @GetMapping("/manage/notice/notices.do")
     public String searchAllNotice(SearchVO sVO, Model model) {
-//        List<SearchVO> list=noticeAdminService.searchAllnotice(sVO);
-//        model.addAttribute("listNotice",list);
+        List<SearchVO> list=noticeAdminService.searchAllnotice(sVO);
+        model.addAttribute("listNotice",list);
         return "manage/notice/notices";
     }
     @GetMapping("/manage/notice/noticeSearch.do")
@@ -23,7 +25,13 @@ public class NoticeAdminController {
         return "";
     }
     @GetMapping("/manage/notice/noticesDetail.do")
-    public String searchNoticeDetail(Model model) {
+    public String searchNoticeDetail(String noticeNum, HttpSession session, Model model) {
+        List<SearchVO> list=noticeAdminService.searchNoticeDetail(noticeNum);
+        
+        session.setAttribute("noticeNum", noticeNum);
+        
+        model.addAttribute("noticeDetail",list);
+        
         return "manage/notice/notices_detail";
     }
     @GetMapping("/manage/notice/noticesWrite.do")
