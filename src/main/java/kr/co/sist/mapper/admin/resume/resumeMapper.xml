@@ -283,6 +283,7 @@
 		      'join_date' VALUE TO_CHAR(c.join_date, 'YYYY-MM-DD'),
 		      'resignation_date' VALUE TO_CHAR(c.resignation_date, 'YYYY-MM-DD'),
 		      'job_description' VALUE c.job_description,
+		      'position' VALUE c.position,
 		      'sal' VALUE c.sal
 		    )
 		  )

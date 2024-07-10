@@ -126,6 +126,7 @@
 		            	updateTitle(data.title);
 		            	updateProfileForm(data);
 		            	updateSkills(data.subData.skills); 
+		            	updateCareer(data.subData.career);
 		            	updateCertifications(data.subData.certifications);
 		            	updateIntroduction(data.introduce);
 		            	
@@ -388,6 +389,46 @@
 		        });
 
 		        $('#license_containers').append($newCert);
+		    });
+		}
+		
+		function updateCareer(careerData) {
+		    $('#career_containers').empty();
+		    
+		    careerData.forEach(function(career, index) {
+		        var newCareerHtml = $('#tplCareerItem').html().replace(/c14/g, 'c' + (index + 1));
+		        var $newCareer = $(newCareerHtml);
+		        
+		        // 회사명 설정
+		        $newCareer.find('[id^="Career_C_Name_"]').val(career.company_name);
+		        
+		        // 부서명 설정
+		        $newCareer.find('[id^="Career_C_Part_"]').val(career.dname);
+		        
+		        // 입사년월 설정
+		        $newCareer.find('[id^="Career_CSYM_"]').val(career.join_date);
+		        
+		        // 퇴사년월 설정
+		        if (career.resignation_date) {
+		            $newCareer.find('[id^="Career_CEYM_"]').val(career.resignation_date);
+		        } else {
+		            $newCareer.find('[id^="Career_CEYM_"]').val('재직중');
+		        }
+		        
+		        // 직급 설정 (데이터에 직급 정보가 있다고 가정)
+		        if (career.position) {
+		            $newCareer.find('[id^="Career_position_field"]').val(career.position);
+		        }
+		        
+		        // 연봉 설정
+		        if (career.sal) {
+		            $newCareer.find('[id^="Career_M_MainPay_User_"]').val(career.sal);
+		        }
+		        
+		        // 담당업무 설정
+		        $newCareer.find('[id^="Career_Prfm_Prt_"]').val(career.job_description);
+		        
+		        $('#career_containers').append($newCareer);
 		    });
 		}
 		

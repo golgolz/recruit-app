@@ -47,7 +47,7 @@
 		</div>
 		<div class="input input-career-duty is-label">
 			<label>직급</label> 
-			<input type="text" name="Career[c14].M_MainField" id="Career_M_MainPay_User_c14" value="" data-format-type="price" maxlength="7" />
+			<input type="text" name="position_field" id="Career_position_field" value="" maxlength="7" />
 		</div>
 		<div class="input input-career-salary is-label salaryInput">
 			<label for="Career_M_MainPay_User_c14">연봉</label> 
