@@ -42,7 +42,7 @@
 		</div>
 	</div>
 </div>
-<script type="text/template" id="tplSkillAutoComplete"></script>
+<!-- <script type="text/template" id="tplSkillAutoComplete"></script>
 <script type="text/template" id="tplSkillTabMenuItem"></script>
 <script type="text/template" id="tplSkillItem"></script>
-<script type="text/template" id="tplSelectedSkillItem"></script>
+<script type="text/template" id="tplSelectedSkillItem"></script> -->

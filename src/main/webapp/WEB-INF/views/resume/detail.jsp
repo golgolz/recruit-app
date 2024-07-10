@@ -123,6 +123,7 @@
 		            dataType: 'JSON',
 		            success: function(data) {
 		            	console.log(data);
+		            	updateProfileForm(data);
 		            },
 		            error: function(xhr, status, error) {
 		                console.error("Error fetching data: " + error);
@@ -137,8 +138,48 @@
 			
 		}
 		
-		function udpateProfile(profileData){
-			
+		function updateProfileForm(data) {
+		    // 이름 업데이트
+		    $('#UserInfo_M_Name').val(data.owner);
+
+		    // 생년월일 업데이트
+		    $('#UserInfo_M_Born').val(data.birth);
+
+		    // 성별 업데이트
+		    $('#genderSelect').val(data.gender);
+
+		    // 이메일 업데이트
+		    $('#UserInfo_M_Email').val(data.email);
+
+		    // 전화번호 업데이트
+		    $('input[name="UserInfo.M_Hand_Phone"]').eq(0).val(data.tel);
+		    $('input[name="UserInfo.M_Hand_Phone"]').eq(1).val(data.phone);
+
+		    // 주소 업데이트
+		    if (data.addr) {
+		        var addrParts = data.addr.split(' ');
+		        if (addrParts.length >= 2) {
+		            var sido = addrParts[0];
+		            var gugun = addrParts.slice(1).join(' ');
+		
+		            // sido 선택
+		            $('#sido1').val(sido);
+		            
+		            // sido 변경 이벤트 트리거하여 구/군 옵션 업데이트
+		            $('#sido1').trigger('change');
+		
+		            // gugun 선택 (setTimeout을 사용하여 구/군 옵션이 업데이트된 후 선택)
+		            setTimeout(function() {
+		                $('#gugun1').val(gugun);
+		            }, 100);
+		        }
+		    }
+
+		    // 프로필 이미지 업데이트
+		    // 이 부분은 서버에서 이미지를 어떻게 제공하는지에 따라 달라질 수 있습니다.
+		    if (data.profile) {
+		        $('.picture').css('background-image', `url(${data.profile})`).addClass('dropped');
+		    }
 		}
 	</script>
 </head>
