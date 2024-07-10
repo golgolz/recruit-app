@@ -37,6 +37,13 @@ public class ResumeUserDAO {
     public int insertApply(ApplyVO apply) {
         SqlSession session = myBatis.getMyBatisHandler(false);
         int result = session.insert("kr.co.sist.resume.user.apply", apply);
+
+        if (result == 1) {
+            session.commit();
+        } else {
+            session.rollback();
+        }
+
         myBatis.closeHandler(session);
 
         return result;

@@ -48,10 +48,11 @@ String userId = (String)session.getAttribute("userId");
 		<!-- golgolz end -->
 	</style>
 	<script text="text/javascript">
+		var id = "<%= session.getAttribute("userId") %>";
+		var recruitNum = "${recruit}";
+		
 		$(function(){
 			<!-- golgolz start -->
-			var id = "<%= session.getAttribute("userId") %>";
-			var recruitNum = "${recruitNum}";
 			
 			$("#registerBtn").click(function(){
 				location.href = "http://localhost/recruit-app/resume/detail.do";
@@ -103,7 +104,7 @@ String userId = (String)session.getAttribute("userId");
 		            '</div>';
 		        mtuList.appendChild(li);
 
-		        $("selectBtn").click(function(){
+		        $("#selectBtn").click(function(){
 		        	apply($(this).data('resume'));
 		        });
 		        
@@ -123,10 +124,15 @@ String userId = (String)session.getAttribute("userId");
         		$.ajax({
     	            url: "${pageContext.request.contextPath}/api/apply.do",
     	            method: 'POST',
-    	            data: createApplyVO(resumeNum),
-    	            dataType: 'JSON',
+    	            data: JSON.stringify(createApplyVO(resumeNum)),
+    	            contentType: 'application/json',
     	            success: function(data) {
-						alert("지원 완료되었습니다.");
+    	            	if(data === "success"){
+    						alert("지원 완료되었습니다.");
+    						return;
+    	            	}
+    	            	
+    	            	alert("오류가 발생했습니다. 자세한 사항은 관리자에게 문의하세요.");
     	            },
     	            error: function(xhr, status, error) {
     	                console.error("Error fetching data: " + error);
@@ -141,7 +147,7 @@ String userId = (String)session.getAttribute("userId");
 				userId: id,
 				recruitNum: recruitNum,
 				resumeNum: resumeNum
-			}
+			};
 		}
 	</script>
 </head>

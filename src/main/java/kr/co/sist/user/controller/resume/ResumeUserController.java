@@ -50,6 +50,7 @@ public class ResumeUserController {
         if (1 == resumeUserService.apply(apply)) {
             result = "success";
         }
+
         return result;
     }
 }
