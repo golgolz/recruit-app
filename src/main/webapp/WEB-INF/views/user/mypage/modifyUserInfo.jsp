@@ -132,9 +132,7 @@
     		  var validateFlag = isValidateName && isValidatePhone && isValidateTel;
       	  	  
       	  	  if(notNullFlag && validateFlag){
-	      	  	  //alert('회원정보 수정이 완료 되었습니다.');
 	      	  	  $("#modifyUserFrm").submit();
-	      	  	  //location.href='mypageUserInfo.do';
       	  	  }else if(!notNullFlag) {
       	  		  alert('회원정보를 입력해주세요.');
       	  		  return;
@@ -166,7 +164,6 @@
 	
 	      	    if(chkAll){
 	      	    	$("#securityQuestionForm").submit();
-	      	    	//location.href='http://localhost/recruit-app/user/mypage/modifyPassPage.do';
 		      	    // 필드 초기화 후 닫기
 					$("#questionSelect").val('0');
 					$("#answerInput").val('');
@@ -232,6 +229,44 @@
 				return nameRegex.test(chkName);
 			}//function
 			
+			var profileImage = document.getElementById('profileImage');
+			var imageUpload = document.getElementById('imageUpload');
+
+			profileImage.addEventListener('click', () => {
+			    imageUpload.click();
+			});
+			
+			imageUpload.addEventListener('change', (event) => {
+			    var file = event.target.files[0];
+			    if (file) {
+			        // 이미지 미리보기 표시 로직
+			        var reader = new FileReader();
+			        reader.onload = (e) => {
+			            profileImage.src = e.target.result;
+			        };
+			        reader.readAsDataURL(file);
+			        
+			        //$("#uploadImg").val(file.name);
+
+			        // 서버로 이미지 업로드
+			        /* var formData = new FormData();
+			        formData.append('profileImage', file);
+			        fetch('/user/mypage/uploadProfileImage.do', { 
+			            method: 'POST',
+			            body: formData
+			        })
+			        .then(response => response.json())
+			        .then(data => {
+			        	alert('업로드 성공');
+			            // 업로드 성공 처리
+			        })
+			        .catch(error => {
+			            // 업로드 실패 처리
+			        	alert('업로드 실패');
+			        }); */
+			    }
+			});
+			
 			<!-- golgolz end -->
 		});
 	</script>
@@ -254,6 +289,7 @@
               <div
                 class="Grid_Grid__container__J9CcC Grid_Grid__direction_column__jR3AZ Grid_Grid__wrap_nowrap__4r_cp ProfileView_ProfileView__root__eOS_q"
               >
+              <form id="modifyUserFrm" action="http://localhost/recruit-app/user/mypage/modifyUser.do" method="post" enctype="multipart/form-data">
                 <section
                   class="Grid_Grid__item__FUkSS Grid_Grid__align-items_flex-start__PA0JE"
                 >
@@ -276,13 +312,16 @@
                           	style="text-align: center;"
                           >
                             <div class="Avatar_Avatar__bg__MRkK0" style="text-align: center;">
-                              <img
-                                alt="프로필 이미지"
-                                src="http://localhost/recruit-app/assets/images/mypage/${ userInfo.profileImg }"
-                                class="Avatar_Avatar__img__kcubw"
-                                style="text-align: center;"
-                              />
-                            </div>
+								    <img
+								        id="profileImage"  
+								        alt="프로필 이미지"
+								        src="http://localhost/recruit-app/assets/images/mypage/uploadImg/${ userInfo.profileImg }"
+								        class="Avatar_Avatar__img__kcubw"
+								        style="text-align: center;"
+								    />
+								    <input type="file"  multiple="multiple" name="uploadImg" id="imageUpload" style="display: none;" accept="image/*">
+								    <input type="hidden" id="profileImg" name="profileImg" value="${ userInfo.profileImg }">
+							</div>
                           </div>
                         </div>
                         <div
@@ -296,6 +335,7 @@
                         </div>
                       </div>
                     </div>
+                    </div>
                 </section>
                 <div class="Grid_Grid__container__J9CcC Grid_Grid__align-items_center__VEikH ProfileViewFollowerFollwingInfo_ProfileViewFollowerFollwingInfo__root__TSJnS" >
                 </div>
@@ -305,7 +345,7 @@
                 <section
                   class="Grid_Grid__item__FUkSS Grid_Grid__align-items_flex-start__PA0JE" style="margin-bottom: 50px;"
                 >
-                  <form id="modifyUserFrm" action="../mypage/modifyUser.do" method="post">
+                  
                   <article class="css-dnwsdj">
                   <div class="css-9as5im">
                   <p data-testid="Typography" color="#000000" class="css-dk1ca0">회원정보</p>
@@ -342,7 +382,10 @@
                    <input type="button" id="cancleBtn" value="취소" class="btn btn-outline-danger btn-sm remove-btn" style="margin: 5px;">
                    </li>
                   </ul></article>
+                  </section>
                   </form>
+                  </div>
+                  </div>
 				  
 				  <!-- 모달 창 시작 -->
                   <div class="modal fade" id="securityQuestionModal" tabindex="-1" aria-labelledby="securityQuestionModalLabel" aria-hidden="true">

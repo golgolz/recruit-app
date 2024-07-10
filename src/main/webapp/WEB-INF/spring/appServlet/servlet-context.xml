@@ -23,6 +23,44 @@
 	
 	<context:component-scan base-package="kr.co.sist" />
 	
-	
+	<!-- interceptor 등록 -->
+	<interceptors>
+			<interceptor>
+				<!-- 모든 URL 등록 -->
+				<mapping path="/manage/**"/>
+				<exclude-mapping path="/manage/adminLogin/adminLoginPage.do"/>
+				<exclude-mapping path="/manage/adminLogin/adminLogin.do"/>
+				<beans:bean id="ai" class="kr.co.sist.admin.interceptor.AdminInterceptor"/>
+			</interceptor>
+			<interceptor>
+				<mapping path="/manage/user/**"/>
+				<beans:bean id="userAi" class="kr.co.sist.admin.interceptor.UserAuthInterceptor"/>
+			</interceptor>
+			<interceptor>
+				<mapping path="/manage/companyinfo/**"/>
+				<beans:bean id="compAi" class="kr.co.sist.admin.interceptor.CompanyAuthInterceptor"/>
+			</interceptor>
+			<interceptor>
+				<mapping path="/manage/recruit/**"/>
+				<beans:bean id="recrAi" class="kr.co.sist.admin.interceptor.RecruitAuthInterceptor"/>
+			</interceptor>
+			<interceptor>
+				<mapping path="/manage/review/**"/>
+				<beans:bean id="reviAi" class="kr.co.sist.admin.interceptor.ReviewAuthInterceptor"/>
+			</interceptor>
+			<interceptor>
+				<mapping path="/manage/qna/**"/>
+				<beans:bean id="qnaAi" class="kr.co.sist.admin.interceptor.QnaAuthInterceptor"/>
+			</interceptor>
+			<interceptor>
+				<mapping path="/manage/notice/**"/>
+				<beans:bean id="noteAi" class="kr.co.sist.admin.interceptor.NoticeAuthInterceptor"/>
+			</interceptor>
+			<interceptor>
+				<mapping path="/manage/admin/**"/>
+				<beans:bean id="adminAi" class="kr.co.sist.admin.interceptor.AdminPositionInterceptor"/>
+			</interceptor>
+			
+	</interceptors>
 	
 </beans:beans>

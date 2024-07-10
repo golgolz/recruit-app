@@ -95,6 +95,7 @@ public class MypageDAO {
         return cnt;
     }
 
+
     public QuestResultDomain selectChkQuestion(QuestionVO qVO) {
         SqlSession ss = myBatis.getMyBatisHandler(false);
 
