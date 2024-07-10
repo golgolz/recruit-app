@@ -29,7 +29,7 @@ public class UserReviewDAO {
         this.myBatis = myBatis;
     }
 
-    // ¸®ºä È­¸é Ãâ·Â
+    // ë¦¬ë·° í™”ë©´ ì¶œë ¥
     public List<ReviewVO> selectReviewScreenOutput(String companyCode) {
         SqlSession ss = myBatis.getMyBatisHandler(false);
         List<ReviewVO> result = 
@@ -48,7 +48,7 @@ public class UserReviewDAO {
         return result;
     }
     
-    // ÆäÀÌÁö³×ÀÌ¼Ç
+    // ë¦¬ë·° í˜ì´ì§•
     public List<ReviewVO> selectReviewScreenOutputWithPagination(String companyCode, int offset) {
         SqlSession ss = myBatis.getMyBatisHandler(false);
         Map<String, Object> params = new HashMap<>();
@@ -59,8 +59,7 @@ public class UserReviewDAO {
         return result;
     }
     
-    
- // °³º° ¸®ºä Åë°è °ª °¡Á®¿À±â
+    // ë¦¬ë·° ì§ˆë¬¸ ì„ íƒ
     public ReviewQuestionsVO selectReviewQuestions(int reviewNum) {
         SqlSession ss = myBatis.getMyBatisHandler(false);
         ReviewQuestionsVO result = 
@@ -69,10 +68,7 @@ public class UserReviewDAO {
         return result;
     }
     
-   
-    
-
-    //¸®ºä ¼³¹® ÀÛ¼º
+    // ë¦¬ë·° ì„¤ë¬¸ì¡°ì‚¬ ì¶”ê°€
     public int insertReviewSurvey(ReviewSurveyDomain reviewSurveyDomain) {
         SqlSession ss = myBatis.getMyBatisHandler(true);
         int result = ss.insert("kr.co.sist.user.mapper.review.ReviewMapper.insertReviewSurvey", reviewSurveyDomain);
@@ -80,44 +76,44 @@ public class UserReviewDAO {
         return result;
     }
     
- // ÃßÃµ¼ö Áõ°¡
+    // ì¶”ì²œ ì—…ë°ì´íŠ¸
     public int updateRecommend(RecommendVO recommendVO) {
-        logger.debug("DAO - updateRecommend() ½ÃÀÛ"); // ¸Ş¼­µå ½ÃÀÛ ·Î±×
-        logger.debug("DAO - recommendVO: {}", recommendVO); // RecommendVO °ª È®ÀÎ
+        logger.debug("DAO - updateRecommend() ì‹œì‘"); 
+        logger.debug("DAO - recommendVO: {}", recommendVO);
         SqlSession ss = myBatis.getMyBatisHandler(true);
         int result = ss.update("kr.co.sist.user.mapper.review.ReviewMapper.updateRecommend", recommendVO);
         myBatis.closeHandler(ss);
-        logger.debug("DAO - updateRecommend() °á°ú: {}", result); // °á°ú ·Î±×
+        logger.debug("DAO - updateRecommend() ê²°ê³¼: {}", result);
         return result;
     }
 
-    // ÃßÃµ ±â·Ï Ãß°¡
+    // ì¶”ì²œ ì¶”ê°€
     public int insertReviewRecommend(RecommendVO recommendVO) {
-        logger.debug("DAO - insertReviewRecommend() ½ÃÀÛ"); // ¸Ş¼­µå ½ÃÀÛ ·Î±×
-        logger.debug("DAO - recommendVO: {}", recommendVO); // RecommendVO °ª È®ÀÎ
+        logger.debug("DAO - insertReviewRecommend() ì‹œì‘"); 
+        logger.debug("DAO - recommendVO: {}", recommendVO);
         SqlSession ss = myBatis.getMyBatisHandler(true);
         int result = ss.insert("kr.co.sist.user.mapper.review.ReviewMapper.insertReviewRecommend", recommendVO);
         myBatis.closeHandler(ss);
-        logger.debug("DAO - insertReviewRecommend() °á°ú: {}", result); // °á°ú ·Î±×
+        logger.debug("DAO - insertReviewRecommend() ê²°ê³¼: {}", result);
         return result;
     }
 
-    // ÀÌ¹Ì ÃßÃµÇß´ÂÁö È®ÀÎ
-    public boolean checkIfRecommended(RecommendVO recommendVO) { // ReviewVO -> RecommendVO ·Î º¯°æ
-        logger.debug("DAO - checkIfRecommended() ½ÃÀÛ");
+    // ì¶”ì²œ ì—¬ë¶€ í™•ì¸
+    public boolean checkIfRecommended(RecommendVO recommendVO) { 
+        logger.debug("DAO - checkIfRecommended() ì‹œì‘");
         logger.debug("DAO - recommendVO: {}", recommendVO);
         
         SqlSession ss = myBatis.getMyBatisHandler(false);
         try {
             int count = ss.selectOne("kr.co.sist.user.mapper.review.ReviewMapper.checkIfRecommended", recommendVO);
-            logger.debug("DAO - checkIfRecommended() °á°ú: {}", count);
+            logger.debug("DAO - checkIfRecommended() ê²°ê³¼: {}", count);
             return count > 0;
         } finally {
             myBatis.closeHandler(ss);
         }
     }
     
-    //¸®ºä È­¸é ºÒ·¯¿À±â
+    // íšŒì‚¬ ì •ë³´ ê°€ì ¸ì˜¤ê¸°
     public CompanyInfoVO selectCompanyInfo(String companyCode) {
         SqlSession ss = myBatis.getMyBatisHandler(true);
         System.out.println("DAO Layer - companyCode: " + companyCode);
@@ -127,7 +123,7 @@ public class UserReviewDAO {
         return companyInfo;
     }
     
-    //¸®ºä ÀÛ¼º
+    // ë¦¬ë·° ì¶”ê°€
     public void insertReview(ReviewDomain reviewDomain) {
         SqlSession ss = myBatis.getMyBatisHandler(true);
         try {
@@ -139,7 +135,7 @@ public class UserReviewDAO {
         }
     }
     
-    //¸®ºä ³Ñ¹ö °¡Á®¿À±â
+    // ë¦¬ë·° ë²ˆí˜¸ ê°€ì ¸ì˜¤ê¸°
     public int getReviewNumByDomain(ReviewDomain reviewDomain) {
         SqlSession ss = myBatis.getMyBatisHandler(true);
         int reviewNum = ss.selectOne("kr.co.sist.user.mapper.review.ReviewMapper.getReviewNumByDomain", reviewDomain);
@@ -147,7 +143,7 @@ public class UserReviewDAO {
         return reviewNum;
     }
     
-    // È¸»ç ÄÚµå·Î È¸»ç Á¤º¸ °¡Á®¿À±â
+    // íšŒì‚¬ ì½”ë“œë¡œ íšŒì‚¬ ì •ë³´ ê°€ì ¸ì˜¤ê¸°
     public CompanyInfoVO getCompanyDetailsByCode(String companyCode) {
         SqlSession ss = myBatis.getMyBatisHandler(true);
         CompanyInfoVO companyInfo = ss.selectOne("kr.co.sist.user.mapper.review.ReviewMapper.getCompanyDetailsByCode", companyCode);
@@ -155,7 +151,7 @@ public class UserReviewDAO {
         return companyInfo;
     }
     
-    //¸®ºä ÃÑ °¹¼ö °¡Á®¿À±â
+    // ì´ ë¦¬ë·° ìˆ˜ ê°€ì ¸ì˜¤ê¸°
     public int getTotalReviewCount(String companyCode) {
         SqlSession ss = myBatis.getMyBatisHandler(true);
         int totalReviewCount = ss.selectOne("kr.co.sist.user.mapper.review.ReviewMapper.getTotalReviewCount", companyCode);
@@ -163,12 +159,11 @@ public class UserReviewDAO {
         return totalReviewCount;
     }
    
-    //¸®ºä ÀÛ¼º À¯È¿¼º °ËÁõ
+    // ë¦¬ë·° ì‘ì„± ìœ íš¨ì„± ê²€ì‚¬
     public boolean hasReviewForCompany(String userId, String companyCode) {
         SqlSession ss = myBatis.getMyBatisHandler(true);
         int count = ss.selectOne("kr.co.sist.user.mapper.review.ReviewMapper.hasReviewForCompany", Map.of("userId", userId, "companyCode", companyCode));
         myBatis.closeHandler(ss);
         return count > 0;
     }
-
 }

@@ -4,10 +4,10 @@ $(function () {
       model: CareerModel,
     });
     var careerCollection = new CareerCollection(
-      JSON.parse(
-        '[{"IDX":194159993,"M_ID":"GL_44288030","C_Code":0,"C_Name":null,"C_Part":null,"M_MainCate":"0","M_MainField":"0","Job_BizJobtype_Code":null,"M_MainField_Ctgr":null,"M_MainJob":null,"CSYM":"","CEYM":"","M_MainJob_Jikwi":null,"M_MainPay":0,"M_MainJob_Level":null,"OrdNo":1,"OpenStat":"1","RegDate":"\\/Date(1717223556393)\\/","RetireSt":"1","CNameHold":"0","R_No":26455495,"Posn_Code":null,"Retire_Rsn_Code":null,"Retire_Rsn":null,"Prfm_Prt":null,"Old_Idx":null,"Co_Code":null,"M_MainPay_User":null,"Cname_Code":0,"Job_Type_Code":null,"Rank_Sub_Code":null,"Index_Name":null,"M_MainJob_Jikwi_Name":null,"Posn_Name":null,"Co_Name":null,"Rank_Sub_Name":null,"Biz_No":null,"C_ID":null,"Job_Field_Name":"","Job_Field_Direct":"","NHIS_LINKED_STAT":0,"Mem_Sys_No":0},{"IDX":194159994,"M_ID":"GL_44288030","C_Code":0,"C_Name":null,"C_Part":null,"M_MainCate":"0","M_MainField":"0","Job_BizJobtype_Code":null,"M_MainField_Ctgr":null,"M_MainJob":null,"CSYM":"","CEYM":"","M_MainJob_Jikwi":null,"M_MainPay":0,"M_MainJob_Level":null,"OrdNo":2,"OpenStat":"1","RegDate":"\\/Date(1717223556400)\\/","RetireSt":"1","CNameHold":"0","R_No":26455495,"Posn_Code":null,"Retire_Rsn_Code":null,"Retire_Rsn":null,"Prfm_Prt":null,"Old_Idx":null,"Co_Code":null,"M_MainPay_User":null,"Cname_Code":0,"Job_Type_Code":null,"Rank_Sub_Code":null,"Index_Name":null,"M_MainJob_Jikwi_Name":null,"Posn_Name":null,"Co_Name":null,"Rank_Sub_Name":null,"Biz_No":null,"C_ID":null,"Job_Field_Name":"","Job_Field_Direct":"","NHIS_LINKED_STAT":0,"Mem_Sys_No":0}]'
-      )
-    );
+	  JSON.parse(
+	    '[{"IDX":194159993,"M_ID":"GL_44288030","C_Code":0,"C_Name":null,"C_Part":null,"M_MainCate":"0","M_MainField":"0","Job_BizJobtype_Code":null,"M_MainField_Ctgr":null,"M_MainJob":null,"CSYM":"","CEYM":"","M_MainJob_Jikwi":null,"M_MainPay":0,"M_MainJob_Level":null,"OrdNo":1,"OpenStat":"1","RegDate":"\\/Date(1717223556393)\\/","RetireSt":"1","CNameHold":"0","R_No":26455495,"Posn_Code":null,"Retire_Rsn_Code":null,"Retire_Rsn":null,"Prfm_Prt":null,"Old_Idx":null,"Co_Code":null,"M_MainPay_User":null,"Cname_Code":0,"Job_Type_Code":null,"Rank_Sub_Code":null,"Index_Name":null,"M_MainJob_Jikwi_Name":null,"Posn_Name":null,"Co_Name":null,"Rank_Sub_Name":null,"Biz_No":null,"C_ID":null,"Job_Field_Name":"","Job_Field_Direct":"","NHIS_LINKED_STAT":0,"Mem_Sys_No":0}]'
+	  )
+	);
     var CompanySearchCollection = Backbone.Collection.extend({
       //url: "/User/Resume/CompanySearchJson",
       url: "/User/Resume/CompanySearchUcoJson",

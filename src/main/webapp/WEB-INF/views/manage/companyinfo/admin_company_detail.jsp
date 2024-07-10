@@ -88,7 +88,7 @@ input{
 				<c:if test="${not empty requestScope.companyDetail}">
                     <c:set var="companyIntroDetail" value="${requestScope.companyDetail[0]}" />
                 </c:if>
-					<form id="dataForm" name="dataForm" action="http://localhost/recruit-app/companyinfo/updateCompanyinfo.do" method="post" enctype="multipart/form-data">
+					<form id="dataForm" name="dataForm" action="http://localhost/recruit-app/manage/companyinfo/updateCompanyinfo.do" method="post" enctype="multipart/form-data">
 						<div class="subtitle">
 							<img src="http://localhost/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
 							기업정보
