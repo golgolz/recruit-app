@@ -80,12 +80,22 @@ input{
 		<div class="container-fluid py-4">
 			<!-- golgolz start -->
 			<div id="contentcolumn" class="">
+				<form id="frmInsertHistory" action="http://localhost/recruit-app/companyinfo/insertHistory.do" method="post">
+				<input type="hidden" id="historyBaseDate" value="" name="hidHistoryDate"/>
+				<input type="hidden" id="historyContents" value="" name="hidInHistoryContent"/>
+				<input type="hidden" id="companyCode" name="companyCode" value="${companyIntroDetail.companyCode}"/>
+				</form>
+				<form id="frmInsertWelfare" action="http://localhost/recruit-app/companyinfo/insertWelfare.do" method="post">
+				<input type="hidden" id="welfareCategories" value="" name="hidWelfareCategory"/>
+				<input type="hidden" id="welfareContents" value="" name="hidWelfareContent"/>
+				<input type="hidden" id="companyCode" name="companyCode" value="${companyIntroDetail.companyCode}"/>
+				</form>
 				<form id="frmDeleteHistory" action="http://localhost/recruit-app/companyinfo/deleteHistory.do" method="post">
-				<input type="hidden" id="history" value="history" name="hidHistory"/>
+				<input type="hidden" id="delHistoryBaseDate" value="" name="hidHistory"/>
 				<input type="hidden" id="companyCode" name="companyCode" value="${companyIntroDetail.companyCode}"/>
 				</form>
 				<form id="frmDeleteWelfare" action="http://localhost/recruit-app/companyinfo/deleteWelfare.do" method="post">
-				<input type="hidden" id="welfare" value="" name="hidWelfare"/>
+				<input type="hidden" id="delWelfareCategories" value="" name="hidWelfare"/>
 				<input type="hidden" id="companyCode" name="companyCode" value="${companyIntroDetail.companyCode}"/>
 				</form>
 				<div class="contents">
@@ -123,7 +133,7 @@ input{
 									</td>
 									<td class="box text">
 										<input type="text" id="historyContent" name="historyContent" value="" size="50" class="inputbox naver_shopping_prodName" />
-										<input type="button" id="btn-register" class="btn btn-outline-success btn-sm" value="추가" />
+										<input type="button" id="historyInsert" class="btn btn-outline-success btn-sm" value="추가" />
 										<input type="button" id="historyDelete" class="btn btn-outline-danger btn-sm" value="삭제" />
 									</td>
 								</tr>
@@ -167,7 +177,7 @@ input{
 									</td>
 									<td class="box text">
 										<input type="text" id="welfareContent" name="welfareContent" value="" size="50" class="inputbox naver_shopping_prodName" />
-										<input type="button" id="btn-register" class="btn btn-outline-success btn-sm" value="추가" />
+										<input type="button" id="welfareInsert" class="btn btn-outline-success btn-sm" value="추가" />
 										<input type="button" id="welfareDelete" class="btn btn-outline-danger btn-sm" value="삭제" />
 									</td>
 								</tr>
@@ -200,13 +210,22 @@ input{
 	</main>
 	<script type="text/javascript">
     $(function(){
-        $("#btn-register").click(function(){
-            $("#dataForm").submit();
+        $("#historyInsert").click(function(){
+        	$('#historyBaseDate').val($('#historyDate').val());
+            $('#historyContents').val($('#historyContent').val());
+        	$("#frmInsertHistory").submit();
         });
         $("#historyDelete").click(function(){
+        	$('#delHistoryBaseDate').val($('#historyDate').val());
             $("#frmDeleteHistory").submit();
         });
+        $("#welfareInsert").click(function(){
+        	$('#welfareCategories').val($('#welfareCategory').val());
+            $('#welfareContents').val($('#welfareContent').val());
+            $("#frmInsertWelfare").submit();
+        });
         $("#welfareDelete").click(function(){
+        	$('#delWelfareCategories').val($('#welfareCategory').val());
             $("#frmDeleteWelfare").submit();
         });
     });
@@ -214,12 +233,10 @@ input{
     function fillHistory(baseDate, historyContent) {
         $('#historyDate').val(baseDate);
         $('#historyContent').val(historyContent);
-        $('#history').val(baseDate);
     }
     function fillWelfare(category, welfareContent) {
         $('#welfareCategory').val(category);
         $('#welfareContent').val(welfareContent);
-        $('#welfare').val(category);
     }
     
 </script>

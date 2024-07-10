@@ -12,5 +12,5 @@ import lombok.ToString;
 @Setter
 @ToString
 public class WelfareVO {
-    private String company_code, category, content;
+    private String companyCode, category, welfareContent;
 }

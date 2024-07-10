@@ -19,6 +19,8 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import kr.co.sist.admin.service.companyinfo.CompanyinfoAdminService;
 import kr.co.sist.domain.companyinfo.SearchDomain;
 import kr.co.sist.vo.companyinfo.CompanyinfoVO;
+import kr.co.sist.vo.companyinfo.HistoryVO;
+import kr.co.sist.vo.companyinfo.WelfareVO;
 
 @Controller
 public class CompanyinfoAdminController {
@@ -67,16 +69,15 @@ public class CompanyinfoAdminController {
     @PostMapping("/companyinfo/addCompanyinfoWrite.do")
     public String insertCompanyinfoPage(CompanyinfoVO cVO,HttpServletRequest request) throws IOException {
         String nextCompNum=companyinfoAdminService.searchNextCompNum();
-        String uploadLogoPath = "C:/dev/recruit-app/src/main/webapp/WEB-INF/views/assets/images/company/logo";
+        File uploadLogoPath = new File("C:/dev/recruit-app/src/main/webapp/assets/images/company/logo");
 
-        File logoDir = new File(uploadLogoPath);
 
-        if (!logoDir.exists()) {
-            logoDir.mkdirs();
+        if (!uploadLogoPath.exists()) {
+            uploadLogoPath.mkdirs();
         }
 
         int maxSize = 100 * 1024 * 1024; // 100MB
-        MultipartRequest mrLogo = new MultipartRequest(request, uploadLogoPath, maxSize, "UTF-8", new DefaultFileRenamePolicy());
+        MultipartRequest mrLogo = new MultipartRequest(request, uploadLogoPath.getAbsolutePath(), maxSize, "UTF-8", new DefaultFileRenamePolicy());
 
         String companyName = mrLogo.getParameter("companyName");
         String businessNumber = mrLogo.getParameter("businessNumber");
@@ -109,7 +110,6 @@ public class CompanyinfoAdminController {
         System.out.println("cVO.toString() : " + cVO.toString());
         
         companyinfoAdminService.addCompanyinfoDetail(cVO);
-        
         return "redirect:/companyinfo/adminCompanyinfoList.do";
     }
     
@@ -126,7 +126,7 @@ public class CompanyinfoAdminController {
     public String updateCompanyinfo(CompanyinfoVO cVO ,HttpServletRequest request, HttpSession session) throws IOException {
         
         
-        String uploadLogoPath = "C:/dev/recruit-app/src/main/webapp/WEB-INF/views/assets/images/company/logo";
+        String uploadLogoPath = "C:/dev/recruit-app/src/main/webapp/assets/images/company/logo";
 
         File logoDir = new File(uploadLogoPath);
         //경로가 없을 시 예외를 던진다.
@@ -194,12 +194,56 @@ public class CompanyinfoAdminController {
         return "redirect:/companyinfo/adminCompanyinfoList.do";
     }//updateCompanyinfo
     
+    @PostMapping("/companyinfo/insertHistory.do")
+    public String insertHistory(HttpServletRequest request, HttpSession session) {
+        String companyCode= (String) session.getAttribute("companyCode");
+        String baseDate = request.getParameter("hidHistoryDate");
+        String historyContent = request.getParameter("hidInHistoryContent");
+
+        System.out.println("================Received data================");
+        System.out.println("Company Code: " + companyCode);
+        System.out.println("Base Date: " + baseDate);
+        System.out.println("History Content: " + historyContent);
+        
+        HistoryVO hVO = new HistoryVO();
+        hVO.setCompanyCode(companyCode);
+        hVO.setBaseDate(baseDate);
+        hVO.setHistoryContent(historyContent);
+
+        companyinfoAdminService.addHistory(hVO);
+
+        return "redirect:/companyinfo/adminHistoryWelfare.do?companyCode=" + companyCode;
+    }
+
+    @PostMapping("/companyinfo/insertWelfare.do")
+    public String insertWelfare(HttpServletRequest request, HttpSession session) {
+        String companyCode= (String) session.getAttribute("companyCode");
+        String category = request.getParameter("hidWelfareCategory");
+        String welfareContent = request.getParameter("hidWelfareContent");
+
+        System.out.println("================Received data================");
+        System.out.println("Company Code: " + companyCode);
+        System.out.println("category: " + category);
+        System.out.println("welfare Content: " + welfareContent);
+        
+        WelfareVO wVO = new WelfareVO();
+        wVO.setCompanyCode(companyCode);
+        wVO.setCategory(category);
+        wVO.setWelfareContent(welfareContent);
+
+        companyinfoAdminService.addWelfare(wVO);
+
+        return "redirect:/companyinfo/adminHistoryWelfare.do?companyCode=" + companyCode;
+    }
+    
     @PostMapping("/companyinfo/deleteHistory.do")
     public String deleteHistory(@RequestParam("hidHistory") String baseDate, HttpSession session) {
         Map<String, Object> param=new HashMap<String, Object>();
         String companyCode=(String) session.getAttribute("companyCode");
         param.put("baseDate", baseDate);
         param.put("companyCode", companyCode);
+        
+        System.out.println("base date: "+baseDate);
         
         companyinfoAdminService.deleteHistory(param);
         

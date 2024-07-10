@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import kr.co.sist.admin.domain.qna.QnaDomain;
 import kr.co.sist.admin.service.qna.QnaAdminService;
 import kr.co.sist.admin.vo.qna.QnaVO;
+import kr.co.sist.admin.vo.qna.SearchVO;
 
 @Controller
 public class QnaAdminController {
@@ -21,10 +22,29 @@ public class QnaAdminController {
         this.qnaAdminService = qnaAdminService;
     }
 
+    // @GetMapping("/manage/qna/new_qnas.do")
+    // public String searchNewQnas(Model model) {
+    // List<Map<String, Object>> newQnas = qnaAdminService.searchNewQnas();
+    // model.addAttribute("newQnas", newQnas);
+    // return "manage/qna/new_qnas";
+    // }// 새 문의 리스트 조회
+
     @GetMapping("/manage/qna/new_qnas.do")
-    public String searchNewQnas(Model model) {
-        List<Map<String, Object>> newQnas = qnaAdminService.searchNewQnas();
+    public String searchNewQnas(@RequestParam(defaultValue = "1") int currentPage,
+            @RequestParam(defaultValue = "10") int itemsPerPage, Model model) {
+        SearchVO sVO = new SearchVO();
+        sVO.setCurrentPage(currentPage);
+        sVO.setItemsPerPage(itemsPerPage);
+        sVO.pageIndexes();
+
+        int totalItems = qnaAdminService.countNewQnas();
+        sVO.setTotalItems(totalItems);
+        sVO.setTotalPages((int) Math.ceil((double) totalItems / itemsPerPage));
+
+        List<Map<String, Object>> newQnas = qnaAdminService.searchNewQnas(sVO);
         model.addAttribute("newQnas", newQnas);
+        model.addAttribute("searchVO", sVO);
+
         return "manage/qna/new_qnas";
     }
 
@@ -33,25 +53,7 @@ public class QnaAdminController {
         QnaDomain newDetail = qnaAdminService.searchOneNewQna(qnaNum);
         model.addAttribute("newDetail", newDetail);
         return "manage/qna/new_detail";
-    }
-
-    // @GetMapping("/manage/qna/new_qnas.do")
-    // public String searchNewQnas(Model model) {
-    // List<QnaDomain> newQnas = qnaAdminService.searchNewQnas();
-    // model.addAttribute("newQnas", newQnas);
-    // return "manage/qna/new_qnas";
-    // } // 새 문의사항 리스트 조회
-    //
-    // @GetMapping("/manage/qna/new_detail.do")
-    // public String searchOneNewQna(QnaVO qVO, Model model) {
-    // int qna_num = qVO.getQna_num();
-    // // System.out.println(qVO.toString());
-    // QnaDomain newDetail = qnaAdminService.searchOneNewQna(qna_num);
-    //
-    // System.out.println("----------" + qVO);
-    // model.addAttribute("newDetail", newDetail);
-    // return "manage/qna/new_detail";
-    // } // 새 문의사항 상세조회
+    }// 새로운 문의 상세조회
 
     @GetMapping("/manage/qna/qnas.do")
     public String searchOldQnas(Model model) {
@@ -65,18 +67,7 @@ public class QnaAdminController {
         QnaDomain oldDetail = qnaAdminService.searchOneOldQna(qnaNum);
         model.addAttribute("oldDetail", oldDetail);
         return "manage/qna/old_detail";
-    }
-
-    // @GetMapping("/manage/qna/old_detail.do")
-    // public String searchOneOldQna(QnaVO qVO, Model model) {
-    // int qna_num = qVO.getQna_num();
-    // // System.out.println(qVO.toString());
-    // QnaDomain oldDetail = qnaAdminService.searchOneOldQna(qna_num);
-    // model.addAttribute("oldDetail", oldDetail);
-    //
-    // System.out.println("------" + oldDetail);
-    // return "manage/qna/old_detail";
-    // } // 답변 완료된 문의사항 상세조회
+    }// 답변 완료된 문의 상세조회
 
     @PostMapping("/manage/qna/qnas.do")
     public String addQnaAnswer(QnaVO qVO, Model model) {
@@ -92,6 +83,6 @@ public class QnaAdminController {
         }
         model.addAttribute("qnaAnswer", qVO);
         return "manage/qna/qnas";
-    }
+    }// 문의 추가
 
 }
