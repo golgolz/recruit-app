@@ -10,9 +10,10 @@ public class NoticeAdminService {
     @Autowired(required = false)
     private NoticeAdminDAO noticeAdminDAO;
     
-    public List<SearchVO> searchAllnotice() {
+    public List<SearchVO> searchAllnotice(SearchVO sVO) {
         List<SearchVO> list = null;
-        list = noticeAdminDAO.selectAllNotice();
+        list = noticeAdminDAO.selectAllNotice(sVO);
+        System.out.println(list);
         return list;
     }
 

@@ -1,6 +1,5 @@
 package kr.co.sist.admin.vo.notice;
 
-import java.sql.Date;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +13,6 @@ import lombok.ToString;
 @ToString
 public class SearchVO {
   private String field, keyword;
-  private String currentPage, category, title, content, adminId, modifier, blindFlag;
+  private String currentPage, category, title, content, adminId, modifier, blindFlag, inputDate, updateDate;
   private int startNum, endNum, noticeNum, views;
-  private Date inputDate, updateDate;
 }
