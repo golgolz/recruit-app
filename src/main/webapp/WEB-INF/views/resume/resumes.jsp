@@ -19,6 +19,7 @@ String userId = (String)session.getAttribute("userId");
 		<!-- golgolz start -->
 		#container{
 			border: none;
+			min-height: 1200px;
 		}
         #registerBtn {
         	font-size: 18px;
@@ -35,30 +36,34 @@ String userId = (String)session.getAttribute("userId");
         #container, .container, .content {
         	width: 1100px;
         }
+        .col{
+        	font-size: 14px;
+        }
+        .mtuList .col01 .tit a {
+		    font-size: 23px;
+		}
+        .mtuList .col01 .date {
+		    font-size: 18px;
+		}
 		<!-- golgolz end -->
 	</style>
 	<script text="text/javascript">
+		var id = "<%= session.getAttribute("userId") %>";
+		var recruitNum = "${recruit}";
+		
 		$(function(){
 			<!-- golgolz start -->
+			
 			$("#registerBtn").click(function(){
-				location.href = "http://localhost/recruit-app/resume/detail.jsp";
-			});
-
-			$("#updateBtn").click(function(){
-				location.href = "http://localhost/recruit-app/resume/detail.jsp";
-			});
-
-			$("#removeBtn").click(function(){
-				confirm("삭제하시겠습니까?");
+				location.href = "http://localhost/recruit-app/resume/detail.do";
 			});
 			
 			$.ajax({
-	            url: "${pageContext.request.contextPath}/api/recruits.do",
+	            url: "${pageContext.request.contextPath}/api/resumes.do?id=" + id,
 	            method: 'GET',
-	            data: searchVO,
 	            dataType: 'JSON',
 	            success: function(data) {
-	            	renderRecruitList(data);
+	    			updateResumeList(data);
 	            	if(data.size === 0){
 	            		isNoResult = true;
 	            		$("#recruit-list tbody").html('<tr><td colspan="4" style="font-size: 16px; font-weight: bold;">검색 결과가 없습니다.</td></tr>');
@@ -71,6 +76,79 @@ String userId = (String)session.getAttribute("userId");
 	        });
 			<!-- golgolz end -->
 		});
+		
+		function updateResumeList(data) {
+		    var mtuList = document.querySelector('.mtuList ul');
+		    mtuList.innerHTML = '';
+
+		    for (var i = 0; i < data.length; i++) {
+		        var resume = data[i];
+		        var li = document.createElement('li');
+		        li.innerHTML = 
+		            '<div class="col col01">' +
+		                '<div class="tit">' +
+		                    '<a href="http://localhost/recruit-app/resume/detail.do?id=' + resume.resumeNum + '">' + resume.title + '</a>' +
+		                '</div>' +
+		                '<div class="date">' + resume.inputDate + '</div>' +
+		            '</div>' +
+		            '<div class="col col02">' +
+		                '<div class="btnCell">' +
+		                    '<input type="button" id="selectBtn" data-resume="' + resume.resumeNum + '" class="golgolBtn btn btn-outline-primary btn-sm" value="선택" />' +
+		                '</div>' +
+		                '<div class="btnCell">' +
+		                    '<input type="button" id="updateBtn" data-resume="' + resume.resumeNum + '" class="golgolBtn btn btn-outline-primary btn-sm" value="수정" />' +
+		                '</div>' +
+		                '<div class="btnCell">' +
+		                    '<input type="button" id="removeBtn" data-resume="' + resume.resumeNum + '" class="golgolBtn btn btn-outline-primary btn-sm" value="삭제" />' +
+		                '</div>' +
+		            '</div>';
+		        mtuList.appendChild(li);
+
+		        $("#selectBtn").click(function(){
+		        	apply($(this).data('resume'));
+		        });
+		        
+				$("#updateBtn").click(function(){
+					var resumeNum = $(this).data('resume');
+			        window.location.href = 'http://localhost/recruit-app/resume/detail.do?id=' + resumeNum;
+				});
+
+				$("#removeBtn").click(function(){
+					confirm("삭제하시겠습니까?");
+				});
+		    }
+		}
+		
+		function apply(resumeNum){
+			if(confirm("해당 이력서로 지원하시겠습니까?")){
+        		$.ajax({
+    	            url: "${pageContext.request.contextPath}/api/apply.do",
+    	            method: 'POST',
+    	            data: JSON.stringify(createApplyVO(resumeNum)),
+    	            contentType: 'application/json',
+    	            success: function(data) {
+    	            	if(data === "success"){
+    						alert("지원 완료되었습니다.");
+    						return;
+    	            	}
+    	            	
+    	            	alert("오류가 발생했습니다. 자세한 사항은 관리자에게 문의하세요.");
+    	            },
+    	            error: function(xhr, status, error) {
+    	                console.error("Error fetching data: " + error);
+    	                $("#recruit-list tbody").html('<tr><td colspan="4" style="font-size: 16px; font-weight: bold;">데이터를 불러오는 데 실패했습니다.</td></tr>');
+    	            }
+    	        });
+        	}
+		}
+		
+		function createApplyVO(resumeNum){
+			return{
+				userId: id,
+				recruitNum: recruitNum,
+				resumeNum: resumeNum
+			};
+		}
 	</script>
 </head>
 <body>
@@ -94,44 +172,13 @@ String userId = (String)session.getAttribute("userId");
 	                			<div class="tableList">
 	                  				<div class="">
 	                    				<div class="listSortArea">
-	                      					<div class="col col01">이력서 제목</div>
-	                      					<div class="col col02">이력서 관리</div>
+	                      					<div class="col col01" style="font-size:16px; font-weight: 500;">이력서 제목</div>
+	                      					<div class="col col02" style="font-size:16px; font-weight: 500;">이력서 관리</div>
 	                    				</div>
 	                    				<div class="mtuList">
-	                      					<ul>
-	                        					<li>
-	                          						<div class="col col01">
-		                            					<div class="tit">
-		                              						<a href="http://localhost/recruit-app/resume/detail.jsp" target="_blank">기본 이력서 2</a>
-	                            						</div>
-	                            						<div class="date">2024.06.02</div>
-	                          						</div>
-	                          						<div class="col col02">
-	                            						<div class="btnCell">
-	                              							<input type="button" id="updateBtn" class="golgolBtn btn btn-outline-primary btn-sm" value="수정" />
-	                            						</div>
-		                            					<div class="btnCell">
-															<input type="button" id="removeBtn" class="golgolBtn btn btn-outline-primary btn-sm" value="삭제" />
-		                            					</div>
-	                          						</div>
-	                        					</li>
-	                        					<li>
-	                          						<div class="col col01">
-		                            					<div class="tit">
-		                              						<a href="http://localhost/recruit-app/resume/detail.jsp" target="_blank">기본 이력서 2</a>
-	                            						</div>
-	                            						<div class="date">2024.06.02</div>
-	                          						</div>
-	                          						<div class="col col02">
-	                            						<div class="btnCell">
-	                              							<input type="button" id="updateBtn" class="golgolBtn btn btn-outline-primary btn-sm" value="수정" />
-	                            						</div>
-		                            					<div class="btnCell">
-															<input type="button" id="removeBtn" class="golgolBtn btn btn-outline-primary btn-sm" value="삭제" />
-		                            					</div>
-	                          						</div>
-	                        					</li>
-	                      					</ul>
+	                    					<ul>
+	                    						<li></li>
+	                    					</ul>
 	                    				</div>
 	                  				</div>
 	                  				<!-- TIP -->
