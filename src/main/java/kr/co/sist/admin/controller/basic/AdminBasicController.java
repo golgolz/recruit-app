@@ -24,7 +24,7 @@ import kr.co.sist.admin.vo.basic.InsertAdminVO;
 import kr.co.sist.admin.vo.basic.SearchVO;
 import kr.co.sist.admin.vo.basic.UpdateAdminInfoVO;
 
-@SessionAttributes("adminId")
+@SessionAttributes({"adminId", "position", "authority"})
 @Controller
 public class AdminBasicController {
     private final AdminBasicService abs;
@@ -40,6 +40,17 @@ public class AdminBasicController {
     public String adminLoginPage() {
 
         return "manage/adminLogin/adminLogin";
+    }
+
+    @GetMapping("/manage/chkAuth.do")
+    public String chkAuth(RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("resultMsg", "접근 권한이 없습니다.");
+        return "redirect:/manage/chkAuthProcess.do";
+    }
+
+    @GetMapping("/manage/chkAuthProcess.do")
+    public String chkAuthPage() {
+        return "manage/admin/chkAuthProcess";
     }
 
     @PostMapping("/manage/adminLogin/adminLogin.do")
@@ -63,7 +74,11 @@ public class AdminBasicController {
 
         String adminId = ld.getAdminId();
 
+        AdminInfoDomain adminInfo = abs.searchAdminInfo(adminId);
+
         model.addAttribute("adminId", adminId);
+        model.addAttribute("position", adminInfo.getPosition());
+        model.addAttribute("authority", adminInfo.getAuthority());
 
         return "redirect:/manage/dashboard/dashboard.do";
     }
