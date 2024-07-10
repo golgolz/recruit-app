@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /* Base */
 a, abbr, acronym, address, big, blockquote, body, button, caption, cite, code, dd, del, dfn, div, dl, dt, em, fieldset, form, h1, h2, h3, h4, h5, h6, html, iframe, img, input, ins, kbd, label, legend, li, object, ol, p, pre, q, samp, select, small, span, strike, strong, sub, sup, table, tbody, td, textarea, tfoot, th, thead, tr, tt, ul, var { color: #666; }
 /* Skip Navigation */
@@ -50,56 +49,3 @@ a, abbr, acronym, address, big, blockquote, body, button, caption, cite, code, d
 .sidebarRight .buttonToTop { display: block; width: 100%; height: 34px; }
 .sidebarRight .buttonToTop span { display: block; width: 100%; height: 34px; padding-top: 9px; box-sizing: border-box; }
 .sidebarRight .buttonToTop span:before { content: ''; display: inline-block; width: 11px; height: 8px; margin-right: 4px; background: url("/content/images/salary/sprite-sidebar.png") no-repeat 0 -12px; }
-=======
-/* Base */
-a, abbr, acronym, address, big, blockquote, body, button, caption, cite, code, dd, del, dfn, div, dl, dt, em, fieldset, form, h1, h2, h3, h4, h5, h6, html, iframe, img, input, ins, kbd, label, legend, li, object, ol, p, pre, q, samp, select, small, span, strike, strong, sub, sup, table, tbody, td, textarea, tfoot, th, thead, tr, tt, ul, var { color: #666; }
-/* Skip Navigation */
-.accessibility { position: absolute; top: 0; left: 0; z-index: 9999; width: 100%; text-align: left; }
-.accessibility a { display: block; position: absolute; top: -1000px; left: 0; z-index: 500; width: 100%; text-align: center; }
-.accessibility a:focus, .accessibility a:active { position: absolute; top: 0; z-index: 1000; height: 40px; background: #000;font-size:12px;letter-spacing: 0px; font-weight:bold; color: #fff; line-height: 40px; }
-#header .secNav .nav .salary-fixed .navItemLink { height: 44px !important; }
-.button span { display: block; width: 100%; }
-.input { position: relative; display: inline-block; vertical-align: top; font-size: 0; }
-.input input { display: inline-block; width: 100%; height: 34px; padding: 0 12px; border: 1px solid #cbcbcb; color: #666; line-height: 32px; vertical-align: top; box-sizing: border-box; }
-.input .buttonReset { overflow: hidden; display: block; position: absolute; right: 5px; top: 50%; margin-top: -5px; width: 10px; height: 9px; }
-.input .buttonReset:before { content: ''; display: block; width: 10px; height: 9px; background: url("/content/images/salary/icon-delete.png") no-repeat; }
-/* Sidebar */
-.salarySidebar {z-index:1; position: absolute; left: 50%; top: 0; width: 960px; margin-left: -480px; }
-.sidebarRight { position: absolute; right: -138px; top: 0; width: 120px; text-align: center; }
-.sidebarRight .adSkyscraper { overflow: hidden; position: relative; height: 600px; margin-bottom: 20px; background-color: #545454; }
-.sidebarRight .container { width: 120px; margin: 0; }
-.sidebarRight .container.fixed { position: fixed; top: 50px; }
-.sidebarRight .container.isPositionMax { position: absolute; right: 0; }
-.sidebarRight .buttonMySalary { display: block; width: 100%; height: 46px; padding-top: 11px; margin-bottom: 10px; background-color: #4a5470; color: #fff;font-size:14px;letter-spacing: 0px; box-sizing: border-box; }
-.sidebarRight .calculator { position: relative; padding: 15px 4px 0; margin-bottom: 10px; border: 1px solid #e6eaf1; border-top: 1px solid #999; box-sizing: border-box; background-color:#fff;}
-.sidebarRight .calculator h2.header { position: relative; height: 20px; padding-left: 38px; margin-bottom: 13px;font-size:13px;letter-spacing: 0px; color: #666; text-align: left; box-sizing: border-box; width: 110px; padding-right: 0;}
-.sidebarRight .calculator h2.header:before { content: ''; position: absolute; left: 12px; top: 0; width: 20px; height: 20px; background: url("/content/images/salary/sprite-sidebar.png") no-repeat 0 -87px; }
-.sidebarRight .calculator .form { position: relative; }
-.sidebarRight .calculator .detail { display: none; }
-.sidebarRight .calculator .detail.expanded { display: block; }
-.sidebarRight .calculator .field { padding: 5px 0 4px; box-sizing: border-box; }
-.sidebarRight .calculator .field .label { display: block; position: relative; padding-left: 8px; margin-bottom: 6px;font-size:11px;letter-spacing: 0px; color: #999; text-align: left; background: url("/content/images/salary/sprite-sidebar.png") no-repeat 0 7px; box-sizing: border-box;}
-.sidebarRight .calculator .field .input input { position: relative; padding: 0 24px 0 0; color: #333; text-align: right; font-weight: bold; box-sizing: border-box; }
-.sidebarRight .calculator .field .input input::-webkit-input-placeholder { color: #999;font-size:11px;letter-spacing: 0px; }
-.sidebarRight .calculator .field .input input::-moz-placeholder { color: #999;font-size:11px;letter-spacing: 0px; }
-.sidebarRight .calculator .field .input input:-moz-placeholder { color: #999;font-size:11px;letter-spacing: 0px; }
-.sidebarRight .calculator .field .input input:-ms-input-placeholder { color: #999;font-size:11px;letter-spacing: 0px; }
-.sidebarRight .calculator .field .input .buttonReset { right: 8px; }
-.sidebarRight .calculator .field .input .popup { display: none; z-index: 10; position: absolute; left: -4px; top: 40px; border: 1px solid #565d79; background-color: #ffffef; box-sizing: border-box; }
-.sidebarRight .calculator .field .input .popup p { padding: 5px 6px 6px; white-space: nowrap; color: #333; box-sizing: border-box;font-size:11px;letter-spacing: 0px; }
-.sidebarRight .calculator .field .input .popup p:before { content: ''; display: block; position: absolute; left: 98px; top: -6px; width: 9px; height: 6px; background: url("/content/images/salary/bg-popup.png") no-repeat; }
-.sidebarRight .calculator .fieldResult { margin-bottom: 4px; padding-bottom: 0; box-sizing: border-box; }
-.sidebarRight .calculator .fieldResult .value { height: 34px; padding: 8px 13px 0 0; text-align: right; background-color: #3399ff; color: #fff; font-weight: bold; box-sizing: border-box; }
-.sidebarRight .calculator .buttonCalculator { display: block; width: 100%; height: 34px; border: 1px solid #333; box-sizing: border-box; }
-.sidebarRight .calculator .buttonCalculator span { height: 32px; padding-top: 6px; box-sizing: border-box; }
-.sidebarRight .calculator .buttonCalculator span:before { content: ''; display: inline-block; width: 10px; height: 9px; margin-right: 3px; background: url("/content/images/salary/sprite-sidebar.png") no-repeat 0 -49px; }
-.sidebarRight .calculator .buttonToggle { height: 46px;font-size:12px;letter-spacing: 0px; color: #333; }
-.sidebarRight .calculator .buttonToggle span { height: 46px; padding-top: 17px; box-sizing: border-box; }
-.sidebarRight .calculator .buttonToggle span:after { content: ''; display: inline-block; width: 9px; height: 7px; margin-left: 7px; background: url("/content/images/salary/sprite-dropdown.png") no-repeat 0 -33px; }
-.sidebarRight .calculator .buttonToggle.expanded span:after { background: url("/content/images/salary/sprite-dropdown.png") no-repeat 0 -16px; }
-.sidebarRight .banner { display: block; overflow: hidden; }
-.sidebarRight .banner img { vertical-align: top; }
-.sidebarRight .buttonToTop { display: block; width: 100%; height: 34px; }
-.sidebarRight .buttonToTop span { display: block; width: 100%; height: 34px; padding-top: 9px; box-sizing: border-box; }
-.sidebarRight .buttonToTop span:before { content: ''; display: inline-block; width: 11px; height: 8px; margin-right: 4px; background: url("/content/images/salary/sprite-sidebar.png") no-repeat 0 -12px; }
->>>>>>> refs/heads/master
