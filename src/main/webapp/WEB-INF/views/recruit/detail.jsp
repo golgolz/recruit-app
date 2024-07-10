@@ -41,7 +41,17 @@
 	            }
 	        });
 			
+			$("#devApplyBtn1").click(function(){
+		        var url = 'http://localhost/recruit-app/resumes.do?recruit=' + ${recruitNum};
+		        
+		        window.location.href = url;
+			});
 			
+			$("#devApplyBtn2").click(function(){
+		        var url = 'http://localhost/recruit-app/resumes.do?recruit=' + ${recruitNum};
+		        
+		        window.location.href = url;
+			});
 			<!-- golgolz end -->
 		});
 		
@@ -273,7 +283,7 @@
 							<div class="sumBtn">
 								<button type="button"
 									class="girBtn tplBtn_1 tplBtnOrg girBtnOrg devOnlineApplyBtn"
-									id="devApplyBtn">
+									id="devApplyBtn1">
 									<span>즉시지원</span>
 								</button>
 							</div>
@@ -343,7 +353,7 @@
 											<div class="btn">
 												<button type="button"
 													class="girBtn tplBtn_1 tplBtnOrg girBtnOrg devOnlineApplyBtn"
-													id="devApplyBtn">
+													id="devApplyBtn2">
 													<span>즉시지원</span>
 												</button>
 											</div>
@@ -371,7 +381,6 @@
 										</div> -->
 									</article>
 								</div>
-
 								<p class="textEnd">마감일은 기업의 사정으로 인해 조기 마감 또는 변경될 수 있습니다.</p>
 							</section>
 
