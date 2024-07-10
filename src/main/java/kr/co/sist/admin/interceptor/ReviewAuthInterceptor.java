@@ -36,12 +36,7 @@ public class ReviewAuthInterceptor implements HandlerInterceptor {
                 Map<String, String> authorityMap = objectMapper.readValue(authorityJson,
                         new TypeReference<Map<String, String>>() {});
 
-                // String userAuth = authorityMap.get("user");
-                // String companyAuth = authorityMap.get("company");
-                // String recruitAuth = authorityMap.get("recruit");
                 String reviewAuth = authorityMap.get("review");
-                // String qnaAuth = authorityMap.get("qna");
-                // String noticeAuth = authorityMap.get("notice");
                 // 권한에 따른 추가 로직 수행
                 System.out.println(reviewAuth);
                 flag = reviewAuth.equals("Y");

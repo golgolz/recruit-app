@@ -6,7 +6,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 
-public class AdminInterceptor implements HandlerInterceptor {
+public class AdminPositionInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
@@ -14,11 +14,10 @@ public class AdminInterceptor implements HandlerInterceptor {
 
         boolean flag = false;
 
-        Object adminId = WebUtils.getSessionAttribute(request, "adminId");
-        flag = adminId != null;
+        String position = (String) WebUtils.getSessionAttribute(request, "position");
+        flag = position.equals("슈퍼");
         if (!flag) {
-            response.sendRedirect(
-                    "http://localhost/recruit-app/manage/adminLogin/adminLoginPage.do");
+            response.sendRedirect("http://localhost/recruit-app/manage/chkAuth.do");
         } // end if
 
         return flag;
@@ -31,7 +30,4 @@ public class AdminInterceptor implements HandlerInterceptor {
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
             Object handler, Exception ex) throws Exception {}
-
-
-
 }
