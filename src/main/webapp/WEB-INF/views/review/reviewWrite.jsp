@@ -40,6 +40,8 @@
         <jsp:include page="../assets/layout/user/header.jsp" />
         <main class="JobsFeed_Jobsfeed__DpeV9">
             <section class="Section_Section__P1hhc">
+            
+           
                 <div>
                     <hr class="layout"/>
                     <div id="container">
