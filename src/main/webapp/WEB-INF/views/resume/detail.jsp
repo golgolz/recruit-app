@@ -123,6 +123,13 @@
 		            dataType: 'JSON',
 		            success: function(data) {
 		            	console.log(data);
+		            	updateTitle(data.title);
+		            	updateProfileForm(data);
+		            	updateSkills(data.subData.skills); 
+		            	
+		            	if (data.subData && data.subData.education) {
+		                    updateEducation(data.subData.education);
+		                }
 		            },
 		            error: function(xhr, status, error) {
 		                console.error("Error fetching data: " + error);
@@ -133,13 +140,181 @@
 			<!-- golgolz end -->
 		});
 		
+		/* 수정 삭제를 위한 js functions start */
 		function updateTitle(titleData){
-			
+		    $('#UserResume_M_Resume_Title').val(titleData);
 		}
 		
-		function udpateProfile(profileData){
-			
+		function updateProfileForm(data) {
+		    $('#UserInfo_M_Name').val(data.owner);
+		    $('#UserInfo_M_Born').val(data.birth);
+		    $('#genderSelect').val(data.gender);
+		    $('#UserInfo_M_Email').val(data.email);
+		    $('input[name="UserInfo.M_Hand_Phone"]').eq(0).val(data.tel);
+		    $('input[name="UserInfo.M_Hand_Phone"]').eq(1).val(data.phone);
+
+		    if (data.addr) {
+		        var addrParts = data.addr.split(' ');
+		        if (addrParts.length >= 2) {
+		            var sido = addrParts[0];
+		            var gugun = addrParts.slice(1).join(' ');
+		
+		            $('#sido1').val(sido);
+		            $('#sido1').trigger('change');
+
+		            setTimeout(function() {
+		                $('#gugun1').val(gugun);
+		            }, 100);
+		        }
+		    }
+
+		    if (data.profile) {
+		        $('.picture').css('background-image', `url(${data.profile})`).addClass('dropped');
+		    }
 		}
+		
+		function updateSkills(skills) {
+		    $('.chip').removeClass('active');
+		    skills.forEach(function(skill) {
+		        $('.chip[data-value="' + skill.skill_name + '"]').addClass('active');
+		    });
+		}
+		
+		function addSchoolItem() {
+		    var containerCount = $('#school_containers .container').length;
+		    var newSchoolHtml = $('#tplSchool').html().replace(/\{no\}/g, containerCount + 1);
+		    $('#school_containers').append(newSchoolHtml);
+
+		    // 새로 추가된 학교 항목에 대한 이벤트 리스너 추가
+		    var $newSchool = $('#school_containers .container').last();
+		    initSchoolItemEvents($newSchool);
+		}
+
+		function initSchoolItemEvents($school) {
+		    $school.find('.dropdown-education-category .button').click(function() {
+		        $(this).closest('.dropdown').find('.list').toggleClass('hidden');
+		    });
+
+		    $school.find('.dropdown-education-category .eduItem').click(function() {
+		        var schoolType = $(this).data('schltypecode');
+		        updateSchoolType($school, schoolType);
+		    });
+
+		    $school.find('.buttonDeleteField').click(function() {
+		        $school.remove();
+		    });
+		}
+		
+		function updateSchoolType($school, schoolType) {
+		    var templateId = schoolType === "0" ? '#tplHighSchool' : '#tplUnivSchool';
+		    var newSchoolHtml = $(templateId).html().replace(/\{no\}/g, $school.index() + 1);
+		    $school.replaceWith(newSchoolHtml);
+		    
+		    var $newSchool = $('#school_containers .container').eq($school.index());
+		    initSchoolItemEvents($newSchool);
+
+		    if (schoolType !== "0") {
+		        initUnivSchoolEvents($newSchool);
+		    }
+		}
+		
+		function updateEducation(educationData) {
+			$('#school_containers').empty();
+		    
+		    var gradStateMap = {
+		        "졸업": "10",
+		        "졸업예정": "5",
+		        "재학중": "4",
+		        "중퇴": "2",
+		        "수료": "9",
+		        "휴학": "3"
+		    };
+		    
+		    educationData.forEach(function(edu, index) {
+		        var templateId;
+		        if (edu.school_classification === "1") {
+		            templateId = '#tplHighSchool';
+		        } else {
+		            templateId = '#tplUnivSchool';
+		        }
+		        
+		        var newSchoolHtml = $(templateId).html().replace(/\{no\}/g, index + 1);
+		        var $newSchool = $(newSchoolHtml);
+		        var $schoolNameInput = $newSchool.find('[data-type="School_Name"][data-comp_type="jkAcInput"]');
+		        $schoolNameInput.val(edu.school_name);
+		        
+		        if (edu.school_classification === "1") {
+		            $newSchool.find('[name="HighSchool.Schl_Name"]').val(edu.school_name);
+		            $newSchool.find('#HighSchool_Schl_Name_Search').val(edu.school_name);
+		            $newSchool.find('#HighSchool_Grad_Year').val(edu.graduation_date.substring(0, 4));
+		            
+		            var $gradStateDropdown = $newSchool.find('.dropdown-edcation-state');
+		            var $gradStateButton = $gradStateDropdown.find('.buttonChoose');
+		            var $gradStateInput = $newSchool.find('#HighSchool_Grad_Type_Code');
+		            
+		            if (edu.graduation_state && gradStateMap[edu.graduation_state]) {
+		                $gradStateDropdown.addClass('selected');
+		                $gradStateDropdown.find('.label').removeClass('hidden').attr('aria-hidden', 'false');
+		                $gradStateButton.html('<span>' + edu.graduation_state + '</span>');
+		                $gradStateInput.val(gradStateMap[edu.graduation_state]);
+		            }
+		        } else {
+		            // 대학교 데이터 채우기 (기존 코드)
+		            $newSchool.find('[name$="Schl_Name"]').val(edu.school_name);
+		            $newSchool.find('[name$="Entc_YM"]').val(edu.admission_date);
+		            $newSchool.find('[name$="Grad_YM"]').val(edu.graduation_date);
+		            
+		            // graduation_state 처리
+		            var $gradStateDropdown = $newSchool.find('.dropdown-edcation-state');
+		            var $gradStateButton = $gradStateDropdown.find('.buttonChoose');
+		            var $gradStateLabel = $gradStateDropdown.find('.label');
+		            var $gradStateInput = $newSchool.find('[name$="Grad_Type_Code"]');
+		            
+		            if (edu.graduation_state && gradStateMap[edu.graduation_state]) {
+		                $gradStateDropdown.addClass('selected');
+		                $gradStateLabel.removeClass('hidden').attr('aria-hidden', 'false');
+		                $gradStateButton.html('<span>' + edu.graduation_state + '</span>');
+		                $gradStateInput.val(gradStateMap[edu.graduation_state]);
+		            }
+		            
+		            $newSchool.find('[data-type="Major_Name"]').val(edu.major);
+		            $newSchool.find('[name$="Grade"]').val(edu.grades);
+		            $newSchool.find('[name$="Grade_Prft_Scr"]').val(edu.total_score);
+		        }
+		        
+		        $newSchool.find('.list').removeClass('visible').addClass('hidden');
+		        
+		        $('#school_containers').append($newSchool);
+		        initSchoolItemEvents($newSchool);
+		    });
+		}
+
+		function initUnivSchoolEvents($school) {
+		    $school.find('.dropdown-edcation-state .buttonChoose').click(function(e) {
+		        e.preventDefault();
+		        var $list = $(this).closest('.dropdown').find('.list');
+		
+		        if ($list.hasClass('hidden')) {
+		            $list.removeClass('hidden').addClass('visible');
+		        } else {
+		            $list.removeClass('visible').addClass('hidden');
+		        }
+		    });
+
+		    $school.find('.dropdown-edcation-state .list .button').click(function(e) {
+		        e.preventDefault();
+		        var selectedValue = $(this).data('value');
+		        var selectedText = $(this).find('span').text();
+		        var $dropdown = $(this).closest('.dropdown');
+		        
+		        $dropdown.addClass('selected');
+		        $dropdown.find('.label').removeClass('hidden').attr('aria-hidden', 'false');
+		        $dropdown.find('.buttonChoose').html('<span>' + selectedText + '</span>');
+		        $dropdown.find('input[type="hidden"]').val(selectedValue);
+		        $dropdown.find('.list').removeClass('visible').addClass('hidden');
+		    });
+		}
+		/* 수정 삭제를 위한 js functions end */
 	</script>
 </head>
 <body>
