@@ -352,33 +352,21 @@
 		}
 		
 		function updateCertifications(certificationData) {
-		    // 기존 자격증 항목들을 모두 제거
 		    $('#license_containers').empty();
 
-		    // 각 자격증 데이터에 대해 새 항목 생성
 		    certificationData.forEach(function(cert, index) {
 		        var newCertHtml = $('#tplLicenseItem').html().replace(/c23/g, 'c' + (index + 1));
 		        var $newCert = $(newCertHtml);
 
-		        // 자격증명 설정
 		        $newCert.find('[data-type="Lc_Name"]').val(cert.certificate_name);
-
-		        // 발행처 설정
 		        $newCert.find('[data-type="Lc_Pub"]').val(cert.publisher);
-
-		        // 취득월 설정
 		        $newCert.find('[data-format-type="month"]').val(cert.acquisition_date);
-
-		        // 삭제 버튼 이벤트 설정
 		        $newCert.find('.dev-btn-del-license').click(function() {
 		            $(this).closest('.container').remove();
 		        });
-
-		        // 새 자격증 항목을 컨테이너에 추가
 		        $('#license_containers').append($newCert);
 		    });
 
-		    // 자격증 추가 버튼 이벤트 설정
 		    $('.formWrapCertificate .buttonAddField').off('click').click(function() {
 		        var newIndex = $('#license_containers .container').length + 1;
 		        var newCertHtml = $('#tplLicenseItem').html().replace(/c23/g, 'c' + newIndex);
@@ -399,35 +387,24 @@
 		        var newCareerHtml = $('#tplCareerItem').html().replace(/c14/g, 'c' + (index + 1));
 		        var $newCareer = $(newCareerHtml);
 		        
-		        // 회사명 설정
 		        $newCareer.find('[id^="Career_C_Name_"]').val(career.company_name);
-		        
-		        // 부서명 설정
 		        $newCareer.find('[id^="Career_C_Part_"]').val(career.dname);
-		        
-		        // 입사년월 설정
 		        $newCareer.find('[id^="Career_CSYM_"]').val(career.join_date);
-		        
-		        // 퇴사년월 설정
 		        if (career.resignation_date) {
 		            $newCareer.find('[id^="Career_CEYM_"]').val(career.resignation_date);
 		        } else {
 		            $newCareer.find('[id^="Career_CEYM_"]').val('재직중');
 		        }
-		        
-		        // 직급 설정 (데이터에 직급 정보가 있다고 가정)
+
 		        if (career.position) {
 		            $newCareer.find('[id^="Career_position_field"]').val(career.position);
 		        }
 		        
-		        // 연봉 설정
 		        if (career.sal) {
 		            $newCareer.find('[id^="Career_M_MainPay_User_"]').val(career.sal);
 		        }
 		        
-		        // 담당업무 설정
 		        $newCareer.find('[id^="Career_Prfm_Prt_"]').val(career.job_description);
-		        
 		        $('#career_containers').append($newCareer);
 		    });
 		}

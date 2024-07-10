@@ -314,7 +314,8 @@
 		      'language' VALUE lang.language,
 		      'test_name' VALUE lang.test_name,
 		      'lang_level' VALUE lang.lang_level,
-		      'category' VALUE lang.category
+		      'category' VALUE lang.category,
+		      'aquisition_date' VALUE TO_CHAR(lang.aquisition_date, 'YYYY-MM-DD')
 		    )
 		  )
 		) AS languages_json

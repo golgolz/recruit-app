@@ -141,7 +141,7 @@
         $.each(recruits, function(index, recruit) {
             var row = $('<tr>')
                 .addClass('list0')
-                .attr('data-href', 'http://localhost/recruit-app/manage/recruits/detail.do?id=' + recruit.id);
+                .attr('data-href', 'http://localhost/recruit-app/manage/recruit/detail.do?id=' + recruit.id);
             
             row.append($('<td>').text(index + startNum))
                .append($('<td>').text(recruit.companyCode))
@@ -425,7 +425,7 @@
               				<tr>
                 				<td align="right">
 									<input type="button" value="등록하기" class="btn btn-outline-success btn-sm float-right goRegist" style="font-weight: bold; margin: 10px auto;" 
-									onclick="location.href='${pageContext.request.contextPath}/manage/recruits/detail.do'"/>
+									onclick="location.href='${pageContext.request.contextPath}/manage/recruit/detail.do'"/>
                 				</td>
               				</tr>
             			</tbody>

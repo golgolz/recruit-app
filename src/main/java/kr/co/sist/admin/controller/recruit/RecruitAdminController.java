@@ -27,12 +27,12 @@ public class RecruitAdminController {
         this.recruitAdminService = recruitAdminService;
     }
 
-    @GetMapping("/manage/recruits.do")
+    @GetMapping("/manage/recruit/recruits.do")
     public String showRecruitPage() {
         return "/manage/recruit/recruits";
     }
 
-    @GetMapping("/manage/recruits/detail.do")
+    @GetMapping("/manage/recruit/detail.do")
     public String showRecruitDetailPage(
             @RequestParam(value = "id", required = false) Integer recruitNum, Model model) {
         model.addAttribute("recruitNum", recruitNum);
