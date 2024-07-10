@@ -45,8 +45,8 @@
 			<input type="text" name="Career[c14].CEYM" id="Career_CEYM_c14" value="" data-format-type="month" class="devCareerCEYM" placeholder="2016.06" />
 			<div class="validation hidden" aria-hidden="true"></div>
 		</div>
-		<div class="input input-career-duty is-label is-value">
-			<label>포지션</label> 
+		<div class="input input-career-duty is-label">
+			<label>직급</label> 
 			<input type="text" name="Career[c14].M_MainField" id="Career_M_MainPay_User_c14" value="" data-format-type="price" maxlength="7" />
 		</div>
 		<div class="input input-career-salary is-label salaryInput">

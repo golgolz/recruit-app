@@ -126,6 +126,7 @@
 		            	updateTitle(data.title);
 		            	updateProfileForm(data);
 		            	updateSkills(data.subData.skills); 
+		            	updateCertifications(data.subData.certifications);
 		            	
 		            	if (data.subData && data.subData.education) {
 		                    updateEducation(data.subData.education);
@@ -345,6 +346,47 @@
 		        $dropdown.find('.buttonChoose').html('<span>' + selectedText + '</span>');
 		        $dropdown.find('input[type="hidden"]').val(selectedValue);
 		        $dropdown.find('.list').removeClass('visible').addClass('hidden');
+		    });
+		}
+		
+		function updateCertifications(certificationData) {
+		    // 기존 자격증 항목들을 모두 제거
+		    $('#license_containers').empty();
+
+		    // 각 자격증 데이터에 대해 새 항목 생성
+		    certificationData.forEach(function(cert, index) {
+		        var newCertHtml = $('#tplLicenseItem').html().replace(/c23/g, 'c' + (index + 1));
+		        var $newCert = $(newCertHtml);
+
+		        // 자격증명 설정
+		        $newCert.find('[data-type="Lc_Name"]').val(cert.certificate_name);
+
+		        // 발행처 설정
+		        $newCert.find('[data-type="Lc_Pub"]').val(cert.publisher);
+
+		        // 취득월 설정
+		        $newCert.find('[data-format-type="month"]').val(cert.acquisition_date);
+
+		        // 삭제 버튼 이벤트 설정
+		        $newCert.find('.dev-btn-del-license').click(function() {
+		            $(this).closest('.container').remove();
+		        });
+
+		        // 새 자격증 항목을 컨테이너에 추가
+		        $('#license_containers').append($newCert);
+		    });
+
+		    // 자격증 추가 버튼 이벤트 설정
+		    $('.formWrapCertificate .buttonAddField').off('click').click(function() {
+		        var newIndex = $('#license_containers .container').length + 1;
+		        var newCertHtml = $('#tplLicenseItem').html().replace(/c23/g, 'c' + newIndex);
+		        var $newCert = $(newCertHtml);
+
+		        $newCert.find('.dev-btn-del-license').click(function() {
+		            $(this).closest('.container').remove();
+		        });
+
+		        $('#license_containers').append($newCert);
 		    });
 		}
 		/* 수정 삭제를 위한 js functions end */
