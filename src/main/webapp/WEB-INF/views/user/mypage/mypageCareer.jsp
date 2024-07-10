@@ -186,13 +186,155 @@
 	<script type="text/javascript">
 		$(function(){
 			<!-- golgolz start -->
+			
+			var startNum = 1;
+			var endNum = startNum + itemsPerPage;
+			var itemsPerPage = 5;
+			var showPages = 3;
+			var totalPages = 0;
+			var currentPage = 1;
+			
+			updateCareerList(true);
+			
+			function getCareerVO() {
+        	    return {
+        	        startNum: startNum,
+        	        endNum: startNum + itemsPerPage - 1
+        	    };
+        	}//function
+        	
+        	
+        	function updateCareerList(isFirst) {
+				var careerVO = {};
+			    
+			    if (isFirst) {
+			    	careerVO = {
+			    		startNum: 1,
+			            endNum: itemsPerPage
+			        };
+			    } else {
+			        careerVO = getCareerVO();
+			    }
+			    
+			    $.ajax({
+		            url: "${pageContext.request.contextPath}/api/mypage/getCareer.do",
+		            method: 'GET',
+		            data: careerVO,
+		            dataType: 'JSON',
+		            success: function(data) {
+		                populateTable(data);
+		                countApplyList(isFirst);
+		                updatePagination();
+		               if(!(data && data.length > 0)){
+		                    $("#careerTable tbody").html('<tr><td colspan="4">요청하신 결과가 없습니다.</td></tr>');
+		                } 
+		            },
+		            error: function(xhr, status, error) {
+		                console.error("Error fetching data: " + error);
+		                $("#careerTable tbody").html('<tr><td colspan="4">데이터를 불러오는 데 실패했습니다.</td></tr>');
+		            }
+		        });
+		    }//function
+		    
+		    function populateTable(careerList) {
+	            var tableBody = $("#careerTable tbody");
+	            tableBody.empty();
+	            $.each(careerList, function(index, companyInfo) {
+	            	
+	                var logoCell = $('<td class="tableHeader">').append(
+	                    $('<img>').attr({
+	                        src: 'http://localhost/recruit-app/assets/images/company/logo/' + companyInfo.logo,
+	                        style: 'width: 70px; height: 70px;'
+	                    })
+	                );
+
+	                var companyInfoCell = $('<td class="companyInfo">').append(
+	                    $('<h1 class="companyInfo" style="font-size: 18px;"><strong>').text(companyInfo.companyName),
+	                    $('<ul class="companyInfo">').append(
+	                        $('<li>').text('매출액 ' + companyInfo.revenue + '억'),
+	                        $('<li>').text('사원수 ' + companyInfo.headcount + '명') 
+	                    )
+	                );
+
+	                var buttonCell = $('<td class="tableHeader">').append(
+	                    $('<input type="button">').attr({
+	                        name: 'writeRivew',
+	                        class: 'btn btn-outline-success btn-sm register-btn',
+	                        value: '리뷰 작성',
+	                        onclick: "location.href='http://localhost/recruit-app/review/reviewWrite.do?companyCode=" + companyInfo.companyCode + "';"
+	                    })
+	                );
+
+	                var row = $('<tr class="tableMiddle">').append(logoCell, companyInfoCell, buttonCell);
+	                tableBody.append(row);
+	            });//each
+	    	}//function
+	    	
+	    	
+		    function countApplyList(careerVO){
+        		$.ajax({
+                    url: "${pageContext.request.contextPath}/api/mypage/careerCount.do",
+                    method: 'GET',
+                    data: careerVO,
+                    dataType: 'JSON',
+                    async: false,
+                    success: function(data) {
+                    	totalPages = data;
+                    	$("#cnt").text(JSON.stringify(data));
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error fetching data: " + error);
+                    }
+                });//ajax
+        	}//function
+			
+			$('.pagination').on('click', '.page-link', function(e) {
+                
+                e.preventDefault();
+                var clickedPage = $(this).data('page');
+                if (clickedPage) {
+                    currentPage = clickedPage;
+                    startNum = itemsPerPage * (currentPage - 1) + 1;
+                    updateCareerList(false);
+                } else if ($(this).attr('id') === 'prev-page') {
+                    if (currentPage > 1) {
+                        currentPage--;
+                        startNum = itemsPerPage * (currentPage - 1) + 1;
+                        updateCareerList(false);
+                    }
+                } else if ($(this).attr('id') === 'next-page') {
+                    if (currentPage < Math.ceil(totalPages / itemsPerPage)) {
+                        currentPage++;
+                        startNum = itemsPerPage * (currentPage - 1) + 1;
+                        updateCareerList(false);
+                    }
+                }
+    	});//function
+    	
+    	function updatePagination() {
+     		var currentGroup = Math.ceil(currentPage / showPages);
+        	var startPage = (currentGroup - 1) * showPages + 1;
+            var paginationHtml = '';
+            var endPage = Math.min(Math.ceil(totalPages / itemsPerPage) , startPage + showPages - 1);
+            paginationHtml += '<li class="page-items' + (currentPage === 1 ? ' disabled' : '') + '">';
+            paginationHtml += '<a class="page-link" href="#" aria-label="Previous" id="prev-page">';
+            paginationHtml += '<span aria-hidden="true">&laquo;</span></a></li>';
+
+            for (var i = startPage; i <= endPage; i++) {
+                paginationHtml += '<li class="page-items' + (i === currentPage ? ' active' : '') + '">';
+                paginationHtml += '<a class="page-link" href="#" data-page="' + i + '">' + i + '</a></li>';
+            }
+
+            paginationHtml += '<li class="page-items' + (currentPage === Math.ceil(totalPages / itemsPerPage) ? ' disabled' : '') + '">';
+            paginationHtml += '<a class="page-link" href="#" aria-label="Next" id="next-page">';
+            paginationHtml += '<span aria-hidden="true">&raquo;</span></a></li>';
+
+            $('.pagination').html(paginationHtml);
+        }//function
 			<!-- golgolz end -->
 		});
 	</script>
 </head>
-<%
-	List<UserCareerDomain> careerList = (List)request.getAttribute("careerList");
-%>
 <body>
     <div id="__next" data-reactroot="">
 		<jsp:include page="../../assets/layout/user/header.jsp" />
@@ -217,39 +359,17 @@
 					<label>나의 재직 기업</label>
 				</div>
 				<div>
-					<label>총 <strong><%= careerList.size() %></strong>건</label>
+					<label>총 <strong><span id="cnt"></span></strong>건</label>
 				</div>
 				<div class="row salaryList salaryCompanyList" style="margin-top: 50px; margin-bottom: 50px;">
-					<% if(careerList == null || careerList.isEmpty()) { %>
-						<div class="List_List_table__K2VFf">
-							<ul>
-								<dl class="List_List_empty__pphW6"">
-									<dd>조회 결과가 없습니다.</dd>
-								</dl>
-							</ul>
-						</div>
-					<% } else { %>
 				<div class="container">
-					<table>
-						<% for(UserCareerDomain ucd : careerList) { %>
-						<tr class="tableMiddle">
-							<td class="tableHeader"><img src="http://localhost/recruit-app/assets/images/company/logo/<%= ucd.getLogo() %>" style="width: 70px; height: 70px;"></td>
-							<td class="companyInfo">
-							<h1 class="companyInfo" style="font-size: 18px;"><strong><%= ucd.getCompanyName() %></strong></h1>
-							<ul class="companyInfo">
-								<li>매출액 <%= ucd.getRevenue() %>억</li>
-								<li>사원수 <%= ucd.getHeadcount() %>명</li>
-							</ul>
-							</td>
-							<td class="tableHeader"><input type="button" name="writeRivew" class="btn btn-outline-success btn-sm register-btn" 
-								value="리뷰 작성" onclick="location.href='http://localhost/recruit-app/review/reviewWrite.do';"></td>
-						</tr>
-						<% }//end for %>
+					<table id="careerTable">
+						<tbody>
+						</tbody>
 					</table>
-					<%}//end else %>
                 </div>
             		<!-- 페이지네이션 시작 -->
-						<!-- <div style="text-align:center;">
+						<div style="text-align:center;">
 					        <nav aria-label="...">
 					                <ul class="pagination pagination-lg" style="display: inline-flex;">
 					                       <li class="page-item disabled">
@@ -265,7 +385,7 @@
 					                        </li>
 						                 </ul>
 							         </nav>
-								</div> -->
+								</div>
 						<!-- 페이지네이션 끝 -->
 				</div>
             </div>

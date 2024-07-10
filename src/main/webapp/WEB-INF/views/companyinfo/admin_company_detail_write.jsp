@@ -14,8 +14,8 @@
 	
 	});
 		function addInfo(){
-	    	alert("기업이 등록되었습니다.")
 	        $("#dataForm").submit();
+	    	alert("기업이 등록되었습니다.")
 		}
 </script>
 <style>

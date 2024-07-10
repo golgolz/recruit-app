@@ -20,9 +20,18 @@
 </style>
 
 <script type="text/javascript">
-	$(function(){
-    	$("#qna_menu").addClass("bg-gradient-primary");
-	});
+	$(document).ready(function() {
+		 $("#qna_menu").addClass("bg-gradient-primary");
+	        $(document).on('click', '.pagination a', function (e) {
+	            e.preventDefault(); // 기본 동작 방지
+
+	            const url = $(this).attr('href'); // 링크 URL 가져오기
+	            $.get(url, function (data) {
+	                $('#pageWrap').html($(data).find('#pageWrap').html()); 
+	                // 페이지 내용을 업데이트
+	            });
+	        });
+	    });
 </script>
 <!-- golgolz start -->
 <!-- golgolz end -->
@@ -67,40 +76,43 @@
 		<!-- tap menu //-->
 
 		<!--// 내 제안내역 보기 -->
-		<div class="inquiryListWrap">
+		<div class="inquiryListWrap"  id="pageWrap">
 		<!--// List 시작 -->
-		<div class="schListWrap">
-			<div class="mtcSchListTb">
-			<!--[개발] 문의 내용이 없는 경우 hide 처리 -->
-			<table summary="내 제안내역 보기 목록으로 글번호, 내용, 날짜, 답변여부로 구성되어 있습니다.">
-			<caption>내 제안내역 보기</caption>
-			<colgroup>
-				<col class="col_1">
-				<col class="col_2">
-				<col class="col_3">
-				<col class="col_4">
-			</colgroup>
-			<thead class="blind">
-				<tr>
-				<th scope="col">글번호</th>
-				<th scope="col">내용</th>
-				<th scope="col">날짜</th>
-				<th scope="col">답변여부</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="qna" items="${newQnas}">
-					<tr>
-					<td><c:out value="${qna.view_num}"/></td>
-					<td class="alLeft"><span class="tit"><a href="http://localhost/recruit-app/manage/qna/new_detail.do?qna_num=${qna.qna_num }"><c:out value="${qna.title}"/></a></span></td>
-					<!-- <td>2024.05.24</td> -->
-					<td><fmt:formatDate value="${qna.input_date}" pattern="yy-MM-dd HH:mm:ss" /></td>
-					<td class="">답변대기</td>
-					</tr>
-				</c:forEach>
-				</tbody>
-			</table>
-	<!-- 	<div class="listBtmArea">
+					<div class="schListWrap">
+						<div class="mtcSchListTb">
+							<!--[개발] 문의 내용이 없는 경우 hide 처리 -->
+							<table summary="내 제안내역 보기 목록으로 글번호, 내용, 날짜, 답변여부로 구성되어 있습니다.">
+								<caption>내 제안내역 보기</caption>
+								<colgroup>
+									<col class="col_1">
+									<col class="col_2">
+									<col class="col_3">
+									<col class="col_4">
+								</colgroup>
+								<thead class="blind">
+									<tr>
+										<th scope="col">글번호</th>
+										<th scope="col">내용</th>
+										<th scope="col">날짜</th>
+										<th scope="col">답변여부</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="qna" items="${newQnas}">
+										<tr>
+											<td><c:out value="${qna.view_num}" /></td>
+											<td class="alLeft"><span class="tit"><a
+													href="http://localhost/recruit-app/manage/qna/new_detail.do?qna_num=${qna.qna_num }"><c:out
+															value="${qna.title}" /></a></span></td>
+											<!-- <td>2024.05.24</td> -->
+											<td><fmt:formatDate value="${qna.input_date}"
+													pattern="yy-MM-dd HH:mm:ss" /></td>
+											<td class="">답변대기</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+							<!-- 	<div class="listBtmArea">
 		<div class="tplPagination">
    		<div class="tplPagination">
         <ul>
@@ -110,28 +122,41 @@
 	</div>
 	</div> -->
 
-						<div style="justify-content: center; margin-top:30px">
-							<nav aria-label="Page navigation example">
-								<ul class="pagination" style="justify-content: center;">
-									<li>
-										<a class="page-link" href="#" aria-label="Previous">
-											<span aria-hidden="true">&laquo;</span>
-										</a>
-									</li>
-									<li><a class="page-link" href="#">1</a></li>
-									<li><a class="page-link" href="#">2</a></li>
-									<li><a class="page-link" href="#">3</a></li>
-									<li>
-										<a class="page-link" href="#" aria-label="Next">
-											<span aria-hidden="true">&raquo;</span>
-										</a>
-									</li>
-								</ul>
-							</nav>
+							<div style="justify-content: center; margin-top: 30px">
+								<nav aria-label="Page navigation example">
+								    <ul class="pagination justify-content-center">
+								        <c:if test="${searchVO.currentPage > 1}">
+								            <li class="page-item">
+								                <a class="page-link"
+								                   href="?currentPage=${searchVO.currentPage - 1}&itemsPerPage=${searchVO.itemsPerPage}"
+								                   aria-label="Previous">
+								                    <span aria-hidden="true">&laquo;</span>
+								                </a>
+								            </li>
+								        </c:if>
+								        <c:forEach var="i" begin="1" end="${searchVO.totalPages}">
+								            <li class="page-item ${i == searchVO.currentPage ? 'active' : ''}">
+								                <a class="page-link"
+								                   href="?currentPage=${i}&itemsPerPage=${searchVO.itemsPerPage}">
+								                    ${i}
+								                </a>
+								            </li>
+								        </c:forEach>
+								        <c:if test="${searchVO.currentPage < searchVO.totalPages}">
+								            <li class="page-item">
+								                <a class="page-link"
+								                   href="?currentPage=${searchVO.currentPage + 1}&itemsPerPage=${searchVO.itemsPerPage}"
+								                   aria-label="Next">
+								                    <span aria-hidden="true">&raquo;</span>
+								                </a>
+								            </li>
+								        </c:if>
+								    </ul>
+								</nav>
+							</div>
 						</div>
-						
 					</div>
-	</div>
+				</div>
 	<!-- List 끝 //-->
 	</div>
 </div>

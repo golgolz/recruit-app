@@ -44,7 +44,6 @@
                     <hr class="layout"/>
                     <div id="container">
                         <div id="contents">
-                        
                             
                             <div class="companyInfo">
                                 <img src="<c:url value='/assets/images/company/${companyInfo.companyImg}' />" alt="${companyInfo.companyName}" />

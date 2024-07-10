@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import kr.co.sist.admin.domain.qna.QnaDomain;
 import kr.co.sist.admin.vo.qna.QnaVO;
+import kr.co.sist.admin.vo.qna.SearchVO;
 import kr.co.sist.properties.MyBatisConfig;
 
 @Component
@@ -17,13 +18,20 @@ public class QnaAdminDAO {
         this.myBatis = myBatis;
     }
 
-    public List<QnaDomain> selectNewQnas() {
+    public List<QnaDomain> selectNewQnas(SearchVO sVO) { // searchVO만 추가했음.
         SqlSession session = myBatis.getMyBatisHandler(false);
         List<QnaDomain> qnas = null;
-        qnas = session.selectList("kr.co.sist.qna.admin.selectNewQnas");
+        qnas = session.selectList("kr.co.sist.qna.admin.selectNewQnas", sVO);
         myBatis.closeHandler(session);
         return qnas;
     }// 답변 대기 문의 리스트
+
+    public int countNewQnas() {
+        SqlSession session = myBatis.getMyBatisHandler(false);
+        int count = session.selectOne("kr.co.sist.qna.admin.countNewQnas");
+        myBatis.closeHandler(session);
+        return count;
+    }
 
     public QnaDomain selectOneNewQna(int qna_num) {
         SqlSession session = myBatis.getMyBatisHandler(false);
@@ -64,7 +72,5 @@ public class QnaAdminDAO {
         myBatis.closeHandler(session);
         return result2;
     }// 답변 플래그 바꾸기
-
-    // public List<QnaDomain> select
 
 }

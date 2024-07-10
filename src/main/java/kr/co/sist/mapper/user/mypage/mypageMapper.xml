@@ -10,13 +10,14 @@
 		    <result property="progressState" column="progress_state"/>
 	</resultMap>
 	<resultMap id="userCareerList" type="kr.co.sist.user.domain.mypage.UserCareerDomain">
+			<result property="companyCode" column="company_code"/>
 		    <result property="logo" column="logo"/>
 		    <result property="companyName" column="company_name"/>
 		    <result property="revenue" column="revenue"/>
 		    <result property="headcount" column="headcount"/>
 	</resultMap>
 	<resultMap id="userReviewList" type="kr.co.sist.user.domain.mypage.UserReviewDomain">
-		    <result property="reviewNum" column="review_num"/>
+			<result property="companyCode" column="company_code"/>
 		    <result property="companyName" column="company_name"/>
 		    <result property="title" column="title"/>
 		    <result property="inputDate" column="input_date"/>
@@ -83,16 +84,42 @@
 			</where>
 			  )
   	</select>
-  	<select id="selectCareer" parameterType="String" resultMap="userCareerList">
-	  	select cpi.logo,cpi.company_name,cpi.revenue,cpi.headcount
-		from career cr,resume rs, companyinfo cpi
-		where ((cr.resume_num=rs.resume_num) and (cpi.company_code=cr.company_code)) and rs.user_id=#{ userId }
-		order by cr.join_date desc
+  	<select id="selectCareer" parameterType="kr.co.sist.user.vo.mypage.CareerVO" resultMap="userCareerList">
+  		select company_code,logo,company_name,revenue,headcount
+	  	from(select row_number() over(order by cr.join_date desc) as rnum,cpi.company_code,cpi.logo,cpi.company_name,cpi.revenue,cpi.headcount
+			from career cr,resume rs, companyinfo cpi
+			where ((cr.resume_num=rs.resume_num) and (cpi.company_code=cr.company_code)) and rs.user_id=#{ userId }
+		)
+		<where>
+			<if test="startNum != 0 and endNum != 0">
+				and rnum between #{startNum} and #{endNum}
+			</if>
+		</where>
   	</select>
-  	<select id="selectReview" parameterType="String" resultMap="userReviewList">
-	  	select riv.review_num,cpi.company_name,riv.title,riv.input_date,riv.content
-		from review riv,companyinfo cpi
-		where (riv.company_code=cpi.company_code) and riv.user_id=#{ userId } and riv.delete_flag='N'
-		order by input_date desc
+  	<select id="selectCareerCnt" parameterType="kr.co.sist.user.vo.mypage.CareerVO" resultType="int">
+  		select count(*) as total_count
+	  	from(select row_number() over(order by cr.join_date desc) as rnum,cpi.logo,cpi.company_name,cpi.revenue,cpi.headcount
+			from career cr,resume rs, companyinfo cpi
+			where ((cr.resume_num=rs.resume_num) and (cpi.company_code=cr.company_code)) and rs.user_id=#{ userId }
+		)
+  	</select>
+  	<select id="selectReview" parameterType="kr.co.sist.user.vo.mypage.CareerVO" resultMap="userReviewList">
+  		select company_code,company_name,title,input_date,content
+	  	from (select row_number() over(order by riv.input_date desc) as rnum,cpi.company_code,cpi.company_name,riv.title,riv.input_date,riv.content
+			from review riv,companyinfo cpi
+			where (riv.company_code=cpi.company_code) and riv.user_id=#{ userId } and riv.delete_flag='N'
+		)
+		<where>
+			<if test="startNum != 0 and endNum != 0">
+				and rnum between #{startNum} and #{endNum}
+			</if>
+		</where>
+  	</select>
+  	<select id="selectReviewCnt" parameterType="kr.co.sist.user.vo.mypage.CareerVO" resultType="int">
+  		select count(*) as total_count
+	  	from (select row_number() over(order by riv.input_date desc) as rnum,cpi.company_code,cpi.company_name,riv.title,riv.input_date,riv.content
+			from review riv,companyinfo cpi
+			where (riv.company_code=cpi.company_code) and riv.user_id=#{ userId } and riv.delete_flag='N'
+		)
   	</select>
  </mapper>

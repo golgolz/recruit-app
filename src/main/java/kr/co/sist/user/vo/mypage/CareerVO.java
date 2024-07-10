@@ -1,4 +1,4 @@
-package kr.co.sist.vo.companyinfo;
+package kr.co.sist.user.vo.mypage;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,6 +11,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class WelfareVO {
-    private String companyCode, category, welfareContent;
+public class CareerVO {
+    private String userId;
+    private int startNum;
+    private int endNum;
 }

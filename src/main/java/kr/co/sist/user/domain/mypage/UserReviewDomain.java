@@ -1,6 +1,7 @@
 package kr.co.sist.user.domain.mypage;
 
 import java.sql.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,9 +14,10 @@ import lombok.ToString;
 @Setter
 @ToString
 public class UserReviewDomain {
-    private int reviewNum;
+    private String companyCode;
     private String companyName;
     private String title;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     private Date inputDate;
     private String content;
 
