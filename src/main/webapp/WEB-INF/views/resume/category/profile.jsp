@@ -16,31 +16,18 @@
 			</div>
 			<div class="input is-label input-profile-birth is-value">
 				<label for="UserInfo_M_Born">생년월일 <span class="star">*</span></label> 
-				<input class="dev-essential" data-format-type="birth" data-max-date="2009.06.01" data-val="true"data-val-date="생년월일 필드는 날짜여야 합니다." id="UserInfo_M_Born"name="UserInfo.M_Born" placeholder="1988.03.01" type="text" value="1996-08-21" />
+				<input class="dev-essential" data-format-type="birth" data-max-date="2009.06.01" data-val="true" data-val-date="생년월일 필드는 날짜여야 합니다." id="UserInfo_M_Born"name="UserInfo.M_Born" placeholder="1988.03.01" type="text" value="1996-08-21" />
 				<div class="validation hidden" aria-hidden="true"></div>
 			</div>
 			<div class="dropdown dropdown-profile-sex is-label selected">
 				<div class="label" aria-hidden="true">성별 <span class="star">*</span>
 				</div>
-				<button type="button" class="button buttonChoose dev-essential" aria-haspopup="true">
-					<span>여자</span>
-				</button>
-				<div class="list hidden" aria-hidden="true">
-					<ul>
-						<li>
-							<button type="button" class="button" data-value="False">
-								<span>남자</span>
-							</button>
-						</li>
-						<li>
-							<button type="button" class="button" data-value="True">
-								<span>여자</span>
-							</button>
-						</li>
-					</ul>
-				</div>
-				<div class="validation hidden" aria-hidden="true">성별을 입력해주세요</div>
-				<input class="dev-essential" id="UserInfo_M_Gender" name="UserInfo.M_Gender" type="hidden" value="True" />
+				<select class="button buttonChoose dev-essential" id="genderSelect" style="font-size: 16px; padding: 0px 15px; padding-top: 15px;">
+					<option value="여자" style="font-size: 16px;">여자</option>
+					<option value="남자" style="font-size: 16px;">남자</option>
+				</select>
+				<!-- <div class="validation hidden" aria-hidden="true">성별을 입력해주세요</div>
+				<input class="dev-essential" id="UserInfo_M_Gender" name="UserInfo.M_Gender" type="hidden" value="True" /> -->
 			</div>
 			<div class="input input-profile-email is-label is-value">
 				<label for="UserInfo_M_Email">이메일 <span class="star">*</span></label>
@@ -67,7 +54,6 @@
 				</div>
 			</div>
 		</div>
-
 		<div class="picture dropped" style="">
 			<div class="guide">사진추가</div>
 			<a href="javascript:;" class="buttonAddFile"> 사진등록 </a>

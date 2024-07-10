@@ -15,6 +15,7 @@ import lombok.ToString;
 public class QnaVO {
 
     private int qna_num;
+    private int view_num;
     private String category, title, content, user_id, flag;
     private Date input_date;
 

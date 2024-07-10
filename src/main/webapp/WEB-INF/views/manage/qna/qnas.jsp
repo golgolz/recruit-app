@@ -5,6 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- pagination / datatables -->
+<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/datatables.min.css">
+<!-- pagination / datatables -->
 <link href="http://localhost/recruit-app/assets/css/layout/user/common-sv-202405271315.css" rel="stylesheet" type="text/css" />
 <link href="//i.jobkorea.kr/content/css/ver_2/event/banner.promotion-sv-202401301659.css" rel="stylesheet" type="text/css" />
 <link href="view-source:https://www.jobkorea.co.kr/help/inquiry" rel="stylesheet" type="text/css" />
@@ -14,6 +17,7 @@
 <link href="https://i.jobkorea.kr/deploy/pc/dist/css/personal/layout/footer-sv-202405131313.css" rel="stylesheet" type="text/css" />
 <link href="https://i.jobkorea.kr/deploy/pc/dist/css/personal/pages/main/auto_search-sv-202405231305.css" rel="stylesheet" type="text/css" />
 <link href="https://i.jobkorea.kr/content/css/ver_2/mtc/inquiry_selection.css?v=2024052914000" rel="stylesheet" type="text/css" />
+
 <!--bootstrap시작-->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
@@ -27,6 +31,7 @@
 <script type="text/javascript">
 	$(function(){
     	$("#qna_menu").addClass("bg-gradient-primary");
+    	
 	});
 </script>
 <!-- golgolz start -->
@@ -80,7 +85,7 @@
 						<div class="schListWrap">
 							<div class="mtcSchListTb" >
 								<!--[개발] 문의 내용이 없는 경우 hide 처리 -->
-								<table summary="내 제안내역 보기 목록으로 글번호, 내용, 날짜, 답변여부로 구성되어 있습니다.">
+								<table id ="qnaTable" summary="내 제안내역 보기 목록으로 글번호, 내용, 날짜, 답변여부로 구성되어 있습니다.">
 									<caption>내 제안내역 보기</caption>
 									<colgroup>
 										<col class="col_1">
