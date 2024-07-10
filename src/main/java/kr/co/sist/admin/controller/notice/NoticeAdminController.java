@@ -1,14 +1,22 @@
 package kr.co.sist.admin.controller.notice;
 
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import kr.co.sist.admin.service.notice.NoticeAdminService;
+import kr.co.sist.admin.vo.notice.SearchVO;
 
 @Controller
 public class NoticeAdminController {
+    @Autowired(required=false)
+    private NoticeAdminService noticeAdminService;
     
     @GetMapping("/manage/notice/notices.do")
-    public String searchAllNotice() {
+    public String searchAllNotice(Model model) {
+        List<SearchVO> list=noticeAdminService.searchAllnotice();
+        model.addAttribute("listNotice",list);
         return "manage/notice/notices";
     }
     @GetMapping("/manage/notice/noticeSearch.do")
