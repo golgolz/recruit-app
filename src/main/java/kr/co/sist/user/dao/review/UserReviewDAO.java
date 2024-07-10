@@ -163,5 +163,12 @@ public class UserReviewDAO {
         return totalReviewCount;
     }
    
+    //리뷰 작성 유효성 검증
+    public boolean hasReviewForCompany(String userId, String companyCode) {
+        SqlSession ss = myBatis.getMyBatisHandler(true);
+        int count = ss.selectOne("kr.co.sist.user.mapper.review.ReviewMapper.hasReviewForCompany", Map.of("userId", userId, "companyCode", companyCode));
+        myBatis.closeHandler(ss);
+        return count > 0;
+    }
 
 }
