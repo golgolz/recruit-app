@@ -173,7 +173,7 @@
           <div class="list hidden">
             <ul>
               <li>
-                <button type="button" class="button" data-value="2">
+                <button type="button" class="button" data-value="1">
                   <span>(2,3년제)학사</span>
                 </button>
               </li>
@@ -188,7 +188,7 @@
                 </button>
               </li>
               <li>
-                <button type="button" class="button" data-value="1">
+                <button type="button" class="button" data-value="4">
                   <span>박사</span>
                 </button>
               </li>

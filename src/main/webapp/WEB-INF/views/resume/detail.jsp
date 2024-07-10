@@ -230,6 +230,13 @@
 		        "휴학": "3"
 		    };
 		    
+		    var degreeMap = {
+		        "1": "(2,3년제)학사",
+		        "2": "(4년제)학사",
+		        "3": "석사",
+		        "4": "박사"
+		    };
+		    
 		    educationData.forEach(function(edu, index) {
 		        var templateId;
 		        if (edu.school_classification === "1") {
@@ -259,12 +266,10 @@
 		                $gradStateInput.val(gradStateMap[edu.graduation_state]);
 		            }
 		        } else {
-		            // 대학교 데이터 채우기 (기존 코드)
 		            $newSchool.find('[name$="Schl_Name"]').val(edu.school_name);
 		            $newSchool.find('[name$="Entc_YM"]').val(edu.admission_date);
 		            $newSchool.find('[name$="Grad_YM"]').val(edu.graduation_date);
 		            
-		            // graduation_state 처리
 		            var $gradStateDropdown = $newSchool.find('.dropdown-edcation-state');
 		            var $gradStateButton = $gradStateDropdown.find('.buttonChoose');
 		            var $gradStateLabel = $gradStateDropdown.find('.label');
@@ -275,6 +280,34 @@
 		                $gradStateLabel.removeClass('hidden').attr('aria-hidden', 'false');
 		                $gradStateButton.html('<span>' + edu.graduation_state + '</span>');
 		                $gradStateInput.val(gradStateMap[edu.graduation_state]);
+		            }
+		            
+		            var $degreeDropdown = $newSchool.find('.dropdown-edcation-degree');
+		            var $degreeButton = $degreeDropdown.find('.buttonChoose');
+		            var $degreeInput = $newSchool.find('[name$="Mstr_Dctr_Type_Code"]');
+		            
+		            var degreeIndex = Math.min(parseInt(edu.school_classification) - 1, 3);
+		            var degreeValue = Object.keys(degreeMap)[degreeIndex];
+		            var degreeText = degreeMap[degreeValue];
+
+		            $degreeDropdown.addClass('selected');
+		            $degreeDropdown.find('.label').removeClass('hidden').attr('aria-hidden', 'false');
+		            $degreeButton.html('<span>' + degreeText + '</span>');
+		            $degreeInput.val(degreeValue);
+		            
+		            var $totalScoreDropdown = $newSchool.find('.dropdown-education-total');
+		            var $totalScoreButton = $totalScoreDropdown.find('.buttonChoose span');
+		            var $totalScoreInput = $newSchool.find('[name$="Grade_Prft_Scr"]');
+		            
+		            if (edu.total_score) {
+		                $totalScoreDropdown.addClass('selected');
+		                $totalScoreDropdown.find('.label').removeClass('hidden').attr('aria-hidden', 'false');
+		                $totalScoreButton.text(edu.total_score);
+		                $totalScoreInput.val(edu.total_score);
+		                
+		                $totalScoreDropdown.find('.list ul li button').each(function() {
+		                    $(this).toggleClass('selected', $(this).data('value') == edu.total_score);
+		                });
 		            }
 		            
 		            $newSchool.find('[data-type="Major_Name"]').val(edu.major);
