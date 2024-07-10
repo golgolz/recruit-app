@@ -210,4 +210,13 @@
     SELECT COUNT(*) FROM REVIEW WHERE COMPANY_CODE = #{companyCode}
 </select>
 
+
+	<!-- 리뷰 작성 유효성 검증 -->
+	
+	<select id="hasReviewForCompany" parameterType="map" resultType="int">
+    SELECT COUNT(*)
+    FROM REVIEW
+    WHERE USER_ID = #{userId}
+    AND COMPANY_CODE = #{companyCode}
+	</select>
 </mapper>
