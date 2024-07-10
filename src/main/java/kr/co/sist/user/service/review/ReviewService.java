@@ -109,4 +109,11 @@ public class ReviewService {
     public int getTotalReviewCount(String companyCode) {
         return userReviewDAO.getTotalReviewCount(companyCode);
     }
+    
+    //리뷰 작성 유효성 검증
+ // ReviewService.java
+    public boolean hasReviewForCompany(String userId, String companyCode) {
+        return userReviewDAO.hasReviewForCompany(userId, companyCode);
+    }
+    
 }

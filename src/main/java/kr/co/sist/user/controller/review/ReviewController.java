@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import kr.co.sist.user.domain.review.ReviewDomain;
 import kr.co.sist.user.domain.review.ReviewSurveyDomain;
 import kr.co.sist.user.service.review.ReviewService;
@@ -159,23 +160,28 @@ public class ReviewController {
 
     // 리뷰 작성
     @GetMapping("/review/reviewWrite.do")
-    public String writeReview(
-            @RequestParam(value = "companyCode", defaultValue = "comp_0001") String companyCode,
-            Model model, HttpSession session) {
+    public String writeReview(@RequestParam(value = "companyCode", defaultValue = "comp_0001") 
+    String companyCode, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
         String userId = (String) session.getAttribute("userId");
         if (userId == null || userId.isEmpty()) {
             return "redirect:/user/loginPage.do"; // 로그인 페이지로 리디렉션
+        }
+
+        // 이미 리뷰를 작성했는지 확인
+        if (reviewService.hasReviewForCompany(userId, companyCode)) {
+            redirectAttributes.addFlashAttribute("errorMsg", "이미 리뷰를 작성했습니다.");
+            return "redirect:/user/mypage/mypageCareer.do";
         }
 
         // 회사 정보를 가져와 모델에 추가
         CompanyInfoVO companyInfo = reviewService.getCompanyInfo(companyCode);
         model.addAttribute("companyInfo", companyInfo);
         model.addAttribute("userId", userId);
-
+        
         // 디버깅을 위한 로그 추가
         System.out.println("Company Info: " + companyInfo);
         System.out.println("User ID: " + userId);
-
+        
         return "review/reviewWrite"; // 리뷰 작성 페이지로 이동
     }
 
