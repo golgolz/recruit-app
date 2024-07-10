@@ -127,6 +127,7 @@
 		            	updateProfileForm(data);
 		            	updateSkills(data.subData.skills); 
 		            	updateCertifications(data.subData.certifications);
+		            	updateIntroduction(data.introduce);
 		            	
 		            	if (data.subData && data.subData.education) {
 		                    updateEducation(data.subData.education);
@@ -388,6 +389,14 @@
 
 		        $('#license_containers').append($newCert);
 		    });
+		}
+		
+		function updateLanguages(languageData){
+			
+		}
+
+		function updateIntroduction(introductionData){
+			$("#ResumeProfile_Contents_").html(introductionData);
 		}
 		/* 수정 삭제를 위한 js functions end */
 	</script>
