@@ -49,6 +49,7 @@
 				<exclude-mapping path="/manage/adminLogin/adminLoginPage.do"/>
 				<exclude-mapping path="/manage/adminLogin/adminLogin.do"/>
 				<exclude-mapping path="/manage/logoutProcess.do"/>
+				<exclude-mapping path="/manage/adminLogin/logoutProcess.do"/>
 				<beans:bean id="ai" class="kr.co.sist.admin.interceptor.AdminInterceptor"/>
 			</interceptor>
 			<interceptor>
