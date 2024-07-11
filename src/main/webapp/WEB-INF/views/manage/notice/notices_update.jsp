@@ -1,19 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" info=""%>
-	
-<%-- <%
-Boolean isLoggedIn = (Boolean) session.getAttribute("isLoggedIn");
-System.out.println("세션 로그인 상태: " + isLoggedIn);
-if (!Boolean.TRUE.equals(isLoggedIn)) {
-%>
-  <script type="text/javascript">
-      alert('로그인이 필요합니다.');
-      window.location.href = '../../adminLogin/adminLogin.jsp'; // 경로 수정 필요
-  </script>
-<%
-  return;
-}
-%> --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,17 +18,7 @@ if (!Boolean.TRUE.equals(isLoggedIn)) {
 <script type="text/javascript">
 	$(function(){
     	$("#notice_menu").addClass("bg-gradient-primary");
-    	/* 
-		$("#btnList").click(function(){
-			history.back();
-		});//click
-		$("#btnWrite").click(function(){
-			$("#frmWrite").submit();
-		});//click
-		$("#btnCancel").click(function(){
-			alert("글작성을 취소합니다.");
-			location.href="http://localhost/manage/notice/notice.jsp";
-		});//click */
+    	
 		$('#content').summernote({
 	        placeholder: 'Hello stand alone ui',
 	        tabsize: 2,
@@ -54,18 +31,25 @@ if (!Boolean.TRUE.equals(isLoggedIn)) {
 	          ['table', ['table']],
 	          ['insert', ['link', 'picture', 'video']],
 	          ['view', ['fullscreen', 'codeview', 'help']]
-	        ]
+	        ],
+	        
+	        callbacks: {
+	            onBlur: function() {
+	                var content = $('#content').summernote('code');
+	                content = content.replace(/^<p>/, '').replace(/<\/p>$/, '');
+	                $('#content').summernote('code', content);
+	            }
+	        }
+		
 	      });//summernote
 	});//ready
 	
-	/* function chkNull() {
-		/* $("#frmWrite").submit(); */
-		/* $("#frmWrite").submit(function() { */
-        // 추가 작업을 수행합니다.
-        // 예: 폼이 제출되기 전에 유효성을 검사하는 등의 작업을 수행할 수 있습니다.
-	/*     });
-	}//chkNull */
-		
+	function updateNot(){
+    	alert("공지사항이 수정되었습니다.")
+        $("#frmUpdate").submit();
+    	
+	}
+	
 </script>
 <!-- golgolz start -->
 <!-- golgolz end -->
@@ -105,29 +89,15 @@ if (!Boolean.TRUE.equals(isLoggedIn)) {
 			<!-- golgolz start -->
 			<div id="container">
 		<div id="contents">
-		
-<!-- <div class="xans-element- xans-board xans-board-writepackage-4 xans-board-writepackage xans-board-4 "><div class="xans-element- xans-board xans-board-title-4 xans-board-title xans-board-4 "><div class="path">
-            <span>현재 위치</span>
-            <ol>
-<li><a href="/">홈</a></li>
-                <li><a href="/board/index.html">게시판</a></li>
-                <li title="현재 위치"><strong>공지사항</strong></li>
-            </ol>
-</div> -->
-<%-- <jsp:useBean id="nVO" class="notice.NoticeVO" scope="page"/>
-<jsp:setProperty property="*" name="nVO"/>
-<%
-String notice_id=request.getParameter("notice_id");
-System.out.print("공지사항 아이디: "+notice_id);
-
-%> --%>
+		<c:if test="${not empty requestScope.noticeDetail}">
+            <c:set var="noticeDetail" value="${requestScope.noticeDetail[0]}" />
+        </c:if>
 <div class="titleArea" style="padding-top : 3px ">
             <h2><font color="333333">공지사항</font></h2>
             <p>공지사항 작성</p>
         </div>
 </div>
-<form id="frmWrite" name="frmWrite" action="notice_write_process.jsp" method="post">
-<input type="hidden" id="notice_id" name="notice_id" value="${ nVO.notice_id }"/>
+<form id="frmUpdate" action="http://localhost/recruit-app/manage/notice/noticesUpdate.do" method="post">
 <div class="ec-base-table typeWrite ">
             <table border="1" summary="">
 <caption>글쓰기 폼</caption>
@@ -143,23 +113,23 @@ System.out.print("공지사항 아이디: "+notice_id);
 		<option value="1">선택</option>
 		<option value="2">공지사항</option>
 	  </select> -->
-		<input id="title" name="title" class="inputTypeText" placeholder="" maxLength="125" value="수정할 제목" type="text" style="height:30px; width:500px" />
-            <select id="noticeCategory" value="category">
-            	<option name="notice" value="공지">공지</option>
-            	<option name="service" value="서비스">서비스</option>
-            	<option name="info" value="안내">안내</option>
+		<input id="title" name="title" class="inputTypeText" placeholder="" maxLength="125" value="<c:out value="${noticeDetail.title}" />" type="text" style="height:30px; width:500px" />
+            <select id="noticeCategory" value="${noticeDetail.category}">
+            	<option value="공지">공지</option>
+            	<option value="서비스">서비스</option>
+            	<option value="안내">안내</option>
             </select>
  	</td>
  </tr>
 </tbody>
 </table>
 </div>
-  <textarea id="content" name="content">수정할 내용</textarea>
+  <textarea id="content" name="content"><c:out value="${noticeDetail.content}" /></textarea>
 </form>
 
 <div class="ec-base-button ">
             <span class="gRight">
-            	<input type="button" value="수정" class="btn btn-outline-warning btn-sm" id="btnWrite" name="btnWrite" onclick="location.href='http://localhost/recruit-app/manage/notice/notices.do'"/>
+            	<input type="button" value="수정" class="btn btn-outline-warning btn-sm" id="btnWrite" name="btnWrite" onclick="updateNot()"/>
             	<input type="button" value="취소" class="btn btn-outline-dark btn-sm detail-control" id="btnCancel" name="btnCancel" onclick="location.href='http://localhost/recruit-app/manage/notice/noticesDetail.do'"/>
             	
             	
