@@ -33,6 +33,11 @@
 		from users
 		where user_id=#{ userId }
   	</select>
+  	<select id="selectProfileImg" parameterType="String" resultType="String">
+  	  	select profile_img profileImg
+  	  	from users
+  	  	where profile_img=#{ profileImg }
+  	</select>
   	<select id="selectChkPass" parameterType="String" resultType="String">
   		select password
 		from users
@@ -45,7 +50,7 @@
   	</select>
   	<update id="updateUserInfo" parameterType="kr.co.sist.user.vo.mypage.UpdateUserVO">
 	  	update users
-		set name=#{ name }, phone=#{ phone }, tel=#{ tel }
+		set name=#{ name }, phone=#{ phone }, tel=#{ tel }, profile_img=#{ profileImg }
 		where user_id=#{ userId }
   	</update>
   	<select id="selectApply" parameterType="kr.co.sist.user.vo.mypage.SearchVO" resultMap="userApplyList">

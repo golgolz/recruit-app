@@ -32,7 +32,7 @@
 </style>
 
 <script type="text/javascript">
-	$(function(){
+	$(document).ready(function() {
     	$("#qna_menu").addClass("bg-gradient-primary");
 	});
 </script>
@@ -55,9 +55,10 @@
 							[ 'view', [ 'fullscreen', 'codeview', 'help' ] ] ]
 				});//summernote
 		$("#btnSend").click(function(){
-			//alert("fffff")
+			alert("답변이 등록되었습니다.")
 			$("#answerPost").submit();
 		}); //click
+		
 	});//ready
 </script>
 

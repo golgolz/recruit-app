@@ -208,6 +208,13 @@
 		    <version>3.12.0</version> 
 		</dependency>
 		<!-- 240630 명호 - 임시 비밀번호 생성을 위한 추가 end -->
+		<!-- 240710 명호 - 이미지 해시값 비교를 위한 추가 start -->
+		<dependency>
+		    <groupId>commons-codec</groupId>
+		    <artifactId>commons-codec</artifactId>
+		    <version>1.15</version> 
+		</dependency>
+		<!-- 240710 명호 - 이미지 해시값 비교를 위한 추가 end -->
 		<!-- servlet cos -->
         <dependency>
             <groupId>servlets.com</groupId>

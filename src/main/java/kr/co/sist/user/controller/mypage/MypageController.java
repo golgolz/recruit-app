@@ -1,6 +1,11 @@
 package kr.co.sist.user.controller.mypage;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
+import javax.servlet.http.HttpServletRequest;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import kr.co.sist.user.domain.basic.QuestionDomain;
 import kr.co.sist.user.domain.mypage.QuestResultDomain;
 import kr.co.sist.user.domain.mypage.UserApplyDomain;
@@ -63,8 +70,54 @@ public class MypageController {
 
     @PostMapping("/user/mypage/modifyUser.do")
     public String modifyUserInfo(@SessionAttribute("userId") String userId, UpdateUserVO uVO,
-            RedirectAttributes redirectAttributes) {
+            RedirectAttributes redirectAttributes, HttpServletRequest request) throws IOException {
+
+
+        String uploadProfilePath =
+                "C:/dev/sts-git/recruit-app/src/main/webapp/assets/images/mypage/uploadImg";
+
+        File profileDir = new File(uploadProfilePath);
+
+        if (!profileDir.exists()) {
+            profileDir.mkdirs();
+            // throw new IOException("error");
+        }
+
+        int maxSize = 100 * 1024 * 1024;
+        MultipartRequest mrProfile = new MultipartRequest(request, uploadProfilePath, maxSize,
+                "UTF-8", new DefaultFileRenamePolicy());
+
+        // 새로 업로드 된 이미지
+        String uploadImg = mrProfile.getFilesystemName("uploadImg");
+        // 기존 이미지
+        String profileImg = mrProfile.getParameter("profileImg");
+
+        String phone = mrProfile.getParameter("phone");
+        String tel = mrProfile.getParameter("tel");
+        String name = mrProfile.getParameter("name");
+
+        if (uploadImg == null && profileImg != null) {
+            uploadImg = profileImg;
+        }
+        String extension = FilenameUtils.getExtension(uploadImg); // 파일 확장자 가져오기
+        String newFileName = UUID.randomUUID().toString() + "." + extension; // 새 고유 파일명 생성
+
         uVO.setUserId(userId);
+        uVO.setName(name);
+        uVO.setTel(tel);
+        uVO.setPhone(phone);
+
+        File tempFile = new File(profileDir.getAbsoluteFile() + "/" + uploadImg);
+        File newFile = new File(profileDir.getAbsoluteFile() + "/" + newFileName);
+
+        tempFile.renameTo(newFile); // 파일 이동
+
+        uVO.setProfileImg(newFileName);
+
+        if (tempFile.length() > maxSize) { // 파일 크기 검증
+            tempFile.delete();
+        }
+
         int cnt = ms.modifyUserInfo(uVO);
 
         if (cnt > 0) {
@@ -134,11 +187,6 @@ public class MypageController {
 
     @GetMapping("/user/mypage/mypageCareer.do")
     public String mypageCareer() {
-        /*
-         * List<UserCareerDomain> careerList = ms.searchUserCareer(userId);
-         * 
-         * model.addAttribute("careerList", careerList);
-         */
 
         return "user/mypage/mypageCareer";
     }
@@ -188,5 +236,6 @@ public class MypageController {
 
         return cnt;
     }
+
 
 }

@@ -23,6 +23,8 @@ public class NoticeUserService {
         return notieceList;
     }
 
+
+
     public List<NoticeUserDomain> searchNoticesByCategory(String category) {
         List<NoticeUserDomain> result = noticeUserDAO.selectNoticesByCategory(category);
         return result;

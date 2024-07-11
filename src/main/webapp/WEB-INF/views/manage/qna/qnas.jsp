@@ -5,9 +5,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- pagination / datatables -->
-<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/datatables.min.css">
-<!-- pagination / datatables -->
 <link href="http://localhost/recruit-app/assets/css/layout/user/common-sv-202405271315.css" rel="stylesheet" type="text/css" />
 <link href="//i.jobkorea.kr/content/css/ver_2/event/banner.promotion-sv-202401301659.css" rel="stylesheet" type="text/css" />
 <link href="view-source:https://www.jobkorea.co.kr/help/inquiry" rel="stylesheet" type="text/css" />
@@ -29,9 +26,17 @@
 	
 </style>
 <script type="text/javascript">
-	$(function(){
-    	$("#qna_menu").addClass("bg-gradient-primary");
-    	
+$(document).ready(function() {
+	 $("#qna_menu").addClass("bg-gradient-primary");
+       $(document).on('click', '.pagination a', function (e) {
+           e.preventDefault(); // 기본 동작 방지
+
+           const url = $(this).attr('href'); // 링크 URL 가져오기
+           $.get(url, function (data) {
+               $('#pageWrap').html($(data).find('#pageWrap').html()); 
+               // 페이지 내용을 업데이트
+           });
+       });
 	});
 </script>
 <!-- golgolz start -->
@@ -80,7 +85,7 @@
 					</div>
 					<!-- tap menu //-->
 					<!--// 내 제안내역 보기 -->
-					<div class="inquiryListWrap">
+					<div class="inquiryListWrap" id="pageWrap">
 						<!--// List 시작 -->
 						<div class="schListWrap">
 							<div class="mtcSchListTb" >
@@ -114,22 +119,35 @@
 									</tbody>
 								</table>
 	
-								<div style="justify-content: center; margin-top : 30px">
-									<nav aria-label="Page navigation example">
-										<ul class="pagination" style="justify-content: center;">
-											<li>
-												<a class="page-link" href="#" aria-label="Previous">
-													<span aria-hidden="true">&laquo;</span>
+								<div style="justify-content: center; margin-top: 30px">
+								<nav aria-label="Page navigation example">
+								    <ul class="pagination" style="justify-content: center;">
+								        <c:if test="${searchVO.currentPage > 1}">
+								            <li class="page-item">
+								                <a class="page-link"
+								                   href="?currentPage=${searchVO.currentPage - 1}&itemsPerPage=${searchVO.itemsPerPage}"
+								                   aria-label="Previous">
+								                    <span aria-hidden="true">&laquo;</span>
+								                </a>
+								            </li>
+								        </c:if>
+								        <c:forEach var="i" begin="1" end="${searchVO.totalPages}">
+								            <li class="page-item ${i == searchVO.currentPage ? 'active' : ''}">
+								                <a class="page-link"
+								                   href="?currentPage=${i}&itemsPerPage=${searchVO.itemsPerPage}">
+								                    ${i}
+								                </a>
+								            </li>
+								        </c:forEach>
+								        <c:if test="${searchVO.currentPage < searchVO.totalPages}">
+								            <li class="page-item">
+								                <a class="page-link"
+								                   href="?currentPage=${searchVO.currentPage + 1}&itemsPerPage=${searchVO.itemsPerPage}"
+								                   aria-label="Next">
+								                    <span aria-hidden="true">&raquo;</span>
 												</a>
 											</li>
-											<li><a class="page-link" href="#">1</a></li>
-											<li><a class="page-link" href="#">2</a></li>
-											<li><a class="page-link" href="#">3</a></li>
-											<li>
-												<a class="page-link" href="#" aria-label="Next">
-													<span aria-hidden="true">&raquo;</span>
-												</a>
-											</li>
+											</c:if>
 										</ul>
 									</nav>
 								</div>

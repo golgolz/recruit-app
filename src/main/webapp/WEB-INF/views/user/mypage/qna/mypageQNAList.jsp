@@ -94,7 +94,7 @@ td{
 						<tbody>
 							<c:forEach var="uesrqna" items="${qnaList}">
 								<tr>
-								<td><c:out value="${uesrqna.qna_num}"/></td>
+								<td><c:out value="${uesrqna.view_num}"/></td>
 								<td class="alLeft"><span class="tit"><a href="http://localhost/recruit-app/user/mypage/qna/mypageQNADetail.do?qna_num=${uesrqna.qna_num}"><c:out value="${uesrqna.title}"/></a></span></td>
 								<td><c:out value="${uesrqna.input_date}"/></td>
 								<td class=""><c:out value="${uesrqna.flag}"/></td>
@@ -103,7 +103,7 @@ td{
 						</tbody>
 						</table>
 		
-				<div style="text-align:center; margin-top:30px">
+				<!-- <div style="text-align:center; margin-top:30px">
 			        <nav aria-label="...">
 			                <ul class="pagination pagination-lg" style="display: inline-flex;">
 			                       <li class="page-item disabled">
@@ -119,8 +119,31 @@ td{
 			                        </li>
 			                 </ul>
 			         </nav>
-			</div>
+				</div> -->
+				<c:set var="currentPage" value="${searchVO.currentPage}" />
+				<c:set var="totalPages" value="${searchVO.totalPages}" />
 				
+				<div style="text-align:center; margin-top:30px">
+				    <nav aria-label="...">
+				        <ul class="pagination pagination-lg" style="display: inline-flex;">
+				            <c:if test="${currentPage > 1}">
+				                <li class="page-item">
+				                    <a class="page-link" href="?currentPage=${currentPage - 1}&itemsPerPage=${searchVO.itemsPerPage}">&lt;</a>
+				                </li>
+				            </c:if>
+				            <c:forEach var="i" begin="1" end="${totalPages}">
+				                <li class="page-item ${i == currentPage ? 'active' : ''}">
+				                    <a class="page-link" href="?currentPage=${i}&itemsPerPage=${searchVO.itemsPerPage}">${i}</a>
+				                </li>
+				            </c:forEach>
+				            <c:if test="${currentPage < totalPages}">
+				                <li class="page-item">
+				                    <a class="page-link" href="?currentPage=${currentPage + 1}&itemsPerPage=${searchVO.itemsPerPage}">&gt;</a>
+				                </li>
+				            </c:if>
+				        </ul>
+				    </nav>
+				</div>
 			</div>
 			</div>
 			</div>

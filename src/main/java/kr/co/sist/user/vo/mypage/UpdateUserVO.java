@@ -16,4 +16,5 @@ public class UpdateUserVO {
     private String name;
     private String phone;
     private String tel;
+    private String profileImg;
 }

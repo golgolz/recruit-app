@@ -5,9 +5,36 @@
 <mapper namespace="kr.co.sist.qna.user">
 
 	<select id="selectMyQnas" resultType="kr.co.sist.user.domain.qna.UserQnaDomain">
-		select row_number() over (order by input_date) as qna_num, title, input_date, flag
+		<!-- select row_number() over (order by input_date) as qna_num, title, input_date, flag
 		from qna
-		order by input_date desc
+		order by input_date desc -->
+		 <![CDATA[
+			SELECT qna_num, view_num, title, input_date, flag
+			FROM (
+			    SELECT
+			        ROWNUM AS rnum,
+			        qna_num,
+			        view_num,
+			        title,
+			        input_date,
+			        flag
+			    FROM (
+			        SELECT
+			            ROW_NUMBER() OVER (ORDER BY input_date DESC) AS view_num,
+			            qna_num,
+			            title,
+			            input_date,
+			            flag
+			        FROM qna
+			        ORDER BY input_date DESC
+			    )
+			    WHERE ROWNUM <= #{endItemIndex}
+			)
+			WHERE rnum >= #{startItemIndex} ]]>
+	</select>
+	
+	<select id="countMyQnas" resultType="int">
+	select count(*) from qna
 	</select>
 
 	<select id="selectOneQna" resultType="kr.co.sist.user.domain.qna.UserQnaDomain">

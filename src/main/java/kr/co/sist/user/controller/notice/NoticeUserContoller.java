@@ -28,17 +28,15 @@ public class NoticeUserContoller {
         List<NoticeUserDomain> noticeList = noticeUserService.searchNotices();
         model.addAttribute("noticeList", noticeList);
         return "/notice/notices";
-    } // °øÁö»çÇ× ¸®½ºÆ® ºÒ·¯¿À±â
+    } // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½
 
     @GetMapping("/notice/noticesByCategory.do")
     @ResponseBody
     public Map<String, Object> searhNoticesByCategory(@RequestParam("category") String category) {
-        // System.out.println("-----------------" + category);
         List<NoticeUserDomain> noticeList = noticeUserService.searchNoticesByCategory(category);
-        // System.out.println("---------????--------" + noticeList);
         Map<String, Object> response = new HashMap<>();
         response.put("noticeList", noticeList);
-        return response; // °øÁö»çÇ× Ä«Å×°í¸® °Ë»ö
+        return response; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ä«ï¿½×°ï¿½ ï¿½Ë»ï¿½
     }
 
     @GetMapping("/notice/noticesbyKeyword.do")
@@ -49,11 +47,12 @@ public class NoticeUserContoller {
         System.out
                 .println("Received search keyword: " + keyword + " and searchType: " + searchType);
         List<NoticeUserDomain> noticeList;
-        // °Ë»ö ¿É¼ÇÀÌ '¼±ÅÃ'ÀÎ °æ¿ì ÀüÃ¼ °øÁö»çÇ× ¸®½ºÆ®¸¦ °¡Á®¿Àµµ·Ï Ã³¸®
-        if ("¼±ÅÃ".equals(searchType)) {
-            noticeList = noticeUserService.searchNotices(); // ÀüÃ¼ °øÁö»çÇ× ¸®½ºÆ®¸¦ °¡Á®¿À´Â ¸Þ¼­µå È£Ãâ
+        // ï¿½Ë»ï¿½ ï¿½É¼ï¿½ï¿½ï¿½ 'ï¿½ï¿½ï¿½ï¿½'ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
+        if ("ï¿½ï¿½ï¿½ï¿½".equals(searchType)) {
+            noticeList = noticeUserService.searchNotices(); // ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
+                                                            // È£ï¿½ï¿½
         } else {
-            // ±âÅ¸ °Ë»ö Å¸ÀÔ¿¡ µû¶ó ÇÊ¿äÇÑ ·ÎÁ÷ ¼öÇà
+            // ï¿½ï¿½Å¸ ï¿½Ë»ï¿½ Å¸ï¿½Ô¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             noticeList = noticeUserService.searchNoticesbyKeyword(keyword, searchType);
         }
         Map<String, Object> response = new HashMap<>();
@@ -68,7 +67,7 @@ public class NoticeUserContoller {
         NoticeUserDomain noticeDetail = noticeUserService.searchOneNotice(notice_num);
         model.addAttribute("noticeDetail", noticeDetail);
         return "notice/detail";
-    } // °ø½Ã»çÇ× ¼¼ºÎÁ¶È¸
+    } // ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¸
 
 }
 

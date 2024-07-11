@@ -34,10 +34,6 @@ public class CompanyinfoAdminService {
     }
 
     public List<SearchDomain> searchCompanyinfo(Map<String, Object> params) {
-        // System.out.println("ï¿½Ì°ï¿½ serviceï¿½ï¿½ paramsï¿½ï¿½ : "+params);
-        // if("companyClassification"==null) {
-        //
-        // }
         return companyinfoAdminDAO.selectCompanyinfo(params);
     }
 
@@ -81,16 +77,16 @@ public class CompanyinfoAdminService {
 
     public String searchNextCompNum() {
 
-      //ÀÌº¥Æ® ¸¶Áö¸· ¹øÈ£ + 1 ¸Þ¼­µå
+      //ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ + 1 ï¿½Þ¼ï¿½ï¿½ï¿½
         String nextCompNum = "";
         try {
             String lastCompNum = companyinfoAdminDAO.selectLastCompNum();
-            //¼ýÀÚ ÃßÃâ °úÁ¤
+            //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             String prefix = "comp_";
             String numberStr = lastCompNum.substring(prefix.length());
             int number = Integer.parseInt(numberStr);
             number++;
-            //Áõ°¡µÈ ¼ýÀÚ Çü½Ä¿¡ ¸ÂÃç ¹®ÀÚ¿­ º¯È¯
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ä¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ ï¿½ï¿½È¯
             nextCompNum = String.format("%s%04d", prefix,number);
 
         }catch(PersistenceException pe) {

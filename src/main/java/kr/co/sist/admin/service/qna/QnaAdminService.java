@@ -49,6 +49,7 @@ public class QnaAdminService {
             map.put("flag", qna.getFlag());
             result.add(map);
         }
+        System.out.println("~~~~~~~~~~~~~~~~~~~~qnas: " + result);
         return result;
     }
 
@@ -62,21 +63,41 @@ public class QnaAdminService {
         return oneQna;
     }// 답변 대기 문의 상세 조회
 
-    public List<Map<String, Object>> searchOldQnas() {
-        List<QnaDomain> qnas = qnaAdminDAO.selectOldQnas();
+    public List<Map<String, Object>> searchOldQnas(SearchVO sVO) { // 오류나면 searchVO만 지워
+        List<QnaDomain> qnas = qnaAdminDAO.selectOldQnas(sVO);
         List<Map<String, Object>> result = new ArrayList<>();
-        for (int i = 0; i < qnas.size(); i++) {
-            QnaDomain qna = qnas.get(i);
+        for (QnaDomain oldQnas : qnas) {
             Map<String, Object> map = new HashMap<>();
-            map.put("view_num", i + 1);
-            map.put("qna_num", qna.getQna_num());
-            map.put("category", qna.getCategory());
-            map.put("title", qna.getTitle());
-            map.put("input_date", qna.getInput_date());
+            map.put("view_num", oldQnas.getView_num());
+            map.put("qna_num", oldQnas.getQna_num());
+            map.put("title", oldQnas.getTitle());
+            map.put("input_date", oldQnas.getInput_date());
+            map.put("flag", oldQnas.getFlag());
             result.add(map);
         }
+        System.out.println("========================Old QnAs: " + result);
         return result;
     }// 답변 완료 문의 리스트 조회
+
+    public int countQnas() {
+        return qnaAdminDAO.countQnas();
+    }
+
+    // public List<Map<String, Object>> searchOldQnas(SearchVO sVO) {
+    // List<QnaDomain> qnas = qnaAdminDAO.selectOldQnas(sVO);
+    // List<Map<String, Object>> result = new ArrayList<>();
+    // for (int i = 0; i < qnas.size(); i++) {
+    // QnaDomain qna = qnas.get(i);
+    // Map<String, Object> map = new HashMap<>();
+    // map.put("view_num", i + 1);
+    // map.put("qna_num", qna.getQna_num());
+    // map.put("category", qna.getCategory());
+    // map.put("title", qna.getTitle());
+    // map.put("input_date", qna.getInput_date());
+    // result.add(map);
+    // }
+    // return result;
+    // }// 답변 완료 문의 리스트 조회
 
 
     public QnaDomain searchOneOldQna(int qna_num) {
