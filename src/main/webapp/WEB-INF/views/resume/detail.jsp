@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     info=""%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head> 
@@ -637,6 +638,8 @@
 			$("#ResumeProfile_Contents_").html(introductionData);
 		}
 		/* 수정 삭제를 위한 js functions end */
+		/* 등록을 위한 js functions start */
+		/* 등록을 위한 js functions end */
 	</script>
 </head>
 <body>
@@ -666,9 +669,15 @@
  								<jsp:include page="./category/language.jsp" />
  								<jsp:include page="./category/introduction.jsp" />
 								<div id="resumeBtns">
-									<input type="button" id="registerBtn" class="golgolBtn btn btn-outline-success btn-sm register-btn" value="등록" />
-									<input type="button" id="registerBtn" class="golgolBtn btn btn-outline-warning btn-sm update-btn" value="수정" />
-									<input type="button" id="registerBtn" class="golgolBtn btn btn-outline-danger btn-sm remove-btn" value="삭제" />
+									<c:choose>
+        								<c:when test="${not empty resumeNum}">
+											<input type="button" id="registerBtn" class="golgolBtn btn btn-outline-warning btn-sm update-btn" value="수정" />
+											<input type="button" id="registerBtn" class="golgolBtn btn btn-outline-danger btn-sm remove-btn" value="삭제" />
+								    	</c:when>
+        								<c:otherwise>
+											<input type="button" id="registerBtn" class="golgolBtn btn btn-outline-success btn-sm register-btn" value="등록" />
+								        </c:otherwise>
+								    </c:choose>
 								</div>
 							</div>
 						</div>
