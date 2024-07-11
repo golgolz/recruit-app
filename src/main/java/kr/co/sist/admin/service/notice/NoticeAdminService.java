@@ -15,7 +15,6 @@ public class NoticeAdminService {
     public List<SearchVO> searchAllnotice(SearchVO sVO) {
         List<SearchVO> list = null;
         list = noticeAdminDAO.selectAllNotice(sVO);
-        System.out.println(list);
         return list;
     }
 
