@@ -26,10 +26,28 @@
 	<!-- interceptor 등록 -->
 	<interceptors>
 			<interceptor>
-				<!-- 모든 URL 등록 -->
+				<mapping path="/user/**"/>
+				<exclude-mapping path="/user/mypage/**"/>
+				<exclude-mapping path="/user/logout.do"/>
+				<beans:bean id="nli" class="kr.co.sist.user.interceptor.NotLoginInterceptor"/>
+			</interceptor>
+			<interceptor>
+				<mapping path="/user/mypage/**"/>
+				<beans:bean id="mui" class="kr.co.sist.user.interceptor.UserInterceptor"/>
+			</interceptor>
+			<interceptor>
+				<mapping path="/resume/**"/>
+				<beans:bean id="rui" class="kr.co.sist.user.interceptor.UserInterceptor"/>
+			</interceptor>
+			<interceptor>
+				<mapping path="/review/**"/>
+				<beans:bean id="rei" class="kr.co.sist.user.interceptor.UserInterceptor"/>
+			</interceptor>
+			<interceptor>
 				<mapping path="/manage/**"/>
 				<exclude-mapping path="/manage/adminLogin/adminLoginPage.do"/>
 				<exclude-mapping path="/manage/adminLogin/adminLogin.do"/>
+				<exclude-mapping path="/manage/logoutProcess.do"/>
 				<beans:bean id="ai" class="kr.co.sist.admin.interceptor.AdminInterceptor"/>
 			</interceptor>
 			<interceptor>

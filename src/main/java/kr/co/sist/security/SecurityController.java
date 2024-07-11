@@ -1,6 +1,8 @@
 package kr.co.sist.security;
 
 import java.util.List;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -127,11 +129,32 @@ public class SecurityController {
     }
 
     @GetMapping("/user/logout.do")
-    public String logout(SessionStatus ss) {
+    public String logout(SessionStatus ss, HttpServletRequest request,
+            HttpServletResponse response) {
+
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("viewHistory".equals(cookie.getName())) {
+                    cookie.setValue(null);
+                    cookie.setMaxAge(0);
+                    cookie.setPath("/");
+                    response.addCookie(cookie);
+                }
+            }
+        }
 
         ss.setComplete();
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        response.setHeader("Pragma", "no-cache");
+        response.setHeader("Expires", "0");
 
-        return "redirect:/main/main.do";
+        return "redirect:/main/mainPage.do";
     }
 
 
