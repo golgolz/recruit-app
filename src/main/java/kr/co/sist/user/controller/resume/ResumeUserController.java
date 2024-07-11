@@ -22,7 +22,7 @@ public class ResumeUserController {
         this.resumeUserService = resumeUserService;
     }
 
-    @GetMapping("/resumes.do")
+    @GetMapping("/resume/resumes.do")
     public String showResumePage(
             @RequestParam(value = "recruit", required = false) String recruitNum, Model model) {
         model.addAttribute("recruit", recruitNum);
