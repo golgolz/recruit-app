@@ -49,7 +49,7 @@
         .options input[type="radio"] {
             margin-right: 5px;
         }
-        button {
+        .button-survey {
             display: block;
             width: 100%;
             padding: 10px;
@@ -126,7 +126,7 @@
                             <label for="question4_no">아니오</label>
                         </div>
                     </div>
-                    <button type="submit">제출</button>
+                    <button class="button-survey" type="submit">제출</button>
                 </form>
             </section>
             <jsp:include page="../assets/layout/user/footer.jsp" />
