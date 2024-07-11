@@ -220,6 +220,7 @@
 		            method: 'GET',
 		            dataType: 'JSON',
 		            success: function(data) {
+		            	console.log(data);
 		            	updateTitle(data.title);
 		            	updateProfileForm(data);
 		            	updateSkills(data.subData.skills); 
@@ -235,6 +236,20 @@
 		            }
 		        });
 		    }
+			
+			$("#registerBtn").click(function(){
+				let resumeData = createResumeData();
+				console.log(resumeData);
+			});
+			
+			$("#updateBtn").click(function(){
+				let resumeData = createResumeData();
+				console.log(resumeData);
+			});
+			
+			$("#removeBtn").click(function(){
+				alert("clicked");
+			});
 			<!-- golgolz end -->
 		});
 		
@@ -639,6 +654,84 @@
 		}
 		/* 수정 삭제를 위한 js functions end */
 		/* 등록을 위한 js functions start */
+		function formatDate(dateString) {
+	        if (!dateString) return null;
+	        var parts = dateString.split('.');
+	        if (parts.length !== 2) return dateString; // 잘못된 형식이면 원래 문자열 반환
+	        return parts[0] + '-' + (parts[1].length === 1 ? '0' + parts[1] : parts[1]) + '-01'; // 월을 2자리로 만들고 일을 01로 설정
+	    }
+		
+		function removeCommasAndParseInt(str) {
+		    return parseInt(str.replace(/,/g, ''), 10);
+		}
+		
+		function createResumeData(){
+			return {
+				owner: $('#UserInfo_M_Name').val(),
+	            email: $('#UserInfo_M_Email').val(),
+	            title: $('#UserResume_M_Resume_Title').val(),
+	            profile: "profile_1.png",
+	            birth: formatDate($('#UserInfo_M_Born').val()),
+	            gender: $('#genderSelect').val(),
+	            tel: $('input[name="UserInfo.M_Hand_Phone"]').eq(0).val(),
+	            phone: $('input[name="UserInfo.M_Hand_Phone"]').eq(1).val(),
+	            addr: $('#sido1').val() + ' ' + $('#gugun1').val(),
+	            introduce: $('.textarea-introduction textarea').val(),
+	            modifyDate: new Date().toISOString().split('T')[0],
+	            subData: {
+	                skills: $('.chip.active').map(function() {
+	                    return { skill_name: $(this).data('value') };
+	                }).get(),
+	                education: $('.formWrapEducation .container').map(function() {
+	                    return {
+	                        school_classification: $(this).find('[name$="Mstr_Dctr_Type_Code"]').val(),
+	                        school_name: $(this).find('[name$="Schl_Name"]').val(),
+	                        admission_date: formatDate($(this).find('[name$="Entc_YM"]').val()),
+	                        graduation_date: formatDate($(this).find('[name$="Grad_YM"]').val()),
+	                        graduation_state: $(this).find('.dropdown-edcation-state .button.buttonChoose span').text(),
+	                        major: $(this).find('[id^="univmajor_"]').val(),
+	                        grades: parseFloat($(this).find('[name$="Grade"]').val()),
+	                        total_score: parseFloat($(this).find('[name$="Grade_Prft_Scr"]').val())
+	                    };
+	                }).get(),
+	                career: $('.formWrapCareer .container').map(function() {
+	                    return {
+	                        company_name: $(this).find('[id^="Career_C_Name_"]').val(),
+	                        dname: $(this).find('[id^="Career_C_Part_"]').val(),
+	                        join_date: formatDate($(this).find('[id^="Career_CSYM_"]').val()),
+	                        resignation_date: formatDate($(this).find('[id^="Career_CEYM_"]').val()),
+	                        job_description: $(this).find('.textarea-career').val(),
+	                        position: $(this).find('[name="position_field"]').val(),
+	                        sal: removeCommasAndParseInt($(this).find('[id^="Career_M_MainPay_User_"]').val())
+	                    };
+	                }).get(),
+	                certifications: $('.formWrapCertificate .container').map(function() {
+	                    return {
+	                        certificate_name: $(this).find('[id^="License_Search_"]').val(),
+	                        publisher: $(this).find('[id^="License_Lc_Pub_"]').val(),
+	                        acquisition_date: formatDate($(this).find('[id^="License_Lc_YYMM_"]').val())
+	                    };
+	                }).get(),
+	                languages: $('.formWrapLanguage .container').map(function() {
+	                    var $container = $(this);
+	                    var evalCategory = $container.find('[id^="Language_Eval_Category_"]').val();
+	                    var isConversation = evalCategory === '1';
+
+	                    return {
+	                        language: $container.find('.dropdown-language-name .button.buttonChoose > span').text().trim(),
+	                        test_name: isConversation 
+	                            ? null 
+	                            : $container.find('.devExamDropdown .button.buttonChoose > span').text().trim(),
+	                        lang_level: isConversation 
+	                            ? $container.find('.devConversationArea .dropdown-language-grade .button.buttonChoose > span').text().trim()
+	                            : $container.find('.devExamArea [id^="Language_Test1_Point_I_"]').val(),
+	                        category: isConversation ? '회화능력' : '공인시험',
+	                        aquisition_date: formatDate($container.find('[id^="Language_Test_YYMM_"]').val())
+	                    };
+	                }).get()
+	            }
+			};
+		}
 		/* 등록을 위한 js functions end */
 	</script>
 </head>
@@ -671,8 +764,8 @@
 								<div id="resumeBtns">
 									<c:choose>
         								<c:when test="${not empty resumeNum}">
-											<input type="button" id="registerBtn" class="golgolBtn btn btn-outline-warning btn-sm update-btn" value="수정" />
-											<input type="button" id="registerBtn" class="golgolBtn btn btn-outline-danger btn-sm remove-btn" value="삭제" />
+											<input type="button" id="updateBtn" class="golgolBtn btn btn-outline-warning btn-sm update-btn" value="수정" />
+											<input type="button" id="removeBtn" class="golgolBtn btn btn-outline-danger btn-sm remove-btn" value="삭제" />
 								    	</c:when>
         								<c:otherwise>
 											<input type="button" id="registerBtn" class="golgolBtn btn btn-outline-success btn-sm register-btn" value="등록" />
