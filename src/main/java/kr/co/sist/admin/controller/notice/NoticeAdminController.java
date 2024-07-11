@@ -1,12 +1,16 @@
 package kr.co.sist.admin.controller.notice;
 
+import java.io.IOException;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import kr.co.sist.admin.service.notice.NoticeAdminService;
+import kr.co.sist.admin.vo.notice.NoticeAdminVO;
 import kr.co.sist.admin.vo.notice.SearchVO;
 
 @Controller
@@ -25,7 +29,7 @@ public class NoticeAdminController {
         return "";
     }
     @GetMapping("/manage/notice/noticesDetail.do")
-    public String searchNoticeDetail(String noticeNum, HttpSession session, Model model) {
+    public String searchNoticeDetail(int noticeNum, HttpSession session, Model model) {
         List<SearchVO> list=noticeAdminService.searchNoticeDetail(noticeNum);
         
         session.setAttribute("noticeNum", noticeNum);
@@ -36,11 +40,40 @@ public class NoticeAdminController {
     }
     @GetMapping("/manage/notice/noticesWrite.do")
     public String insertNoticePage() {
+        
         return "manage/notice/notices_write";
     }
-    @GetMapping("/manage/notice/noticesInsert.do")
-    public String insertNotice(Model model) {
-        return "";
+    @PostMapping("/manage/notice/noticesInsert.do")
+    public String insertNotice(NoticeAdminVO nVO, HttpServletRequest request) throws IOException {
+        int nextNoticeNum=noticeAdminService.searchNextNoticeNum();
+        String category= request.getParameter("category");
+        String title = request.getParameter("title");
+        String content = request.getParameter("content");
+        String adminId = request.getParameter("hidAdminId");
+        String modifier = request.getParameter("hidModifier");
+        String inputDate = request.getParameter("hidInputDate");
+        String updateDate = request.getParameter("hidUpdateDate");
+        String blindFlag = request.getParameter("hidBlindFlag");
+
+        System.out.println("================Received data================");
+        System.out.println("noticeNum: " + nextNoticeNum);
+        System.out.println("category: " + category);
+        System.out.println("title: " + title);
+        System.out.println("content: " + content);
+        
+        nVO.setNoticeNum(nextNoticeNum);
+        nVO.setCategory(category);
+        nVO.setTitle(title);
+        nVO.setContent(content);
+        nVO.setAdminId(adminId);
+        nVO.setModifier(modifier);
+        nVO.setInputDate(inputDate);
+        nVO.setUpdateDate(updateDate);
+        nVO.setBlindFlag(blindFlag);
+
+        noticeAdminService.addNotice(nVO);
+
+        return "redirect:/manage/notice/notices.do";
     }
     @GetMapping("/manage/notice/noticesUpdate.do")
     public String updateNotice(Model model) {

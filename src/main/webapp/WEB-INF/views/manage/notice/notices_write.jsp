@@ -29,17 +29,8 @@ if (!Boolean.TRUE.equals(isLoggedIn)) {
 <script type="text/javascript">
 	$(function(){
     	$("#notice_menu").addClass("bg-gradient-primary");
-    	/* 
-		$("#btnList").click(function(){
-			history.back();
-		});//click
-		$("#btnWrite").click(function(){
-			$("#frmWrite").submit();
-		});//click
-		$("#btnCancel").click(function(){
-			alert("글작성을 취소합니다.");
-			location.href="http://localhost/manage/notice/notice.jsp";
-		});//click */
+    	
+    	
 		$('#content').summernote({
 	        placeholder: 'Hello stand alone ui',
 	        tabsize: 2,
@@ -52,9 +43,22 @@ if (!Boolean.TRUE.equals(isLoggedIn)) {
 	          ['table', ['table']],
 	          ['insert', ['link', 'picture', 'video']],
 	          ['view', ['fullscreen', 'codeview', 'help']]
-	        ]
+	        ],
+	        
+	        callbacks: {
+	            onBlur: function() {
+	                var content = $('#content').summernote('code');
+	                content = content.replace(/^<p>/, '').replace(/<\/p>$/, '');
+	                $('#content').summernote('code', content);
+	            }
+	        }
+		
 	      });//summernote
 	});//ready
+   	function addNot(){
+        $("#frmWrite").submit();
+    	alert("공지사항이 등록되었습니다.")
+	}
 	
 	/* function chkNull() {
 		/* $("#frmWrite").submit(); */
@@ -127,8 +131,12 @@ System.out.print("공지사항 아이디: "+notice_id);
             <p>공지사항 작성</p>
         </div>
 </div>
-<form id="frmWrite" name="frmWrite" action="notice_write_process.jsp" method="post">
-<input type="hidden" id="notice_id" name="notice_id" value="${ nVO.notice_id }"/>
+<form id="frmWrite" name="frmWrite" action="http://localhost/recruit-app/manage/notice/noticesInsert.do" method="post">
+<input type="hidden" id="hidAdminId" value="noticemanage" name="hidAdminId"/>
+<input type="hidden" id="hidModifier" value="noticemanage" name="hidModifier"/>
+<input type="hidden" id="hidInputDate" value="" name="hidInputDate"/>
+<input type="hidden" id="hidUpdateDate" value="" name="hidUpdateDate"/>
+<input type="hidden" id="hidBlindFlag" value="N" name="hidBlindFlag"/>
 <div class="ec-base-table typeWrite ">
             <table border="1" summary="">
 <caption>글쓰기 폼</caption>
@@ -145,10 +153,10 @@ System.out.print("공지사항 아이디: "+notice_id);
 		<option value="2">공지사항</option>
 	  </select> -->
 		<input id="title" name="title" class="inputTypeText" placeholder="" maxLength="125" value="" type="text" style="height:30px; width:500px" />
-            <select id="noticeCategory" value="category">
-            	<option name="notice" value="공지">공지</option>
-            	<option name="service" value="서비스">서비스</option>
-            	<option name="info" value="안내">안내</option>
+            <select id="noticeCategory" name="category" value="">
+            	<option value="공지">공지</option>
+            	<option value="서비스">서비스</option>
+            	<option value="안내">안내</option>
             </select>
  	</td>
  </tr>
@@ -160,7 +168,7 @@ System.out.print("공지사항 아이디: "+notice_id);
 
 <div class="ec-base-button ">
             <span class="gRight">
-            	<input type="button" value="등록" class="btn btn-outline-success btn-sm float-right" id="btnWrite" name="btnWrite" onclick="location.href='http://localhost/recruit-app/manage/notice/notices.do'"/><!-- noticesInsert -->
+            	<input type="button" value="등록" class="btn btn-outline-success btn-sm float-right" id="btnWrite" name="btnWrite" onclick="addNot()"/>
             	<input type="button" value="취소" class="btn btn-outline-dark btn-sm detail-control" id="btnCancel" name="btnCancel" onclick="location.href='http://localhost/recruit-app/manage/notice/notices.do'"/>
             </span>
         </div>
