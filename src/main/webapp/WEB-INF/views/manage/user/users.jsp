@@ -62,7 +62,7 @@
 		            dataType: 'JSON',
 		            success: function(data) {
 		                populateTable(data);
-		                countUserList(isFirst);
+		                countUserList(searchVO);
 		                updatePagination();
 		                if(!(data && data.length > 0)){
 		                    $("#sodr_list tbody").html('<tr><td colspan="10" style="font-size: 16px; font-weight: bold;">검색 결과가 없습니다.</td></tr>');

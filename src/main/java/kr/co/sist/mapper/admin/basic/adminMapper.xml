@@ -40,7 +40,7 @@
 			<where>
 			position!='슈퍼'
 			<if test="keyword != null and keyword != ''">
-				and admin_id='%'||#{ keyword }||'%'
+				and admin_id like '%'||#{ keyword }||'%'
 			</if>
 			</where>
 			)
