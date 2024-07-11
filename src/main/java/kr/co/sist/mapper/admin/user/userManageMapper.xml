@@ -78,7 +78,7 @@
 	                    and name LIKE '%' || #{keyword} || '%'
 	                </when>
 	                <when test="category == 3 and keyword != null and keyword != ''">
-	                    and phone '%' || #{keyword} || '%'
+	                    and phone Like '%' || #{keyword} || '%'
 	                </when>
 	            </choose>
 	            <if test="signupDateStart != null">
