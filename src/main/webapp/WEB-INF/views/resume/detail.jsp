@@ -638,6 +638,8 @@
 			$("#ResumeProfile_Contents_").html(introductionData);
 		}
 		/* 수정 삭제를 위한 js functions end */
+		/* 등록을 위한 js functions start */
+		/* 등록을 위한 js functions end */
 	</script>
 </head>
 <body>
