@@ -24,7 +24,7 @@
                     location.href = "../mypage/modifyUserPage.do"; // 실패 시 다시 회원정보수정 화면으로 이동
                 </c:otherwise>
             </c:choose>
-            }, 500);
+            }, 1500);
         </c:if>
     });
 </script>

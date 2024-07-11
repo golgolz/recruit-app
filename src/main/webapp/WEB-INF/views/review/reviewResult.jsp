@@ -11,6 +11,9 @@ String companyCode = request.getParameter("companyCode");
 <!doctype html>
 <html class="no-js win ko-KR" lang="ko-KR" xmlns="http://www.w3.org/1999/xhtml" prefix="og:http://ogp.me/ns#" xml:lang="ko-KR" foxified=""> 
 <head> 
+
+<jsp:include page="../assets/layout/user/lib.jsp" /> 
+
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
     <title>구지직 GoojzzK</title> 
     <link rel="stylesheet" href="http://localhost/recruit-app/assets/css/review/c76e012c05e1318d.css" crossorigin="anonymous" data-n-g=""> 
@@ -260,21 +263,12 @@ String companyCode = request.getParameter("companyCode");
                                                         </dl>
 
                                                         <div style="display: flex; justify-content: flex-end; margin-top: 20px;">
-                                                            <button class="btn btn-dark" onclick="submitRecommend(${review.reviewNum}, '${companyCode}', '${sessionScope.userId}', this)">추천 ${review.recommend}</button>
-                                                        </div>
+														    <button class="btn btn-dark" onclick="submitRecommend(${review.reviewNum}, '${companyCode}', '${userId}', this)">추천 ${review.recommend}</button>
+														</div>
                                                     </div>
 
                                                     <script>
-                                                        function checkLoginAndSubmit(form) {
-                                                            var userId = form.userId.value;
-                                                            if (!userId) {
-                                                                alert("로그인해주세요.");
-                                                                window.location.href = '${pageContext.request.contextPath}/user/loginPage.do'; // 로그인 페이지로 리다이렉션
-                                                                return false; // 폼 제출 중단
-                                                            }
-                                                            return true; // 로그인된 경우 폼 제출
-                                                        }
-
+                                                        
                                                         function submitRecommend(reviewNum, companyCode, userId, button) {
                                                             $.ajax({
                                                                 type: "POST",
@@ -284,6 +278,7 @@ String companyCode = request.getParameter("companyCode");
                                                                     companyCode: companyCode,
                                                                     userId: userId
                                                                 },
+                                                                dataType: "json",
                                                                 success: function(response) {
                                                                     alert(response.message);
                                                                     if (response.success) {
@@ -295,6 +290,7 @@ String companyCode = request.getParameter("companyCode");
                                                                     alert('추천 처리 중 오류가 발생했습니다.');
                                                                 }
                                                             });
+                                                            return false;
                                                         }
                                                     </script>
 

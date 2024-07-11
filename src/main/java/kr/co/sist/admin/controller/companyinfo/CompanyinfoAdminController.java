@@ -27,13 +27,13 @@ public class CompanyinfoAdminController {
      @Autowired(required=false)
      private CompanyinfoAdminService companyinfoAdminService;
 
-    @GetMapping("/companyinfo/adminCompanyinfoList.do")
+    @GetMapping("/manage/companyinfo/adminCompanyinfoList.do")
     public String searchAllCompanyinfo(Model model) {
         List<SearchDomain> list=companyinfoAdminService.searchAllCompanyinfo();
         model.addAttribute("listCompanyinfo",list);
-        return "companyinfo/companies";
+        return "manage/companyinfo/companies";
     }
-    @GetMapping("/companyinfo/adminCompanyinfoDetail.do")
+    @GetMapping("/manage/companyinfo/adminCompanyinfoDetail.do")
     public String companyinfoDetail(String companyCode, HttpSession session, Model model) {
         List<SearchDomain> list=companyinfoAdminService.searchCompanyinfoDetail(companyCode);
         List<SearchDomain> list2=companyinfoAdminService.searchHistory(companyCode);
@@ -44,14 +44,14 @@ public class CompanyinfoAdminController {
         model.addAttribute("companyDetail",list);
         model.addAttribute("history",list2);
         model.addAttribute("welfare",list3);
-        return "companyinfo/admin_company_detail";
+        return "manage/companyinfo/admin_company_detail";
     }
-    @GetMapping("/companyinfo/adminCompanyinfoWrite.do")
+    @GetMapping("/manage/companyinfo/adminCompanyinfoWrite.do")
     public String insertCompanyinfoPage() {
-        return "companyinfo/admin_company_detail_write";
+        return "manage/companyinfo/admin_company_detail_write";
     }
   
-    @GetMapping("/companyinfo/adminHistoryWelfare.do")
+    @GetMapping("/manage/companyinfo/adminHistoryWelfare.do")
     public String selectHistoryWelfareDetail(String companyCode, Model model, HttpSession session) {
         List<SearchDomain> list=companyinfoAdminService.searchCompanyinfoDetail(companyCode);
         List<SearchDomain> list2=companyinfoAdminService.searchHistory(companyCode);
@@ -63,10 +63,10 @@ public class CompanyinfoAdminController {
         model.addAttribute("history",list2);
         model.addAttribute("welfare",list3);
       
-        return "companyinfo/admin_history_welfare";
+        return "manage/companyinfo/admin_history_welfare";
     }
 
-    @PostMapping("/companyinfo/addCompanyinfoWrite.do")
+    @PostMapping("/manage/companyinfo/addCompanyinfoWrite.do")
     public String insertCompanyinfoPage(CompanyinfoVO cVO,HttpServletRequest request) throws IOException {
         String nextCompNum=companyinfoAdminService.searchNextCompNum();
         File uploadLogoPath = new File("C:/dev/recruit-app/src/main/webapp/assets/images/company/logo");
@@ -110,10 +110,10 @@ public class CompanyinfoAdminController {
         System.out.println("cVO.toString() : " + cVO.toString());
         
         companyinfoAdminService.addCompanyinfoDetail(cVO);
-        return "redirect:/companyinfo/adminCompanyinfoList.do";
+        return "redirect:/manage/companyinfo/adminCompanyinfoList.do";
     }
     
-    @PostMapping("/companyinfo/addCompanyinfoDetail.do")
+    @PostMapping("/manage/companyinfo/addCompanyinfoDetail.do")
     public String addCompanyinfo(CompanyinfoVO companyinfoVO) {
         String result = "success";
         if (!companyinfoAdminService.addCompanyinfoDetail(companyinfoVO)) {
@@ -122,16 +122,16 @@ public class CompanyinfoAdminController {
         return result;
     }
     
-    @PostMapping("/companyinfo/updateCompanyinfo.do")
+    @PostMapping("/manage/companyinfo/updateCompanyinfo.do")
     public String updateCompanyinfo(CompanyinfoVO cVO ,HttpServletRequest request, HttpSession session) throws IOException {
         
         
         String uploadLogoPath = "C:/dev/recruit-app/src/main/webapp/assets/images/company/logo";
 
         File logoDir = new File(uploadLogoPath);
-        //°æ·Î°¡ ¾øÀ» ½Ã ¿¹¿Ü¸¦ ´øÁø´Ù.
+        //ï¿½ï¿½Î°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Ü¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
         if (!logoDir.exists()) {
-            throw new IOException("Ã£À»¼ö ¾ø´Â °æ·ÎÀÔ´Ï´Ù");
+            throw new IOException("Ã£ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½");
         }
         
         int maxSize = 100 * 1024 * 1024; // 100MB
@@ -143,7 +143,7 @@ public class CompanyinfoAdminController {
         String existingMainImg = mrLogo.getParameter("existLogo");
         String existingSubImg = mrLogo.getParameter("existImg");
         
-        //»õ·Î µî·ÏÇÑ ÀÌ¹ÌÁö°¡ ¾øÀ»°æ¿ì º»·¡ ÀÌ¹ÌÁö·Î ´ëÃ¼
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
         if(mainImg == null && existingMainImg != null) {
              mainImg = existingMainImg;
          }
@@ -182,19 +182,19 @@ public class CompanyinfoAdminController {
         File tempFile = new File(logoDir.getAbsolutePath()+"/"+ mainImg);
         File subFile = new File(logoDir.getAbsolutePath()+"/"+ subImg);
   
-        if(tempFile.length() > maxSize) { //¾÷·Îµå Á¦ÇÑ
+        if(tempFile.length() > maxSize) { //ï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½
             tempFile.delete();
         }
-        if(subFile.length() > maxSize) { //¾÷·Îµå Á¦ÇÑ
+        if(subFile.length() > maxSize) { //ï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½
             subFile.delete();
         }
         
         companyinfoAdminService.updateCompanyinfo(cVO);
         
-        return "redirect:/companyinfo/adminCompanyinfoList.do";
+        return "redirect:/manage/companyinfo/adminCompanyinfoList.do";
     }//updateCompanyinfo
     
-    @PostMapping("/companyinfo/insertHistory.do")
+    @PostMapping("/manage/companyinfo/insertHistory.do")
     public String insertHistory(HttpServletRequest request, HttpSession session) {
         String companyCode= (String) session.getAttribute("companyCode");
         String baseDate = request.getParameter("hidHistoryDate");
@@ -212,7 +212,7 @@ public class CompanyinfoAdminController {
 
         companyinfoAdminService.addHistory(hVO);
 
-        return "redirect:/companyinfo/adminHistoryWelfare.do?companyCode=" + companyCode;
+        return "redirect:/manage/companyinfo/adminHistoryWelfare.do?companyCode=" + companyCode;
     }
 
     @PostMapping("/companyinfo/insertWelfare.do")
@@ -233,10 +233,10 @@ public class CompanyinfoAdminController {
 
         companyinfoAdminService.addWelfare(wVO);
 
-        return "redirect:/companyinfo/adminHistoryWelfare.do?companyCode=" + companyCode;
+        return "redirect:/manage/companyinfo/adminHistoryWelfare.do?companyCode=" + companyCode;
     }
     
-    @PostMapping("/companyinfo/deleteHistory.do")
+    @PostMapping("/manage/companyinfo/deleteHistory.do")
     public String deleteHistory(@RequestParam("hidHistory") String baseDate, HttpSession session) {
         Map<String, Object> param=new HashMap<String, Object>();
         String companyCode=(String) session.getAttribute("companyCode");
@@ -247,10 +247,10 @@ public class CompanyinfoAdminController {
         
         companyinfoAdminService.deleteHistory(param);
         
-       return "redirect:/companyinfo/adminHistoryWelfare.do?companyCode=" + companyCode;  
+       return "redirect:/manage/companyinfo/adminHistoryWelfare.do?companyCode=" + companyCode;  
        }
     
-    @PostMapping("/companyinfo/deleteWelfare.do")
+    @PostMapping("/manage/companyinfo/deleteWelfare.do")
     public String deleteWelfare(@RequestParam("hidWelfare") String category, HttpSession session) {
         Map<String, Object> param=new HashMap<String, Object>();
         String companyCode=(String) session.getAttribute("companyCode");
@@ -259,7 +259,7 @@ public class CompanyinfoAdminController {
         
         companyinfoAdminService.deleteWelfare(param);
         
-        return "redirect:/companyinfo/adminHistoryWelfare.do?companyCode=" + companyCode;
+        return "redirect:/manage/companyinfo/adminHistoryWelfare.do?companyCode=" + companyCode;
     }
     
 //    @GetMapping("/companyinfo/search_test.do")
@@ -270,23 +270,23 @@ public class CompanyinfoAdminController {
 //    }
 //    
     @ResponseBody
-    @PostMapping("/companyinfo/adminCompanySearchList.do")
-    public Map<String, Object> companyinfoSearchList(Model model, @RequestParam(name = "companyName" , defaultValue ="null")String companyName, @RequestParam(name = "avgSal" , defaultValue ="0")String strAvgSal, @RequestParam(name = "selectedValue" , defaultValue ="¼±ÅÃ¾ÈÇÔ")String selectedValue) {
+    @PostMapping("/manage/companyinfo/adminCompanySearchList.do")
+    public Map<String, Object> companyinfoSearchList(Model model, @RequestParam(name = "companyName" , defaultValue ="null")String companyName, @RequestParam(name = "avgSal" , defaultValue ="0")String strAvgSal, @RequestParam(name = "selectedValue" , defaultValue ="ï¿½ï¿½ï¿½Ã¾ï¿½ï¿½ï¿½")String selectedValue) {
         int avgSal=Integer.parseInt(strAvgSal);
-     // °Ë»ö Á¶°ÇÀ» HashMap¿¡ ÀúÀå
+     // ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ HashMapï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         Map<String, Object> params = new HashMap<>();
         params.put("companyName", companyName);
         params.put("avgSal", avgSal);
         params.put("companyClassification", selectedValue);
-        System.out.println("ÀÌ°Ç controllerÀÇ params¾ß : "+params);
+        System.out.println("ï¿½Ì°ï¿½ controllerï¿½ï¿½ paramsï¿½ï¿½ : "+params);
 
-        // ¼­ºñ½º °èÃþ¿¡ °Ë»ö ¿äÃ»
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ ï¿½ï¿½Ã»
         List<SearchDomain> companyList = companyinfoAdminService.searchCompanyinfo(params);
 
-        // °á°ú µ¥ÀÌÅÍ¿Í »óÅÂ¸¦ ´ãÀ» Map »ý¼º
+        // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½ï¿½ Map ï¿½ï¿½ï¿½ï¿½
         Map<String, Object> response = new HashMap<>();
         response.put("adminCompanyList", companyList);
-        response.put("status", "success"); // ¼º°ø »óÅÂ Ãß°¡
+        response.put("status", "success"); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
 
         return response;
     }

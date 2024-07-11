@@ -22,7 +22,7 @@ public class ReviewService {
     private static final Logger logger = LogManager.getLogger(ReviewService.class);
     
     @Autowired
-    private MyBatisConfig myBatis; // MyBatisHandler Å¸ÀÔÀ¸·Î ¼±¾ğ
+    private MyBatisConfig myBatis; // MyBatisHandler íƒ€ì…ìœ¼ë¡œ ì„¤ì •
 
     @Autowired
     public ReviewService(MyBatisConfig myBatis) {
@@ -32,37 +32,34 @@ public class ReviewService {
     @Autowired(required = false)
     private UserReviewDAO userReviewDAO;
 
-    //¸®ºä È­¸é Ãâ·Â
+    // ë¦¬ë·° í™”ë©´ ì¶œë ¥
     public List<ReviewVO> getReviewScreenOutput(String companyCode) {
         return userReviewDAO.selectReviewScreenOutput(companyCode);
     }
+    
     public List<ReviewVO> getReviewScreenOutput(String companyCode, int offset) {
         return userReviewDAO.selectReviewScreenOutput(companyCode, offset);
     }
     
-  //ÆäÀÌÁö ³×ÀÌ¼Ç
+    // ë¦¬ë·° í™”ë©´ í˜ì´ì§•
     public List<ReviewVO> getReviewScreenOutputWithPagination(String companyCode, int offset) {
         return userReviewDAO.selectReviewScreenOutputWithPagination(companyCode, offset);
     }
 
-    //¼³¹® Á¶»ç °ª Ãß°¡
+    // ë¦¬ë·° ì„¤ë¬¸ ì¡°ì‚¬ ì¶”ê°€
     public void insertReviewSurvey(ReviewSurveyDomain reviewSurveyDomain) {
         userReviewDAO.insertReviewSurvey(reviewSurveyDomain);
     }
     
- // °³º° ¸®ºä Åë°è °ª °¡Á®¿À±â
+    // ê°œë³„ ë¦¬ë·° í†µê³„ ê°’ ê°€ì ¸ì˜¤ê¸°
     public ReviewQuestionsVO getReviewQuestions(int reviewNum) {
         return userReviewDAO.selectReviewQuestions(reviewNum);
     }
     
-    
-    
-
-    
- // ÃßÃµ¼ö Áõ°¡ (ÀÌ¹Ì ÃßÃµ ¿©ºÎ È®ÀÎ ·ÎÁ÷ Á¦°Å)
+    // ì¶”ì²œ ì—…ë°ì´íŠ¸ (ì´ë¯¸ ì¶”ì²œ ì—¬ë¶€ í™•ì¸ í›„ ì—…ë°ì´íŠ¸)
     @Transactional
     public boolean updateRecommend(RecommendVO recommendVO) {
-        logger.debug("Service - updateRecommend() ½ÃÀÛ, reviewNum: {}", recommendVO.getReviewNum());
+        logger.debug("Service - updateRecommend() ì‹œì‘, reviewNum: {}", recommendVO.getReviewNum());
         try {
             userReviewDAO.updateRecommend(recommendVO);
             userReviewDAO.insertReviewRecommend(recommendVO);
@@ -71,18 +68,18 @@ public class ReviewService {
             logger.error("Error occurred while updating recommendation: {}", e.getMessage(), e);
             throw e;
         } finally {
-            // mybatis ÇÚµé·¯¸¦ ´İ´Â ºÎºĞÀ» updateRecommend ¸Ş¼­µå¿¡¼­ Ã³¸®ÇÏµµ·Ï º¯°æ
+            // mybatis ì„¸ì…˜ì„ ë‹«ëŠ” ë¶€ë¶„ì„ updateRecommend ë©”ì†Œë“œì—ì„œ ì²˜ë¦¬í•˜ë„ë¡ ì„¤ì •
             SqlSession ss = myBatis.getMyBatisHandler(false);
             myBatis.closeHandler(ss); 
         }
     }
     
-    // ÀÌ¹Ì ÃßÃµÇß´ÂÁö È®ÀÎ
+    // ì´ë¯¸ ì¶”ì²œí–ˆëŠ”ì§€ í™•ì¸
     public boolean checkIfRecommended(RecommendVO recommendVO) {
         return userReviewDAO.checkIfRecommended(recommendVO);
     }
     
-    //¸®ºä È­¸é ºÒ·¯¿À±â
+    // íšŒì‚¬ ì •ë³´ ê°€ì ¸ì˜¤ê¸°
     public CompanyInfoVO getCompanyInfo(String companyCode) {
         System.out.println("Service Layer - companyCode: " + companyCode);
         CompanyInfoVO companyInfo = userReviewDAO.selectCompanyInfo(companyCode);
@@ -90,23 +87,28 @@ public class ReviewService {
         return companyInfo;
     }
     
-    //¸®ºä ÀÛ¼º Ã³¸®
+    // ë¦¬ë·° ì‘ì„± ì²˜ë¦¬
     public void insertReview(ReviewDomain reviewDomain) {
         userReviewDAO.insertReview(reviewDomain);
     }
     
-    //¸®ºä ³Ñ¹ö °¡Á®¿À±â
+    // ë¦¬ë·° ë„˜ë²„ ê°€ì ¸ì˜¤ê¸°
     public int getReviewNumByDomain(ReviewDomain reviewDomain) {
         return userReviewDAO.getReviewNumByDomain(reviewDomain);
     }
     
-    //È¸»ç Á¤º¸ °¡Á®¿À±â
+    // íšŒì‚¬ ì •ë³´ ìƒì„¸ ê°€ì ¸ì˜¤ê¸°
     public CompanyInfoVO getCompanyDetailsByCode(String companyCode) {
         return userReviewDAO.getCompanyDetailsByCode(companyCode);
     }
     
-    //¸®ºä ÃÑ °¹¼ö °¡Á®¿À±â
+    // ì´ ë¦¬ë·° ìˆ˜ ê°€ì ¸ì˜¤ê¸°
     public int getTotalReviewCount(String companyCode) {
         return userReviewDAO.getTotalReviewCount(companyCode);
+    }
+    
+    // ë¦¬ë·° ì‘ì„± ìœ íš¨ì„± ê²€ì‚¬
+    public boolean hasReviewForCompany(String userId, String companyCode) {
+        return userReviewDAO.hasReviewForCompany(userId, companyCode);
     }
 }

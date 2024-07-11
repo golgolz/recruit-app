@@ -39,7 +39,7 @@
 				<a
 					id="company_menu"
 					class="nav-link text-white"
-					href="http://localhost/recruit-app/companyinfo/adminCompanyinfoList.do">
+					href="http://localhost/recruit-app/manage/companyinfo/adminCompanyinfoList.do">
 					<span class="nav-link-text ms-1">기업 관리</span>
 				</a>
 			</li>
@@ -47,7 +47,7 @@
 				<a 
 					id="recruit_menu"
 					class="nav-link text-white"
-					href="http://localhost/recruit-app/manage/recruits.do">
+					href="http://localhost/recruit-app/manage/recruit/recruits.do">
 					<span class="nav-link-text ms-1">공고 관리</span>
 				</a>
 			</li>

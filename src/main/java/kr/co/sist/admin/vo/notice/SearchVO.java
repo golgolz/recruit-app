@@ -13,6 +13,6 @@ import lombok.ToString;
 @ToString
 public class SearchVO {
   private String field, keyword;
-  private String currentPage;
-  private int startNum, endNum;
+  private String currentPage, category, title, content, adminId, modifier, blindFlag, inputDate, updateDate;
+  private int startNum, endNum, noticeNum, views;
 }

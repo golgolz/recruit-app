@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<jsp:include page="../assets/layout/admin/lib.jsp" />
+<jsp:include page="../../assets/layout/admin/lib.jsp" />
 <script type="text/javascript">
 	$(function() {
 		$("#company_menu").addClass("bg-gradient-primary");
@@ -72,7 +72,7 @@
 <!-- golgolz end -->
 </head>
 <body>
-	<jsp:include page="../assets/layout/admin/header.jsp" />
+	<jsp:include page="../../assets/layout/admin/header.jsp" />
 	<main
 		class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ps--active-y">
 		<nav
@@ -192,8 +192,8 @@
 								<td><c:out value="${ company.companyClassification }"/></td>
 								<td><c:out value="${ company.avgSal }"/>만</td>
 								<td>
-									<input type="button" value="연혁/복리후생" class="btn btn-outline-secondary btn-sm" style="font-weight: bold;" onclick="location.href='http://localhost/recruit-app/companyinfo/adminHistoryWelfare.do?companyCode=${ company.companyCode }'"/>
-									<input type="button" value="기업정보" class="btn btn-outline-secondary btn-sm" style="font-weight: bold;" onclick="location.href='http://localhost/recruit-app/companyinfo/adminCompanyinfoDetail.do?companyCode=${ company.companyCode }'"/>
+									<input type="button" value="연혁/복리후생" class="btn btn-outline-secondary btn-sm" style="font-weight: bold;" onclick="location.href='http://localhost/recruit-app/manage/companyinfo/adminHistoryWelfare.do?companyCode=${ company.companyCode }'"/>
+									<input type="button" value="기업정보" class="btn btn-outline-secondary btn-sm" style="font-weight: bold;" onclick="location.href='http://localhost/recruit-app/manage/companyinfo/adminCompanyinfoDetail.do?companyCode=${ company.companyCode }'"/>
 								</td>
 							</tr>
 							</c:forEach>

@@ -22,12 +22,10 @@ public class CompanyinfoAdminDAO {
     private MyBatisConfig mbConfig;
 
     public List<SearchDomain> selectAllCompanyinfo()throws PersistenceException{
-        System.out.println("이건 다오야");
         SqlSession ss=mbConfig.getMyBatisHandler(false);
         List<SearchDomain> list= new ArrayList<SearchDomain>();
         list=ss.selectList("kr.co.sist.admin.companyinfo.selectAllCompanyinfo");
         mbConfig.closeHandler(ss);
-        System.out.println("값 잘 받아옴?");
         return list;
     }
     

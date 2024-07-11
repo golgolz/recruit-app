@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     info=""%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -336,6 +337,11 @@
 	</script>
 </head>
 <body>
+	<c:if test="${not empty errorMsg}">
+        <script>
+            alert("${errorMsg}");
+        </script>
+    </c:if>
     <div id="__next" data-reactroot="">
 		<jsp:include page="../../assets/layout/user/header.jsp" />
 		<main class="JobsFeed_Jobsfeed__DpeV9">  

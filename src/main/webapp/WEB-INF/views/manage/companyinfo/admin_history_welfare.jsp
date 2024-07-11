@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<jsp:include page="../assets/layout/admin/lib.jsp" />
+<jsp:include page="../../assets/layout/admin/lib.jsp" />
 <!-- golgolz start -->
 <link href="http://localhost/recruit-app/assets/css/manage/goods/general.css" rel="stylesheet" />
 <link href="http://localhost/recruit-app/assets/css/manage/goods/goods.css" rel="stylesheet" />
@@ -56,7 +56,7 @@ input{
 <!-- golgolz end -->
 </head>
 <body>
-	<jsp:include page="../assets/layout/admin/header.jsp" />
+	<jsp:include page="../../assets/layout/admin/header.jsp" />
 	<main
 		class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ps--active-y" style="height: 100%; overflow-y: scroll">
 		<nav
@@ -80,21 +80,21 @@ input{
 		<div class="container-fluid py-4">
 			<!-- golgolz start -->
 			<div id="contentcolumn" class="">
-				<form id="frmInsertHistory" action="http://localhost/recruit-app/companyinfo/insertHistory.do" method="post">
+				<form id="frmInsertHistory" action="http://localhost/recruit-app/manage/companyinfo/insertHistory.do" method="post">
 				<input type="hidden" id="historyBaseDate" value="" name="hidHistoryDate"/>
 				<input type="hidden" id="historyContents" value="" name="hidInHistoryContent"/>
 				<input type="hidden" id="companyCode" name="companyCode" value="${companyIntroDetail.companyCode}"/>
 				</form>
-				<form id="frmInsertWelfare" action="http://localhost/recruit-app/companyinfo/insertWelfare.do" method="post">
+				<form id="frmInsertWelfare" action="http://localhost/recruit-app/manage/companyinfo/insertWelfare.do" method="post">
 				<input type="hidden" id="welfareCategories" value="" name="hidWelfareCategory"/>
 				<input type="hidden" id="welfareContents" value="" name="hidWelfareContent"/>
 				<input type="hidden" id="companyCode" name="companyCode" value="${companyIntroDetail.companyCode}"/>
 				</form>
-				<form id="frmDeleteHistory" action="http://localhost/recruit-app/companyinfo/deleteHistory.do" method="post">
+				<form id="frmDeleteHistory" action="http://localhost/recruit-app/manage/companyinfo/deleteHistory.do" method="post">
 				<input type="hidden" id="delHistoryBaseDate" value="" name="hidHistory"/>
 				<input type="hidden" id="companyCode" name="companyCode" value="${companyIntroDetail.companyCode}"/>
 				</form>
-				<form id="frmDeleteWelfare" action="http://localhost/recruit-app/companyinfo/deleteWelfare.do" method="post">
+				<form id="frmDeleteWelfare" action="http://localhost/recruit-app/manage/companyinfo/deleteWelfare.do" method="post">
 				<input type="hidden" id="delWelfareCategories" value="" name="hidWelfare"/>
 				<input type="hidden" id="companyCode" name="companyCode" value="${companyIntroDetail.companyCode}"/>
 				</form>
@@ -196,7 +196,7 @@ input{
 					</form>
 						<div class="alignCenter">
 							<% if(request.getParameter("code") == null){ %>
-								<input type="button" id="btn-register" class="btn btn-outline-dark btn-sm detail-control" value="뒤로" onclick="location.href='http://localhost/recruit-app/companyinfo/adminCompanyinfoList.do'"/>
+								<input type="button" id="btn-register" class="btn btn-outline-dark btn-sm detail-control" value="뒤로" onclick="location.href='http://localhost/recruit-app/manage/companyinfo/adminCompanyinfoList.do'"/>
 							<% } else { %>
 								<input type="button" id="btn-update" class="btn btn-outline-warning btn-sm detail-control" value="수정하기" />
 								<input type="button" id="btn-delete" class="btn btn-outline-danger btn-sm detail-control" value="삭제하기" />

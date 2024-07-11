@@ -50,6 +50,103 @@
 		<!-- golgolz end -->
 	</style>
 	<script text="text/javascript">
+	var filteredLanguageExamData = [
+		  {
+		    Lang_Code: "16",
+		    Lang_Name: "영어",
+		    Exams: [
+		      { Exam_Code: 1, Exam_Name: "TOEIC" },
+		      { Exam_Code: 28, Exam_Name: "TOEIC(Speaking)" },
+		      { Exam_Code: 77, Exam_Name: "TOEIC(Writing)" },
+		      { Exam_Code: 29, Exam_Name: "TOEIC Speaking and Writing Tests" },
+		      { Exam_Code: 2, Exam_Name: "TOEFL(PBT)" },
+		      { Exam_Code: 21, Exam_Name: "TOEFL(CBT)" },
+		      { Exam_Code: 24, Exam_Name: "TOEFL(iBT)" },
+		      { Exam_Code: 3, Exam_Name: "TEPS" },
+		      { Exam_Code: 14, Exam_Name: "IELTS" },
+		      { Exam_Code: 15, Exam_Name: "G-TELP(GLT)" },
+		      { Exam_Code: 16, Exam_Name: "G-TELP(GST)" },
+		      { Exam_Code: 75, Exam_Name: "G-TELP(GWT)" },
+		      { Exam_Code: 76, Exam_Name: "G-TELP(GBST)" },
+		      { Exam_Code: 17, Exam_Name: "SLEP" },
+		      { Exam_Code: 18, Exam_Name: "GRE" },
+		      { Exam_Code: 19, Exam_Name: "GMAT" },
+		      { Exam_Code: 23, Exam_Name: "PELT" },
+		      { Exam_Code: 30, Exam_Name: "OPIc" },
+		      { Exam_Code: 79, Exam_Name: "OPIc Listening&Reading" },
+		      { Exam_Code: 63, Exam_Name: "OPIc Writing" },
+		      { Exam_Code: 80, Exam_Name: "OPI" },
+		      { Exam_Code: 64, Exam_Name: "FLEX 영어" }
+		    ]
+		  },
+		  {
+		    Lang_Code: "20",
+		    Lang_Name: "일본어",
+		    Exams: [
+		      { Exam_Code: 4, Exam_Name: "JPT" },
+		      { Exam_Code: 13, Exam_Name: "JLPT" },
+		      { Exam_Code: 34, Exam_Name: "新JLPT" },
+		      { Exam_Code: 20, Exam_Name: "JTRA" },
+		      { Exam_Code: 27, Exam_Name: "NPT" },
+		      { Exam_Code: 37, Exam_Name: "SJPT" },
+		      { Exam_Code: 48, Exam_Name: "OPIc" },
+		      { Exam_Code: 67, Exam_Name: "FLEX 일본어" }
+		    ]
+		  },
+		  {
+		    Lang_Code: "21",
+		    Lang_Name: "중국어",
+		    Exams: [
+		      { Exam_Code: 8, Exam_Name: "HSK" },
+		      { Exam_Code: 32, Exam_Name: "新HSK" },
+		      { Exam_Code: 33, Exam_Name: "HSK회화" },
+		      { Exam_Code: 35, Exam_Name: "新HSK회화" },
+		      { Exam_Code: 36, Exam_Name: "TSC" },
+		      { Exam_Code: 38, Exam_Name: "OPIc" },
+		      { Exam_Code: 42, Exam_Name: "BCT" },
+		      { Exam_Code: 43, Exam_Name: "CPT" },
+		      { Exam_Code: 78, Exam_Name: "HSKK" },
+		      { Exam_Code: 81, Exam_Name: "OPI" },
+		      { Exam_Code: 49, Exam_Name: "新BCT(A)" },
+		      { Exam_Code: 50, Exam_Name: "新BCT(B)" },
+		      { Exam_Code: 51, Exam_Name: "新BCT(Speaking)" },
+		      { Exam_Code: 68, Exam_Name: "FLEX 중국어" }
+		    ]
+		  },
+		  {
+		    Lang_Code: "4",
+		    Lang_Name: "독일어",
+		    Exams: [
+		      { Exam_Code: 11, Exam_Name: "ZDAF" },
+		      { Exam_Code: 12, Exam_Name: "ZMP" },
+		      { Exam_Code: 7, Exam_Name: "GDS" },
+		      { Exam_Code: 9, Exam_Name: "KDS" },
+		      { Exam_Code: 52, Exam_Name: "DSH" },
+		      { Exam_Code: 53, Exam_Name: "FLEX 독일어" },
+		      { Exam_Code: 54, Exam_Name: "PWD" },
+		      { Exam_Code: 55, Exam_Name: "SD1" },
+		      { Exam_Code: 56, Exam_Name: "SD2" },
+		      { Exam_Code: 57, Exam_Name: "SNULT 독일어" },
+		      { Exam_Code: 58, Exam_Name: "TCT 번역능력인정시험 독일어" },
+		      { Exam_Code: 59, Exam_Name: "TestDaF" },
+		      { Exam_Code: 60, Exam_Name: "ZD" },
+		      { Exam_Code: 61, Exam_Name: "ZOP" },
+		      { Exam_Code: 62, Exam_Name: "관광통역안내사 독일어" },
+		      { Exam_Code: 83, Exam_Name: "OPI" }
+		    ]
+		  },
+		  {
+		    Lang_Code: "27",
+		    Lang_Name: "프랑스어",
+		    Exams: [
+		      { Exam_Code: 6, Exam_Name: "DELF" },
+		      { Exam_Code: 5, Exam_Name: "DALF" },
+		      { Exam_Code: 82, Exam_Name: "OPI" },
+		      { Exam_Code: 69, Exam_Name: "FLEX 프랑스어" }
+		    ]
+		  }
+		];
+	
 		$(function(){
 			<!-- golgolz start -->
 			//$('.chip[data-value="Vue.js"]').addClass("active"); // select before rendering
@@ -113,8 +210,433 @@
 					});
 				}
 			});
+			
+			var resumeNum = "${resumeNum}";
+			
+			if (resumeNum) {
+				$.ajax({
+		            url: "${pageContext.request.contextPath}/api/manage/resumes/detail.do?id=" + resumeNum,
+		            method: 'GET',
+		            dataType: 'JSON',
+		            success: function(data) {
+		            	updateTitle(data.title);
+		            	updateProfileForm(data);
+		            	updateSkills(data.subData.skills); 
+		            	updateCareer(data.subData.career);
+		            	updateLanguages(data.subData.languages);
+		            	updateCertifications(data.subData.certifications);
+		            	updateIntroduction(data.introduce);
+		                updateEducation(data.subData.education);
+		            },
+		            error: function(xhr, status, error) {
+		                console.error("Error fetching data: " + error);
+		                $("#recruit-list tbody").html('<tr><td colspan="4" style="font-size: 16px; font-weight: bold;">데이터를 불러오는 데 실패했습니다.</td></tr>');
+		            }
+		        });
+		    }
 			<!-- golgolz end -->
 		});
+		
+		/* 수정 삭제를 위한 js functions start */
+		function updateTitle(titleData){
+		    $('#UserResume_M_Resume_Title').val(titleData);
+		}
+		
+		function updateProfileForm(data) {
+		    $('#UserInfo_M_Name').val(data.owner);
+		    $('#UserInfo_M_Born').val(data.birth);
+		    $('#genderSelect').val(data.gender);
+		    $('#UserInfo_M_Email').val(data.email);
+		    $('input[name="UserInfo.M_Hand_Phone"]').eq(0).val(data.tel);
+		    $('input[name="UserInfo.M_Hand_Phone"]').eq(1).val(data.phone);
+
+		    if (data.addr) {
+		        var addrParts = data.addr.split(' ');
+		        if (addrParts.length >= 2) {
+		            var sido = addrParts[0];
+		            var gugun = addrParts.slice(1).join(' ');
+		
+		            $('#sido1').val(sido);
+		            $('#sido1').trigger('change');
+
+		            setTimeout(function() {
+		                $('#gugun1').val(gugun);
+		            }, 100);
+		        }
+		    }
+
+		    if (data.profile) {
+		        $('.picture').css('background-image', `url(${data.profile})`).addClass('dropped');
+		    }
+		}
+		
+		function updateSkills(skills) {
+			if(skills == null){
+				return;
+			}
+			
+		    $('.chip').removeClass('active');
+		    skills.forEach(function(skill) {
+		        $('.chip[data-value="' + skill.skill_name + '"]').addClass('active');
+		    });
+		}
+		
+		function addSchoolItem() {
+		    var containerCount = $('#school_containers .container').length;
+		    var newSchoolHtml = $('#tplSchool').html().replace(/\{no\}/g, containerCount + 1);
+		    $('#school_containers').append(newSchoolHtml);
+
+		    // 새로 추가된 학교 항목에 대한 이벤트 리스너 추가
+		    var $newSchool = $('#school_containers .container').last();
+		    initSchoolItemEvents($newSchool);
+		}
+
+		function initSchoolItemEvents($school) {
+		    $school.find('.dropdown-education-category .button').click(function() {
+		        $(this).closest('.dropdown').find('.list').toggleClass('hidden');
+		    });
+
+		    $school.find('.dropdown-education-category .eduItem').click(function() {
+		        var schoolType = $(this).data('schltypecode');
+		        updateSchoolType($school, schoolType);
+		    });
+
+		    $school.find('.buttonDeleteField').click(function() {
+		        $school.remove();
+		    });
+		}
+		
+		function updateSchoolType($school, schoolType) {
+		    var templateId = schoolType === "0" ? '#tplHighSchool' : '#tplUnivSchool';
+		    var newSchoolHtml = $(templateId).html().replace(/\{no\}/g, $school.index() + 1);
+		    $school.replaceWith(newSchoolHtml);
+		    
+		    var $newSchool = $('#school_containers .container').eq($school.index());
+		    initSchoolItemEvents($newSchool);
+
+		    if (schoolType !== "0") {
+		        initUnivSchoolEvents($newSchool);
+		    }
+		}
+		
+		function updateEducation(educationData) {
+			if(educationData == null){
+				return;
+			}
+			
+			$('#school_containers').empty();
+		    
+		    var gradStateMap = {
+		        "졸업": "10",
+		        "졸업예정": "5",
+		        "재학중": "4",
+		        "중퇴": "2",
+		        "수료": "9",
+		        "휴학": "3"
+		    };
+		    
+		    var degreeMap = {
+		        "1": "(2,3년제)학사",
+		        "2": "(4년제)학사",
+		        "3": "석사",
+		        "4": "박사"
+		    };
+		    
+		    educationData.forEach(function(edu, index) {
+		        var templateId;
+		        if (edu.school_classification === "1") {
+		            templateId = '#tplHighSchool';
+		        } else {
+		            templateId = '#tplUnivSchool';
+		        }
+		        
+		        var newSchoolHtml = $(templateId).html().replace(/\{no\}/g, index + 1);
+		        var $newSchool = $(newSchoolHtml);
+		        var $schoolNameInput = $newSchool.find('[data-type="School_Name"][data-comp_type="jkAcInput"]');
+		        $schoolNameInput.val(edu.school_name);
+		        
+		        if (edu.school_classification === "1") {
+		            $newSchool.find('[name="HighSchool.Schl_Name"]').val(edu.school_name);
+		            $newSchool.find('#HighSchool_Schl_Name_Search').val(edu.school_name);
+		            $newSchool.find('#HighSchool_Grad_Year').val(edu.graduation_date.substring(0, 4));
+		            
+		            var $gradStateDropdown = $newSchool.find('.dropdown-edcation-state');
+		            var $gradStateButton = $gradStateDropdown.find('.buttonChoose');
+		            var $gradStateInput = $newSchool.find('#HighSchool_Grad_Type_Code');
+		            
+		            if (edu.graduation_state && gradStateMap[edu.graduation_state]) {
+		                $gradStateDropdown.addClass('selected');
+		                $gradStateDropdown.find('.label').removeClass('hidden').attr('aria-hidden', 'false');
+		                $gradStateButton.html('<span>' + edu.graduation_state + '</span>');
+		                $gradStateInput.val(gradStateMap[edu.graduation_state]);
+		            }
+		        } else {
+		            $newSchool.find('[name$="Schl_Name"]').val(edu.school_name);
+		            $newSchool.find('[name$="Entc_YM"]').val(edu.admission_date);
+		            $newSchool.find('[name$="Grad_YM"]').val(edu.graduation_date);
+		            
+		            var $gradStateDropdown = $newSchool.find('.dropdown-edcation-state');
+		            var $gradStateButton = $gradStateDropdown.find('.buttonChoose');
+		            var $gradStateLabel = $gradStateDropdown.find('.label');
+		            var $gradStateInput = $newSchool.find('[name$="Grad_Type_Code"]');
+		            
+		            if (edu.graduation_state && gradStateMap[edu.graduation_state]) {
+		                $gradStateDropdown.addClass('selected');
+		                $gradStateLabel.removeClass('hidden').attr('aria-hidden', 'false');
+		                $gradStateButton.html('<span>' + edu.graduation_state + '</span>');
+		                $gradStateInput.val(gradStateMap[edu.graduation_state]);
+		            }
+		            
+		            var $degreeDropdown = $newSchool.find('.dropdown-edcation-degree');
+		            var $degreeButton = $degreeDropdown.find('.buttonChoose');
+		            var $degreeInput = $newSchool.find('[name$="Mstr_Dctr_Type_Code"]');
+		            
+		            var degreeIndex = Math.min(parseInt(edu.school_classification) - 1, 3);
+		            var degreeValue = Object.keys(degreeMap)[degreeIndex];
+		            var degreeText = degreeMap[degreeValue];
+
+		            $degreeDropdown.addClass('selected');
+		            $degreeDropdown.find('.label').removeClass('hidden').attr('aria-hidden', 'false');
+		            $degreeButton.html('<span>' + degreeText + '</span>');
+		            $degreeInput.val(degreeValue);
+		            
+		            var $totalScoreDropdown = $newSchool.find('.dropdown-education-total');
+		            var $totalScoreButton = $totalScoreDropdown.find('.buttonChoose span');
+		            var $totalScoreInput = $newSchool.find('[name$="Grade_Prft_Scr"]');
+		            
+		            if (edu.total_score) {
+		                $totalScoreDropdown.addClass('selected');
+		                $totalScoreDropdown.find('.label').removeClass('hidden').attr('aria-hidden', 'false');
+		                $totalScoreButton.text(edu.total_score);
+		                $totalScoreInput.val(edu.total_score);
+		                
+		                $totalScoreDropdown.find('.list ul li button').each(function() {
+		                    $(this).toggleClass('selected', $(this).data('value') == edu.total_score);
+		                });
+		            }
+		            
+		            $newSchool.find('[data-type="Major_Name"]').val(edu.major);
+		            $newSchool.find('[name$="Grade"]').val(edu.grades);
+		            $newSchool.find('[name$="Grade_Prft_Scr"]').val(edu.total_score);
+		        }
+		        
+		        $newSchool.find('.list').removeClass('visible').addClass('hidden');
+		        
+		        $('#school_containers').append($newSchool);
+		        initSchoolItemEvents($newSchool);
+		    });
+		}
+
+		function initUnivSchoolEvents($school) {
+		    $school.find('.dropdown-edcation-state .buttonChoose').click(function(e) {
+		        e.preventDefault();
+		        var $list = $(this).closest('.dropdown').find('.list');
+		
+		        if ($list.hasClass('hidden')) {
+		            $list.removeClass('hidden').addClass('visible');
+		        } else {
+		            $list.removeClass('visible').addClass('hidden');
+		        }
+		    });
+
+		    $school.find('.dropdown-edcation-state .list .button').click(function(e) {
+		        e.preventDefault();
+		        var selectedValue = $(this).data('value');
+		        var selectedText = $(this).find('span').text();
+		        var $dropdown = $(this).closest('.dropdown');
+		        
+		        $dropdown.addClass('selected');
+		        $dropdown.find('.label').removeClass('hidden').attr('aria-hidden', 'false');
+		        $dropdown.find('.buttonChoose').html('<span>' + selectedText + '</span>');
+		        $dropdown.find('input[type="hidden"]').val(selectedValue);
+		        $dropdown.find('.list').removeClass('visible').addClass('hidden');
+		    });
+		}
+		
+		function updateCertifications(certificationData) {
+			if(certificationData == null){
+				return;
+			}
+			
+		    $('#license_containers').empty();
+
+		    certificationData.forEach(function(cert, index) {
+		        var newCertHtml = $('#tplLicenseItem').html().replace(/c23/g, 'c' + (index + 1));
+		        var $newCert = $(newCertHtml);
+
+		        $newCert.find('[data-type="Lc_Name"]').val(cert.certificate_name);
+		        $newCert.find('[data-type="Lc_Pub"]').val(cert.publisher);
+		        $newCert.find('[data-format-type="month"]').val(cert.acquisition_date);
+		        $newCert.find('.dev-btn-del-license').click(function() {
+		            $(this).closest('.container').remove();
+		        });
+		        $('#license_containers').append($newCert);
+		    });
+
+		    $('.formWrapCertificate .buttonAddField').off('click').click(function() {
+		        var newIndex = $('#license_containers .container').length + 1;
+		        var newCertHtml = $('#tplLicenseItem').html().replace(/c23/g, 'c' + newIndex);
+		        var $newCert = $(newCertHtml);
+
+		        $newCert.find('.dev-btn-del-license').click(function() {
+		            $(this).closest('.container').remove();
+		        });
+
+		        $('#license_containers').append($newCert);
+		    });
+		}
+		
+		function updateCareer(careerData) {
+			if(careerData == null){
+				return;
+			}
+			
+		    $('#career_containers').empty();
+		    
+		    careerData.forEach(function(career, index) {
+		        var newCareerHtml = $('#tplCareerItem').html().replace(/c14/g, 'c' + (index + 1));
+		        var $newCareer = $(newCareerHtml);
+		        
+		        $newCareer.find('[id^="Career_C_Name_"]').val(career.company_name);
+		        $newCareer.find('[id^="Career_C_Part_"]').val(career.dname);
+		        $newCareer.find('[id^="Career_CSYM_"]').val(career.join_date);
+		        if (career.resignation_date) {
+		            $newCareer.find('[id^="Career_CEYM_"]').val(career.resignation_date);
+		        } else {
+		            $newCareer.find('[id^="Career_CEYM_"]').val('재직중');
+		        }
+
+		        if (career.position) {
+		            $newCareer.find('[id^="Career_position_field"]').val(career.position);
+		        }
+		        
+		        if (career.sal) {
+		            $newCareer.find('[id^="Career_M_MainPay_User_"]').val(career.sal);
+		        }
+		        
+		        $newCareer.find('[id^="Career_Prfm_Prt_"]').val(career.job_description);
+		        $('#career_containers').append($newCareer);
+		    });
+		}
+		
+		function updateLanguages(languageData) {
+			if(languageData == null){
+				return;
+			}
+			
+		    var $container = $('#language_containers');
+		    
+		    if ($container.length === 0) {
+		        return;
+		    }
+
+		    $container.html('');
+
+		    var $template = $('#tplLanguageItem');
+		    if ($template.length === 0) {
+		        console.error("Error: Template #tplLanguageItem not found");
+		        return;
+		    }
+
+		    var templateHtml = $template.html();
+
+		    languageData.forEach(function(lang, index) {
+		        var newItemHtml = templateHtml.replace(/c508/g, 'c' + (index + 1));
+		        var $newLangItem = $(newItemHtml);
+		        
+		        var categoryValue = lang.category === "회화능력" ? "1" : "2";
+		        $newLangItem.find('[name$="Eval_Category"]').val(categoryValue);
+		        $newLangItem.find('.dropdown-category .buttonChoose span').text(lang.category);
+		        $newLangItem.find('.dropdown-category').addClass('selected');
+		        $newLangItem.find('.dropdown-category .label').attr('aria-hidden', 'false').removeClass('hidden');
+
+		        var langCode = getLanguageCode(lang.language);
+		        $newLangItem.find('[name$="Lang1_Name"]').val(langCode);
+		        $newLangItem.find('.dropdown-language-name .buttonChoose span').text(lang.language);
+		        $newLangItem.find('.dropdown-language-name').addClass('selected');
+		        $newLangItem.find('.dropdown-language-name .label').attr('aria-hidden', 'false').removeClass('hidden');
+
+		        if (lang.category === "회화능력") {
+		            $newLangItem.find('.devConversationArea').show();
+		            $newLangItem.find('.devExamArea').hide();
+
+		            var conversationLevelValue = getConversationLevelValue(lang.lang_level);
+		            $newLangItem.find('[name$="Lang1_Stat"]').val(conversationLevelValue);
+		            $newLangItem.find('.devConversationArea .buttonChoose span').text(lang.lang_level);
+		            $newLangItem.find('.devConversationArea .dropdown-language-grade').addClass('selected');
+		            $newLangItem.find('.devConversationArea .dropdown-language-grade .label').attr('aria-hidden', 'false').removeClass('hidden');
+		        } else if (lang.category === "공인시험") {
+		            $newLangItem.find('.devExamArea').show();
+		            $newLangItem.find('.devConversationArea').hide();
+
+		            var examList = getExamListByLanguage(langCode);
+		            var $examListContainer = $newLangItem.find('.devExamDropdown .list ul');
+		            $examListContainer.empty();
+		            examList.forEach(function(exam) {
+		                $examListContainer.append('<li><button type="button" class="button" data-value="' + exam.Exam_Code + '"><span>' + exam.Exam_Name + '</span></button></li>');
+		            });
+
+		            var examInfo = getExamInfo(langCode, lang.test_name);
+		            $newLangItem.find('[name$="Test1_Name"]').val(examInfo.Exam_Code);
+		            $newLangItem.find('.devExamDropdown .buttonChoose span').text(lang.test_name);
+		            $newLangItem.find('.devExamDropdown').addClass('selected').css({
+		                'display': 'inline-block',
+		                'margin-right': '10px'
+		            });
+		            $newLangItem.find('.devExamDropdown .label').attr('aria-hidden', 'false').removeClass('hidden');
+		            $newLangItem.find('.devExamInput').remove();
+		            $newLangItem.find('.devExamGradeInput').addClass('is-value').show().css({
+		                'display': 'inline-block',
+		                'margin-right': '10px'
+		            });
+		            $newLangItem.find('.devExamGradeInput input').val(lang.lang_level);
+		            $newLangItem.find('.devExamGradeDropdown').hide();
+		            $newLangItem.find('.devExamGradeDropdown input').attr('disabled', 'disabled');
+		            $newLangItem.find('[name$="Test_YYMM"]').val(lang.aquisition_date);
+		            $newLangItem.find('.input-passdate').addClass('is-value').css({
+		                'display': 'inline-block'
+		            });
+		        }
+		        $container.append($newLangItem);
+		    });
+		}
+		
+		function getExamListByLanguage(langCode) {
+		    var language = filteredLanguageExamData.find(lang => lang.Lang_Code === langCode);
+		    return language ? language.Exams : [];
+		}
+		
+	    function getLanguageCode(languageName) {
+	        var language = filteredLanguageExamData.find(lang => lang.Lang_Name === languageName);
+	        return language ? language.Lang_Code : "";
+	    }
+
+	    function getConversationLevelValue(level) {
+	        var levels = {
+	            "일상회화 가능": "1",
+	            "비즈니스 회화가능": "2",
+	            "원어민 수준": "3"
+	        };
+	        return levels[level] || "";
+	    }
+
+	    function getExamInfo(langCode, examName) {
+	        var language = filteredLanguageExamData.find(lang => lang.Lang_Code === langCode);
+	        if (language) {
+	            var exam = language.Exams.find(exam => exam.Exam_Name === examName);
+	            return exam || { Exam_Code: "", Exam_Name: examName };
+	        }
+	        return { Exam_Code: "", Exam_Name: examName };
+	    }
+
+		function updateIntroduction(introductionData){
+			if(introductionData == null){
+				return;
+			}
+			
+			$("#ResumeProfile_Contents_").html(introductionData);
+		}
+		/* 수정 삭제를 위한 js functions end */
 	</script>
 </head>
 <body>

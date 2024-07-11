@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<jsp:include page="../assets/layout/admin/lib.jsp" />
+<jsp:include page="../../assets/layout/admin/lib.jsp" />
 <!-- golgolz start -->
 <link href="http://localhost/recruit-app/assets/css/manage/goods/general.css" rel="stylesheet" />
 <link href="http://localhost/recruit-app/assets/css/manage/goods/goods.css" rel="stylesheet" />
@@ -59,7 +59,7 @@ input{
 <!-- golgolz end -->
 </head>
 <body>
-	<jsp:include page="../assets/layout/admin/header.jsp" />
+	<jsp:include page="../../assets/layout/admin/header.jsp" />
 	<main
 		class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ps--active-y" style="height: 100%; overflow-y: scroll">
 		<nav
@@ -84,7 +84,7 @@ input{
 			<!-- golgolz start -->
 			<div id="contentcolumn" class="">
 				<div class="contents">
-					<form id="dataForm" name="dataForm" action="http://localhost/recruit-app/companyinfo/addCompanyinfoWrite.do" method="post" enctype="multipart/form-data">
+					<form id="dataForm" name="dataForm" action="http://localhost/recruit-app/manage/companyinfo/addCompanyinfoWrite.do" method="post" enctype="multipart/form-data">
 						<div class="subtitle">
 							<img src="http://localhost/recruit-app/assets/images/manage/common/bul_subtitle.gif" />
 							기업정보
