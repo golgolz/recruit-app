@@ -1,4 +1,4 @@
-package kr.co.sist.admin.vo.qna;
+package kr.co.sist.user.vo.qna;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

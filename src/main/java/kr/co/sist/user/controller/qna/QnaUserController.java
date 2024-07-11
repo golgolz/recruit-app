@@ -2,14 +2,17 @@ package kr.co.sist.user.controller.qna;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import kr.co.sist.user.domain.qna.UserQnaDomain;
 import kr.co.sist.user.service.qna.QnaUserService;
+import kr.co.sist.user.vo.qna.SearchVO;
 import kr.co.sist.user.vo.qna.UserQnaVO;
 
 @Controller
@@ -21,12 +24,30 @@ public class QnaUserController {
         this.qnaUserService = qnaUserService;
     }
 
+    // @GetMapping("/user/mypage/qna/mypageQNAList.do")
+    // public String searchMyQnaList(Model model) {
+    // List<UserQnaDomain> qnaList = qnaUserService.searchMyQnaList();
+    // model.addAttribute("qnaList", qnaList);
+    // return "user/mypage/qna/mypageQNAList";
+    // }
     @GetMapping("/user/mypage/qna/mypageQNAList.do")
-    public String searchMyQnaList(Model model) {
-        List<UserQnaDomain> qnaList = qnaUserService.searchMyQnaList();
+    public String searchMyQnaList(@RequestParam(defaultValue = "1") int currentPage,
+            @RequestParam(defaultValue = "10") int itemsPerPage, Model model) {
+        SearchVO sVO = new SearchVO();
+        sVO.setCurrentPage(currentPage);
+        sVO.setItemsPerPage(itemsPerPage);
+        sVO.pageIndexes();
+
+        int totlalItems = qnaUserService.countMyQnas();
+        sVO.setTotalItems(totlalItems);
+        sVO.setTotalPages((int) Math.ceil((double) totlalItems / itemsPerPage));
+
+        List<Map<String, Object>> qnaList = qnaUserService.searchMyQnaList(sVO);
         model.addAttribute("qnaList", qnaList);
+        model.addAttribute("searchVO", sVO);
         return "user/mypage/qna/mypageQNAList";
     }
+
 
     @GetMapping("/user/mypage/qna/mypageQNADetail.do")
     public String searchOneQna(UserQnaVO qVO, Model model) {

@@ -56,11 +56,48 @@ public class QnaAdminController {
     }// 새로운 문의 상세조회
 
     @GetMapping("/manage/qna/qnas.do")
-    public String searchOldQnas(Model model) {
-        List<Map<String, Object>> oldQnas = qnaAdminService.searchOldQnas();
+    public String searchOldQnas(@RequestParam(defaultValue = "1") int currentPage,
+            @RequestParam(defaultValue = "10") int itemsPerPage, Model model) {
+        SearchVO sVO = new SearchVO();
+        sVO.setCurrentPage(currentPage);
+        sVO.setItemsPerPage(itemsPerPage);
+        sVO.pageIndexes();
+
+        int totalItems = qnaAdminService.countQnas();
+        sVO.setTotalItems(totalItems);
+        sVO.setTotalPages((int) Math.ceil((double) totalItems / itemsPerPage));
+
+        List<Map<String, Object>> oldQnas = qnaAdminService.searchOldQnas(sVO);
         model.addAttribute("oldQnas", oldQnas);
+        model.addAttribute("searchVO", sVO);
+
         return "manage/qna/qnas";
-    } // 답변 완료된 문의사항 리스트 조회
+    }
+
+    // @GetMapping("/manage/qna/qnas.do")
+    // public String searchOldQnas(@RequestParam(defaultValue = "1") int currentPage,
+    // @RequestParam(defaultValue = "10") int itemsPerPage, Model model) {
+    // SearchVO sVO = new SearchVO();
+    // sVO.setCurrentPage(currentPage);
+    // sVO.setItemsPerPage(itemsPerPage);
+    // sVO.pageIndexes();
+    //
+    // int totalItems = qnaAdminService.countQnas();
+    // sVO.setTotalItems(totalItems);
+    // sVO.setTotalPages((int) Math.ceil((double) totalItems / itemsPerPage));
+    //
+    // List<Map<String, Object>> oldQnas = qnaAdminService.searchOldQnas(sVO);
+    // model.addAttribute("oldQnas", oldQnas);
+    // model.addAttribute("searchVO", sVO);
+    // return "manage/qna/qnas";
+    // }
+
+    // @GetMapping("/manage/qna/qnas.do")
+    // public String searchOldQnas(Model model) {
+    // List<Map<String, Object>> oldQnas = qnaAdminService.searchOldQnas();
+    // model.addAttribute("oldQnas", oldQnas);
+    // return "manage/qna/qnas";
+    // } // 답변 완료된 문의사항 리스트 조회
 
     @GetMapping("/manage/qna/old_detail.do")
     public String searchOneOldQna(@RequestParam("qna_num") int qnaNum, Model model) {

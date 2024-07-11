@@ -40,13 +40,21 @@ public class QnaAdminDAO {
         return newDetail;
     }// 답변 대기 문의 상세 조회
 
-    public List<QnaDomain> selectOldQnas() {
+    public List<QnaDomain> selectOldQnas(SearchVO sVO) {
         SqlSession session = myBatis.getMyBatisHandler(false);
         List<QnaDomain> oldQnas = null;
-        oldQnas = session.selectList("kr.co.sist.qna.admin.selectOldQnas");
+        oldQnas = session.selectList("kr.co.sist.qna.admin.selectOldQnas", sVO);
         myBatis.closeHandler(session);
+        System.out.println("$$$$$$$$$$$$$$$" + oldQnas + "^^^^^^^^^^^" + sVO);
         return oldQnas;
     }// 답변 완료 문의 리스트 조회
+
+    public int countQnas() {
+        SqlSession session = myBatis.getMyBatisHandler(false);
+        int qnaCount = session.selectOne("kr.co.sist.qna.admin.countQnas");
+        myBatis.closeHandler(session);
+        return qnaCount;
+    }
 
     public QnaDomain selectOneOldQna(int qna_num) {
         SqlSession session = myBatis.getMyBatisHandler(false);

@@ -18,7 +18,7 @@ public class NoticeUserDAO {
         this.myBatis = myBatis;
     }
 
-    public List<NoticeUserDomain> selectNotices() {
+    public List<NoticeUserDomain> selectNotices() { // sVO
         SqlSession session = myBatis.getMyBatisHandler(false);
         List<NoticeUserDomain> noticeList =
                 session.selectList("kr.co.sist.notice.user.selectNotices");

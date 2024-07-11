@@ -14,7 +14,7 @@ import lombok.ToString;
 public class SearchVO {
     private String keyword;
 
-    private int currentPage; // 사용자가 현재 보고있는 페이지 번호
+    private int currentPage = 1; // 사용자가 현재 보고있는 페이지 번호
     private int itemsPerPage = 10; // 한 페이지에 표시할 항목의 수
     private int totalItems; // 전체 공지사항의 수
     private int totalPages; // 전체 페이지의 수 항목 수(항목 수와 페이지당 항목 수를 기반으로 계산)
