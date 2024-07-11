@@ -42,13 +42,13 @@
 	        });
 			
 			$("#devApplyBtn1").click(function(){
-		        var url = 'http://localhost/recruit-app/resumes.do?recruit=' + ${recruitNum};
+		        var url = 'http://localhost/recruit-app/resume/resumes.do?recruit=' + ${recruitNum};
 		        
 		        window.location.href = url;
 			});
 			
 			$("#devApplyBtn2").click(function(){
-		        var url = 'http://localhost/recruit-app/resumes.do?recruit=' + ${recruitNum};
+		        var url = 'http://localhost/recruit-app/resume/resumes.do?recruit=' + ${recruitNum};
 		        
 		        window.location.href = url;
 			});
