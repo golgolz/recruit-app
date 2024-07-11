@@ -114,8 +114,15 @@ public class AdminBasicController {
     }
 
     @GetMapping("/manage/logoutProcess.do")
-    public String logoutProcess() {
-        return "redirect:/manage/adminLogin/adminLoginPage.do";
+    public String logoutMessage(RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("resultMsg", "로그아웃 되었습니다.");
+
+        return "redirect:/manage/adminLogin/logoutProcess.do";
+    }
+
+    @GetMapping("/manage/adminLogin/logoutProcess.do")
+    public String logoutPage() {
+        return "manage/adminLogin/logoutProcess";
     }
 
     @GetMapping("/api/manage/admins.do")

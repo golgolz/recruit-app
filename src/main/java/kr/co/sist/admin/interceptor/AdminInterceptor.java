@@ -11,17 +11,20 @@ public class AdminInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
             Object handler) throws Exception {
-
-        boolean flag = false;
+        /*
+         * HttpSession session = request.getSession(false); if (session.getAttribute("userId") ==
+         * null) { response.sendRedirect(
+         * "http://localhost/recruit-app/manage/adminLogin/adminLoginPage.do"); return false; }
+         */
 
         Object adminId = WebUtils.getSessionAttribute(request, "adminId");
-        flag = adminId != null;
-        if (!flag) {
+        if (adminId == null) {
             response.sendRedirect(
                     "http://localhost/recruit-app/manage/adminLogin/adminLoginPage.do");
+            return false;
         } // end if
 
-        return flag;
+        return true;
     }
 
     @Override
