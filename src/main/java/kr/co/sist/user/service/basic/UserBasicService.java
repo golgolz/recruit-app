@@ -85,6 +85,12 @@ public class UserBasicService {
         return cnt;
     }
 
+    public String searchPassFlag(String userId) {
+        String passFlag = ubDAO.selectPassFlag(userId);
+
+        return passFlag;
+    }
+
     public String formatNumber(String phoneNumber) {
         // 전화번호 하이픈 추가
         String formatNum = phoneNumber.replaceFirst("(\\d{3})(\\d{3,4})(\\d{4})", "$1-$2-$3");

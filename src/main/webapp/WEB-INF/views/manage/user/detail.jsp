@@ -22,7 +22,7 @@
 <link href="http://localhost/recruit-app/assets/css/manage/goods/general.css" rel="stylesheet" />
 <link href="http://localhost/recruit-app/assets/css/manage/goods/goods.css" rel="stylesheet" />
 <link href="http://localhost/recruit-app/assets/css/manage/goods/default.css" rel="stylesheet" />
-
+<jsp:include page="../../assets/layout/admin/lib.jsp" />
 <style>
 .subtitle{
 	padding: 0px;
@@ -54,9 +54,90 @@
 #benefits li:hover{
 	background-color: #DDD;
 }
+.masked-data .original-data { display: none; }
+.masked-data:hover .original-data, .masked-data .reveal-button:active + .original-data { display: inline; }
+.masked-data:hover .masked-data-display, .masked-data .reveal-button:active + .masked-data-display { display: none; }
 </style>
+<script type="text/javascript">
+	$(function(){
+		
+		function applyMasking(elementId, dataType) {
+		    const $dataElement = $('#' + elementId);
+		    const originalData = $dataElement.text();
+		    const maskedData = maskData(originalData, dataType);
+
+		    $dataElement.empty().append(
+		      $('<span>')
+		        .addClass('masked-data')
+		        .attr('data-original', originalData)
+		        .attr('data-type', dataType)
+		        .text(maskedData)
+		    ).append(
+		      $('<button>')
+		        .addClass('masking-button')
+		        .text('👁️‍🗨️')
+		        .attr('type', 'button') 
+		        .click(function() {
+		          toggleMasking(this);
+		        })
+		    );
+		  }
+
+		  function toggleMasking(button) {
+		    var $maskedData = $(button).siblings('.masked-data');
+		    var originalData = $maskedData.attr('data-original');
+		    var dataType = $maskedData.attr('data-type');
+		    var currentData = $maskedData.text();
+
+		    if (currentData === maskData(originalData, dataType)) {
+		      $maskedData.text(originalData);
+		    } else {
+		      $maskedData.text(maskData(originalData, dataType));
+		    }
+		  }
+
+		  applyMasking('nameData', 'name');
+		  applyMasking('userIdData', 'email'); 
+		  applyMasking('phoneData', 'phone');
+		  applyMasking('telData', 'tel'); 
+		
+		function maskString(str, startLen = 2, endLen = 2) {
+            if (!str) return '';
+            const length = str.length;
+            const maskLen = Math.max(0, length - startLen - endLen); 
+            return str.substring(0, startLen) + '*'.repeat(maskLen) + str.substring(length - endLen);
+          }//function
+          
+          function maskData(data, type) {
+          	  if (!data) return '';
+
+          	  switch (type) {
+          	    case 'email':
+          	      return maskString(data, 2, 2);
+          	    case 'name':
+          	      return maskString(data, 1, 1);
+          	    case 'phone':
+          	      const matchPhone = data.match(/^(\d{3})-(\d{4})-(\d{4})$/);
+          	      if (matchPhone) {
+          	        return maskString(data, 4, 5); 
+          	      } else {
+          	        return maskString(data, 4, 5); 
+          	      }
+          	    case 'tel':
+          	      const matchTel = data.match(/^(\d{2})-(\d{3})-(\d{4})$/);
+          	      if (matchTel) {
+          	        return maskString(data, 3, 5); 
+          	      } else {
+          	        return maskString(data, 4, 5); 
+          	      }
+          	    default:
+          	      return data; 
+          	  }
+          	}//function
+		
+	});//ready
+</script>
 <!-- golgolz end -->
-<jsp:include page="../../assets/layout/admin/lib.jsp" />
 </head>
 <body>
 	<jsp:include page="../../assets/layout/admin/header.jsp" />
@@ -100,42 +181,32 @@
 							기본정보
 						</div>
 						<table class="tbstyleB" width="100%">
-							<colgroup>
-								<col width="15%" />
-								<col width="85%" />
-							</colgroup>
-							<tbody>
-								<tr>
-									<td class="label">회원명</td>
-									<td class="box text">
-										${ detailInfo.name }
-									</td>
-								</tr>
-								<tr>
-									<td class="label">성별</td>
-									<td class="box text">
-										${ detailInfo.gender }
-									</td>
-								</tr>
-								<tr>
-									<td class="label">아이디</td>
-									<td class="box text">
-										${ detailInfo.userId }
-									</td>
-								</tr>
-								<tr>
-									<td class="label">휴대폰번호</td>
-									<td class="box text">
-									${ detailInfo.phone }
-									</td>
-								</tr>
-								<tr>
-									<td class="label">전화번호</td>
-									<td class="box text">
-									${ detailInfo.tel }
-									</td>
-								</tr>
-							</tbody>
+						  <colgroup>
+							    <col width="15%" />
+						    <col width="85%" />
+						  </colgroup>
+						  <tbody>
+						    <tr>
+						      <td class="label">회원명</td>
+						      <td class="box text" id="nameData">${detailInfo.name}</td>
+						    </tr>
+						    <tr>
+						      <td class="label">성별</td>
+						      <td class="box text">${detailInfo.gender}</td>
+						    </tr>
+						    <tr>
+						      <td class="label">아이디</td>
+						      <td class="box text" id="userIdData">${detailInfo.userId}</td>
+						    </tr>
+						    <tr>
+						      <td class="label">휴대폰번호</td>
+						      <td class="box text" id="phoneData">${detailInfo.phone}</td>
+						    </tr>
+						    <tr>
+						      <td class="label">전화번호</td>
+						      <td class="box text" id="telData">${detailInfo.tel}</td>
+						    </tr>
+							  </tbody>
 						</table>
 						<div class="subtitle">
 							<img src="http://localhost/recruit-app/assets/images/manage/common/bul_subtitle.gif" />

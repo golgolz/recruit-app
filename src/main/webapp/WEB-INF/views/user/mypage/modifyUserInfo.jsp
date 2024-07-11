@@ -110,6 +110,9 @@
 			body.modal-open {
 		  		padding-right: 0 !important;
 			}
+			.Avatar_Avatar__bg__MRkK0:hover {
+			  cursor: pointer;
+			}
 		<!-- golgolz end -->
 	</style>
 	<script type="text/javascript">
@@ -245,28 +248,10 @@
 			            profileImage.src = e.target.result;
 			        };
 			        reader.readAsDataURL(file);
-			        
-			        //$("#uploadImg").val(file.name);
-
-			        // 서버로 이미지 업로드
-			        /* var formData = new FormData();
-			        formData.append('profileImage', file);
-			        fetch('/user/mypage/uploadProfileImage.do', { 
-			            method: 'POST',
-			            body: formData
-			        })
-			        .then(response => response.json())
-			        .then(data => {
-			        	alert('업로드 성공');
-			            // 업로드 성공 처리
-			        })
-			        .catch(error => {
-			            // 업로드 실패 처리
-			        	alert('업로드 실패');
-			        }); */
 			    }
 			});
 			
+
 			<!-- golgolz end -->
 		});
 	</script>
@@ -318,6 +303,7 @@
 								        src="http://localhost/recruit-app/assets/images/mypage/uploadImg/${ userInfo.profileImg }"
 								        class="Avatar_Avatar__img__kcubw"
 								        style="text-align: center;"
+								        title="프로필 이미지를 변경하려면 클릭하세요."
 								    />
 								    <input type="file"  multiple="multiple" name="uploadImg" id="imageUpload" style="display: none;" accept="image/*">
 								    <input type="hidden" id="profileImg" name="profileImg" value="${ userInfo.profileImg }">
