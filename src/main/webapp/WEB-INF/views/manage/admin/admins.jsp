@@ -264,7 +264,7 @@
 		            dataType: 'JSON',
 		            success: function(data) {
 		                populateTable(data);
-		                countAdminList(isFirst);
+		                countAdminList(searchVO);
 		                updatePagination();
 		                if(!(data && data.length > 0)){
 		                    $("#sodr_list tbody").html('<tr><td colspan="10" style="font-size: 16px; font-weight: bold;">검색 결과가 없습니다.</td></tr>');
@@ -320,6 +320,7 @@
 	                    async: false,
 	                    success: function(data) {
 	                    	totalPages = data;
+	                    	console.log(totalPages);
 	                    	$(".fc_all").text(JSON.stringify(data)); 
 	                    },
 	                    error: function(xhr, status, error) {
