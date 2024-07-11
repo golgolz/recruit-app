@@ -3,6 +3,7 @@ package kr.co.sist.admin.interceptor;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
@@ -16,6 +17,7 @@ public class UserAuthInterceptor implements HandlerInterceptor {
 
     private final AdminBasicService abs;
 
+    @Autowired
     public UserAuthInterceptor(AdminBasicService abs) {
         this.abs = abs;
     }

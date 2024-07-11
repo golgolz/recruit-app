@@ -19,7 +19,6 @@ public class NoticeAdminDAO {
         SqlSession ss=mbConfig.getMyBatisHandler(false);
         List<SearchVO> list= new ArrayList<SearchVO>();
         list=ss.selectList("kr.co.sist.admin.notice.selectAllNotice",sVO);
-        System.out.println("다오에서의 리스트==============="+list);
         mbConfig.closeHandler(ss);
         return list;
     }
