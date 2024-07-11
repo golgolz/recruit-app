@@ -5,23 +5,12 @@
   
 <mapper namespace="kr.co.sist.qna.admin">
   <select id="selectNewQnas" resultType="kr.co.sist.admin.domain.qna.QnaDomain">
-    <!-- select
-        row_number() over (order by input_date desc) as view_num,
-        qna_num,
-        category,
-        title,
-        content,
-        user_id,
-        input_date
-    from qna
-    where flag = '답변대기'
-    order by input_date desc -->
      <![CDATA[
-    SELECT *
-    FROM (
-        SELECT rownum rnum, q.*
-        FROM (
-            SELECT
+    select *
+    from (
+        select rownum rnum, q.*
+        from (
+            select
                 row_number() over (order by input_date desc) as view_num,
                 qna_num,
                 category,
@@ -29,13 +18,13 @@
                 content,
                 user_id,
                 input_date
-            FROM qna
-            WHERE flag = '답변대기'
-            ORDER BY input_date DESC
+            from qna
+            where flag = '답변대기'
+            order by input_date
         ) q
-        WHERE rownum <= #{endItemIndex}
+        where rownum <= #{endItemIndex}
     )
-    WHERE rnum >= #{startItemIndex}
+    where rnum >= #{startItemIndex}
     ]]>
   </select>
   
@@ -59,7 +48,7 @@
   </select>
   
   <select id="selectOldQnas" resultType="kr.co.sist.admin.domain.qna.QnaDomain">
-    select
+    <!-- select
         row_number() over (order by input_date desc) as view_num,
         qna_num,
         category,
@@ -67,8 +56,33 @@
         input_date
     from qna
     where flag = '답변완료'
-    order by input_date desc
+    order by input_date desc -->
+    <![CDATA[
+   select *
+    from (
+        select rownum rnum, q.*
+        from (
+            select
+                row_number() over (order by input_date desc) as view_num,
+                qna_num,
+                category,
+                title,
+                content,
+                user_id,
+                input_date
+            from qna
+            where flag = '답변완료'
+            order by input_date desc
+        ) q
+        where rownum <= #{endItemIndex, jdbcType=INTEGER}
+    )
+    where rnum >= #{startItemIndex, jdbcType=INTEGER}
+    ]]>
   </select>
+  
+  <select id="countQnas" resultType="int">
+    select count(*) from qna where flag = '답변완료'
+	</select>
   
   <select id="selectOneOldQna" resultType="kr.co.sist.admin.domain.qna.QnaDomain">
 	select 

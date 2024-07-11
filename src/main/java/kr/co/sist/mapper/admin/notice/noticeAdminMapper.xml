@@ -21,9 +21,11 @@
     <result property="updateDate" column="UPDATE_DATE" />
 </resultMap>
     <select id="selectAllNotice" resultMap="noticeResultMap">
-    	SELECT NOTICE_NUM, CATEGORY, TITLE, INPUT_DATE, CONTENT FROM NOTICE;
+    	SELECT NOTICE_NUM, CATEGORY, TITLE, TO_CHAR(INPUT_DATE,'YYYY-MM-DD') AS INPUT_DATE, CONTENT FROM NOTICE
     </select>
-    <select id="selectNotice" resultType="kr.co.sist.user.domain.NoticeAdminDomain" parameterType="String">
-    
+    <select id="selectNotice" resultMap="noticeResultMap" parameterType="String">
+    	SELECT NOTICE_NUM, CATEGORY, TITLE, TO_CHAR(INPUT_DATE,'YYYY-MM-DD') AS INPUT_DATE, CONTENT
+    	FROM NOTICE
+    	WHERE NOTICE_NUM = #{noticeNum}
     </select>
 </mapper>

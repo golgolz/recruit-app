@@ -50,6 +50,103 @@
 		<!-- golgolz end -->
 	</style>
 	<script text="text/javascript">
+	var filteredLanguageExamData = [
+		  {
+		    Lang_Code: "16",
+		    Lang_Name: "영어",
+		    Exams: [
+		      { Exam_Code: 1, Exam_Name: "TOEIC" },
+		      { Exam_Code: 28, Exam_Name: "TOEIC(Speaking)" },
+		      { Exam_Code: 77, Exam_Name: "TOEIC(Writing)" },
+		      { Exam_Code: 29, Exam_Name: "TOEIC Speaking and Writing Tests" },
+		      { Exam_Code: 2, Exam_Name: "TOEFL(PBT)" },
+		      { Exam_Code: 21, Exam_Name: "TOEFL(CBT)" },
+		      { Exam_Code: 24, Exam_Name: "TOEFL(iBT)" },
+		      { Exam_Code: 3, Exam_Name: "TEPS" },
+		      { Exam_Code: 14, Exam_Name: "IELTS" },
+		      { Exam_Code: 15, Exam_Name: "G-TELP(GLT)" },
+		      { Exam_Code: 16, Exam_Name: "G-TELP(GST)" },
+		      { Exam_Code: 75, Exam_Name: "G-TELP(GWT)" },
+		      { Exam_Code: 76, Exam_Name: "G-TELP(GBST)" },
+		      { Exam_Code: 17, Exam_Name: "SLEP" },
+		      { Exam_Code: 18, Exam_Name: "GRE" },
+		      { Exam_Code: 19, Exam_Name: "GMAT" },
+		      { Exam_Code: 23, Exam_Name: "PELT" },
+		      { Exam_Code: 30, Exam_Name: "OPIc" },
+		      { Exam_Code: 79, Exam_Name: "OPIc Listening&Reading" },
+		      { Exam_Code: 63, Exam_Name: "OPIc Writing" },
+		      { Exam_Code: 80, Exam_Name: "OPI" },
+		      { Exam_Code: 64, Exam_Name: "FLEX 영어" }
+		    ]
+		  },
+		  {
+		    Lang_Code: "20",
+		    Lang_Name: "일본어",
+		    Exams: [
+		      { Exam_Code: 4, Exam_Name: "JPT" },
+		      { Exam_Code: 13, Exam_Name: "JLPT" },
+		      { Exam_Code: 34, Exam_Name: "新JLPT" },
+		      { Exam_Code: 20, Exam_Name: "JTRA" },
+		      { Exam_Code: 27, Exam_Name: "NPT" },
+		      { Exam_Code: 37, Exam_Name: "SJPT" },
+		      { Exam_Code: 48, Exam_Name: "OPIc" },
+		      { Exam_Code: 67, Exam_Name: "FLEX 일본어" }
+		    ]
+		  },
+		  {
+		    Lang_Code: "21",
+		    Lang_Name: "중국어",
+		    Exams: [
+		      { Exam_Code: 8, Exam_Name: "HSK" },
+		      { Exam_Code: 32, Exam_Name: "新HSK" },
+		      { Exam_Code: 33, Exam_Name: "HSK회화" },
+		      { Exam_Code: 35, Exam_Name: "新HSK회화" },
+		      { Exam_Code: 36, Exam_Name: "TSC" },
+		      { Exam_Code: 38, Exam_Name: "OPIc" },
+		      { Exam_Code: 42, Exam_Name: "BCT" },
+		      { Exam_Code: 43, Exam_Name: "CPT" },
+		      { Exam_Code: 78, Exam_Name: "HSKK" },
+		      { Exam_Code: 81, Exam_Name: "OPI" },
+		      { Exam_Code: 49, Exam_Name: "新BCT(A)" },
+		      { Exam_Code: 50, Exam_Name: "新BCT(B)" },
+		      { Exam_Code: 51, Exam_Name: "新BCT(Speaking)" },
+		      { Exam_Code: 68, Exam_Name: "FLEX 중국어" }
+		    ]
+		  },
+		  {
+		    Lang_Code: "4",
+		    Lang_Name: "독일어",
+		    Exams: [
+		      { Exam_Code: 11, Exam_Name: "ZDAF" },
+		      { Exam_Code: 12, Exam_Name: "ZMP" },
+		      { Exam_Code: 7, Exam_Name: "GDS" },
+		      { Exam_Code: 9, Exam_Name: "KDS" },
+		      { Exam_Code: 52, Exam_Name: "DSH" },
+		      { Exam_Code: 53, Exam_Name: "FLEX 독일어" },
+		      { Exam_Code: 54, Exam_Name: "PWD" },
+		      { Exam_Code: 55, Exam_Name: "SD1" },
+		      { Exam_Code: 56, Exam_Name: "SD2" },
+		      { Exam_Code: 57, Exam_Name: "SNULT 독일어" },
+		      { Exam_Code: 58, Exam_Name: "TCT 번역능력인정시험 독일어" },
+		      { Exam_Code: 59, Exam_Name: "TestDaF" },
+		      { Exam_Code: 60, Exam_Name: "ZD" },
+		      { Exam_Code: 61, Exam_Name: "ZOP" },
+		      { Exam_Code: 62, Exam_Name: "관광통역안내사 독일어" },
+		      { Exam_Code: 83, Exam_Name: "OPI" }
+		    ]
+		  },
+		  {
+		    Lang_Code: "27",
+		    Lang_Name: "프랑스어",
+		    Exams: [
+		      { Exam_Code: 6, Exam_Name: "DELF" },
+		      { Exam_Code: 5, Exam_Name: "DALF" },
+		      { Exam_Code: 82, Exam_Name: "OPI" },
+		      { Exam_Code: 69, Exam_Name: "FLEX 프랑스어" }
+		    ]
+		  }
+		];
+	
 		$(function(){
 			<!-- golgolz start -->
 			//$('.chip[data-value="Vue.js"]').addClass("active"); // select before rendering
@@ -122,17 +219,14 @@
 		            method: 'GET',
 		            dataType: 'JSON',
 		            success: function(data) {
-		            	console.log(data);
 		            	updateTitle(data.title);
 		            	updateProfileForm(data);
 		            	updateSkills(data.subData.skills); 
 		            	updateCareer(data.subData.career);
+		            	updateLanguages(data.subData.languages);
 		            	updateCertifications(data.subData.certifications);
 		            	updateIntroduction(data.introduce);
-		            	
-		            	if (data.subData && data.subData.education) {
-		                    updateEducation(data.subData.education);
-		                }
+		                updateEducation(data.subData.education);
 		            },
 		            error: function(xhr, status, error) {
 		                console.error("Error fetching data: " + error);
@@ -177,6 +271,10 @@
 		}
 		
 		function updateSkills(skills) {
+			if(skills == null){
+				return;
+			}
+			
 		    $('.chip').removeClass('active');
 		    skills.forEach(function(skill) {
 		        $('.chip[data-value="' + skill.skill_name + '"]').addClass('active');
@@ -222,6 +320,10 @@
 		}
 		
 		function updateEducation(educationData) {
+			if(educationData == null){
+				return;
+			}
+			
 			$('#school_containers').empty();
 		    
 		    var gradStateMap = {
@@ -352,6 +454,10 @@
 		}
 		
 		function updateCertifications(certificationData) {
+			if(certificationData == null){
+				return;
+			}
+			
 		    $('#license_containers').empty();
 
 		    certificationData.forEach(function(cert, index) {
@@ -381,6 +487,10 @@
 		}
 		
 		function updateCareer(careerData) {
+			if(careerData == null){
+				return;
+			}
+			
 		    $('#career_containers').empty();
 		    
 		    careerData.forEach(function(career, index) {
@@ -409,11 +519,121 @@
 		    });
 		}
 		
-		function updateLanguages(languageData){
+		function updateLanguages(languageData) {
+			if(languageData == null){
+				return;
+			}
 			
+		    var $container = $('#language_containers');
+		    
+		    if ($container.length === 0) {
+		        return;
+		    }
+
+		    $container.html('');
+
+		    var $template = $('#tplLanguageItem');
+		    if ($template.length === 0) {
+		        console.error("Error: Template #tplLanguageItem not found");
+		        return;
+		    }
+
+		    var templateHtml = $template.html();
+
+		    languageData.forEach(function(lang, index) {
+		        var newItemHtml = templateHtml.replace(/c508/g, 'c' + (index + 1));
+		        var $newLangItem = $(newItemHtml);
+		        
+		        var categoryValue = lang.category === "회화능력" ? "1" : "2";
+		        $newLangItem.find('[name$="Eval_Category"]').val(categoryValue);
+		        $newLangItem.find('.dropdown-category .buttonChoose span').text(lang.category);
+		        $newLangItem.find('.dropdown-category').addClass('selected');
+		        $newLangItem.find('.dropdown-category .label').attr('aria-hidden', 'false').removeClass('hidden');
+
+		        var langCode = getLanguageCode(lang.language);
+		        $newLangItem.find('[name$="Lang1_Name"]').val(langCode);
+		        $newLangItem.find('.dropdown-language-name .buttonChoose span').text(lang.language);
+		        $newLangItem.find('.dropdown-language-name').addClass('selected');
+		        $newLangItem.find('.dropdown-language-name .label').attr('aria-hidden', 'false').removeClass('hidden');
+
+		        if (lang.category === "회화능력") {
+		            $newLangItem.find('.devConversationArea').show();
+		            $newLangItem.find('.devExamArea').hide();
+
+		            var conversationLevelValue = getConversationLevelValue(lang.lang_level);
+		            $newLangItem.find('[name$="Lang1_Stat"]').val(conversationLevelValue);
+		            $newLangItem.find('.devConversationArea .buttonChoose span').text(lang.lang_level);
+		            $newLangItem.find('.devConversationArea .dropdown-language-grade').addClass('selected');
+		            $newLangItem.find('.devConversationArea .dropdown-language-grade .label').attr('aria-hidden', 'false').removeClass('hidden');
+		        } else if (lang.category === "공인시험") {
+		            $newLangItem.find('.devExamArea').show();
+		            $newLangItem.find('.devConversationArea').hide();
+
+		            var examList = getExamListByLanguage(langCode);
+		            var $examListContainer = $newLangItem.find('.devExamDropdown .list ul');
+		            $examListContainer.empty();
+		            examList.forEach(function(exam) {
+		                $examListContainer.append('<li><button type="button" class="button" data-value="' + exam.Exam_Code + '"><span>' + exam.Exam_Name + '</span></button></li>');
+		            });
+
+		            var examInfo = getExamInfo(langCode, lang.test_name);
+		            $newLangItem.find('[name$="Test1_Name"]').val(examInfo.Exam_Code);
+		            $newLangItem.find('.devExamDropdown .buttonChoose span').text(lang.test_name);
+		            $newLangItem.find('.devExamDropdown').addClass('selected').css({
+		                'display': 'inline-block',
+		                'margin-right': '10px'
+		            });
+		            $newLangItem.find('.devExamDropdown .label').attr('aria-hidden', 'false').removeClass('hidden');
+		            $newLangItem.find('.devExamInput').remove();
+		            $newLangItem.find('.devExamGradeInput').addClass('is-value').show().css({
+		                'display': 'inline-block',
+		                'margin-right': '10px'
+		            });
+		            $newLangItem.find('.devExamGradeInput input').val(lang.lang_level);
+		            $newLangItem.find('.devExamGradeDropdown').hide();
+		            $newLangItem.find('.devExamGradeDropdown input').attr('disabled', 'disabled');
+		            $newLangItem.find('[name$="Test_YYMM"]').val(lang.aquisition_date);
+		            $newLangItem.find('.input-passdate').addClass('is-value').css({
+		                'display': 'inline-block'
+		            });
+		        }
+		        $container.append($newLangItem);
+		    });
 		}
+		
+		function getExamListByLanguage(langCode) {
+		    var language = filteredLanguageExamData.find(lang => lang.Lang_Code === langCode);
+		    return language ? language.Exams : [];
+		}
+		
+	    function getLanguageCode(languageName) {
+	        var language = filteredLanguageExamData.find(lang => lang.Lang_Name === languageName);
+	        return language ? language.Lang_Code : "";
+	    }
+
+	    function getConversationLevelValue(level) {
+	        var levels = {
+	            "일상회화 가능": "1",
+	            "비즈니스 회화가능": "2",
+	            "원어민 수준": "3"
+	        };
+	        return levels[level] || "";
+	    }
+
+	    function getExamInfo(langCode, examName) {
+	        var language = filteredLanguageExamData.find(lang => lang.Lang_Code === langCode);
+	        if (language) {
+	            var exam = language.Exams.find(exam => exam.Exam_Name === examName);
+	            return exam || { Exam_Code: "", Exam_Name: examName };
+	        }
+	        return { Exam_Code: "", Exam_Name: examName };
+	    }
 
 		function updateIntroduction(introductionData){
+			if(introductionData == null){
+				return;
+			}
+			
 			$("#ResumeProfile_Contents_").html(introductionData);
 		}
 		/* 수정 삭제를 위한 js functions end */
