@@ -3,6 +3,7 @@ package kr.co.sist.admin.interceptor;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
@@ -15,6 +16,7 @@ import kr.co.sist.admin.service.basic.AdminBasicService;
 public class ReviewAuthInterceptor implements HandlerInterceptor {
     private final AdminBasicService abs;
 
+    @Autowired
     public ReviewAuthInterceptor(AdminBasicService abs) {
         this.abs = abs;
     }
