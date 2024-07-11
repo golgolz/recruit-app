@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" info=""%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,21 +46,24 @@
 			<!-- golgolz start -->
 			<div>
 				<div class="loungeContent noticeViewContent" id="notice_detail_view">
+				<c:if test="${not empty requestScope.noticeDetail}">
+                    <c:set var="noticeDetail" value="${requestScope.noticeDetail[0]}" />
+                </c:if>
 			        <div class="noticeViewWrap">
 			            <p class="noticeTit">
-			                <span style="font-size:15px">일반공지</span>
-			                <span style="margin-left:20px; color:#000000; font-size:15px">[시스템 점검 공지] 3/28(목) AM 01시-05시</span>
-			                <span style="margin-left: auto">2020.02.03</span>
+			                <span style="font-size:15px"><c:out value="${noticeDetail.category}" /></span>
+			                <span style="margin-left:20px; color:#000000; font-size:15px"><c:out value="${noticeDetail.title}" /></span>
+			                <span style="margin-left: auto"><c:out value="${noticeDetail.inputDate}" /></span>
 			            </p>
 			            <div class="noticeView">
 			                <!--// 공지사항 내용 -->
-			                        <p>안녕하세요. 잡코리아 운영자입니다. 더욱 좋은 서비스로 보답할 수 있도록 노력하겠습니다.</p>
+			                        <p><c:out value="${noticeDetail.content}" /></p>
 			                <!-- 공지사항 내용 //-->
 			            </div>
 			            <div>
 			                <input type="button" class="btn btn-outline-dark btn-sm detail-control" value="뒤로" onclick="location.href='http://localhost/recruit-app/manage/notice/notices.do'">
-			                <input type="button" class="btn btn-outline-warning btn-sm" value="수정" onclick="location.href='http://localhost/recruit-app/manage/notice/noticesUpdate.do'">
-			                <input type="button" class="btn btn-outline-danger btn-sm" value="삭제" onclick="location.href='http://localhost/recruit-app/manage/notice/notices.do'">
+			                <input type="button" class="btn btn-outline-warning btn-sm" value="수정" onclick="location.href='http://localhost/recruit-app/manage/notice/noticesUpdate.do?noticeNum=${noticeDetail.noticeNum}'">
+			                <input type="button" class="btn btn-outline-danger btn-sm" value="삭제" onclick="location.href='http://localhost/recruit-app/manage/notice/noticesDelete.do'">
 			            </div>
 			        </div>
 			    </div>

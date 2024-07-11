@@ -1,6 +1,5 @@
 package kr.co.sist.admin.vo.notice;
 
-import java.sql.Date;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +13,5 @@ import lombok.ToString;
 @ToString
 public class NoticeAdminVO {
     private int noticeNum, views;
-    private String category, title, content, adminId, modifier, blindFlag;
-    private Date inputDate, updateDate;
+    private String category, title, content, adminId, modifier, blindFlag, inputDate, updateDate;
 }

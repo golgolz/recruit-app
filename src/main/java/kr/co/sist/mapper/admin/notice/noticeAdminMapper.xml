@@ -15,17 +15,34 @@
     <result property="adminId" column="ADMIN_ID" />
     <result property="noticeNum" column="NOTICE_NUM" />
     <result property="modifier" column="MODIFIER" />
-    <result property="views" column="VIEWS" />
-    <result property="blindFlag" column="BLIND_FLAG" />
     <result property="inputDate" column="INPUT_DATE" />
     <result property="updateDate" column="UPDATE_DATE" />
+    <result property="views" column="VIEWS" />
+    <result property="blindFlag" column="BLIND_FLAG" />
 </resultMap>
     <select id="selectAllNotice" resultMap="noticeResultMap">
     	SELECT NOTICE_NUM, CATEGORY, TITLE, TO_CHAR(INPUT_DATE,'YYYY-MM-DD') AS INPUT_DATE, CONTENT FROM NOTICE
     </select>
-    <select id="selectNotice" resultMap="noticeResultMap" parameterType="String">
+    <select id="selectNoticeDetail" resultMap="noticeResultMap" parameterType="int">
     	SELECT NOTICE_NUM, CATEGORY, TITLE, TO_CHAR(INPUT_DATE,'YYYY-MM-DD') AS INPUT_DATE, CONTENT
     	FROM NOTICE
     	WHERE NOTICE_NUM = #{noticeNum}
     </select>
+    <select id="lastNoticeNum" resultType="int">
+    	SELECT NOTICE_NUM
+    	FROM NOTICE
+    	WHERE ROWNUM=1
+    	ORDER BY NOTICE_NUM DESC
+    </select>
+    <insert id="insertNotice" parameterType="kr.co.sist.admin.vo.notice.SearchVO">
+    	INSERT INTO NOTICE(NOTICE_NUM, CATEGORY, TITLE, CONTENT, ADMIN_ID, MODIFIER, INPUT_DATE, UPDATE_DATE, BLIND_FLAG)
+		VALUES(#{noticeNum},#{category},#{title},#{content},#{adminId},#{modifier},SYSDATE,SYSDATE,#{blindFlag})
+    </insert>
+    <update id="updateNotice" parameterType="kr.co.sist.admin.vo.notice.SearchVO">
+    	UPDATE NOTICE
+    	SET CATEGORY=#{companyName},
+    		TITLE=#{businessNumber},
+    		CONTENT=#{headcount},
+		WHERE NOTICE_NUM=#{ noticeNum }
+    </update>
 </mapper>

@@ -129,9 +129,8 @@ public class CompanyinfoAdminController {
         String uploadLogoPath = "C:/dev/recruit-app/src/main/webapp/assets/images/company/logo";
 
         File logoDir = new File(uploadLogoPath);
-        //��ΰ� ���� �� ���ܸ� ������.
         if (!logoDir.exists()) {
-            throw new IOException("ã���� ���� ����Դϴ�");
+            throw new IOException("찾을 수 없는 경로입니다.");
         }
         
         int maxSize = 100 * 1024 * 1024; // 100MB
@@ -143,7 +142,7 @@ public class CompanyinfoAdminController {
         String existingMainImg = mrLogo.getParameter("existLogo");
         String existingSubImg = mrLogo.getParameter("existImg");
         
-        //���� ����� �̹����� ������� ���� �̹����� ��ü
+      //새로 등록한 이미지가 없을경우 본래 이미지로 대체
         if(mainImg == null && existingMainImg != null) {
              mainImg = existingMainImg;
          }
