@@ -219,7 +219,6 @@
 		            method: 'GET',
 		            dataType: 'JSON',
 		            success: function(data) {
-		            	console.log(data);
 		            	updateTitle(data.title);
 		            	updateProfileForm(data);
 		            	updateSkills(data.subData.skills); 
@@ -227,10 +226,7 @@
 		            	updateLanguages(data.subData.languages);
 		            	updateCertifications(data.subData.certifications);
 		            	updateIntroduction(data.introduce);
-		            	
-		            	if (data.subData && data.subData.education) {
-		                    updateEducation(data.subData.education);
-		                }
+		                updateEducation(data.subData.education);
 		            },
 		            error: function(xhr, status, error) {
 		                console.error("Error fetching data: " + error);
@@ -275,6 +271,10 @@
 		}
 		
 		function updateSkills(skills) {
+			if(skills == null){
+				return;
+			}
+			
 		    $('.chip').removeClass('active');
 		    skills.forEach(function(skill) {
 		        $('.chip[data-value="' + skill.skill_name + '"]').addClass('active');
@@ -320,6 +320,10 @@
 		}
 		
 		function updateEducation(educationData) {
+			if(educationData == null){
+				return;
+			}
+			
 			$('#school_containers').empty();
 		    
 		    var gradStateMap = {
@@ -450,6 +454,10 @@
 		}
 		
 		function updateCertifications(certificationData) {
+			if(certificationData == null){
+				return;
+			}
+			
 		    $('#license_containers').empty();
 
 		    certificationData.forEach(function(cert, index) {
@@ -479,6 +487,10 @@
 		}
 		
 		function updateCareer(careerData) {
+			if(careerData == null){
+				return;
+			}
+			
 		    $('#career_containers').empty();
 		    
 		    careerData.forEach(function(career, index) {
@@ -508,16 +520,17 @@
 		}
 		
 		function updateLanguages(languageData) {
-			console.log("Updating language UI with data:", languageData);
+			if(languageData == null){
+				return;
+			}
+			
 		    var $container = $('#language_containers');
 		    
 		    if ($container.length === 0) {
-		        console.error("Error: #language_containers not found in the DOM");
 		        return;
 		    }
 
 		    $container.html('');
-		    console.log("Container cleared. Current content:", $container.html());
 
 		    var $template = $('#tplLanguageItem');
 		    if ($template.length === 0) {
@@ -526,22 +539,17 @@
 		    }
 
 		    var templateHtml = $template.html();
-		    console.log("Template HTML:", templateHtml);
 
 		    languageData.forEach(function(lang, index) {
-		        console.log("Processing language item:", lang);
-		        
 		        var newItemHtml = templateHtml.replace(/c508/g, 'c' + (index + 1));
 		        var $newLangItem = $(newItemHtml);
 		        
-		        // 구분(category) 설정
 		        var categoryValue = lang.category === "회화능력" ? "1" : "2";
 		        $newLangItem.find('[name$="Eval_Category"]').val(categoryValue);
 		        $newLangItem.find('.dropdown-category .buttonChoose span').text(lang.category);
 		        $newLangItem.find('.dropdown-category').addClass('selected');
 		        $newLangItem.find('.dropdown-category .label').attr('aria-hidden', 'false').removeClass('hidden');
 
-		        // 외국어명 설정
 		        var langCode = getLanguageCode(lang.language);
 		        $newLangItem.find('[name$="Lang1_Name"]').val(langCode);
 		        $newLangItem.find('.dropdown-language-name .buttonChoose span').text(lang.language);
@@ -561,7 +569,6 @@
 		            $newLangItem.find('.devExamArea').show();
 		            $newLangItem.find('.devConversationArea').hide();
 
-		            // 공인시험 리스트 생성
 		            var examList = getExamListByLanguage(langCode);
 		            var $examListContainer = $newLangItem.find('.devExamDropdown .list ul');
 		            $examListContainer.empty();
@@ -569,7 +576,6 @@
 		                $examListContainer.append('<li><button type="button" class="button" data-value="' + exam.Exam_Code + '"><span>' + exam.Exam_Name + '</span></button></li>');
 		            });
 
-		            // 공인시험명 설정
 		            var examInfo = getExamInfo(langCode, lang.test_name);
 		            $newLangItem.find('[name$="Test1_Name"]').val(examInfo.Exam_Code);
 		            $newLangItem.find('.devExamDropdown .buttonChoose span').text(lang.test_name);
@@ -578,32 +584,21 @@
 		                'margin-right': '10px'
 		            });
 		            $newLangItem.find('.devExamDropdown .label').attr('aria-hidden', 'false').removeClass('hidden');
-
-		            // devExamInput 제거
 		            $newLangItem.find('.devExamInput').remove();
-
-		            // 점수 설정
 		            $newLangItem.find('.devExamGradeInput').addClass('is-value').show().css({
 		                'display': 'inline-block',
 		                'margin-right': '10px'
 		            });
 		            $newLangItem.find('.devExamGradeInput input').val(lang.lang_level);
-		            
 		            $newLangItem.find('.devExamGradeDropdown').hide();
 		            $newLangItem.find('.devExamGradeDropdown input').attr('disabled', 'disabled');
-
-		            // 취득년월 설정
 		            $newLangItem.find('[name$="Test_YYMM"]').val(lang.aquisition_date);
 		            $newLangItem.find('.input-passdate').addClass('is-value').css({
 		                'display': 'inline-block'
 		            });
 		        }
-
-		        console.log("Appending new language item to container");
 		        $container.append($newLangItem);
 		    });
-
-		    console.log("Language UI update complete. Final container content:", $container.html());
 		}
 		
 		function getExamListByLanguage(langCode) {
@@ -635,6 +630,10 @@
 	    }
 
 		function updateIntroduction(introductionData){
+			if(introductionData == null){
+				return;
+			}
+			
 			$("#ResumeProfile_Contents_").html(introductionData);
 		}
 		/* 수정 삭제를 위한 js functions end */
