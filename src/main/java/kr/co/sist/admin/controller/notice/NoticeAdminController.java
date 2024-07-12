@@ -43,6 +43,16 @@ public class NoticeAdminController {
         
         return "manage/notice/notices_write";
     }
+    @GetMapping("/manage/notice/noticesUpdatePage.do")
+    public String updateNoticePage(int noticeNum, HttpSession session, Model model) {
+        List<SearchVO> list=noticeAdminService.searchNoticeDetail(noticeNum);
+        
+        session.setAttribute("noticeNum", noticeNum);
+        
+        model.addAttribute("noticeDetail",list);
+        
+        return "manage/notice/notices_update";
+    }
     @PostMapping("/manage/notice/noticesInsert.do")
     public String insertNotice(NoticeAdminVO nVO, HttpServletRequest request) throws IOException {
         int nextNoticeNum=noticeAdminService.searchNextNoticeNum();
@@ -75,12 +85,27 @@ public class NoticeAdminController {
 
         return "redirect:/manage/notice/notices.do";
     }
-    @GetMapping("/manage/notice/noticesUpdate.do")
-    public String updateNotice(Model model) {
-        return "manage/notice/notices_update";
+    @PostMapping("/manage/notice/noticesUpdate.do")
+    public String updateNotice(NoticeAdminVO nVO, HttpServletRequest request, Model model) throws IOException {
+        int noticeNum= Integer.parseInt(request.getParameter("category"));
+        String category= request.getParameter("category");
+        String title = request.getParameter("title");
+        String content = request.getParameter("content");
+        String updateDate = request.getParameter("hidUpdateDate");
+        
+        nVO.setNoticeNum(noticeNum);
+        nVO.setCategory(category);
+        nVO.setTitle(title);
+        nVO.setContent(content);
+        nVO.setUpdateDate(updateDate);
+        
+        noticeAdminService.updateNoticeNum(nVO);
+        
+        return "redirect:/manage/notice/noticesDetail.do";
     }
     @GetMapping("/manage/notice/noticesDelete.do")
     public String deleteNotice(Model model) {
+        
         return "";
     }
     

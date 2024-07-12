@@ -11,6 +11,7 @@
 	$(function(){
 		$("#notice_menu").addClass("bg-gradient-primary");
 	});
+	
 </script>
 <style>
 	.noticeViewWrap{
@@ -45,6 +46,7 @@
 		<div class="container-fluid py-4">
 			<!-- golgolz start -->
 			<div>
+			
 				<div class="loungeContent noticeViewContent" id="notice_detail_view">
 				<c:if test="${not empty requestScope.noticeDetail}">
                     <c:set var="noticeDetail" value="${requestScope.noticeDetail[0]}" />
@@ -62,11 +64,12 @@
 			            </div>
 			            <div>
 			                <input type="button" class="btn btn-outline-dark btn-sm detail-control" value="뒤로" onclick="location.href='http://localhost/recruit-app/manage/notice/notices.do'">
-			                <input type="button" class="btn btn-outline-warning btn-sm" value="수정" onclick="location.href='http://localhost/recruit-app/manage/notice/noticesUpdate.do?noticeNum=${noticeDetail.noticeNum}'">
-			                <input type="button" class="btn btn-outline-danger btn-sm" value="삭제" onclick="location.href='http://localhost/recruit-app/manage/notice/noticesDelete.do'">
+			                <input type="button" class="btn btn-outline-warning btn-sm" value="수정" onclick="location.href='http://localhost/recruit-app/manage/notice/noticesUpdatePage.do?noticeNum=${noticeDetail.noticeNum}'">
+			                <input type="button" class="btn btn-outline-danger btn-sm" value="삭제" onclick="location.href='http://localhost/recruit-app/manage/notice/noticesDelete.do?noticeNum=${noticeDetail.noticeNum}'">
 			            </div>
 			        </div>
 			    </div>
+	        </form>
 			</div>
 			<!-- golgolz end -->
 		</div>

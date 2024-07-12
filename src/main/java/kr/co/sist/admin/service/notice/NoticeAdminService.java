@@ -42,19 +42,32 @@ public class NoticeAdminService {
         }
         return result;
     }
+
+    public boolean updateNoticeNum(NoticeAdminVO nVO) {
+        boolean result=false;
+        int i=0;
+        i=noticeAdminDAO.updateNotice(nVO);
+        if(i==0) {
+            result=false;
+        }else {
+            result=true;
+        }        
+        return result;
+    }
     
     public int searchNextNoticeNum() {
 
         int nextNoticeNum=0;
-            int lastNoticeNum = noticeAdminDAO.selectLastNoticeNum();
-            System.out.println("=================lastnoticenum: "+lastNoticeNum);
-            lastNoticeNum++;
-            nextNoticeNum=lastNoticeNum;
+        int lastNoticeNum = noticeAdminDAO.selectLastNoticeNum();
+        System.out.println("=================lastnoticenum: "+lastNoticeNum);
+        lastNoticeNum++;
+        nextNoticeNum=lastNoticeNum;
 
         System.out.println("=================service의 공지사항번호: "+nextNoticeNum);
         
         return nextNoticeNum;
           
     }
+
 
 }

@@ -42,6 +42,15 @@ public class NoticeAdminDAO {
         return result;
     }
     
+    public int updateNotice(NoticeAdminVO nVO) {
+        int result=0;
+        SqlSession ss = mbConfig.getMyBatisHandler(true);
+        ss.insert("kr.co.sist.admin.notice.insertNotice", nVO);
+        mbConfig.closeHandler(ss);
+        
+        return result;
+    }
+    
     public int selectLastNoticeNum() throws PersistenceException {
         
         int lastNoticeNum=0;

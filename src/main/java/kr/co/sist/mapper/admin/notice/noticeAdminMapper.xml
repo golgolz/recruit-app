@@ -40,9 +40,14 @@
     </insert>
     <update id="updateNotice" parameterType="kr.co.sist.admin.vo.notice.SearchVO">
     	UPDATE NOTICE
-    	SET CATEGORY=#{companyName},
-    		TITLE=#{businessNumber},
-    		CONTENT=#{headcount},
+    	SET CATEGORY=#{category},
+    		TITLE=#{title},
+    		CONTENT=#{content},
+    		UPDATE_DATE=SYSDATE,
 		WHERE NOTICE_NUM=#{ noticeNum }
     </update>
+    <delete id="deleteNotice" parameterType="int">
+    	DELETE FROM NOTICE
+		WHERE NOTICE_NUM=#{noticeNum}
+    </delete>
 </mapper>
