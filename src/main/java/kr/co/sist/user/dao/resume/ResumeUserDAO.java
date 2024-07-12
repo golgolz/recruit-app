@@ -5,10 +5,10 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import kr.co.sist.admin.domain.resume.ResumeDomain;
 import kr.co.sist.properties.MyBatisConfig;
 import kr.co.sist.user.domain.resume.ResumeListDomain;
 import kr.co.sist.user.vo.resume.ApplyVO;
+import kr.co.sist.user.vo.resume.ResumeVO;
 
 @Component
 public class ResumeUserDAO {
@@ -28,10 +28,13 @@ public class ResumeUserDAO {
         return resumes;
     }
 
-    public ResumeDomain selectResume() {
-        ResumeDomain resume = null;
+    public int selectResumeCount(String userId) {
+        SqlSession session = myBatis.getMyBatisHandler(false);
 
-        return resume;
+        int result = session.selectOne("kr.co.sist.resume.user.countResumesPerUser", userId);
+        myBatis.closeHandler(session);
+
+        return result;
     }
 
     public int insertApply(ApplyVO apply) {
@@ -47,5 +50,15 @@ public class ResumeUserDAO {
         myBatis.closeHandler(session);
 
         return result;
+    }
+
+    public int insertResume(ResumeVO resumeVO) {
+        SqlSession session = myBatis.getMyBatisHandler(false);
+        myBatis.closeHandler(session);
+        return 0;
+    }
+
+    public int updateResume(ResumeVO resumeVO) {
+        return 0;
     }
 }
