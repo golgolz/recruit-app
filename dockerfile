@@ -18,5 +18,5 @@ COPY --from=build /app/target/recruit-app-0.0.1-SNAPSHOT.war ./recruit-app.war
 EXPOSE 8080
 EXPOSE 1521
 EXPOSE 80
-#CMD [ "catalina.sh","run" ]
-CMD ["tail", "-f", "/dev/null"]
+CMD [ "catalina.sh","run" ]
+#CMD ["tail", "-f", "/dev/null"]
