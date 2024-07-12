@@ -240,11 +240,36 @@
 			$("#registerBtn").click(function(){
 				let resumeData = createResumeData();
 				console.log(resumeData);
+				$.ajax({
+					url: "${pageContext.request.contextPath}/api/resume.do",
+					method: "POST",
+					dataType: "JSON",
+					data: resumeData,
+					success: function(data){
+						console.log("success");
+					},
+					error: function(xhr, status, error){
+						console.log("fail");
+					}
+				});
 			});
 			
 			$("#updateBtn").click(function(){
 				let resumeData = createResumeData();
 				console.log(resumeData);
+				console.log(JSON.stringify(resumeData));
+				$.ajax({
+					url: "${pageContext.request.contextPath}/api/resume.do",
+					type: "POST",
+			        contentType: "application/json; charset=utf-8",
+			        data: JSON.stringify(resumeData),
+					success: function(data){
+						console.log("success");
+					},
+					error: function(xhr, status, error){
+						console.log("fail");
+					}
+				});
 			});
 			
 			$("#removeBtn").click(function(){
@@ -665,73 +690,97 @@
 		    return parseInt(str.replace(/,/g, ''), 10);
 		}
 		
-		function createResumeData(){
-			return {
-				owner: $('#UserInfo_M_Name').val(),
-	            email: $('#UserInfo_M_Email').val(),
-	            title: $('#UserResume_M_Resume_Title').val(),
-	            profile: "profile_1.png",
-	            birth: formatDate($('#UserInfo_M_Born').val()),
-	            gender: $('#genderSelect').val(),
-	            tel: $('input[name="UserInfo.M_Hand_Phone"]').eq(0).val(),
-	            phone: $('input[name="UserInfo.M_Hand_Phone"]').eq(1).val(),
-	            addr: $('#sido1').val() + ' ' + $('#gugun1').val(),
-	            introduce: $('.textarea-introduction textarea').val(),
-	            modifyDate: new Date().toISOString().split('T')[0],
-	            subData: {
-	                skills: $('.chip.active').map(function() {
-	                    return { skill_name: $(this).data('value') };
-	                }).get(),
-	                education: $('.formWrapEducation .container').map(function() {
-	                    return {
-	                        school_classification: $(this).find('[name$="Mstr_Dctr_Type_Code"]').val(),
-	                        school_name: $(this).find('[name$="Schl_Name"]').val(),
-	                        admission_date: formatDate($(this).find('[name$="Entc_YM"]').val()),
-	                        graduation_date: formatDate($(this).find('[name$="Grad_YM"]').val()),
-	                        graduation_state: $(this).find('.dropdown-edcation-state .button.buttonChoose span').text(),
-	                        major: $(this).find('[id^="univmajor_"]').val(),
-	                        grades: parseFloat($(this).find('[name$="Grade"]').val()),
-	                        total_score: parseFloat($(this).find('[name$="Grade_Prft_Scr"]').val())
-	                    };
-	                }).get(),
-	                career: $('.formWrapCareer .container').map(function() {
-	                    return {
-	                        company_name: $(this).find('[id^="Career_C_Name_"]').val(),
-	                        dname: $(this).find('[id^="Career_C_Part_"]').val(),
-	                        join_date: formatDate($(this).find('[id^="Career_CSYM_"]').val()),
-	                        resignation_date: formatDate($(this).find('[id^="Career_CEYM_"]').val()),
-	                        job_description: $(this).find('.textarea-career').val(),
-	                        position: $(this).find('[name="position_field"]').val(),
-	                        sal: removeCommasAndParseInt($(this).find('[id^="Career_M_MainPay_User_"]').val())
-	                    };
-	                }).get(),
-	                certifications: $('.formWrapCertificate .container').map(function() {
-	                    return {
-	                        certificate_name: $(this).find('[id^="License_Search_"]').val(),
-	                        publisher: $(this).find('[id^="License_Lc_Pub_"]').val(),
-	                        acquisition_date: formatDate($(this).find('[id^="License_Lc_YYMM_"]').val())
-	                    };
-	                }).get(),
-	                languages: $('.formWrapLanguage .container').map(function() {
-	                    var $container = $(this);
-	                    var evalCategory = $container.find('[id^="Language_Eval_Category_"]').val();
-	                    var isConversation = evalCategory === '1';
+		function createResumeData() {
+		    const mainData = {
+		        owner: $('#UserInfo_M_Name').val(),
+		        email: $('#UserInfo_M_Email').val(),
+		        title: $('#UserResume_M_Resume_Title').val(),
+		        profile: "profile_1.png",
+		        birth: formatDate($('#UserInfo_M_Born').val()),
+		        gender: $('#genderSelect').val(),
+		        tel: $('input[name="UserInfo.M_Hand_Phone"]').eq(0).val(),
+		        phone: $('input[name="UserInfo.M_Hand_Phone"]').eq(1).val(),
+		        addr: ($('#sido1').val() + ' ' + $('#gugun1').val()).trim(),
+		        introduce: $('.textarea-introduction textarea').val(),
+		        modifyDate: new Date().toISOString().split('T')[0]
+		    };
 
-	                    return {
-	                        language: $container.find('.dropdown-language-name .button.buttonChoose > span').text().trim(),
-	                        test_name: isConversation 
-	                            ? null 
-	                            : $container.find('.devExamDropdown .button.buttonChoose > span').text().trim(),
-	                        lang_level: isConversation 
-	                            ? $container.find('.devConversationArea .dropdown-language-grade .button.buttonChoose > span').text().trim()
-	                            : $container.find('.devExamArea [id^="Language_Test1_Point_I_"]').val(),
-	                        category: isConversation ? '회화능력' : '공인시험',
-	                        aquisition_date: formatDate($container.find('[id^="Language_Test_YYMM_"]').val())
-	                    };
-	                }).get()
-	            }
-			};
+		    const subData = {
+		        skills: $('.chip.active').map(function() {
+		            return { skill_name: $(this).data('value') };
+		        }).get(),
+		        education: $('.formWrapEducation .container').map(function() {
+		            const $this = $(this);
+		            return {
+		                school_classification: $this.find('[name$="Mstr_Dctr_Type_Code"]').val(),
+		                school_name: $this.find('[name$="Schl_Name"]').val(),
+		                admission_date: formatDate($this.find('[name$="Entc_YM"]').val()),
+		                graduation_date: formatDate($this.find('[name$="Grad_YM"]').val()),
+		                graduation_state: $this.find('.dropdown-edcation-state .button.buttonChoose span').text(),
+		                major: $this.find('[id^="univmajor_"]').val(),
+		                grades: parseFloat($this.find('[name$="Grade"]').val()),
+		                total_score: parseFloat($this.find('[name$="Grade_Prft_Scr"]').val())
+		            };
+		        }).get(),
+		        career: $('.formWrapCareer .container').map(function() {
+		            const $this = $(this);
+		            return {
+		                company_name: $this.find('[id^="Career_C_Name_"]').val(),
+		                dname: $this.find('[id^="Career_C_Part_"]').val(),
+		                join_date: formatDate($this.find('[id^="Career_CSYM_"]').val()),
+		                resignation_date: formatDate($this.find('[id^="Career_CEYM_"]').val()),
+		                job_description: $this.find('.textarea-career').val(),
+		                position: $this.find('[name="position_field"]').val(),
+		                sal: parseInt(removeCommas($this.find('[id^="Career_M_MainPay_User_"]').val()))
+		            };
+		        }).get(),
+		        certifications: $('.formWrapCertificate .container').map(function() {
+		            const $this = $(this);
+		            return {
+		                certificate_name: $this.find('[id^="License_Search_"]').val(),
+		                publisher: $this.find('[id^="License_Lc_Pub_"]').val(),
+		                acquisition_date: formatDate($this.find('[id^="License_Lc_YYMM_"]').val())
+		            };
+		        }).get(),
+		        languages: $('.formWrapLanguage .container').map(function() {
+		            const $this = $(this);
+		            const evalCategory = $this.find('[id^="Language_Eval_Category_"]').val();
+		            const isConversation = evalCategory === '1';
+
+		            return {
+		                language: $this.find('.dropdown-language-name .button.buttonChoose > span').text().trim(),
+		                test_name: isConversation ? null : $this.find('.devExamDropdown .button.buttonChoose > span').text().trim(),
+		                lang_level: isConversation 
+		                    ? $this.find('.devConversationArea .dropdown-language-grade .button.buttonChoose > span').text().trim()
+		                    : $this.find('.devExamArea [id^="Language_Test1_Point_I_"]').val(),
+		                category: isConversation ? '회화능력' : '공인시험',
+		                aquisition_date: formatDate($this.find('[id^="Language_Test_YYMM_"]').val())
+		            };
+		        }).get()
+		    };
+
+		    Object.keys(subData).forEach(key => {
+		        if (Array.isArray(subData[key]) && subData[key].length === 0) {
+		            delete subData[key];
+		        }
+		    });
+
+		    return {
+		        ...mainData,
+		        subData: JSON.stringify(subData)
+		    };
 		}
+		
+		function formatDate(dateString) {
+		    if (!dateString) return null;
+		    const date = new Date(dateString);
+		    return date.toISOString().split('T')[0];
+		}
+
+		function removeCommas(str) {
+		    return str.replace(/,/g, '');
+		}
+
 		/* 등록을 위한 js functions end */
 	</script>
 </head>
