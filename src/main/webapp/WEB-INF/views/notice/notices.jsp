@@ -202,11 +202,13 @@
 			                       <li class="page-item disabled">
 			                            <span class="page-link">&lt;</span>
 			                        </li>
-			                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+			                        
 			                        <li class="page-item active" aria-current="page">
-			                            <span class="page-link">2</span>
+			                            <span class="page-link">1</span>
 			                        </li>
+			                        <li class="page-item"><a class="page-link" href="#">2</a></li>
 			                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+			                        
 			                        <li class="page-item">
 			                            <a class="page-link" href="#">&gt;</a>
 			                        </li>

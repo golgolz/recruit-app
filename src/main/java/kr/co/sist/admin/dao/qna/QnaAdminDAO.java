@@ -18,27 +18,27 @@ public class QnaAdminDAO {
         this.myBatis = myBatis;
     }
 
-    public List<QnaDomain> selectNewQnas(SearchVO sVO) { // searchVO¸¸ Ãß°¡ÇßÀ½.
+    public List<QnaDomain> selectNewQnas(SearchVO sVO) { // searchVOï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½.
         SqlSession session = myBatis.getMyBatisHandler(false);
         List<QnaDomain> qnas = null;
         qnas = session.selectList("kr.co.sist.qna.admin.selectNewQnas", sVO);
         myBatis.closeHandler(session);
         return qnas;
-    }// ´äº¯ ´ë±â ¹®ÀÇ ¸®½ºÆ®
+    }// ìƒˆ ë¬¸ì˜ ë¦¬ìŠ¤íŠ¸ ë¶ˆëŸ¬ì˜¤ê¸°
 
     public int countNewQnas() {
         SqlSession session = myBatis.getMyBatisHandler(false);
         int count = session.selectOne("kr.co.sist.qna.admin.countNewQnas");
         myBatis.closeHandler(session);
         return count;
-    }
+    } // ìƒˆ ë¬¸ì˜ ì „ì²´ ìˆ˜
 
     public QnaDomain selectOneNewQna(int qna_num) {
         SqlSession session = myBatis.getMyBatisHandler(false);
         QnaDomain newDetail = session.selectOne("kr.co.sist.qna.admin.selectOneNewQna", qna_num);
         myBatis.closeHandler(session);
         return newDetail;
-    }// ´äº¯ ´ë±â ¹®ÀÇ »ó¼¼ Á¶È¸
+    }// ìƒˆ ë¬¸ì˜ ìƒì„¸ì¡°íšŒ
 
     public List<QnaDomain> selectOldQnas(SearchVO sVO) {
         SqlSession session = myBatis.getMyBatisHandler(false);
@@ -47,21 +47,21 @@ public class QnaAdminDAO {
         myBatis.closeHandler(session);
         System.out.println("$$$$$$$$$$$$$$$" + oldQnas + "^^^^^^^^^^^" + sVO);
         return oldQnas;
-    }// ´äº¯ ¿Ï·á ¹®ÀÇ ¸®½ºÆ® Á¶È¸
+    }// ë‹µë³€ ì™„ë£Œë¬¸ì˜ ë¦¬ìŠ¤íŠ¸ ë¶ˆëŸ¬ì˜¤ê¸°
 
     public int countQnas() {
         SqlSession session = myBatis.getMyBatisHandler(false);
         int qnaCount = session.selectOne("kr.co.sist.qna.admin.countQnas");
         myBatis.closeHandler(session);
         return qnaCount;
-    }
+    }// ë‹µë³€ ì™„ë£Œ ë¬¸ì˜ ì‚¬í•­ ì „ì²´ ìˆ˜
 
     public QnaDomain selectOneOldQna(int qna_num) {
         SqlSession session = myBatis.getMyBatisHandler(false);
         QnaDomain oldDetail = session.selectOne("kr.co.sist.qna.admin.selectOneOldQna", qna_num);
         myBatis.closeHandler(session);
         return oldDetail;
-    }// ´äº¯ ¿Ï·á ¹®ÀÇ »ó¼¼ Á¶È¸
+    }// ë‹µë³€ì™„ë£Œ ë¬¸ì˜ ìƒì„¸ì¡°íšŒ
 
     public int insertQnaAnswer(QnaVO qVO) {
         SqlSession session = myBatis.getMyBatisHandler(true);
@@ -69,7 +69,7 @@ public class QnaAdminDAO {
         int result = session.insert("kr.co.sist.qna.admin.insertQnaAnswer", qVO);
         myBatis.closeHandler(session);
         return result;
-    }// ´äº¯ÇÏ±â
+    }// ë¬¸ì˜ ë‹µë³€í•˜ê¸°
 
     public int updateQnaFlag(int qna_num) {
         SqlSession session = myBatis.getMyBatisHandler(true);
@@ -79,6 +79,6 @@ public class QnaAdminDAO {
         System.out.println("-------------com" + qna_num);
         myBatis.closeHandler(session);
         return result2;
-    }// ´äº¯ ÇÃ·¡±× ¹Ù²Ù±â
+    }// í”Œë˜ê·¸ ë°”ê¾¸ê¸°
 
 }

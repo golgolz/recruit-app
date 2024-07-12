@@ -24,12 +24,6 @@ public class QnaUserController {
         this.qnaUserService = qnaUserService;
     }
 
-    // @GetMapping("/user/mypage/qna/mypageQNAList.do")
-    // public String searchMyQnaList(Model model) {
-    // List<UserQnaDomain> qnaList = qnaUserService.searchMyQnaList();
-    // model.addAttribute("qnaList", qnaList);
-    // return "user/mypage/qna/mypageQNAList";
-    // }
     @GetMapping("/user/mypage/qna/mypageQNAList.do")
     public String searchMyQnaList(@RequestParam(defaultValue = "1") int currentPage,
             @RequestParam(defaultValue = "10") int itemsPerPage, Model model) {
@@ -60,9 +54,9 @@ public class QnaUserController {
 
     @GetMapping("/user/mypage/qna/mypageQnaForm.do")
     public String showQnaForm(Model model) {
-        model.addAttribute("categories", Arrays.asList("Á¦¾È»çÇ×", "¿À·ù½Å°í", "¼­ºñ½º ¹®ÀÇ"));
-        model.addAttribute("qVO", new UserQnaVO()); // ÆûÀ» À§ÇÑ ºó °´Ã¼ Ãß°¡
-        return "user/mypage/qna/mypageWriteQNA"; // ÇØ´ç JSP·Î ÀÌµ¿
+        model.addAttribute("categories", Arrays.asList("ì„œë¹„ìŠ¤ ë¬¸ì˜", "ì œì•ˆì‚¬í•­", "ì˜¤ë¥˜ì‹ ê³ "));
+        model.addAttribute("qVO", new UserQnaVO());
+        return "user/mypage/qna/mypageWriteQNA";
     }
 
     @PostMapping("/user/mypage/qna/mypageWriteQNA.do")
@@ -70,11 +64,11 @@ public class QnaUserController {
         String category = qVO.getCategory();
 
         if (category == null || category.isEmpty()) {
-            throw new IllegalArgumentException("Ä«Å×°í¸®¸¦ ¼±ÅÃÇØÁÖ¼¼¿ä.");
+            throw new IllegalArgumentException("ì˜¤ë¥˜.");
         }
         qnaUserService.addQna(qVO);
         System.out.println("++++qVO++++" + qVO);
-        List<String> categories = Arrays.asList("Á¦¾È»çÇ×", "¿À·ù½Å°í", "¼­ºñ½º ¹®ÀÇ");
+        List<String> categories = Arrays.asList("ì„œë¹„ìŠ¤ ë¬¸ì˜", "ì œì•ˆì‚¬í•­", "ì˜¤ë¥˜ì‹ ê³ ");
         model.addAttribute("categories", categories);
         System.out.println("++++categories++++++++" + categories);
         model.addAttribute("qna", qVO);

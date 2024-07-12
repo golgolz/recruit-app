@@ -21,7 +21,6 @@ public class SearchVO {
         this.endItemIndex = currentPage * itemsPerPage;
     }
 
-    // Getters and Setters
     public String getKeyword() {
         return keyword;
     }
