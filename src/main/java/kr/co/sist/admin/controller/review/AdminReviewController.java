@@ -1,6 +1,8 @@
 package kr.co.sist.admin.controller.review;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.co.sist.admin.service.review.AdminReviewService;
 import kr.co.sist.admin.vo.review.ReviewDetailVO;
@@ -22,7 +25,7 @@ public class AdminReviewController {
     @Autowired
     private AdminReviewService adminReviewService;
 
-    // ¸®ºä °ü¸® È­¸é Ç¥½Ã ¹× °Ë»ö Ã³¸®
+    // ë¦¬ë·° ê´€ë¦¬ í™”ë©´ í‘œì‹œ ë° ê²€ìƒ‰ ì²˜ë¦¬
     @GetMapping("/manage/review/review.do")
     public String review(@RequestParam(value = "sfl", required = false) String searchField,
                          @RequestParam(value = "stx", required = false) String searchText,
@@ -51,7 +54,7 @@ public class AdminReviewController {
             String reviewListJson = mapper.writeValueAsString(reviewList);
             logger.debug("reviewListJson: {}", reviewListJson);
             model.addAttribute("reviewListJson", reviewListJson);
-            model.addAttribute("reviewList", reviewList);  // JSP¿¡¼­ ÃÑ ¸®ºä ¼ö¸¦ Ç¥½ÃÇÏ±â À§ÇØ Ãß°¡
+            model.addAttribute("reviewList", reviewList);  // JSPì—ì„œ ë¦¬ë·° ëª©ë¡ í‘œì‹œë¥¼ ìœ„í•´ ì¶”ê°€
         } catch (Exception e) {
             logger.error("Error occurred in review method", e);
         }
@@ -59,8 +62,7 @@ public class AdminReviewController {
         return "manage/review/review";
     }
     
-    
- // ¸®ºä »ó¼¼ Á¶È¸
+    // ë¦¬ë·° ìƒì„¸ ì¡°íšŒ
     @GetMapping("/manage/review/reviewUpdate.do")
     public String getReviewDetailsForUpdate(@RequestParam("reviewNum") int reviewNum, Model model) {
         logger.debug("getReviewDetailsForUpdate method called with reviewNum: {}", reviewNum);
@@ -75,8 +77,7 @@ public class AdminReviewController {
         return "manage/review/reviewUpdate";
     }
 
-    
- // ¸®ºä ¾÷µ¥ÀÌÆ®
+    // ë¦¬ë·° ì—…ë°ì´íŠ¸
     @PostMapping("/manage/review/updateReview.do")
     public String updateReview(ReviewDetailVO review) {
         logger.debug("updateReview method called with review: {}", review);
@@ -90,18 +91,24 @@ public class AdminReviewController {
         return "redirect:/manage/review/review.do";
     }
 
-    // ¸®ºä »èÁ¦
     @PostMapping("/manage/review/deleteReview.do")
-    public String deleteReview(@RequestParam("reviewNum") int reviewNum) {
+    @ResponseBody
+    public Map<String, Object> deleteReview(@RequestParam("reviewNum") int reviewNum) {
         logger.debug("deleteReview method called with reviewNum: {}", reviewNum);
-
+        Map<String, Object> response = new HashMap<>();
+        
         try {
-            adminReviewService.deleteReview(reviewNum);
+            boolean success = adminReviewService.deleteReview(reviewNum);
+            response.put("success", success);
+            if (!success) {
+                logger.error("Failed to delete review with reviewNum: {}", reviewNum);
+            }
         } catch (Exception e) {
             logger.error("Error occurred in deleteReview method", e);
+            response.put("success", false);
+            response.put("error", e.getMessage());
         }
 
-        return "redirect:/manage/review/review.do";
+        return response;
     }
-    
 }

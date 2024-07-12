@@ -95,10 +95,12 @@
                             </table>
                         </div>
                         <div class="ec-base-button">
-                            <input type="button" class="btnSubmitFix sizeS" id="btnDelete" style="float: left" value="삭제"/>
+                            <input type="button" class="btn btn-outline-danger btn-sm" id="btnDelete" style="float: left" value="삭제"/>
                             <span class="gRight">
-                                <input type="submit" class="btnSubmitFix sizeS" id="btnWrite" value="수정"/>
-                                <a href="${pageContext.request.contextPath}/manage/review/review.do" class="btnBasicFix sizeS">취소</a>
+                                <input type="submit" class="btn btn-outline-warning btn-sm" id="btnWrite" value="수정"/>
+                                
+                                <input type="button" value="취소" class="btn btn-outline-dark btn-sm detail-control" id="btnCancel" 
+                                name="btnCancel" onclick="location.href='${pageContext.request.contextPath}/manage/review/review.do'"/>
                             </span>
                         </div>
                     </form>
@@ -107,34 +109,48 @@
         </div>
     </main>
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#btnDelete').click(function() {
-                if(confirm('정말 삭제하시겠습니까?')) {
-                    $.post('${pageContext.request.contextPath}/manage/review/deleteReview.do', {
-                        reviewNum: ${review.reviewNum}
-                    }, function(response) {
+ <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> 
+<script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#btnDelete').click(function() {
+            if(confirm('정말 삭제하시겠습니까?')) {
+                $.post('${pageContext.request.contextPath}/manage/review/deleteReview.do', {
+                    reviewNum: ${review.reviewNum}
+                }, function(response) {
+                    if(response.success) {
                         window.location.href = '${pageContext.request.contextPath}/manage/review/review.do';
-                    });
-                }
-            });
-
-            $('#content').summernote({
-                placeholder: '내용을 입력하세요',
-                tabsize: 2,
-                height: 400,
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'underline', 'clear']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['table', ['table']],
-                    ['insert', ['link', 'picture', 'video']],
-                    ['view', ['fullscreen', 'codeview', 'help']]
-                ]
-            });
+                    } else {
+                        alert('삭제에 실패했습니다: ' + (response.error || 'Unknown error'));
+                    }
+                }, 'json');
+            }
         });
-    </script>
+
+        $('#content').summernote({
+            placeholder: '내용을 입력하세요',
+            tabsize: 2,
+            height: 400,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview', 'help']]
+            ],
+            callbacks: {
+                onChange: function(contents, $editable) {
+                    $(this).val($(this).summernote('isEmpty') ? "" : contents);
+                }
+            }
+        });
+    });
+</script>
 </body>
+
+
 
 </html>
