@@ -142,7 +142,6 @@
         };
 		
 		$(function(){
-			alert("수정뒤 배포 테스트하기");
 			<!-- golgolz start -->
 			$(".position-chip").click(function() {
 		        var value = $(this).data("value");
