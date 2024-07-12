@@ -19,10 +19,13 @@ public class MyBatisConfig {
     private static SqlSessionFactory getSessionFactory() {
         if (sqlSessionFactory == null) {
             try {
-                Reader reader = Resources.getResourceAsReader("kr/co/sist/properties/mybatis-config.xml");
+                Reader reader =
+                        Resources.getResourceAsReader("kr/co/sist/properties/mybatis-config.xml");
 
+                System.out.println("getResourceAsReader failed");
                 sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
 
+                System.out.println("SqlSessionFactoryBuilder() failed");
                 if (reader != null) {
                     reader.close();
                 }
