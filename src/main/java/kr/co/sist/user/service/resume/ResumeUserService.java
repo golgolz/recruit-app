@@ -3,10 +3,10 @@ package kr.co.sist.user.service.resume;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import kr.co.sist.admin.domain.resume.ResumeDomain;
 import kr.co.sist.user.dao.resume.ResumeUserDAO;
 import kr.co.sist.user.domain.resume.ResumeListDomain;
 import kr.co.sist.user.vo.resume.ApplyVO;
+import kr.co.sist.user.vo.resume.ResumeVO;
 
 @Service
 public class ResumeUserService {
@@ -21,13 +21,17 @@ public class ResumeUserService {
         return resumeUserDAO.selectResumes(resumeNum);
     }
 
-    public ResumeDomain searchOneResume() {
-        ResumeDomain resume = null;
-
-        return resume;
-    }
-
     public int apply(ApplyVO apply) {
         return resumeUserDAO.insertApply(apply);
+    }
+
+    public int addResume(ResumeVO resumeVO) {
+        StringBuilder userId = new StringBuilder(resumeVO.getEmail());
+        resumeUserDAO.selectResumeCount(resumeVO.getEmail());
+        return resumeUserDAO.insertResume(resumeVO);
+    }
+
+    public int modifyResume(ResumeVO resumeVO) {
+        return resumeUserDAO.updateResume(resumeVO);
     }
 }
