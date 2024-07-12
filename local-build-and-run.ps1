@@ -19,7 +19,7 @@ if ($LASTEXITCODE -eq 0) {
     docker rm my-java-app-container 2>$null
 
     Write-Host "6. Running new Docker container..." -ForegroundColor Yellow
-    docker run -d -p 8080:8080 --name my-java-app-container my-java-app
+    docker run -d -p 8000:8080 --name my-java-app-container my-java-app
 
     Start-Sleep -Seconds 10  # Wait 10 seconds for the container to fully start
 
