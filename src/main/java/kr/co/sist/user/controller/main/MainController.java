@@ -28,6 +28,7 @@ public class MainController {
         return "redirect:/main/main.do";
     }
 
+    // 메인 화면 출력
     @GetMapping("/main.do")
     public String main(HttpSession session, HttpServletRequest request, Model model) throws UnsupportedEncodingException {
         List<MainVO> recentJobPosts = mainService.getRecentJobPosts();
@@ -62,9 +63,9 @@ public class MainController {
     }
 
     @GetMapping("/detail.do")
-    public String mainDetail(HttpServletRequest request, HttpServletResponse response, @RequestParam("id") String recruitNum, Model model) throws Exception {
+    public String detail(HttpServletRequest request, HttpServletResponse response, @RequestParam("id") String recruitNum, Model model) throws Exception {
         // 디버깅 로그 추가
-        System.out.println("mainDetail 메소드 호출 - recruitNum: " + recruitNum);
+        System.out.println("detail 메소드 호출됨 - recruitNum: " + recruitNum);
 
         // 채용 공고 상세 정보 조회
         MainVO recruitDetail = mainService.getRecruitDetail(recruitNum);
@@ -82,7 +83,7 @@ public class MainController {
             }
         }
 
-        // 디버깅 로그 추가
+        // 로그 추가
         System.out.println("기존 쿠키 값: " + viewHistoryCookie);
 
         if (viewHistoryCookie == null) {
@@ -96,13 +97,13 @@ public class MainController {
         newCookie.setMaxAge(60 * 60 * 1); // 쿠키 유효기간 1시간
         newCookie.setPath("/");
 
-        // 쿠키 설정 및 로그 추가
+        // 쿠키 설정 후 로그 출력
         response.addCookie(newCookie);
 
-        return "recruit/detail"; // 상세 페이지로 이동할 JSP 경로
+        // 리다이렉트 설정
+        return "redirect:/recruit/detail.do?id=" + recruitNum;
     }
-    
-    
+
     @GetMapping("/logout")
     public String logout(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
         // 세션 무효화
@@ -124,5 +125,4 @@ public class MainController {
         // 리디렉션 설정 (쿼리 파라미터 없이)
         return "redirect:/main/main.do";
     }
-    
 }
