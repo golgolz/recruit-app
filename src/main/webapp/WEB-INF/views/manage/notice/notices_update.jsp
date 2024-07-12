@@ -120,7 +120,7 @@
             	<option value="안내">안내</option>
             </select>
  	</td>
- </tr>
+</tr>
 </tbody>
 </table>
 </div>

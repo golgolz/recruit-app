@@ -103,10 +103,10 @@ public class NoticeAdminController {
         
         return "redirect:/manage/notice/noticesDetail.do";
     }
-    @GetMapping("/manage/notice/noticesDelete.do")
-    public String deleteNotice(Model model) {
-        
-        return "";
+    @PostMapping("/manage/notice/noticesDelete.do")
+    public String deleteNotice(int noticeNum, Model model) {
+        noticeAdminService.deleteNotice(noticeNum);
+        return "redirect:/manage/notice/notices.do";
     }
     
 }

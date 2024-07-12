@@ -12,6 +12,11 @@
 		$("#notice_menu").addClass("bg-gradient-primary");
 	});
 	
+	function deleteNot(){
+        $("#frmDelete").submit();
+    	alert("공지사항이 삭제되었습니다.")
+	}
+	
 </script>
 <style>
 	.noticeViewWrap{
@@ -46,11 +51,13 @@
 		<div class="container-fluid py-4">
 			<!-- golgolz start -->
 			<div>
-			
+			<c:if test="${not empty requestScope.noticeDetail}">
+                  <c:set var="noticeDetail" value="${requestScope.noticeDetail[0]}" />
+            </c:if>
+			<form id="frmDelete" action="http://localhost/recruit-app/manage/notice/noticesDelete.do?noticeNum=${noticeDetail.noticeNum}" method="post">
+	       		<input type="hidden" id="deleteNotice" name="deleteNotice" value="${noticeDetail.noticeNum}"/>
+	        </form>
 				<div class="loungeContent noticeViewContent" id="notice_detail_view">
-				<c:if test="${not empty requestScope.noticeDetail}">
-                    <c:set var="noticeDetail" value="${requestScope.noticeDetail[0]}" />
-                </c:if>
 			        <div class="noticeViewWrap">
 			            <p class="noticeTit">
 			                <span style="font-size:15px"><c:out value="${noticeDetail.category}" /></span>
@@ -65,11 +72,10 @@
 			            <div>
 			                <input type="button" class="btn btn-outline-dark btn-sm detail-control" value="뒤로" onclick="location.href='http://localhost/recruit-app/manage/notice/notices.do'">
 			                <input type="button" class="btn btn-outline-warning btn-sm" value="수정" onclick="location.href='http://localhost/recruit-app/manage/notice/noticesUpdatePage.do?noticeNum=${noticeDetail.noticeNum}'">
-			                <input type="button" class="btn btn-outline-danger btn-sm" value="삭제" onclick="location.href='http://localhost/recruit-app/manage/notice/noticesDelete.do?noticeNum=${noticeDetail.noticeNum}'">
+			                <input type="button" class="btn btn-outline-danger btn-sm" value="삭제" onclick="deleteNot()">
 			            </div>
 			        </div>
 			    </div>
-	        </form>
 			</div>
 			<!-- golgolz end -->
 		</div>
