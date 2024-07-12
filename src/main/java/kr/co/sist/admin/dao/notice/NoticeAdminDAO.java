@@ -45,7 +45,7 @@ public class NoticeAdminDAO {
     public int updateNotice(NoticeAdminVO nVO) {
         int result=0;
         SqlSession ss = mbConfig.getMyBatisHandler(true);
-        ss.insert("kr.co.sist.admin.notice.insertNotice", nVO);
+        ss.update("kr.co.sist.admin.notice.updateNotice", nVO);
         mbConfig.closeHandler(ss);
         
         return result;

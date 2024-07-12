@@ -5,11 +5,10 @@
 <html>
 <head>
 
-<jsp:include page="../../assets/layout/admin/lib.jsp" />
-
 <link rel="stylesheet" type="text/css" href="https://img.echosting.cafe24.com/editors/froala/css/froala_style_ec.min.css?vs=2404180600" charset="UTF-8"/>
 <link rel="stylesheet" type="text/css" href="https://insideobject.com/ind-script/optimizer.php?filename=nZExDgIxDAT7KC3vsOAJPIEfOMFwJxJv5DgS_J6jggYJ0o52doulBVVofzBqhqtxJZOOYVko904Xgzpl1AqNG9jRL3nJoaMMX6Eh4T4pDvfZ0cIPsTnVORWZVNFCWVVCYtWv-9waHcF2ptNn3YZjeuGYCvJtVjZpMP_Pft_7BA&type=css&k=ecd691e0c80070ef935d0e961272742f67437a3c&t=1681776733" />
 <link rel="stylesheet" type="text/css" href="https://insideobject.com/ind-script/optimizer_user.php?filename=tZRBbsQgDEX3k257Ds-o6j0q9QTEcYI1gBGGTOf2dTtVq64DO8DwvvX1MXiJBIRTUyoKgVcKbj6_nC-Q2xwYJ19jAF1oWkh5S6BXTpdXQFWIsrRAMIsriz3V-ubw6jZ6suIzdCMruYK-MxRdpSh7717XlrCypGPY4O7SKsxOGb81UGLsDn0cdIYSnmxDp8aDwFUkVM6D6J7CKHQuFhQc5Xd2GyfL9CjX3TyIPLdau0f7Fy4f4wwJo8y2a3gMvaxBpEAOzVJhu1Ohnen2txrUuRWodBupPzKx2YdXL_ndc86ctt4CKGk3ho3tfND3KIXSfn9o9Bja_4GqX7RP&type=css&k=d664d08dad9a7052b47cd7d6e8a0a70935bed9eb&t=1678165953&user=T" />
+<jsp:include page="../../assets/layout/admin/lib.jsp" />
 <!-- summernote -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
@@ -98,6 +97,7 @@
         </div>
 </div>
 <form id="frmUpdate" action="http://localhost/recruit-app/manage/notice/noticesUpdate.do" method="post">
+<input type="hidden" id="noticeNum" name="noticeNum" value="${noticeDetail.noticeNum}"/>
 <div class="ec-base-table typeWrite ">
             <table border="1" summary="">
 <caption>글쓰기 폼</caption>
@@ -114,10 +114,10 @@
 		<option value="2">공지사항</option>
 	  </select> -->
 		<input id="title" name="title" class="inputTypeText" placeholder="" maxLength="125" value="<c:out value="${noticeDetail.title}" />" type="text" style="height:30px; width:500px" />
-            <select id="noticeCategory" value="${noticeDetail.category}">
-            	<option value="공지">공지</option>
-            	<option value="서비스">서비스</option>
-            	<option value="안내">안내</option>
+            <select id="noticeCategory" name="category">
+            	<option value="이벤트" <c:if test="${noticeDetail.category == '이벤트'}">selected</c:if>>이벤트</option>
+                <option value="서비스종료" <c:if test="${noticeDetail.category == '서비스종료'}">selected</c:if>>서비스종료</option>
+                <option value="안내" <c:if test="${noticeDetail.category == '안내'}">selected</c:if>>안내</option>
             </select>
  	</td>
 </tr>

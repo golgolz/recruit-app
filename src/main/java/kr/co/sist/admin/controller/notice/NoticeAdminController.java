@@ -87,21 +87,29 @@ public class NoticeAdminController {
     }
     @PostMapping("/manage/notice/noticesUpdate.do")
     public String updateNotice(NoticeAdminVO nVO, HttpServletRequest request, Model model) throws IOException {
-        int noticeNum= Integer.parseInt(request.getParameter("category"));
+        String noticeParam = request.getParameter("noticeNum");
+        if (noticeParam == null || noticeParam.isEmpty()) {
+            throw new IllegalArgumentException("Notice ID cannot be null or empty");
+        }
+        int noticeNum= Integer.parseInt(noticeParam);
         String category= request.getParameter("category");
         String title = request.getParameter("title");
         String content = request.getParameter("content");
-        String updateDate = request.getParameter("hidUpdateDate");
+        
+        System.out.println("================Received data================");
+        System.out.println("noticeNum: " + noticeNum);
+        System.out.println("category: " + category);
+        System.out.println("title: " + title);
+        System.out.println("content: " + content);
         
         nVO.setNoticeNum(noticeNum);
         nVO.setCategory(category);
         nVO.setTitle(title);
         nVO.setContent(content);
-        nVO.setUpdateDate(updateDate);
         
         noticeAdminService.updateNoticeNum(nVO);
         
-        return "redirect:/manage/notice/noticesDetail.do";
+        return "redirect:/manage/notice/noticesDetail.do?noticeNum="+noticeNum;
     }
     @PostMapping("/manage/notice/noticesDelete.do")
     public String deleteNotice(int noticeNum, Model model) {
