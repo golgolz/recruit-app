@@ -6,29 +6,29 @@
  <mapper namespace="kr.co.sist.notice.user">
  	<!-- 전체 공지사항 리스트 조회, 페이지네이션 -->
  	<select id="selectNotices" resultType="kr.co.sist.user.domain.notice.NoticeUserDomain">
- 		<!-- select category, title, input_date, notice_num
+ 		select category, title, input_date, notice_num
  		from notice
  		where blind_flag='N'
- 		order by input_date desc -->
-		<![CDATA[
-		    SELECT category, title, input_date, notice_num
-				FROM (
-				    SELECT rownum AS rnum, category, title, input_date, notice_num
-				    FROM (
-				        SELECT category, title, input_date, notice_num
-				        FROM notice
-				        WHERE blind_flag = 'N'
-				        ORDER BY input_date DESC
-				    )
-				    WHERE rownum <= #{endItemIndex}
-				)
-				WHERE rnum >= #{startItemIndex};
-	    ]]>
+ 		order by input_date desc
+ 	 <!-- <![CDATA[
+        select * from
+        (
+            select category, title, input_date, notice_num, rownum as rnum
+            from
+            (
+                select category, title, input_date, notice_num
+                from notice
+                where blind_flag='N'
+                order by input_date desc
+            )
+        )
+        where rnum >= #{startItemIndex} and rnum < #{endItemIndex}
+        ]]> -->
  	</select> 
  	
  	<!-- 공지사항 수 전체 얻기 -->
  	<select id="countNotices" resultType="int">
-        select count(*)
+         select count(*)
         from notice
         where blind_flag = 'N'
     </select>
@@ -40,10 +40,31 @@
 	    where blind_flag = 'N' and category = #{category, jdbcType=VARCHAR}
 	    order by input_date desc
 	    ]]>
+	 <!--     <![CDATA[
+        select * from
+        (
+            select category, title, input_date, notice_num, rownum as rnum
+            from
+            (
+                select category, title, input_date, notice_num
+                from notice
+                where blind_flag='N' and category = #{category}
+                order by input_date desc
+            )
+        )
+        where rnum >= #{startItemIndex} and rnum < #{endItemIndex}
+        ]]> -->
+    </select>
+    
+    <!-- 카테고리별 공지사항 수 얻기 -->
+    <select id="countNoticesByCategory" resultType="int" parameterType="String">
+        select count(*)
+        from notice
+        where blind_flag = 'N' and category = #{category}
     </select>
     
     <select id="selectNoticesbyKeyword" resultType="kr.co.sist.user.domain.notice.NoticeUserDomain" parameterType="java.util.Map">
-	    select category, title, input_date, notice_num
+	 	 select category, title, input_date, notice_num
 	    from notice
 	    where blind_flag = 'N'
 	    <if test="searchType == '제목'">
@@ -56,6 +77,47 @@
 	        and (title like '%' || #{keyword} || '%' or content like '%' || #{keyword} || '%')
 	    </if>
 	    order by input_date desc
+	    <!--  <![CDATA[
+        select * from
+        (
+            select category, title, input_date, notice_num, rownum as rnum
+            from
+            (
+                select category, title, input_date, notice_num
+                from notice
+                where blind_flag = 'N'
+                <if test="searchType == '제목'">
+                    and title like '%' || #{keyword} || '%'
+                </if>
+                <if test="searchType == '내용'">
+                    and content like '%' || #{keyword} || '%'
+                </if>
+                <if test="searchType == '제목+내용'">
+                    and (title like '%' || #{keyword} || '%' or content like '%' || #{keyword} || '%')
+                </if>
+                order by input_date desc
+            )
+        )
+        where rnum >= #{startItemIndex} and rnum < #{endItemIndex}
+        ]]> -->
+    </select>
+    
+    <!-- 키워드별 공지사항 수 얻기 -->
+    <select id="countNoticesByKeyword" resultType="int" parameterType="map">
+        <![CDATA[
+        select count(*)
+        from notice
+        where blind_flag = 'N'
+        <if test="searchType == '제목'">
+            and title like '%' || #{keyword} || '%'
+        </if>
+        <if test="searchType == '내용'">
+            and content like '%' || #{keyword} || '%'
+        </if>
+        <if test="searchType == '제목+내용'">
+            and (title like '%' || #{keyword} || '%' or content like '%' || #{keyword} || '%')
+        </if>
+        ]]>
     </select>
   	
  	<select id="selectOneNotice" resultType="kr.co.sist.user.domain.notice.NoticeUserDomain">
