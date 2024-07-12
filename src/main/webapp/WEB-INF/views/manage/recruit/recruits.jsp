@@ -121,7 +121,7 @@
             dataType: 'JSON',
             success: function(data) {
                 populateTable(data);
-                countRecruits(isFirst);
+                countRecruits(searchVO);
                 updatePagination();
                 if(!(data && data.length > 0)){
                     $("#sodr_list tbody").html('<tr><td colspan="10" style="font-size: 16px; font-weight: bold;">검색 결과가 없습니다.</td></tr>');
@@ -247,6 +247,7 @@
     	var startPage = (currentGroup - 1) * showPages + 1;
         var paginationHtml = '';
         var endPage = Math.min(Math.ceil(totalPages / itemsPerPage) , startPage + showPages - 1);
+        
         paginationHtml += '<li class="page-items' + (currentPage === 1 ? ' disabled' : '') + '">';
         paginationHtml += '<a class="page-link" href="#" aria-label="Previous" id="prev-page">';
         paginationHtml += '<span aria-hidden="true">&laquo;</span></a></li>';

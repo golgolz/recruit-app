@@ -1,4 +1,4 @@
-package kr.co.sist.admin.interceptor;
+package kr.co.sist.user.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -6,25 +6,21 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 
-public class AdminInterceptor implements HandlerInterceptor {
+public class NotLoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
             Object handler) throws Exception {
-        /*
-         * HttpSession session = request.getSession(false); if (session.getAttribute("userId") ==
-         * null) { response.sendRedirect(
-         * "http://localhost/recruit-app/manage/adminLogin/adminLoginPage.do"); return false; }
-         */
 
-        Object adminId = WebUtils.getSessionAttribute(request, "adminId");
-        if (adminId == null) {
-            response.sendRedirect(
-                    "http://localhost/recruit-app/manage/adminLogin/adminLoginPage.do");
-            return false;
+        boolean flag = false;
+
+        Object userId = WebUtils.getSessionAttribute(request, "userId");
+        flag = !(userId != null); // 로그인이 되어 있다면 false, 로그아웃 상태라면 true
+        if (!flag) {
+            response.sendRedirect("http://localhost/recruit-app/main/main.do");
         } // end if
 
-        return true;
+        return flag;
     }
 
     @Override
@@ -34,7 +30,5 @@ public class AdminInterceptor implements HandlerInterceptor {
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
             Object handler, Exception ex) throws Exception {}
-
-
 
 }

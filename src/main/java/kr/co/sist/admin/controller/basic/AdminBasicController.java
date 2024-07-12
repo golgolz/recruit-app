@@ -3,6 +3,10 @@ package kr.co.sist.admin.controller.basic;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -84,11 +88,41 @@ public class AdminBasicController {
     }
 
     @GetMapping("manage/logout.do")
-    public String logout(SessionStatus ss) {
+    public String logout(SessionStatus ss, HttpServletRequest request,
+            HttpServletResponse response) {
+
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                cookie.setMaxAge(0);
+                cookie.setPath("/");
+                response.addCookie(cookie);
+            }
+        }
 
         ss.setComplete();
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        response.setHeader("Pragma", "no-cache");
+        response.setHeader("Expires", "0");
 
-        return "manage/adminLogin/adminLogin";
+        return "redirect:/manage/logoutProcess.do";
+    }
+
+    @GetMapping("/manage/logoutProcess.do")
+    public String logoutMessage(RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("resultMsg", "로그아웃 되었습니다.");
+
+        return "redirect:/manage/adminLogin/logoutProcess.do";
+    }
+
+    @GetMapping("/manage/adminLogin/logoutProcess.do")
+    public String logoutPage() {
+        return "manage/adminLogin/logoutProcess";
     }
 
     @GetMapping("/api/manage/admins.do")

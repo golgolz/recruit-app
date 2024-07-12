@@ -2,16 +2,8 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" info=""%>
-	
 <!DOCTYPE html>
 <html>
-<%-- <%
-	String adminId = (String)session.getAttribute("adminId");
-	if(adminId == null || adminId == ""){
-	    response.sendRedirect("http://localhost/recruit-app/manage/adminLogin/adminLoginPage.do");
-	    return;
-	}
-%> --%>
 <head>
 <jsp:include page="../../assets/layout/admin/lib.jsp" />
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -272,7 +264,7 @@
 		            dataType: 'JSON',
 		            success: function(data) {
 		                populateTable(data);
-		                countAdminList(isFirst);
+		                countAdminList(searchVO);
 		                updatePagination();
 		                if(!(data && data.length > 0)){
 		                    $("#sodr_list tbody").html('<tr><td colspan="10" style="font-size: 16px; font-weight: bold;">검색 결과가 없습니다.</td></tr>');
@@ -295,11 +287,9 @@
 	                var row = $('<tr>')
 	                    .addClass('list0')
 	                    .attr('data-admin-id',adminInfo.adminId);
-	                    //.attr('data-href', 'http://localhost/recruit-app/manage/recruits/detail.do?id=' + recruit.id);
 	                row.append($('<td>').text(index + startNum))
 	                   .append($('<td>').text(adminInfo.position))
 	                   .append($('<td>').text(adminInfo.adminId))
-	                   /* .append($('<td>').text(authority.dashboard)) */
 	                   .append($('<td>').text(authority.user))
 	                   .append($('<td>').text(authority.company))
 	                   .append($('<td>').text(authority.recruit))
@@ -330,6 +320,7 @@
 	                    async: false,
 	                    success: function(data) {
 	                    	totalPages = data;
+	                    	console.log(totalPages);
 	                    	$(".fc_all").text(JSON.stringify(data)); 
 	                    },
 	                    error: function(xhr, status, error) {
@@ -473,7 +464,6 @@
 							<col class="w90">
 							<col class="w90">
 							<col class="w90">
-							<!-- <col class="w90"> -->
 							<col class="w90">
 							<col class="w90">
 							<col class="w90">
@@ -486,7 +476,6 @@
 							<th scope="col">번호</th>
 							<th scope="col">직책</th>
 							<th scope="col">아이디</th>
-							<!-- <th scope="col">대시보드</th> -->
 							<th scope="col">사용자관리</th>
 							<th scope="col">기업관리</th>
 							<th scope="col">공고관리</th>
@@ -523,10 +512,6 @@
 				          </div>
 				          <div class="mb-3">
 				            <label class="form-label">권한 부여</label>
-				            <!-- <div class="form-check">
-				              <input class="addCheckbox" name="dashboard" type="checkbox" value="dashboard" id="dashboard">
-				              <label class="form-check-label" for="dashboard">대시보드</label>
-				            </div> -->
 				            <div class="form-check">
 				              <input class="addCheckbox" name="user" type="checkbox" value="user" id="user">
 				              <label class="form-check-label" for="user">사용자 관리</label>
@@ -579,10 +564,6 @@
 				          </div>
 				          <div class="mb-3">
 				            <label class="form-label">권한 부여</label>
-				            <!-- <div class="form-check">
-				              <input class="modifyCheckbox" name="dashboard" type="checkbox" value="dashboard" id="modifyDashboard">
-				              <label class="form-check-label" for="modifyDashboard">대시보드</label>
-				            </div> -->
 				            <div class="form-check">
 				              <input class="modifyCheckbox" name="user" type="checkbox" value="user" id="modifyUser">
 				              <label class="form-check-label" for="modifyUser">사용자 관리</label>

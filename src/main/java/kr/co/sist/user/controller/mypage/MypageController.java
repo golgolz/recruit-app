@@ -140,6 +140,18 @@ public class MypageController {
         return "user/mypage/modifyPassProcess";
     }
 
+    @GetMapping("/user/mypage/passFlagON.do")
+    public String passFlagON(RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("resultMsg", "비밀번호 변경 후 서비스 이용이 가능합니다.");
+
+        return "redirect:/user/mypage/flagOnPage.do";
+    }
+
+    @GetMapping("/user/mypage/flagOnPage.do")
+    public String flagONPage() {
+        return "user/mypage/flagON";
+    }
+
 
     @PostMapping("/user/mypage/certification.do")
     public String certificationQuest(@SessionAttribute("userId") String userId, QuestionVO qVO,

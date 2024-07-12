@@ -180,4 +180,15 @@ public class UserBasicDAO {
 
         return cnt;
     }
+
+    public String selectPassFlag(String userId) {
+        SqlSession ss = myBatis.getMyBatisHandler(false);
+
+        String passFlag =
+                ss.selectOne("kr.co.sist.mapper.user.basic.userBasicMapper.selectPassFlag", userId);
+
+        myBatis.closeHandler(ss);
+
+        return passFlag;
+    }
 }

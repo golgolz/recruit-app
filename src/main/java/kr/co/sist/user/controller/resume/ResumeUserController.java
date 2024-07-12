@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.co.sist.user.domain.resume.ResumeListDomain;
 import kr.co.sist.user.service.resume.ResumeUserService;
 import kr.co.sist.user.vo.resume.ApplyVO;
+import kr.co.sist.user.vo.resume.ResumeVO;
 
 @Controller
 public class ResumeUserController {
@@ -22,7 +23,7 @@ public class ResumeUserController {
         this.resumeUserService = resumeUserService;
     }
 
-    @GetMapping("/resumes.do")
+    @GetMapping("/resume/resumes.do")
     public String showResumePage(
             @RequestParam(value = "recruit", required = false) String recruitNum, Model model) {
         model.addAttribute("recruit", recruitNum);
@@ -50,6 +51,16 @@ public class ResumeUserController {
         if (1 == resumeUserService.apply(apply)) {
             result = "success";
         }
+
+        return result;
+    }
+
+    @PostMapping("/api/resume.do")
+    @ResponseBody
+    public String addRecruit(@RequestBody ResumeVO resumeVO) {
+        String result = "success";
+
+        System.out.println(resumeVO);
 
         return result;
     }
