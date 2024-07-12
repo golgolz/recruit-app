@@ -21,12 +21,6 @@ public class QnaUserService {
         this.qnaUserDAO = qnaUserDAO;
     }
 
-    // public List<UserQnaDomain> searchMyQnaList() {
-    // List<UserQnaDomain> qnaList = null;
-    // qnaList = qnaUserDAO.selectMyQnas();
-    // return qnaList;
-    // }
-
     public List<Map<String, Object>> searchMyQnaList(SearchVO sVO) {
         List<UserQnaDomain> qna = qnaUserDAO.selectMyQnas(sVO);
         List<Map<String, Object>> result = new ArrayList<>();

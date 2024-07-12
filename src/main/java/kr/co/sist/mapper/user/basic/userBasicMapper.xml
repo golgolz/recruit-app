@@ -50,4 +50,9 @@
   		set updatepass_flag='Y'
   		where user_id=#{ userId }
   </update>
+  <select id="selectPassFlag" resultType="String" parameterType="String">
+  		select updatepass_flag
+  		from users
+  		where user_id=#{ userId }
+  </select>
  </mapper>

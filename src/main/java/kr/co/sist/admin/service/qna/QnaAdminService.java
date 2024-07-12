@@ -21,22 +21,6 @@ public class QnaAdminService {
         this.qnaAdminDAO = qnaAdminDAO;
     }
 
-    // public List<Map<String, Object>> searchNewQnas() {
-    // List<QnaDomain> qnas = qnaAdminDAO.selectNewQnas();
-    // List<Map<String, Object>> result = new ArrayList<>();
-    // for (int i = 0; i < qnas.size(); i++) {
-    // QnaDomain qna = qnas.get(i);
-    // Map<String, Object> map = new HashMap<>();
-    // map.put("view_num", i + 1);
-    // map.put("qna_num", qna.getQna_num());
-    // map.put("title", qna.getTitle());
-    // map.put("input_date", qna.getInput_date());
-    // map.put("flag", qna.getFlag());
-    // result.add(map);
-    // }
-    // return result;
-    // } // ´äº¯ ´ë±â ¹®ÀÇ ¸®½ºÆ®
-
     public List<Map<String, Object>> searchNewQnas(SearchVO sVO) {
         List<QnaDomain> qnas = qnaAdminDAO.selectNewQnas(sVO);
         List<Map<String, Object>> result = new ArrayList<>();
@@ -51,19 +35,19 @@ public class QnaAdminService {
         }
         System.out.println("~~~~~~~~~~~~~~~~~~~~qnas: " + result);
         return result;
-    }
+    }// ìƒˆ ë¬¸ì˜ ë¦¬ìŠ¤íŠ¸ ë¶ˆëŸ¬ì˜¤ê¸°
 
     public int countNewQnas() {
         return qnaAdminDAO.countNewQnas();
-    }
+    }// ìƒˆ ë¬¸ì˜ ì „ì²´ ìˆ˜
 
     public QnaDomain searchOneNewQna(int qna_num) {
         QnaDomain oneQna = null;
         oneQna = qnaAdminDAO.selectOneNewQna(qna_num);
         return oneQna;
-    }// ´äº¯ ´ë±â ¹®ÀÇ »ó¼¼ Á¶È¸
+    }// ìƒˆ ë¬¸ì˜ ìƒì„¸ì¡°íšŒ
 
-    public List<Map<String, Object>> searchOldQnas(SearchVO sVO) { // ¿À·ù³ª¸é searchVO¸¸ Áö¿ö
+    public List<Map<String, Object>> searchOldQnas(SearchVO sVO) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ searchVOï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         List<QnaDomain> qnas = qnaAdminDAO.selectOldQnas(sVO);
         List<Map<String, Object>> result = new ArrayList<>();
         for (QnaDomain oldQnas : qnas) {
@@ -77,48 +61,29 @@ public class QnaAdminService {
         }
         System.out.println("========================Old QnAs: " + result);
         return result;
-    }// ´äº¯ ¿Ï·á ¹®ÀÇ ¸®½ºÆ® Á¶È¸
+    }// ë‹µë³€ ì™„ë£Œë¬¸ì˜ ë¦¬ìŠ¤íŠ¸ ë¶ˆëŸ¬ì˜¤ê¸°
 
     public int countQnas() {
         return qnaAdminDAO.countQnas();
-    }
-
-    // public List<Map<String, Object>> searchOldQnas(SearchVO sVO) {
-    // List<QnaDomain> qnas = qnaAdminDAO.selectOldQnas(sVO);
-    // List<Map<String, Object>> result = new ArrayList<>();
-    // for (int i = 0; i < qnas.size(); i++) {
-    // QnaDomain qna = qnas.get(i);
-    // Map<String, Object> map = new HashMap<>();
-    // map.put("view_num", i + 1);
-    // map.put("qna_num", qna.getQna_num());
-    // map.put("category", qna.getCategory());
-    // map.put("title", qna.getTitle());
-    // map.put("input_date", qna.getInput_date());
-    // result.add(map);
-    // }
-    // return result;
-    // }// ´äº¯ ¿Ï·á ¹®ÀÇ ¸®½ºÆ® Á¶È¸
-
+    }// ë‹µë³€ ì™„ë£Œ ë¬¸ì˜ ì‚¬í•­ ì „ì²´ ìˆ˜
 
     public QnaDomain searchOneOldQna(int qna_num) {
         QnaDomain oneOldQna = null;
         oneOldQna = qnaAdminDAO.selectOneOldQna(qna_num);
         return oneOldQna;
-    }// ´äº¯ ¿Ï·á ¹®ÀÇ »ó¼¼ Á¶È¸
+    }// ë‹µë³€ì™„ë£Œ ë¬¸ì˜ ìƒì„¸ì¡°íšŒ
 
     public int addQnaAnswer(QnaVO qVO) {
         int result = qnaAdminDAO.insertQnaAnswer(qVO);
         // qnaAdminDAO.updateQnaFlag(qVO.getQna_num());
         return result;
-    }// ´äº¯ÇÏ±â
+    }// ë¬¸ì˜ ë‹µë³€í•˜ê¸°
 
     public int updateQnaFlag(int qna_num) {
         System.out.println("Updating QNA flag for qna_num: " + qna_num);
         int result2 = qnaAdminDAO.updateQnaFlag(qna_num);
         System.out.println("Update result: " + result2);
         return result2;
-    }// ´äº¯ ÇÃ·¡±× ¹Ù²Ù±â
-
-
+    }// í”Œë˜ê·¸ ë°”ê¾¸ê¸°
 
 }

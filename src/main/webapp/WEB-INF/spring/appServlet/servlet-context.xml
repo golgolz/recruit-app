@@ -33,21 +33,23 @@
 			</interceptor>
 			<interceptor>
 				<mapping path="/user/mypage/**"/>
-				<beans:bean id="mui" class="kr.co.sist.user.interceptor.UserInterceptor"/>
-			</interceptor>
-			<interceptor>
-				<mapping path="/resume/**"/>
-				<beans:bean id="rui" class="kr.co.sist.user.interceptor.UserInterceptor"/>
-			</interceptor>
-			<interceptor>
-				<mapping path="/review/**"/>
-				<beans:bean id="rei" class="kr.co.sist.user.interceptor.UserInterceptor"/>
+				<mapping path="/resume/resumes.do"/>
+				<mapping path="/resume/detail.do"/>
+				<mapping path="/review/reviewWrite.do"/>
+				<mapping path="/review/reviewSurvey.do"/>
+				<exclude-mapping path="/user/mypage/modifyPassPage.do"/>
+				<exclude-mapping path="/user/mypage/modifyPassword.do"/>
+				<exclude-mapping path="/user/mypage/modifyPassProcess.do"/>
+				<exclude-mapping path="/user/mypage/passFlagON.do"/>
+				<exclude-mapping path="/user/mypage/flagOnPage.do"/>
+				<beans:bean id="ui" class="kr.co.sist.user.interceptor.UserInterceptor"/>
 			</interceptor>
 			<interceptor>
 				<mapping path="/manage/**"/>
 				<exclude-mapping path="/manage/adminLogin/adminLoginPage.do"/>
 				<exclude-mapping path="/manage/adminLogin/adminLogin.do"/>
 				<exclude-mapping path="/manage/logoutProcess.do"/>
+				<exclude-mapping path="/manage/adminLogin/logoutProcess.do"/>
 				<beans:bean id="ai" class="kr.co.sist.admin.interceptor.AdminInterceptor"/>
 			</interceptor>
 			<interceptor>

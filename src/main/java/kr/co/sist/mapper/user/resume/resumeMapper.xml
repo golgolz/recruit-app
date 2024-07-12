@@ -8,6 +8,11 @@
 		from resume 
 		where user_id=#{user_id}
     </select>
+    <select id="countResumesPerUser" resultType="int" parameterType="java.lang.String">
+    	select count(*) as count
+		from resume 
+		where user_id=#{user_id}
+    </select>
     <insert id="apply" parameterType="kr.co.sist.user.vo.resume.ApplyVO">
     	INSERT INTO apply (RECRUIT_NUM, RESUME_NUM, USER_ID, PROGRESS_STATE, APPLY_DATE)
 		VALUES (#{recruitNum}, #{resumeNum}, #{userId}, '지원완료', TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-DD'), 'YYYY-MM-DD'))

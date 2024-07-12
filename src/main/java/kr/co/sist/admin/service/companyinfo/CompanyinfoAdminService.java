@@ -88,7 +88,6 @@ public class CompanyinfoAdminService {
             number++;
             //������ ���� ���Ŀ� ���� ���ڿ� ��ȯ
             nextCompNum = String.format("%s%04d", prefix,number);
-
         }catch(PersistenceException pe) {
             pe.printStackTrace();
         }
