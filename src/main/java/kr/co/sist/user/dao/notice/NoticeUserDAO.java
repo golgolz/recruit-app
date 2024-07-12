@@ -18,62 +18,46 @@ public class NoticeUserDAO {
         this.myBatis = myBatis;
     }
 
-    public List<NoticeUserDomain> selectNotices() { // sVO
+    public List<NoticeUserDomain> selectNotices() { // sVOë§Œ ì¶”ê°€ë¨
         SqlSession session = myBatis.getMyBatisHandler(false);
         List<NoticeUserDomain> noticeList =
                 session.selectList("kr.co.sist.notice.user.selectNotices");
         myBatis.closeHandler(session);
         return noticeList;
-    }// °øÁö»çÇ× ÀüÃ¼ ¸®½ºÆ® ºÒ·¯¿À±â
+    }// ì „ì²´ ê³µì§€ì‚¬í•­ ë¶ˆëŸ¬ì˜¤ê¸°
 
-    public List<NoticeUserDomain> selectNoticesByCategory(String category) {
+    public int countNotices() {
+        SqlSession session = myBatis.getMyBatisHandler(false);
+        int count = session.selectOne("kr.co.sist.notice.user.countNotices");
+        myBatis.closeHandler(session);
+        return count;
+    }// ê³µì§€ì‚¬í•­ ì „ì²´ ìˆ˜ ë¶ˆëŸ¬ì˜¤ê¸°
+
+    public List<NoticeUserDomain> selectNoticesByCategory(String category) { // searchVOì¶”ê°€
         SqlSession session = myBatis.getMyBatisHandler(false);
         try {
-            if ("ÀüÃ¼".equals(category)) {
+            if ("ì „ì²´".equals(category)) {
                 List<NoticeUserDomain> noticeList =
                         session.selectList("kr.co.sist.notice.user.selectNotices");
                 for (NoticeUserDomain notice : noticeList) {
                 }
-                return noticeList; // °á°ú ¸®½ºÆ®
+                return noticeList;
             } else {
                 List<NoticeUserDomain> noticeList = session
                         .selectList("kr.co.sist.notice.user.selectNoticesByCategory", category);
                 for (NoticeUserDomain notice : noticeList) {
-
                 }
                 return noticeList;
             }
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException("°øÁö»çÇ× Á¶È¸ Áß ¿À·ù ¹ß»ı", e);
+            throw new RuntimeException("ì˜¤ë¥˜ ë°œìƒ", e);
         } finally {
             myBatis.closeHandler(session);
         }
-    }// °øÁö»çÇ× Ä«Å×°í¸®·Î ºÒ·¯¿À±â
+    }// ê³µì§€ì‚¬í•­ ì¹´í…Œê³ ë¦¬ë³„ ê²€ìƒ‰
 
-    // public Object selectNoticesbyKeyword(String keyword, String searchType) {
-    // SqlSession session = myBatis.getMyBatisHandler(false);
-    // try {
-    // Map<String, String> params = new HashMap<>();
-    // params.put("keyword", keyword);
-    // params.put("searchType", searchType);
-    //
-    // List<NoticeUserDomain> noticeList =
-    // session.selectList("kr.co.sist.notice.user.selectNoticesbyKeyword", params);
-    //
-    // if (noticeList.isEmpty()) {
-    // return null; // °Ë»ö °á°ú ¾øÀ½
-    // } else if (noticeList.size() == 1) {
-    // return noticeList.get(0); // °Ë»ö °á°ú °øÁö»çÇ× ÇÏ³ª
-    // } else {
-    // return noticeList; // °Ë»ö °á°ú °øÁö»çÇ× ¸®½ºÆ®
-    // }
-    // } catch (Exception e) {
-    // throw new RuntimeException("¿À·ù ¹ß»ı", e);
-    // } finally {
-    // myBatis.closeHandler(session);
-    // }
-    // }
+
 
     public List<NoticeUserDomain> selectNoticesbyKeyword(String keyword, String searchType) {
         SqlSession session = myBatis.getMyBatisHandler(false);
@@ -84,14 +68,13 @@ public class NoticeUserDAO {
 
             List<NoticeUserDomain> noticeList =
                     session.selectList("kr.co.sist.notice.user.selectNoticesbyKeyword", params);
-
-            return noticeList; // List<NoticeUserDomain> ÇüÅÂ·Î ¹İÈ¯
+            return noticeList;
         } catch (Exception e) {
-            throw new RuntimeException("¿À·ù ¹ß»ı", e);
+            throw new RuntimeException("ì˜¤ë¥˜", e);
         } finally {
             myBatis.closeHandler(session);
         }
-    }
+    }// ê³µì§€ì‚¬í•­ í‚¤ì›Œë“œë³„ ê²€ìƒ‰
 
 
 
@@ -101,6 +84,6 @@ public class NoticeUserDAO {
                 session.selectOne("kr.co.sist.notice.user.selectOneNotice", notice_num);
         myBatis.closeHandler(session);
         return noticeDtail;
-    }// °øÁö»çÇ× »ó¼¼Á¶È¸
+    }// ê³µì§€ì‚¬í•­ ìƒì„¸ì¡°íšŒ
 
 }

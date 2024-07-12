@@ -13,13 +13,14 @@ import lombok.ToString;
 @ToString
 public class SearchVO {
     private String keyword;
+    private String searchType;
 
-    private int currentPage = 1; // »ç¿ëÀÚ°¡ ÇöÀç º¸°íÀÖ´Â ÆäÀÌÁö ¹øÈ£
-    private int itemsPerPage = 10; // ÇÑ ÆäÀÌÁö¿¡ Ç¥½ÃÇÒ Ç×¸ñÀÇ ¼ö
-    private int totalItems; // ÀüÃ¼ °øÁö»çÇ×ÀÇ ¼ö
-    private int totalPages; // ÀüÃ¼ ÆäÀÌÁöÀÇ ¼ö Ç×¸ñ ¼ö(Ç×¸ñ ¼ö¿Í ÆäÀÌÁö´ç Ç×¸ñ ¼ö¸¦ ±â¹İÀ¸·Î °è»ê)
-    private int startItemIndex; // ÇöÀç ÆäÀÌÁö¿¡¼­ Ã¹ ¹øÂ°·Î Ç¥½ÃµÉ Ç×¸ñÀÇ ÀÎµ¦½º¸¦ ³ªÅ¸³»´Â º¯¼ö
-    private int endItemIndex; // ÇöÀç ÆäÀÌÁö¿¡¼­ ¸¶Áö¸·À¸·Î Ç¥½ÃµÉ Ç×¸ñÀÇ ÀÎµ¦½º¸¦ ³ªÅ¸³»´Â º¯¼ö
+    private int currentPage = 1; // ì‚¬ìš©ìê°€ í˜„ì¬ ë³´ê³ ìˆëŠ” í˜ì´ì§€
+    private int itemsPerPage = 10; // ì „ì²´ í˜ì´ì§€ ìˆ˜
+    private int totalItems; // ì „ì²´ ê²Œì‹œê¸€ ìˆ˜
+    private int totalPages; // ì „ì²´ í˜ì´ì§€ ìˆ˜
+    private int startItemIndex; // í˜„ì¬ í˜ì´ì§€ì—ì„œ ì²« ë²ˆì§¸ë¡œ í‘œì‹œë  í•­ëª©ì˜ ì¸ë±ìŠ¤ë¥¼ ë‚˜íƒ€ë‚´ëŠ” ë³€ìˆ˜
+    private int endItemIndex; // í˜„ì¬ í˜ì´ì§€ì—ì„œ ë§ˆì§€ë§‰ìœ¼ë¡œ í‘œì‹œë  í•­ëª©ì˜ ì¸ë±ìŠ¤ë¥¼ ë‚˜íƒ€ë‚´ëŠ” ë³€ìˆ˜
 
     public void pageIndex() {
         this.startItemIndex = (currentPage - 1) * itemsPerPage + 1;

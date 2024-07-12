@@ -22,13 +22,6 @@ public class QnaAdminController {
         this.qnaAdminService = qnaAdminService;
     }
 
-    // @GetMapping("/manage/qna/new_qnas.do")
-    // public String searchNewQnas(Model model) {
-    // List<Map<String, Object>> newQnas = qnaAdminService.searchNewQnas();
-    // model.addAttribute("newQnas", newQnas);
-    // return "manage/qna/new_qnas";
-    // }// »õ ¹®ÀÇ ¸®½ºÆ® Á¶È¸
-
     @GetMapping("/manage/qna/new_qnas.do")
     public String searchNewQnas(@RequestParam(defaultValue = "1") int currentPage,
             @RequestParam(defaultValue = "10") int itemsPerPage, Model model) {
@@ -46,14 +39,14 @@ public class QnaAdminController {
         model.addAttribute("searchVO", sVO);
 
         return "manage/qna/new_qnas";
-    }
+    } // ìƒˆ ë¬¸ì˜ ë¦¬ìŠ¤íŠ¸ ë¶ˆëŸ¬ì˜¤ê¸°
 
     @GetMapping("/manage/qna/new_detail.do")
     public String searchOneNewQna(@RequestParam("qna_num") int qnaNum, Model model) {
         QnaDomain newDetail = qnaAdminService.searchOneNewQna(qnaNum);
         model.addAttribute("newDetail", newDetail);
         return "manage/qna/new_detail";
-    }// »õ·Î¿î ¹®ÀÇ »ó¼¼Á¶È¸
+    }// ìƒˆ ë¬¸ì˜ ìƒì„¸ì¡°íšŒ
 
     @GetMapping("/manage/qna/qnas.do")
     public String searchOldQnas(@RequestParam(defaultValue = "1") int currentPage,
@@ -72,39 +65,14 @@ public class QnaAdminController {
         model.addAttribute("searchVO", sVO);
 
         return "manage/qna/qnas";
-    }
-
-    // @GetMapping("/manage/qna/qnas.do")
-    // public String searchOldQnas(@RequestParam(defaultValue = "1") int currentPage,
-    // @RequestParam(defaultValue = "10") int itemsPerPage, Model model) {
-    // SearchVO sVO = new SearchVO();
-    // sVO.setCurrentPage(currentPage);
-    // sVO.setItemsPerPage(itemsPerPage);
-    // sVO.pageIndexes();
-    //
-    // int totalItems = qnaAdminService.countQnas();
-    // sVO.setTotalItems(totalItems);
-    // sVO.setTotalPages((int) Math.ceil((double) totalItems / itemsPerPage));
-    //
-    // List<Map<String, Object>> oldQnas = qnaAdminService.searchOldQnas(sVO);
-    // model.addAttribute("oldQnas", oldQnas);
-    // model.addAttribute("searchVO", sVO);
-    // return "manage/qna/qnas";
-    // }
-
-    // @GetMapping("/manage/qna/qnas.do")
-    // public String searchOldQnas(Model model) {
-    // List<Map<String, Object>> oldQnas = qnaAdminService.searchOldQnas();
-    // model.addAttribute("oldQnas", oldQnas);
-    // return "manage/qna/qnas";
-    // } // ´äº¯ ¿Ï·áµÈ ¹®ÀÇ»çÇ× ¸®½ºÆ® Á¶È¸
+    }// ë‹µë³€ ì™„ë£Œë¬¸ì˜ ë¦¬ìŠ¤íŠ¸ ë¶ˆëŸ¬ì˜¤ê¸°
 
     @GetMapping("/manage/qna/old_detail.do")
     public String searchOneOldQna(@RequestParam("qna_num") int qnaNum, Model model) {
         QnaDomain oldDetail = qnaAdminService.searchOneOldQna(qnaNum);
         model.addAttribute("oldDetail", oldDetail);
         return "manage/qna/old_detail";
-    }// ´äº¯ ¿Ï·áµÈ ¹®ÀÇ »ó¼¼Á¶È¸
+    }// ë‹µë³€ì™„ë£Œ ë¬¸ì˜ ìƒì„¸ì¡°íšŒ
 
     @PostMapping("/manage/qna/qnas.do")
     public String addQnaAnswer(QnaVO qVO, Model model) {
@@ -112,14 +80,25 @@ public class QnaAdminController {
         if (result == 1) {
             int qna_num = qVO.getQna_num();
             int result2 = qnaAdminService.updateQnaFlag(qna_num);
-            // System.out.println("¿©±â!!!!!!!" + qna_num);
             if (result2 == 1) {
-                // System.out.println("¿©±â????");
                 qVO.setAns_title("RE:" + qVO.getAns_title());
             }
         }
+        SearchVO sVO = new SearchVO();
+        sVO.setCurrentPage(1); // ê¸°ë³¸ í˜ì´ì§€ 1 ì„¤ì •
+        sVO.setItemsPerPage(10); // ê¸°ë³¸ í•­ëª© ìˆ˜ 10 ì„¤ì •
+        sVO.pageIndexes();
+
+        int totalItems = qnaAdminService.countQnas();
+        sVO.setTotalItems(totalItems);
+        sVO.setTotalPages((int) Math.ceil((double) totalItems / sVO.getItemsPerPage()));
+
+        List<Map<String, Object>> oldQnas = qnaAdminService.searchOldQnas(sVO);
+        model.addAttribute("oldQnas", oldQnas);
+        model.addAttribute("searchVO", sVO);
         model.addAttribute("qnaAnswer", qVO);
+
         return "manage/qna/qnas";
-    }// ¹®ÀÇ Ãß°¡
+    }// ë¬¸ì˜ ë‹µë³€í•˜ê¸°
 
 }
