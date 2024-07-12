@@ -63,4 +63,13 @@ public class NoticeAdminDAO {
         return lastNoticeNum;
     }
 
+    public int deleteHistory(int noticeNum) {
+        int result=0;
+        SqlSession ss=mbConfig.getMyBatisHandler(true);
+        result=ss.delete("kr.co.sist.admin.notice.deleteNotice", noticeNum);
+        mbConfig.closeHandler(ss);
+        
+        return result;
+    }
+
 }

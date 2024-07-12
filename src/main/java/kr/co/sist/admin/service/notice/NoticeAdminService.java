@@ -69,5 +69,18 @@ public class NoticeAdminService {
           
     }
 
+    public boolean deleteNotice(int noticeNum) {
+        boolean result=false;
+        int i=0;
+        i=noticeAdminDAO.deleteHistory(noticeNum);
+        if(i == 0) {
+            result=false;
+        }else {
+            result=true;
+        }
+        
+        return result;
+    }
+
 
 }
