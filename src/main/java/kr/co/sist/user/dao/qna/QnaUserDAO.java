@@ -18,7 +18,7 @@ public class QnaUserDAO {
         this.myBatis = myBatis;
     }
 
-    public List<UserQnaDomain> selectMyQnas(SearchVO sVO) {// searchVOÃß°¡
+    public List<UserQnaDomain> selectMyQnas(SearchVO sVO) {// searchVO
         SqlSession session = myBatis.getMyBatisHandler(false);
         List<UserQnaDomain> qna = null;
         qna = session.selectList("kr.co.sist.qna.user.selectMyQnas", sVO);

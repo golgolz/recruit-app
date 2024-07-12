@@ -21,29 +21,25 @@ public class NoticeUserService {
         List<NoticeUserDomain> notieceList = null;
         notieceList = noticeUserDAO.selectNotices();
         return notieceList;
-    }
+    }// ì „ì²´ ê³µì§€ì‚¬í•­ ë¶ˆëŸ¬ì˜¤ê¸°
 
 
+
+    public int countNotices() {
+        return noticeUserDAO.countNotices();
+    }// ê³µì§€ì‚¬í•­ ì „ì²´ ìˆ˜ ë¶ˆëŸ¬ì˜¤ê¸°
 
     public List<NoticeUserDomain> searchNoticesByCategory(String category) {
         List<NoticeUserDomain> result = noticeUserDAO.selectNoticesByCategory(category);
         return result;
-    }
+    }// ê³µì§€ì‚¬í•­ ì¹´í…Œê³ ë¦¬ë³„ ê²€ìƒ‰
 
-    // public Object searchNoticesbyKeyword(String keyword, String searchType) {
-    // try {
-    // Object result = noticeUserDAO.selectNoticesbyKeyword(keyword, searchType);
-    // return result;
-    // } catch (Exception e) {
-    // throw new RuntimeException("¿À·ù ¹ß»ı", e);
-    // }
-    // }
+
 
     public List<NoticeUserDomain> searchNoticesbyKeyword(String keyword, String searchType) {
         try {
-            // °Ë»ö Å¸ÀÔÀÌ '¼±ÅÃ'ÀÏ °æ¿ì ÀüÃ¼ ¸®½ºÆ®¸¦ ¹İÈ¯
-            if ("¼±ÅÃ".equals(searchType)) {
-                return noticeUserDAO.selectNotices(); // ÀüÃ¼ °øÁö»çÇ× ¸®½ºÆ®¸¦ ¹İÈ¯ÇÏ´Â DAO ¸Ş¼­µå È£Ãâ
+            if ("ì „ì²´".equals(searchType)) {
+                return noticeUserDAO.selectNotices();
             } else {
                 Object result = noticeUserDAO.selectNoticesbyKeyword(keyword, searchType);
                 if (result instanceof List<?>) {
@@ -55,9 +51,9 @@ public class NoticeUserService {
                 }
             }
         } catch (Exception e) {
-            throw new RuntimeException("¿À·ù ¹ß»ı", e);
+            throw new RuntimeException("ì˜¤ë¥˜ ë°œìƒ", e);
         }
-    }
+    }// ê³µì§€ì‚¬í•­ í‚¤ì›Œë“œ ê²€ìƒ‰
 
 
 
@@ -65,5 +61,5 @@ public class NoticeUserService {
         NoticeUserDomain noticeDetail = null;
         noticeDetail = noticeUserDAO.selectOneNotice(notice_num);
         return noticeDetail;
-    }
+    }// ê³µì§€ì‚¬í•­ ìƒì„¸ì¡°íšŒ
 }

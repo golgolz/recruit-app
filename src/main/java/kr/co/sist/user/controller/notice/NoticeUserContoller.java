@@ -28,7 +28,9 @@ public class NoticeUserContoller {
         List<NoticeUserDomain> noticeList = noticeUserService.searchNotices();
         model.addAttribute("noticeList", noticeList);
         return "/notice/notices";
-    } // �������� ����Ʈ �ҷ�����
+    } // 전체 공지사항 불러오기
+
+
 
     @GetMapping("/notice/noticesByCategory.do")
     @ResponseBody
@@ -36,8 +38,10 @@ public class NoticeUserContoller {
         List<NoticeUserDomain> noticeList = noticeUserService.searchNoticesByCategory(category);
         Map<String, Object> response = new HashMap<>();
         response.put("noticeList", noticeList);
-        return response; // �������� ī�װ� �˻�
+        return response; // 공지사항 카테고리별 검색
     }
+
+
 
     @GetMapping("/notice/noticesbyKeyword.do")
     @ResponseBody
@@ -47,19 +51,18 @@ public class NoticeUserContoller {
         System.out
                 .println("Received search keyword: " + keyword + " and searchType: " + searchType);
         List<NoticeUserDomain> noticeList;
-        // �˻� �ɼ��� '����'�� ��� ��ü �������� ����Ʈ�� ���������� ó��
-        if ("����".equals(searchType)) {
-            noticeList = noticeUserService.searchNotices(); // ��ü �������� ����Ʈ�� �������� �޼���
-                                                            // ȣ��
+        if ("선택".equals(searchType)) {
+            noticeList = noticeUserService.searchNotices();
         } else {
-            // ��Ÿ �˻� Ÿ�Կ� ���� �ʿ��� ���� ����
             noticeList = noticeUserService.searchNoticesbyKeyword(keyword, searchType);
         }
         Map<String, Object> response = new HashMap<>();
         response.put("noticeList", noticeList);
         // System.out.println("~~~~~~~~~~searchResult~~~~" + noticeList);
         return ResponseEntity.ok(response);
-    }
+    }// 공지사항 키워드 검색
+
+
 
     @GetMapping("/notice/detail.do")
     public String searchOneNotice(NoticeUserVO nVO, Model model) {
@@ -67,7 +70,7 @@ public class NoticeUserContoller {
         NoticeUserDomain noticeDetail = noticeUserService.searchOneNotice(notice_num);
         model.addAttribute("noticeDetail", noticeDetail);
         return "notice/detail";
-    } // ���û��� ������ȸ
+    } // 공지사항 상세조회
 
 }
 
