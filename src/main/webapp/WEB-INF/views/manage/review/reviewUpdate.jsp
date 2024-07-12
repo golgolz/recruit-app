@@ -4,13 +4,26 @@
 <html>
 <head>
     <jsp:include page="/WEB-INF/views/assets/layout/admin/lib.jsp" />
-    <link rel="stylesheet" type="text/css" href="https://img.echosting.cafe24.com/editors/froala/css/froala_style_ec.min.css?vs=2404251303" charset="utf-8"/>
-    <link rel="stylesheet" type="text/css" href="https://insideobject.com/ind-script/optimizer.php?filename=nZExDgIxDAT7KC3vsOAJPIEfOMFwJxJv5DgS_J6jggYJ0o52doulBVVofzBqhqtxJZOOYVko904Xgzpl1AqNG9jRL3nJoaMMX6Eh4T4pDvfZ0cIPsTnVORWZVNFCWVVCYtWv-9waHcF2ptNn3YZjeuGYCvJtVjZpMP_Pft_7BA&type=css&k=ecd691e0c80070ef935d0e961272742f67437a3c&t=1681776733" />
-    <link rel="stylesheet" type="text/css" href="https://insideobject.com/ind-script/optimizer_user.php?filename=tZRNbgMhDIX3M932HE5U5R6VegJgnMGKwQjDpLl9aVL1Z9uBHcboe9bTw-AlIKCbq2JWYDojG3t4ORwhVcvkZl8Cgy44L6i0RtALxeMJnCoEWSojWDF5gWumgq_GXcyKT637DP9Fs7lJLWCNkrvrOAlBYmfo46IzFN3UCpwqDQIXES6UBtE98ih0yi0sbpTfyawUTcFRrhs7iGxrKd2j_Q2X93GG8Ciz2zO3D72cWSRD4tpS0aop40Z4_TkNmrw1MO9j_1qrXzKhtg-vXtKbp5Qorr0FnMStMUhi2ul7kIxxuz00eiztv0DVT9oH&type=css&k=2ac0432e370996de85bc64830c9b818c88b32f75&t=1678165953&user=T" />
-    <link rel="canonical" href="https://insideobject.com/board/product/write.html" />
-    <link rel="alternate" href="https://m.insideobject.com/board/product/write.html" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/layout/user/btn-bootstrap.css" />
+
+
+<jsp:include page="../../assets/layout/admin/header.jsp" />
+
+<script type="text/javascript">
+	$(function(){
+    	$("#review_menu").addClass("bg-gradient-primary");
+	});
+</script>
+<!-- golgolz start -->
+<link rel="stylesheet" type="text/css" href="https://img.echosting.cafe24.com/editors/froala/css/froala_style_ec.min.css?vs=2404251303" charset="utf-8"/>
+<link rel="stylesheet" type="text/css" href="https://insideobject.com/ind-script/optimizer.php?filename=nZExDgIxDAT7KC3vsOAJPIEfOMFwJxJv5DgS_J6jggYJ0o52doulBVVofzBqhqtxJZOOYVko904Xgzpl1AqNG9jRL3nJoaMMX6Eh4T4pDvfZ0cIPsTnVORWZVNFCWVVCYtWv-9waHcF2ptNn3YZjeuGYCvJtVjZpMP_Pft_7BA&type=css&k=ecd691e0c80070ef935d0e961272742f67437a3c&t=1681776733"  />
+<link rel="stylesheet" type="text/css" href="https://insideobject.com/ind-script/optimizer_user.php?filename=tZRNbgMhDIX3M932HE5U5R6VegJgnMGKwQjDpLl9aVL1Z9uBHcboe9bTw-AlIKCbq2JWYDojG3t4ORwhVcvkZl8Cgy44L6i0RtALxeMJnCoEWSojWDF5gWumgq_GXcyKT637DP9Fs7lJLWCNkrvrOAlBYmfo46IzFN3UCpwqDQIXES6UBtE98ih0yi0sbpTfyawUTcFRrhs7iGxrKd2j_Q2X93GG8Ciz2zO3D72cWSRD4tpS0aop40Z4_TkNmrw1MO9j_1qrXzKhtg-vXtKbp5Qorr0FnMStMUhi2ul7kIxxuz00eiztv0DVT9oH&type=css&k=2ac0432e370996de85bc64830c9b818c88b32f75&t=1678165953&user=T"  />
+
+<link rel="canonical" href="https://insideobject.com/board/product/write.html" />
+<link rel="alternate" href="https://m.insideobject.com/board/product/write.html" />
+<!-- golgolz end -->
+
     <style text="text/css">
+    
         .companyInfo {
             margin-top: 20px;
             display: flex;
@@ -34,7 +47,7 @@
 </head>
 <body>
     <div id="__next" data-reactroot="">
-        <jsp:include page="/WEB-INF/views/assets/layout/admin/header.jsp" />
+   		 
         <main class="JobsFeed_Jobsfeed__DpeV9">
             <section class="Section_Section__P1hhc">
                 <div>
@@ -58,7 +71,8 @@
                 <tr>
                     <th scope="row">제목</th>
                     <td>
-                        <input id="title" name="title" class="inputTypeText" placeholder="제목을 입력하세요" value="${review.title}" maxLength="125" type="text" required />
+                        <input id="title" name="title" class="inputTypeText" placeholder="제목을 입력하세요" value="${review.title}" 
+                        maxLength="125" type="text" required  style="width: 350px; height: 30px"/>
                     </td>
                 </tr>
                 <tr>

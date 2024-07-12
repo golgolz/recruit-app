@@ -48,8 +48,8 @@ public class MainController {
             }
         }
 
-        // ·Î±× Ãß°¡
-        System.out.println("ÄíÅ°¿¡¼­ ºÒ·¯¿Â viewHistoryCookie: " + viewHistoryCookie);
+        // ë””ë²„ê¹… ë¡œê·¸ ì¶”ê°€
+        System.out.println("ì¿ í‚¤ì—ì„œ ì¶”ì¶œí•œ viewHistoryCookie: " + viewHistoryCookie);
 
         viewHistory = mainService.getViewHistoryFromCookie(viewHistoryCookie);
 
@@ -58,19 +58,19 @@ public class MainController {
         model.addAttribute("highSalaryPositions", highSalaryPositions);
         model.addAttribute("viewHistory", viewHistory);
 
-        return "main/main"; // "WEB-INF/views/main/main.jsp" °æ·Î¿¡ ¸ÅÇÎ
+        return "main/main"; // "WEB-INF/views/main/main.jsp" íŒŒì¼ê³¼ ë§¤í•‘
     }
 
     @GetMapping("/detail.do")
     public String mainDetail(HttpServletRequest request, HttpServletResponse response, @RequestParam("id") String recruitNum, Model model) throws Exception {
-        // µğ¹ö±ë ·Î±× Ãß°¡
-        System.out.println("mainDetail ¸Ş¼Òµå È£ÃâµÊ - recruitNum: " + recruitNum);
+        // ë””ë²„ê¹… ë¡œê·¸ ì¶”ê°€
+        System.out.println("mainDetail ë©”ì†Œë“œ í˜¸ì¶œ - recruitNum: " + recruitNum);
 
-        // °ø°í »ó¼¼ Á¤º¸¸¦ °¡Á®¿À´Â ·ÎÁ÷ Ãß°¡
+        // ì±„ìš© ê³µê³  ìƒì„¸ ì •ë³´ ì¡°íšŒ
         MainVO recruitDetail = mainService.getRecruitDetail(recruitNum);
         model.addAttribute("recruitDetail", recruitDetail);
 
-        // ÄíÅ°¿¡ ¹æ¹® ±â·Ï Ãß°¡
+        // ì¿ í‚¤ì— ë°©ë¬¸ ê¸°ë¡ ì¶”ê°€
         Cookie[] cookies = request.getCookies();
         String viewHistoryCookie = null;
         if (cookies != null) {
@@ -82,8 +82,8 @@ public class MainController {
             }
         }
 
-        // ·Î±× Ãß°¡
-        System.out.println("±âÁ¸ ÄíÅ° °ª: " + viewHistoryCookie);
+        // ë””ë²„ê¹… ë¡œê·¸ ì¶”ê°€
+        System.out.println("ê¸°ì¡´ ì¿ í‚¤ ê°’: " + viewHistoryCookie);
 
         if (viewHistoryCookie == null) {
             viewHistoryCookie = recruitNum;
@@ -93,14 +93,36 @@ public class MainController {
 
         String encodedCookieValue = URLEncoder.encode(viewHistoryCookie, "UTF-8");
         Cookie newCookie = new Cookie("viewHistory", encodedCookieValue);
-        newCookie.setMaxAge(60 * 60 * 1 * 1); // ÄíÅ° À¯È¿±â°£ 1½Ã°£
+        newCookie.setMaxAge(60 * 60 * 1); // ì¿ í‚¤ ìœ íš¨ê¸°ê°„ 1ì‹œê°„
         newCookie.setPath("/");
 
-        // ÄíÅ° ¼³Á¤ ÈÄ ·Î±× Ãâ·Â
-        System.out.println("¼³Á¤ÇÒ ÄíÅ° °ª: " + newCookie.getValue());
-
+        // ì¿ í‚¤ ì„¤ì • ë° ë¡œê·¸ ì¶”ê°€
         response.addCookie(newCookie);
 
-        return "recruit/detail"; // °ø°í »ó¼¼ ÆäÀÌÁö JSP °æ·Î
+        return "recruit/detail"; // ìƒì„¸ í˜ì´ì§€ë¡œ ì´ë™í•  JSP ê²½ë¡œ
     }
+    
+    
+    @GetMapping("/logout")
+    public String logout(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        // ì„¸ì…˜ ë¬´íš¨í™”
+        session.invalidate();
+
+        // ì¿ í‚¤ ì‚­ì œ
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("viewHistory".equals(cookie.getName())) {
+                    cookie.setValue(null);
+                    cookie.setMaxAge(0);
+                    cookie.setPath("/");
+                    response.addCookie(cookie);
+                }
+            }
+        }
+
+        // ë¦¬ë””ë ‰ì…˜ ì„¤ì • (ì¿¼ë¦¬ íŒŒë¼ë¯¸í„° ì—†ì´)
+        return "redirect:/main/main.do";
+    }
+    
 }

@@ -3,6 +3,7 @@ package kr.co.sist.user.controller.basic;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,6 +20,12 @@ public class UserBasicController {
 
     public UserBasicController(UserBasicService ubs) {
         this.ubs = ubs;
+    }
+
+    @GetMapping("/user/chkLogin.do")
+    public String chkLogin(Model model) {
+        model.addAttribute("resultMsg", "로그인 하셔야 사용 가능한 서비스입니다.");
+        return "user/chkLogin";
     }
 
     @GetMapping("/user/loginPage.do")
@@ -75,7 +82,7 @@ public class UserBasicController {
         String userId = ubs.findUserId(fmVO);
         if (userId == null || userId.isEmpty()) {
             String resultMsg = "입력하신 정보로 조회되는 정보가 없습니다.";
-            redirectAttributes.addFlashAttribute("resultMsg", "입력하신 정보로 조회되는 정보가 없습니다.");
+            redirectAttributes.addFlashAttribute("resultMsg", resultMsg);
             return "redirect:/user/findMail.do";
         } else {
             redirectAttributes.addFlashAttribute("findUserId", userId);

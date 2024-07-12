@@ -106,13 +106,47 @@
 
 	                form.append(detailButton);
 	                
+	             // 마스킹된 데이터를 span 요소로 감싸고 data-original 속성에 원본 데이터 저장
 	                row.append($('<td>').text(index + startNum))
-	                   .append($('<td>').text(userInfo.name))
-	                   .append($('<td>').text(userInfo.userId))
-	                   .append($('<td>').text(userInfo.phone))
+	                  .append($('<td>')
+				      .append($('<span>')
+				        .addClass('masked-data')
+				        .attr('data-original', userInfo.name)
+				        .attr('data-type', 'name') // 데이터 타입 추가
+				        .text(maskData(userInfo.name, 'name')) // maskData 함수 사용
+				      )
+				      .append($('<button>')
+				        .addClass('reveal-button')
+				        .text('👁️‍🗨️')
+				      )
+				    )
+	                  .append($('<td>')
+				      .append($('<span>')
+				        .addClass('masked-data')
+				        .attr('data-original', userInfo.userId)
+				        .attr('data-type', 'email') // 데이터 타입 추가
+				        .text(maskData(userInfo.userId, 'email')) // maskData 함수 사용
+				      )
+				      .append($('<button>')
+				        .addClass('reveal-button')
+				        .text('👁️‍🗨️')
+				      )
+				    )
+	                  .append($('<td>')
+				      .append($('<span>')
+				        .addClass('masked-data')
+				        .attr('data-original', userInfo.phone)
+				        .attr('data-type', 'phone') // 데이터 타입 추가
+				        .text(maskData(userInfo.phone, 'phone')) // maskData 함수 사용
+				      )
+				      .append($('<button>')
+				        .addClass('reveal-button')
+				        .text('👁️‍🗨️')
+				      )
+				    )
+	                   //.append($('<td>').text(userInfo.phone))
 	                   .append($('<td>').text(userInfo.signupDate))
 	                   .append($('<td>').append(form));
-	                   //.append($('<td>').html('<input type="button" value="상세조회" class="btn btn-outline-secondary btn-sm detailBtn" style="font-weight: bold; margin:0px auto;"/>'));
 
 	                tableBody.append(row);
 	            });//each
@@ -203,6 +237,46 @@
 
 	                $('.pagination').html(paginationHtml);
 	            }//function
+	            
+	            $(document).on('click', '.reveal-button', function() {
+	                var $maskedData = $(this).siblings('.masked-data');
+	                var originalData = $maskedData.attr('data-original');
+	                var dataType = $maskedData.attr('data-type');
+	                var currentData = $maskedData.text();
+
+	                if (currentData === maskData(originalData, dataType)) {
+	                    $maskedData.text(originalData);
+	                } else { 
+	                    $maskedData.text(maskData(originalData, dataType)); 
+	                }
+	            });//click
+	            
+	            function maskString(str, startLen = 2, endLen = 2) {
+	              if (!str) return '';
+	              const length = str.length;
+	              const maskLen = Math.max(0, length - startLen - endLen); 
+	              return str.substring(0, startLen) + '*'.repeat(maskLen) + str.substring(length - endLen);
+	            }//function
+	            
+	            function maskData(data, type) {
+	            	  if (!data) return '';
+
+	            	  switch (type) {
+	            	    case 'email':
+	            	      return maskString(data, 2, 2);
+	            	    case 'name':
+	            	      return maskString(data, 1, 1);
+	            	    case 'phone':
+	            	      const match = data.match(/^(\d{3})-(\d{4})-(\d{4})$/);
+	            	      if (match) {
+	            	        return maskString(data, 4, 5); 
+	            	      } else {
+	            	        return maskString(data, 4, 5); 
+	            	      }
+	            	    default:
+	            	      return data; 
+	            	  }
+	            	}//function
 	});//ready
 </script>
 <!-- golgolz start -->

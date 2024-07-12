@@ -75,7 +75,7 @@
 		     function validatePass(){
 		    	 var pass = passwordInput.val().trim();
 		    	 // 비밀번호 유효성 정규식
-		    	 var passRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()-=])[a-zA-Z\d!@#$%^&*()-=]{8,16}$/;
+		    	 var passRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()-_=+])[a-zA-Z\d!@#$%^&*()-_=+]{8,16}$/;
 		    	 return passRegex.test(pass);
 		    	}
 		    

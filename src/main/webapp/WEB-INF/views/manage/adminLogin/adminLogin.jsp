@@ -2,6 +2,12 @@
     pageEncoding="UTF-8" info=""%>
 <!doctype html>
 <html lang="ko" data-bs-theme="auto">
+<%
+	Object adminId = request.getAttribute("adminId");
+	if(adminId != null){
+	    response.sendRedirect("http://localhost/recruit-app/manage/dashboard/dashboard.do");
+	}
+%>
 <% String resultMsg = (String)request.getAttribute("resultMsg"); %>
   <head>
   	<script src="https://getbootstrap.com/docs/5.3/assets/js/color-modes.js"></script>
@@ -119,7 +125,6 @@
 	    	adminLoginFrm = $('#adminLoginFrm');
 	    	
 	    	$('#loginBtn').click(function(){
-	    		//adminLoginFrm.attr("action","../dashboard.do").submit();
 	    		
 	    		adminLoginFrm.submit();
 	    		

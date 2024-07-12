@@ -16,7 +16,7 @@
 			<li class="LnbDesktop_LnbDesktop__item__sZEI4"><a
 				class="Button_Button__root__V1ie3 Button_Button__text__GCOTx Button_Button__textAssistive__Dx57x Button_Button__textSizeMedium__KekFB Button_Button__fullWidth__RU4tf LnbDesktop_LnbDesktop__text__2eGDD LnbDesktop_LnbDesktop__activeLink__A05_V"
 				data-attribute-id="myActivity__snb" data-snb-kind="profile"
-				href="http://localhost/recruit-app/resumes.do"><span
+				href="http://localhost/recruit-app/resume/resumes.do"><span
 					class="Button_Button__label__1Kk0v"><h6
 							class="Typography_Typography__root__xYuMs Typography_Typography__headline1__R9fZk Typography_Typography__weightBold__e15ql">
 							이력서 관리</h6></span><span class="Button_Button__interaction__kkYaa"></span></a></li>
