@@ -23,9 +23,9 @@ public class AdminReviewDAO {
     }
 
     /**
-     * ID·Î ¸®ºä °Ë»ö
-     * @param userId »ç¿ëÀÚ ID
-     * @return ÇØ´ç »ç¿ëÀÚ ID¸¦ °¡Áø ¸®ºä ¸®½ºÆ®
+     * IDï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½
+     * @param userId ï¿½ï¿½ï¿½ï¿½ï¿½ ID
+     * @return ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ IDï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
      */
     public List<ReviewVO> searchReviewById(String userId) {
         logger.debug("searchReviewById called with userId: {}", userId);
@@ -37,9 +37,9 @@ public class AdminReviewDAO {
     }
 
     /**
-     * ÀÌ¸§À¸·Î ¸®ºä °Ë»ö
-     * @param name »ç¿ëÀÚ ÀÌ¸§
-     * @return ÇØ´ç »ç¿ëÀÚ ÀÌ¸§À» °¡Áø ¸®ºä ¸®½ºÆ®
+     * ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½
+     * @param name ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½
+     * @return ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
      */
     public List<ReviewVO> searchReviewByName(String name) {
         logger.debug("searchReviewByName called with name: {}", name);
@@ -51,9 +51,9 @@ public class AdminReviewDAO {
     }
 
     /**
-     * Á¦¸ñ ¶Ç´Â ³»¿ëÀ¸·Î ¸®ºä °Ë»ö
-     * @param keyword °Ë»ö Å°¿öµå
-     * @return ÇØ´ç Å°¿öµå¸¦ Æ÷ÇÔÇÑ Á¦¸ñ ¶Ç´Â ³»¿ëÀ» °¡Áø ¸®ºä ¸®½ºÆ®
+     * ï¿½ï¿½ï¿½ï¿½ ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½
+     * @param keyword ï¿½Ë»ï¿½ Å°ï¿½ï¿½ï¿½ï¿½
+     * @return ï¿½Ø´ï¿½ Å°ï¿½ï¿½ï¿½å¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
      */
     public List<ReviewVO> searchReviewByTitleOrContent(String keyword) {
         logger.debug("searchReviewByTitleOrContent called with keyword: {}", keyword);
@@ -65,8 +65,8 @@ public class AdminReviewDAO {
     }
 
     /**
-     * ÀüÃ¼ ¸®ºä Á¶È¸
-     * @return ¸ğµç ¸®ºä ¸®½ºÆ®
+     * ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
+     * @return ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
      */
     public List<ReviewVO> getAllReviews() {
         logger.debug("getAllReviews called");
@@ -77,7 +77,7 @@ public class AdminReviewDAO {
         return result;
     }
 
-    // ¸®ºä »ó¼¼ Á¶È¸
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½È¸
     public ReviewDetailVO getReviewDetailsForUpdate(int reviewNum) {
         logger.debug("getReviewDetailsForUpdate called with reviewNum: {}", reviewNum);
         SqlSession session = myBatis.getMyBatisHandler(false);
@@ -87,17 +87,17 @@ public class AdminReviewDAO {
         return result;
     }
 
- // ¸®ºä ¾÷µ¥ÀÌÆ®
+ // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
     public int updateReview(ReviewDetailVO review) {
         logger.debug("updateReview called with review: {}", review);
         SqlSession session = myBatis.getMyBatisHandler(false);
         int result = 0;
         try {
             result = session.update("kr.co.sist.mapper.admin.review.AdminReviewMapper.updateReview", review);
-            session.commit();  // ¸í½ÃÀûÀ¸·Î Ä¿¹Ô È£Ãâ
+            session.commit();  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ä¿ï¿½ï¿½ È£ï¿½ï¿½
         } catch (Exception e) {
             logger.error("Error occurred during updateReview", e);
-            session.rollback();  // ¿¹¿Ü ¹ß»ı ½Ã ·Ñ¹é
+            session.rollback();  // ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ ï¿½ï¿½ ï¿½Ñ¹ï¿½
         } finally {
             myBatis.closeHandler(session);
         }
@@ -105,21 +105,22 @@ public class AdminReviewDAO {
         return result;
     }
 
-    // ¸®ºä »èÁ¦
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public int deleteReview(int reviewNum) {
         logger.debug("deleteReview called with reviewNum: {}", reviewNum);
         SqlSession session = myBatis.getMyBatisHandler(false);
         int result = 0;
         try {
             result = session.delete("kr.co.sist.mapper.admin.review.AdminReviewMapper.deleteReview", reviewNum);
-            session.commit();  // ¸í½ÃÀûÀ¸·Î Ä¿¹Ô È£Ãâ
+            session.commit();
         } catch (Exception e) {
-            logger.error("Error occurred during deleteReview", e);
-            session.rollback();  // ¿¹¿Ü ¹ß»ı ½Ã ·Ñ¹é
+            logger.error("Error deleting review", e);
+            session.rollback();
+            throw e; // ì˜ˆì™¸ë¥¼ ìƒìœ„ ê³„ì¸µìœ¼ë¡œ ì „ë‹¬
         } finally {
             myBatis.closeHandler(session);
         }
-        logger.debug("deleteReview result: {}", result);
+        logger.debug("deleteReview result from DB: {}", result);
         return result;
     }
 }
