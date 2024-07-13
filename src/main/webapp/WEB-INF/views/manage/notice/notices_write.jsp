@@ -154,8 +154,8 @@ System.out.print("공지사항 아이디: "+notice_id);
 	  </select> -->
 		<input id="title" name="title" class="inputTypeText" placeholder="" maxLength="125" value="" type="text" style="height:30px; width:500px" />
             <select id="noticeCategory" name="category" value="">
-            	<option value="공지">공지</option>
-            	<option value="서비스">서비스</option>
+            	<option value="이벤트">이벤트</option>
+            	<option value="서비스종료">서비스종료</option>
             	<option value="안내">안내</option>
             </select>
  	</td>

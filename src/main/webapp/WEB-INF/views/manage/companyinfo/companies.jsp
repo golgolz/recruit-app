@@ -157,7 +157,7 @@
 					</div>
 				</form>
 				<div class="local_ov mart30"  align="right">
-					<input type="button" value="등록하기" class="btn btn-outline-success btn-sm float-right" style="font-weight: bold; margin: 10px auto;" onclick="location.href='http://localhost/recruit-app/companyinfo/adminCompanyinfoWrite.do'" />
+					<input type="button" value="등록하기" class="btn btn-outline-success btn-sm float-right" style="font-weight: bold; margin: 10px auto;" onclick="location.href='http://localhost/recruit-app/manage/companyinfo/adminCompanyinfoWrite.do'" />
 				</div>
 				<form name="forderlist" id="forderlist" method="post">
 					<input type="hidden" name="q1" value="code=list"> <input

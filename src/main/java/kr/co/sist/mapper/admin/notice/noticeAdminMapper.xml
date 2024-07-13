@@ -34,16 +34,15 @@
     	WHERE ROWNUM=1
     	ORDER BY NOTICE_NUM DESC
     </select>
-    <insert id="insertNotice" parameterType="kr.co.sist.admin.vo.notice.SearchVO">
+    <insert id="insertNotice" parameterType="kr.co.sist.admin.vo.notice.NoticeAdminVO">
     	INSERT INTO NOTICE(NOTICE_NUM, CATEGORY, TITLE, CONTENT, ADMIN_ID, MODIFIER, INPUT_DATE, UPDATE_DATE, BLIND_FLAG)
 		VALUES(#{noticeNum},#{category},#{title},#{content},#{adminId},#{modifier},SYSDATE,SYSDATE,#{blindFlag})
     </insert>
-    <update id="updateNotice" parameterType="kr.co.sist.admin.vo.notice.SearchVO">
+    <update id="updateNotice" parameterType="kr.co.sist.admin.vo.notice.NoticeAdminVO">
     	UPDATE NOTICE
     	SET CATEGORY=#{category},
     		TITLE=#{title},
-    		CONTENT=#{content},
-    		UPDATE_DATE=SYSDATE,
+    		CONTENT=#{content}
 		WHERE NOTICE_NUM=#{ noticeNum }
     </update>
     <delete id="deleteNotice" parameterType="int">
