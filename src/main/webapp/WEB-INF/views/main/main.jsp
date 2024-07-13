@@ -341,6 +341,7 @@
 
 <!-- 네 번째 테마: 조회 기록 -->
 
+<!-- 네 번째 테마: 조회 기록 -->
 <article class="ViewHistory_ViewHistory__xyz">
     <div class="CarouselContainer_CarouselContainer__95CM6">
         <aside class="CarouselHeader_CarouselHeader__d4DeW">
@@ -348,7 +349,7 @@
             <div class="CarouselHeader_CarouselHeader__action__C_6l_">
                 <a href="" class="CarouselHeader_CarouselHeader__link__WWKP1" data-attribute-id="jobs__seeMore" data-domain="recommendPosition">전체보기<span class="CarouselHeader_CarouselHeader__link__interaction__RUr0k"></span></a>
                 <div class="CarouselNavigation_CarouselNavigation__V89Z_">
-                    <button class="IconButton_IconButton__root__dO2x7 IconButton_IconButton__normal__O3ySx prev-3 CarouselNavigation_CarouselNavigation__left__MtZCF" aria-label="이전" style="font-size: 15px;">
+                    <button class="IconButton_IconButton__root__dO2x7 IconButton_IconButton__normal__O3ySx prev-4 CarouselNavigation_CarouselNavigation__left__MtZCF" aria-label="이전" style="font-size: 15px;">
                         <span class="IconButton_IconButton__label__ZcWfp">
                             <svg width="12" height="12" viewBox="0 0 12 12">
                                 <path fill="#70737C" d="M3.345 9.72a.75.75 0 0 0 1.06 1.06l4.25-4.25a.75.75 0 0 0 0-1.06l-4.25-4.25a.75.75 0 0 0-1.06 1.06L7.065 6l-3.72 3.72z"></path>
@@ -356,7 +357,7 @@
                         </span>
                         <span class="IconButton_IconButton__interaction__7RjPt"></span>
                     </button>
-                    <button class="IconButton_IconButton__root__dO2x7 IconButton_IconButton__normal__O3ySx next-3 CarouselNavigation_CarouselNavigation__right__2qsYe" aria-label="다음" style="font-size: 15px;">
+                    <button class="IconButton_IconButton__root__dO2x7 IconButton_IconButton__normal__O3ySx next-4 CarouselNavigation_CarouselNavigation__right__2qsYe" aria-label="다음" style="font-size: 15px;">
                         <span class="IconButton_IconButton__label__ZcWfp">
                             <svg width="12" height="12" viewBox="0 0 12 12">
                                 <path fill="#70737C" d="M3.345 9.72a.75.75 0 0 0 1.06 1.06l4.25-4.25a.75.75 0 0 0 0-1.06l-4.25-4.25a.75.75 0 0 0-1.06 1.06L7.065 6l-3.72 3.72z"></path>
@@ -367,10 +368,10 @@
                 </div>
             </div>
         </aside>
-        <div class="CarouselContainer_CarouselContainer__slider__zf_Yl">
+        <div class="CarouselContainer_CarouselContainer__slider__zf_Yl view-history-slider">
             <div class="slick-slider slick-initialized" dir="ltr">
                 <div class="slick-list">
-                    <div class="slick-track" id="slick-track-3" style="width: 100%; opacity: 1; transform: translate3d(0px, 0px, 0px);">
+                    <div class="slick-track" id="slick-track-4" style="width: 100%; opacity: 1; transform: translate3d(0px, 0px, 0px);">
                         <c:forEach var="post" items="${viewHistory}">
                             <div class="slick-slide" tabindex="-1" aria-hidden="false" style="outline: none; width: calc(25% - 10px); margin-right: 10px;">
                                 <a href="../recruit/detail.do?id=${post.recruitNum}">
@@ -421,6 +422,32 @@
         infinite: false,
         adaptiveHeight: true
       });
+      $('#slick-track-2').slick({
+          prevArrow: '.prev-1',
+          nextArrow: '.next-1',
+          slidesToShow: 4,
+          slidesToScroll: 4,
+          infinite: false,
+          adaptiveHeight: true
+        });
+      $('#slick-track-3').slick({
+          prevArrow: '.prev-1',
+          nextArrow: '.next-1',
+          slidesToShow: 4,
+          slidesToScroll: 4,
+          infinite: false,
+          adaptiveHeight: true
+        });
+      
+      $('#slick-track-4').slick({
+          prevArrow: '.prev-4',
+          nextArrow: '.next-4',
+          slidesToShow: 4,
+          slidesToScroll: 4,
+          infinite: false,
+          adaptiveHeight: true
+        });
+      
     });
   </script>
 

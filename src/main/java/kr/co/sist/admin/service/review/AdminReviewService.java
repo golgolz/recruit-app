@@ -4,6 +4,7 @@ package kr.co.sist.admin.service.review;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import kr.co.sist.admin.dao.review.AdminReviewDAO;
 import kr.co.sist.admin.vo.review.ReviewDetailVO;
 import kr.co.sist.admin.vo.review.ReviewVO;
@@ -30,7 +31,7 @@ public class AdminReviewService {
         return adminReviewDAO.searchReviewByTitleOrContent(keyword);
     }
     
-    //¸®ºä »ó¼¼ Á¶È¸
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½È¸
     public ReviewDetailVO getReviewDetailsForUpdate(int reviewNum) {
         return adminReviewDAO.getReviewDetailsForUpdate(reviewNum);
     }
@@ -39,8 +40,10 @@ public class AdminReviewService {
         adminReviewDAO.updateReview(review);
     }
 
-    public void deleteReview(int reviewNum) {
-        adminReviewDAO.deleteReview(reviewNum);
+    @Transactional
+    public boolean deleteReview(int reviewNum) {
+        int result = adminReviewDAO.deleteReview(reviewNum);
+        return result > 0;
     }
     
 }
