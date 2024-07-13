@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.co.sist.properties.MyBatisConfig;
 import kr.co.sist.user.domain.resume.ResumeListDomain;
 import kr.co.sist.user.vo.resume.ApplyVO;
+import kr.co.sist.user.vo.resume.EducationVO;
 import kr.co.sist.user.vo.resume.ResumeVO;
 import kr.co.sist.user.vo.resume.SkillVO;
 
@@ -77,13 +78,11 @@ public class ResumeUserDAO {
         }
 
         myBatis.closeHandler(session);
-
         saveResumeData(resumeVO);
         return 0;
     }
 
     public void saveResumeData(ResumeVO resumeVO) {
-        System.out.println("saveResumeData");
         ObjectMapper mapper = new ObjectMapper();
         try {
             Map<String, Object> subData = mapper.readValue(resumeVO.getSubData(),
@@ -101,6 +100,18 @@ public class ResumeUserDAO {
             deleteSkill(resumeNum);
             insertSkill(skills);
 
+            // Education 처리
+            List<EducationVO> educations = mapper.convertValue(subData.get("education"),
+                    new TypeReference<List<EducationVO>>() {});
+            // System.out.println("edu size is " + educations.size()); --- > why 1?
+            if (educations != null && !educations.isEmpty()) {
+                for (EducationVO education : educations) {
+                    education.setResumeNum(resumeNum);
+                }
+
+                deleteEdu(resumeNum);
+                insertEdu(educations);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -111,6 +122,21 @@ public class ResumeUserDAO {
         int result = session.insert("kr.co.sist.resume.user.insertSkill", skills);
 
         if (result == skills.size()) {
+            session.commit();
+        } else {
+            session.rollback();
+        }
+
+        myBatis.closeHandler(session);
+
+        return result;
+    }
+
+    public int insertEdu(List<EducationVO> edus) {
+        SqlSession session = myBatis.getMyBatisHandler(false);
+        int result = session.insert("kr.co.sist.resume.user.insertEducation", edus);
+
+        if (result == edus.size()) {
             session.commit();
         } else {
             session.rollback();
@@ -132,68 +158,44 @@ public class ResumeUserDAO {
     }
 
     public int deleteEdu(String resumeNum) {
-        SqlSession session = myBatis.getMyBatisHandler(false);
+        SqlSession session = myBatis.getMyBatisHandler(true);
 
         int result = 0;
 
         result = session.delete("kr.co.sist.resume.user.deleteEdu", resumeNum);
-
-        if (result != 1) {
-            session.rollback();
-        } else {
-            session.commit();
-        }
 
         myBatis.closeHandler(session);
         return 0;
     }
 
     public int deleteCareer(String resumeNum) {
-        SqlSession session = myBatis.getMyBatisHandler(false);
+        SqlSession session = myBatis.getMyBatisHandler(true);
 
         int result = 0;
 
         result = session.delete("kr.co.sist.resume.user.deleteCareer", resumeNum);
-
-        if (result != 1) {
-            session.rollback();
-        } else {
-            session.commit();
-        }
 
         myBatis.closeHandler(session);
         return 0;
     }
 
     public int deleteCertification(String resumeNum) {
-        SqlSession session = myBatis.getMyBatisHandler(false);
+        SqlSession session = myBatis.getMyBatisHandler(true);
 
         int result = 0;
 
         result = session.delete("kr.co.sist.resume.user.deleteCertification", resumeNum);
-
-        if (result != 1) {
-            session.rollback();
-        } else {
-            session.commit();
-        }
 
         myBatis.closeHandler(session);
         return 0;
     }
 
     public int deleteLanguage(String resumeNum) {
-        SqlSession session = myBatis.getMyBatisHandler(false);
+        SqlSession session = myBatis.getMyBatisHandler(true);
 
         int result = 0;
 
         result = session.delete("kr.co.sist.resume.user.deleteLanguage", resumeNum);
-
-        if (result != 1) {
-            session.rollback();
-        } else {
-            session.commit();
-        }
 
         myBatis.closeHandler(session);
         return 0;

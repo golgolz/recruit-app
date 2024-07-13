@@ -715,14 +715,14 @@
 		        education: $('.formWrapEducation .container').map(function() {
 		            const $this = $(this);
 		            return {
-		                school_classification: $this.find('[name$="Mstr_Dctr_Type_Code"]').val(),
-		                school_name: $this.find('[name$="Schl_Name"]').val(),
-		                admission_date: formatDate($this.find('[name$="Entc_YM"]').val()),
-		                graduation_date: formatDate($this.find('[name$="Grad_YM"]').val()),
-		                graduation_state: $this.find('.dropdown-edcation-state .button.buttonChoose span').text(),
+		                schoolClassification: $this.find('[name$="Mstr_Dctr_Type_Code"]').val(),
+		                schoolName: $this.find('input[data-type="School_Name"][type="text"]').val(),
+		                admissionDate: formatDate($this.find('[name$="Entc_YM"]').val()),
+		                graduationDate: formatDate($this.find('[name$="Grad_YM"]').val()),
+		                graduationState: $this.find('.dropdown-edcation-state .button.buttonChoose span').text(),
 		                major: $this.find('[id^="univmajor_"]').val(),
 		                grades: parseFloat($this.find('[name$="Grade"]').val()),
-		                total_score: parseFloat($this.find('[name$="Grade_Prft_Scr"]').val())
+		                totalScore: parseFloat($this.find('[name$="Grade_Prft_Scr"]').val())
 		            };
 		        }).get(),
 		        career: $('.formWrapCareer .container').map(function() {

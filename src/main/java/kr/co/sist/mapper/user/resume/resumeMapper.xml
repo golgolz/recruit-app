@@ -37,6 +37,27 @@
 	        </foreach>
 	    ) A
 	</insert>
+	<insert id="insertEducation" parameterType="java.util.List">
+        INSERT INTO education (
+            RESUME_NUM, SCHOOL_CLASSIFICATION, SCHOOL_NAME, ADMISSION_DATE, 
+            GRADUATION_DATE, GRADUATION_STATE, MAJOR, GRADES, TOTAL_SCORE
+        )
+        SELECT A.* FROM (
+            <foreach collection="list" item="edu" separator="UNION ALL">
+                SELECT 
+                    #{edu.resumeNum}, 
+	                #{edu.schoolClassification}, 
+	                #{edu.schoolName},
+	                TO_DATE(TO_CHAR(#{edu.admissionDate}, 'YYYY-MM-DD'), 'YYYY-MM-DD'),
+	                TO_DATE(TO_CHAR(#{edu.graduationDate}, 'YYYY-MM-DD'), 'YYYY-MM-DD'),
+	                #{edu.graduationState},
+	                #{edu.major}, 
+	                #{edu.grades}, 
+	                #{edu.totalScore}
+	                FROM DUAL
+            </foreach>
+        ) A
+    </insert>
     <delete id="deleteSkill" parameterType="java.lang.String">
     	DELETE skill WHERE resume_num = #{resumeNum}
     </delete>
