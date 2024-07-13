@@ -55,8 +55,6 @@
               >
                 <a
                   href="http://localhost/recruit-app/user/mypage/qna/mypageQnaForm.do"
-                  target="_blank"
-                  rel="noopener noreferrer"
                   ><span>문의사항</span></a
                 >
               </li>

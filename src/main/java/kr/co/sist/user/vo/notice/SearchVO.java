@@ -15,6 +15,8 @@ public class SearchVO {
     private String keyword;
     private String searchType;
 
+    private String category;
+
     private int currentPage = 1; // 사용자가 현재 보고있는 페이지
     private int itemsPerPage = 10; // 전체 페이지 수
     private int totalItems; // 전체 게시글 수

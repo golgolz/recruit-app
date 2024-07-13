@@ -26,9 +26,9 @@ public class QnaUserDAO {
         return qna;
     }
 
-    public int countMyQnas() {
+    public int countMyQnas(SearchVO sVO) {
         SqlSession session = myBatis.getMyBatisHandler(false);
-        int count = session.selectOne("kr.co.sist.qna.user.countMyQnas");
+        int count = session.selectOne("kr.co.sist.qna.user.countMyQnas", sVO);
         myBatis.closeHandler(session);
         return count;
     }
