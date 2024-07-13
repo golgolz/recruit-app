@@ -4,7 +4,8 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.sist.qna.user">
 
-	<select id="selectMyQnas" resultType="kr.co.sist.user.domain.qna.UserQnaDomain">
+		<!-- 문의리스트 받기 -->
+	<select id="selectMyQnas" resultType="kr.co.sist.user.domain.qna.UserQnaDomain" parameterType="kr.co.sist.user.vo.qna.SearchVO">
 		<!-- select row_number() over (order by input_date) as qna_num, title, input_date, flag
 		from qna
 		order by input_date desc -->
@@ -26,6 +27,7 @@
 			            input_date,
 			            flag
 			        FROM qna
+			        where user_id=#{userId}
 			        ORDER BY input_date DESC
 			    )
 			    WHERE ROWNUM <= #{endItemIndex}
@@ -33,8 +35,32 @@
 			WHERE rnum >= #{startItemIndex} ]]>
 	</select>
 	
-	<select id="countMyQnas" resultType="int">
-	select count(*) from qna
+	<select id="countMyQnas" resultType="int" parameterType="kr.co.sist.user.vo.qna.SearchVO">
+	<!-- select count(*) from qna -->
+	 <![CDATA[
+			SELECT count(*)
+			FROM (
+			    SELECT
+			        ROWNUM AS rnum,
+			        qna_num,
+			        view_num,
+			        title,
+			        input_date,
+			        flag
+			    FROM (
+			        SELECT
+			            ROW_NUMBER() OVER (ORDER BY input_date DESC) AS view_num,
+			            qna_num,
+			            title,
+			            input_date,
+			            flag
+			        FROM qna
+			        where user_id=#{userId}
+			        ORDER BY input_date DESC
+			    )
+			    WHERE ROWNUM <= #{endItemIndex}
+			)
+			WHERE rnum >= #{startItemIndex} ]]>
 	</select>
 
 	<select id="selectOneQna" resultType="kr.co.sist.user.domain.qna.UserQnaDomain">

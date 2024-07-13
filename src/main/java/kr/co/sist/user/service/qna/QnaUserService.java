@@ -36,8 +36,8 @@ public class QnaUserService {
         return result;
     }
 
-    public int countMyQnas() {
-        return qnaUserDAO.countMyQnas();
+    public int countMyQnas(SearchVO sVO) {
+        return qnaUserDAO.countMyQnas(sVO);
     }
 
     public UserQnaDomain searchOneQna(int qna_num) {
