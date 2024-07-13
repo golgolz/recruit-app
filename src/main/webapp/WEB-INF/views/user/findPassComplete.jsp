@@ -10,13 +10,14 @@
 	} 
 %>
 <head>
-	<jsp:include page="../assets/layout/user/lib.jsp" />  
+	<jsp:include page="../assets/layout/user/lib.jsp" />
 	<!-- golgolz start -->
-	<!-- golgolz start -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="shortcut icon" href="https://static.wanted.co.kr/favicon/new/favicon.ico">
 	<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/user_login.css"/>
 	<link rel="stylesheet" href="http://localhost/recruit-app/assets/css/find_user_info.css"/>
+	
 	<!-- golgolz end -->
 	<style>
 		<!-- golgolz start -->
@@ -25,6 +26,15 @@
 	<script type="text/javascript">
 		$(function(){
 			<!-- golgolz start -->
+			$(function(){
+			    const copySpan = document.getElementById("copySpan");
+			    const textToCopy = $("#tempPass").text().trim();
+
+			    copySpan.addEventListener("click", () => {
+			        navigator.clipboard.writeText(textToCopy);
+			    });
+			}); 
+
 			<!-- golgolz end -->
 		});
 	</script>
@@ -54,7 +64,14 @@
 							<h3 data-testid="Typography" color="#000000" class="css-1qgiy3i" style="text-align: center; margin-bottom: 20px;">임시 비밀번호를 발급했어요.</h3>
 							<p data-testid="Typography" color="rgba(55, 56, 60, 0.61)" class="css-d08m0c">${ resultMsg }</p>
 							<div style="padding: 13px 0px; width: 100%; height: 50px; background-color: rgb(244, 244, 245); text-align: center;">
-								<p class="css-14qpgc6" style="font-size: 16px; font-weight: normal;">${ tempPassword }</p>										
+								<p class="css-14qpgc6" style="font-size: 16px; font-weight: normal; display: flex; justify-content: space-between; align-items: center;">
+								<span id="tempPass" style="margin: 0 auto 0 135px;">
+								${ tempPassword }
+								</span>
+								<span id="copySpan" style="text-align: right; margin-right: 5px;">
+								<img id="copyIcon" src="http://localhost/recruit-app/assets/images/mypage/copy_icon.png" alt="클립보드에 복사" style="width: 25px; height: 25px; cursor: pointer" title="클립보드에 복사">								
+								</span>
+								</p>		
 							</div>
 							<div data-testid="Typography" color="#000000" class="css-ng7qrx" style="text-align: center;">
 								<a href="../user/loginPage.do"><strong>로그인 하러가기</strong></a>
