@@ -710,7 +710,7 @@
 
 		    const subData = {
 		        skills: $('.chip.active').map(function() {
-		            return { skill_name: $(this).data('value') };
+		            return { skillName: $(this).data('value') };
 		        }).get(),
 		        education: $('.formWrapEducation .container').map(function() {
 		            const $this = $(this);

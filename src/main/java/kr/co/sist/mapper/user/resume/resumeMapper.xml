@@ -27,4 +27,29 @@
 	    	addr = #{addr}
     	WHERE resume_num = #{id}
     </update>
+    <insert id="insertSkill" parameterType="java.util.List">
+	    INSERT INTO skill (RESUME_NUM, SKILL_CODE)
+	    SELECT A.* FROM (
+	        <foreach collection="list" item="skill" separator="UNION ALL">
+	            SELECT #{skill.resumeNum} AS RESUME_NUM, sl.SKILL_CODE
+	            FROM skill_list sl
+	            WHERE sl.SKILL_NAME = #{skill.skillName}
+	        </foreach>
+	    ) A
+	</insert>
+    <delete id="deleteSkill" parameterType="java.lang.String">
+    	DELETE skill WHERE resume_num = #{resumeNum}
+    </delete>
+    <delete id="deleteEdu" parameterType="java.lang.String">
+    	DELETE education WHERE resume_num = #{resumeNum}
+    </delete>
+    <delete id="deleteCareer" parameterType="java.lang.String">
+    	DELETE career WHERE resume_num = #{resumeNum}
+    </delete>
+    <delete id="deleteCertifacation" parameterType="java.lang.String">
+    	DELETE certificate WHERE resume_num = #{resumeNum}
+    </delete>
+    <delete id="deleteLanguage" parameterType="java.lang.String">
+    	DELETE language WHERE resume_num = #{resumeNum}
+    </delete>
 </mapper>
