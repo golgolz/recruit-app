@@ -17,6 +17,14 @@
     	INSERT INTO apply (RECRUIT_NUM, RESUME_NUM, USER_ID, PROGRESS_STATE, APPLY_DATE)
 		VALUES (#{recruitNum}, #{resumeNum}, #{userId}, '지원완료', TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-DD'), 'YYYY-MM-DD'))
     </insert>
-    <!-- <insert id="insertResume">
-    </insert> -->
+    <update id="updateResume" parameterType="kr.co.sist.user.vo.resume.ResumeVO">
+    	UPDATE resume 
+    	SET 
+	    	title = #{title},
+	    	profile_img = #{profile},
+	    	self_introduction = #{introduce},
+	    	update_date = TO_CHAR(SYSDATE, 'YYYY-MM-DD'),
+	    	addr = #{addr}
+    	WHERE resume_num = #{id}
+    </update>
 </mapper>

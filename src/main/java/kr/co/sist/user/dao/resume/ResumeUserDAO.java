@@ -59,6 +59,18 @@ public class ResumeUserDAO {
     }
 
     public int updateResume(ResumeVO resumeVO) {
+        SqlSession session = myBatis.getMyBatisHandler(false);
+
+        int result = 0;
+
+        result = session.update("kr.co.sist.resume.user.updateResume", resumeVO);
+
+        if (result != 1) {
+            session.rollback();
+        } else {
+            session.commit();
+        }
+        myBatis.closeHandler(session);
         return 0;
     }
 }

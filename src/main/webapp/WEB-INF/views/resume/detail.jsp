@@ -255,21 +255,23 @@
 			});
 			
 			$("#updateBtn").click(function(){
-				let resumeData = createResumeData();
-				console.log(resumeData);
-				console.log(JSON.stringify(resumeData));
-				$.ajax({
-					url: "${pageContext.request.contextPath}/api/resume.do",
-					type: "POST",
-			        contentType: "application/json; charset=utf-8",
-			        data: JSON.stringify(resumeData),
-					success: function(data){
-						console.log("success");
-					},
-					error: function(xhr, status, error){
-						console.log("fail");
-					}
-				});
+				if(confirm("수정하시겠습니까?")){
+					let resumeData = createResumeData();
+					console.log(resumeData);
+					console.log(JSON.stringify(resumeData));
+					$.ajax({
+						url: "${pageContext.request.contextPath}/api/resume.do",
+						type: "PUT",
+				        contentType: "application/json; charset=utf-8",
+				        data: JSON.stringify(resumeData),
+						success: function(data){
+							alert("수정이 완료되었습니다.");
+						},
+						error: function(xhr, status, error){
+							console.log("fail");
+						}
+					});
+				}
 			});
 			
 			$("#removeBtn").click(function(){
@@ -692,6 +694,7 @@
 		
 		function createResumeData() {
 		    const mainData = {
+		    	id: "${resumeNum}",
 		        owner: $('#UserInfo_M_Name').val(),
 		        email: $('#UserInfo_M_Email').val(),
 		        title: $('#UserResume_M_Resume_Title').val(),
