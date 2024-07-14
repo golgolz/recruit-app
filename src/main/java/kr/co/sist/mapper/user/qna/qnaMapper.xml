@@ -81,9 +81,9 @@
 	    qna.qna_num = #{qna_num}
 	</select>	
 	
-	<insert id="insertQna" parameterType="kr.co.sist.user.vo.qna.UserQnaVO">
-        insert into qna (qna_num, category, title, content)
-    	values ((select count(*)+1 from qna), #{category, jdbcType=VARCHAR}, #{title, jdbcType=VARCHAR}, #{content, jdbcType=VARCHAR})
+	<insert id="insertQna" parameterType="kr.co.sist.user.vo.qna.UserQnaVO" >
+        insert into qna (qna_num, category, title, content, user_id)
+    	values ((select count(*)+1 from qna), #{category, jdbcType=VARCHAR}, #{title, jdbcType=VARCHAR}, #{content, jdbcType=VARCHAR}, #{userId, jdbcType=VARCHAR})
 	</insert>
 
 </mapper>

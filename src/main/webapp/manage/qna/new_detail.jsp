@@ -54,8 +54,17 @@
 							[ 'insert', [ 'link', 'picture', 'video' ] ],
 							[ 'view', [ 'fullscreen', 'codeview', 'help' ] ] ]
 				});//summernote
-		$("#btnSend").click(function(){
-			//alert("fffff")
+				$("#btnSend").click(function(event) {
+	                event.preventDefault(); // 기본 제출 방지
+
+	                // summernote의 내용을 가져옴
+	                var content = $('#ans_content').summernote('code');
+
+	                // p 태그를 제거함
+	                var sanitizedContent = content.replace(/<\/?p[^>]*>/g, '');
+
+	                // summernote 내용을 업데이트
+	                $('#ans_content').summernote('code', sanitizedContent);
 			$("#answerPost").submit();
 		}); //click
 	});//ready
@@ -115,9 +124,6 @@
 	<!-- golgolz start -->
 	<div>
 	<div class="loungeContent inquiryContent" id="newQnaFrm">
-					<!-- <div class="topHdWrap">
-						<h2 class="lug_hd_2">문의</h2>
-					</div> -->
 
 					<!--// 내 제안내역 보기 상세 -->
 					<div class="inquiryViewWrap">
@@ -132,21 +138,8 @@
 							</div>
 
 							<div class="viewCont">
-								<!-- <dl class="inqCont">
-									<dt><strong>[답변]</strong> 2024.05.24</dt>
-									<dd>안녕하세요? 회원님, 잡코리아 고객센터입니다.<br/>언제나 잡코리아를 믿고 이용해 주시는 회원님께 진심으로 감사의 마음을 전합니다.<br/><br/>회원님, MY기업 리뷰에서 작성하신 내용은 통계 자료로 반영 되는 부분이며 작성하신 리뷰 문장 자체가 노출되는 것은 아닙니다. (기업에서도 어느분이 작성하셨는지 확인 불가)<br/>자세한 리뷰 현황은 아래 페이지를 참고 부탁 드리겠습니다.<br/><br/>https://www.jobkorea.co.kr/Review/Home<br/><br/>잡코리아를 믿고 이용해 주시는 만큼 회원님의 기대에 어긋나지 않도록 최선을 다하겠습니다.<br/>이용해 보시고 이외 다른 문의사항이 있으시면 언제든지 말씀 남겨주세요.<br/>친절하고 신속하게 답변드리겠습니다.<br/><br/>감사합니다.</dd>
-								</dl> -->
 							</div>
 						</div>
-
-						
-							<!-- <div class="btnListExDn">
-							<input type="button" value="목록" class="btn btn-outline-dark btn-sm detail-control" onclick="location.href='http://localhost/recruit-app/manage/qna/new_qnas.jsp'">
-							<input type="button" value="답변하기" class="btn btn-outline-success btn-sm float-right" onclick="location.href='http://localhost/recruit-app/manage/qna/answer_frm.jsp'"style="float:right">
-								<a href="new_qnas.jsp" class="btnMtcTpl">목록</a> 
-								<a href="answer_frm.jsp" class="btnMtcTpl">답변하기</a>
-							</div> -->
-							<!-- <button type="button" onclick="javascript:window.scrollTo(0,0);" class="btnMtcTpl">TOP</button> -->
 
 					</div>
 				<div id="emailFrm">
@@ -180,8 +173,7 @@
 		<div id="emailButtonArea" style="margin-top: 20px; padding-bottom: 40px">
 			<input type="button" value="취소" class="btn btn-outline-danger " style="float:right ; margin-right : 40px" onclick="location.href='http://localhost/recruit-app/manage/qna/new_qnas.do';">
 			<input type="button" value="전송하기" class="btn btn-outline-secondary " style="float:right ; margin-right : 10px" id="btnSend">
-			<!-- <input type="button" class="btn btn-info btn-sm" value="전송" /> 
-			<input type="button" class="btn btn-info btn-sm" value="취소" /> -->
+			
 		</div>
 		</div>
 					<!-- 내 제안내역 보기 상세 //-->
