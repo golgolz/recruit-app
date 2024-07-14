@@ -12,6 +12,7 @@ import kr.co.sist.properties.MyBatisConfig;
 import kr.co.sist.user.domain.resume.ResumeListDomain;
 import kr.co.sist.user.vo.resume.ApplyVO;
 import kr.co.sist.user.vo.resume.CareerVO;
+import kr.co.sist.user.vo.resume.CertificationVO;
 import kr.co.sist.user.vo.resume.EducationVO;
 import kr.co.sist.user.vo.resume.ResumeVO;
 import kr.co.sist.user.vo.resume.SkillVO;
@@ -101,7 +102,6 @@ public class ResumeUserDAO {
             deleteSkill(resumeNum);
             insertSkill(skills);
 
-            // Education 처리
             List<EducationVO> educations = mapper.convertValue(subData.get("education"),
                     new TypeReference<List<EducationVO>>() {});
             // System.out.println("edu size is " + educations.size()); --- > why 1?
@@ -123,6 +123,17 @@ public class ResumeUserDAO {
 
                 deleteCareer(resumeNum);
                 insertCareer(careers);
+            }
+
+            List<CertificationVO> certifications = mapper.convertValue(
+                    subData.get("certifications"), new TypeReference<List<CertificationVO>>() {});
+            if (certifications != null && !certifications.isEmpty()) {
+                for (CertificationVO certification : certifications) {
+                    certification.setResumeNum(resumeNum);
+                }
+
+                deleteCertification(resumeNum);
+                insertCertification(certifications);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -174,6 +185,21 @@ public class ResumeUserDAO {
         return result;
     }
 
+    public int insertCertification(List<CertificationVO> certifications) {
+        SqlSession session = myBatis.getMyBatisHandler(false);
+        int result = session.insert("kr.co.sist.resume.user.insertCertification", certifications);
+
+        if (result == certifications.size()) {
+            session.commit();
+        } else {
+            session.rollback();
+        }
+
+        myBatis.closeHandler(session);
+
+        return result;
+    }
+
     public int deleteSkill(String resumeNum) {
         SqlSession session = myBatis.getMyBatisHandler(true);
 
@@ -211,7 +237,7 @@ public class ResumeUserDAO {
 
         int result = 0;
 
-        result = session.delete("kr.co.sist.resume.user.deleteCertification", resumeNum);
+        result = session.delete("kr.co.sist.resume.user.deleteCertifacation", resumeNum);
 
         myBatis.closeHandler(session);
         return 0;

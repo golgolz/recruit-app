@@ -87,6 +87,21 @@
 	        </foreach>
 	    ) A
 	</insert>
+	<insert id="insertCertification" parameterType="java.util.List">
+	    INSERT INTO certificate (
+	        RESUME_NUM, CERTIFICATE_NAME, PUBLISHER, ACQUISITION_DATE
+	    )
+	    SELECT A.* FROM (
+	        <foreach collection="list" item="cert" separator="UNION ALL">
+	            SELECT 
+	                #{cert.resumeNum},
+	                #{cert.certificateName},
+	                #{cert.publisher},
+	                TO_DATE(#{cert.acquisitionDate}, 'YYYY-MM-DD')
+	            FROM DUAL
+	        </foreach>
+	    ) A
+	</insert>
     <delete id="deleteSkill" parameterType="java.lang.String">
     	DELETE skill WHERE resume_num = #{resumeNum}
     </delete>

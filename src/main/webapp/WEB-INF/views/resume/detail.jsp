@@ -731,7 +731,7 @@
 		                companyName: $this.find('[id^="Career_C_Name_"]').val(),
 		                dname: $this.find('[id^="Career_C_Part_"]').val(),
 		                joinDate: formatDate($this.find('[id^="Career_CSYM_"]').val()),
-		                resignationDate: formatDate($this.find('[id^="Career_CEYM_"]').val() + 1), // 1일씩 밀리는 이슈
+		                resignationDate: formatDate($this.find('[id^="Career_CEYM_"]').val()), // 1일씩 밀리는 이슈
 		                jobDescription: $this.find('.textarea-career').val(),
 		                position: $this.find('[name="position_field"]').val(),
 		                sal: parseInt(removeCommas($this.find('[id^="Career_M_MainPay_User_"]').val()))
@@ -740,9 +740,9 @@
 		        certifications: $('.formWrapCertificate .container').map(function() {
 		            const $this = $(this);
 		            return {
-		                certificate_name: $this.find('[id^="License_Search_"]').val(),
+		                certificateName: $this.find('[id^="License_Search_"]').val(),
 		                publisher: $this.find('[id^="License_Lc_Pub_"]').val(),
-		                acquisition_date: formatDate($this.find('[id^="License_Lc_YYMM_"]').val())
+		                acquisitionDate: formatDate($this.find('[id^="License_Lc_YYMM_"]').val())
 		            };
 		        }).get(),
 		        languages: $('.formWrapLanguage .container').map(function() {
