@@ -38,6 +38,7 @@
 	    qna.input_date,
 	    qna.title,
 	    qna.content,
+	    qna.user_id,
 	    qna_answer.ans_title,
 	    qna_answer.reply_date,
 	    qna_answer.ans_content
