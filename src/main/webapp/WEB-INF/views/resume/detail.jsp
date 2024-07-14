@@ -213,7 +213,8 @@
 			});
 			
 			var resumeNum = "${resumeNum}";
-			
+	    	var id = "<%= session.getAttribute("userId") %>";
+	    	
 			if (resumeNum) {
 				$.ajax({
 		            url: "${pageContext.request.contextPath}/api/manage/resumes/detail.do?id=" + resumeNum,
@@ -236,7 +237,6 @@
 		            }
 		        });
 		    } else {
-		    	var id = "<%= session.getAttribute("userId") %>";
 		    	$.ajax({
 		    		url: "${pageContext.request.contextPath}/api/resume/profile.do?id=" + id,
 		    		method: "GET",
@@ -292,7 +292,18 @@
 			});
 			
 			$("#removeBtn").click(function(){
-				alert("clicked");
+				if(confirm("삭제하시겠습니까?")){
+					$.ajax({
+						url: "${pageContext.request.contextPath}/api/resume.do?id=" + resumeNum,
+						type: "DELETE",
+						success: function(data){
+							alert("삭제가 완료되었습니다.");
+						},
+						error: function(xhr, status, error){
+							console.log("fail");
+						}
+					});
+				}
 			});
 			<!-- golgolz end -->
 		});

@@ -6,7 +6,7 @@
     <select id="selectResumes" resultType="kr.co.sist.user.domain.resume.ResumeListDomain" parameterType="java.lang.String">
 		select resume_num as resumeNum, title, input_date as inputDate
 		from resume 
-		where user_id=#{user_id}
+		where user_id=#{user_id} and delete_flag != 'T'
     </select>
     <select id="countResumesPerUser" resultType="int" parameterType="java.lang.String">
     	select count(*) as count
@@ -43,6 +43,12 @@
 	        #{addr}
 	    )
 	</insert>
+	<update id="deleteResume" parameterType="java.lang.String">
+		UPDATE resume
+		SET
+			delete_flag = 'T'
+		where resume_num = #{resumeNum}
+	</update>
     <update id="updateResume" parameterType="kr.co.sist.user.vo.resume.ResumeVO">
     	UPDATE resume 
     	SET 

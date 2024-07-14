@@ -104,6 +104,29 @@ public class ResumeUserDAO {
         return result;
     }
 
+    public int deleteResume(String resumeNum) {
+        SqlSession session = myBatis.getMyBatisHandler(false);
+
+        int result = 0;
+        result = session.update("kr.co.sist.resume.user.deleteResume", resumeNum);
+
+        if (result != 1) {
+            session.rollback();
+        } else {
+            session.commit();
+        }
+
+        myBatis.closeHandler(session);
+
+        deleteSkill(resumeNum);
+        deleteEdu(resumeNum);
+        deleteCareer(resumeNum);
+        deleteCertification(resumeNum);
+        deleteLanguage(resumeNum);
+
+        return result;
+    }
+
     public void saveResumeData(ResumeVO resumeVO) {
         ObjectMapper mapper = new ObjectMapper();
         try {

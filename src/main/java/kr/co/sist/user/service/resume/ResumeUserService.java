@@ -40,4 +40,8 @@ public class ResumeUserService {
     public int modifyResume(ResumeVO resumeVO) {
         return resumeUserDAO.updateResume(resumeVO);
     }
+
+    public int removeResume(String resumeNum) {
+        return resumeUserDAO.deleteResume(resumeNum);
+    }
 }
