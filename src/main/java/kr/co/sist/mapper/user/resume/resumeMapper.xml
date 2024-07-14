@@ -97,7 +97,38 @@
 	                #{cert.resumeNum},
 	                #{cert.certificateName},
 	                #{cert.publisher},
-	                TO_DATE(#{cert.acquisitionDate}, 'YYYY-MM-DD')
+	                TO_DATE(TO_CHAR(#{cert.acquisitionDate}, 'YYYY-MM-DD'), 'YYYY-MM-DD')
+	            FROM DUAL
+	        </foreach>
+	    ) A
+	</insert>
+	<insert id="insertLanguage" parameterType="java.util.List">
+	    INSERT INTO language (
+	        RESUME_NUM, CATEGORY, LANGUAGE, TEST_NAME, LANG_LEVEL, AQUISITION_DATE
+	    )
+	    SELECT A.* FROM (
+	        <foreach collection="list" item="lang" separator="UNION ALL">
+	            SELECT 
+	                #{lang.resumeNum},
+	                #{lang.category},
+	                #{lang.language},
+	                <choose>
+	                    <when test="lang.testName != null and lang.testName != ''">
+	                        #{lang.testName}
+	                    </when>
+	                    <otherwise>
+	                        NULL
+	                    </otherwise>
+	                </choose>,
+	                #{lang.langLevel},
+	                <choose>
+	                    <when test="lang.acquisitionDate != null">
+	                		TO_DATE(TO_CHAR(#{lang.acquisitionDate}, 'YYYY-MM-DD'), 'YYYY-MM-DD')
+	                    </when>
+	                    <otherwise>
+	                        NULL
+	                    </otherwise>
+	                </choose>
 	            FROM DUAL
 	        </foreach>
 	    ) A

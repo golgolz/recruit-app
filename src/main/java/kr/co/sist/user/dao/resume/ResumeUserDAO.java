@@ -14,6 +14,7 @@ import kr.co.sist.user.vo.resume.ApplyVO;
 import kr.co.sist.user.vo.resume.CareerVO;
 import kr.co.sist.user.vo.resume.CertificationVO;
 import kr.co.sist.user.vo.resume.EducationVO;
+import kr.co.sist.user.vo.resume.LanguageVO;
 import kr.co.sist.user.vo.resume.ResumeVO;
 import kr.co.sist.user.vo.resume.SkillVO;
 
@@ -135,6 +136,17 @@ public class ResumeUserDAO {
                 deleteCertification(resumeNum);
                 insertCertification(certifications);
             }
+
+            List<LanguageVO> languages = mapper.convertValue(subData.get("languages"),
+                    new TypeReference<List<LanguageVO>>() {});
+            if (languages != null && !languages.isEmpty()) {
+                for (LanguageVO language : languages) {
+                    language.setResumeNum(resumeNum);
+                }
+
+                deleteLanguage(resumeNum);
+                insertLanguage(languages);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -190,6 +202,21 @@ public class ResumeUserDAO {
         int result = session.insert("kr.co.sist.resume.user.insertCertification", certifications);
 
         if (result == certifications.size()) {
+            session.commit();
+        } else {
+            session.rollback();
+        }
+
+        myBatis.closeHandler(session);
+
+        return result;
+    }
+
+    public int insertLanguage(List<LanguageVO> languages) {
+        SqlSession session = myBatis.getMyBatisHandler(false);
+        int result = session.insert("kr.co.sist.resume.user.insertLanguage", languages);
+
+        if (result == languages.size()) {
             session.commit();
         } else {
             session.rollback();

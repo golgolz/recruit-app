@@ -752,12 +752,12 @@
 
 		            return {
 		                language: $this.find('.dropdown-language-name .button.buttonChoose > span').text().trim(),
-		                test_name: isConversation ? null : $this.find('.devExamDropdown .button.buttonChoose > span').text().trim(),
-		                lang_level: isConversation 
+		                testName: isConversation ? null : $this.find('.devExamDropdown .button.buttonChoose > span').text().trim(),
+		                langLevel: isConversation 
 		                    ? $this.find('.devConversationArea .dropdown-language-grade .button.buttonChoose > span').text().trim()
 		                    : $this.find('.devExamArea [id^="Language_Test1_Point_I_"]').val(),
 		                category: isConversation ? '회화능력' : '공인시험',
-		                aquisition_date: formatDate($this.find('[id^="Language_Test_YYMM_"]').val())
+		                acquisitionDate: formatDate($this.find('[id^="Language_Test_YYMM_"]').val())
 		            };
 		        }).get()
 		    };
