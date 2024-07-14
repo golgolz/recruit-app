@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.co.sist.properties.MyBatisConfig;
 import kr.co.sist.user.domain.resume.ResumeListDomain;
 import kr.co.sist.user.vo.resume.ApplyVO;
+import kr.co.sist.user.vo.resume.CareerVO;
 import kr.co.sist.user.vo.resume.EducationVO;
 import kr.co.sist.user.vo.resume.ResumeVO;
 import kr.co.sist.user.vo.resume.SkillVO;
@@ -112,6 +113,17 @@ public class ResumeUserDAO {
                 deleteEdu(resumeNum);
                 insertEdu(educations);
             }
+
+            List<CareerVO> careers = mapper.convertValue(subData.get("career"),
+                    new TypeReference<List<CareerVO>>() {});
+            if (careers != null && !careers.isEmpty()) {
+                for (CareerVO career : careers) {
+                    career.setResumeNum(resumeNum);
+                }
+
+                deleteCareer(resumeNum);
+                insertCareer(careers);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -137,6 +149,21 @@ public class ResumeUserDAO {
         int result = session.insert("kr.co.sist.resume.user.insertEducation", edus);
 
         if (result == edus.size()) {
+            session.commit();
+        } else {
+            session.rollback();
+        }
+
+        myBatis.closeHandler(session);
+
+        return result;
+    }
+
+    public int insertCareer(List<CareerVO> careers) {
+        SqlSession session = myBatis.getMyBatisHandler(false);
+        int result = session.insert("kr.co.sist.resume.user.insertCareer", careers);
+
+        if (result == careers.size()) {
             session.commit();
         } else {
             session.rollback();

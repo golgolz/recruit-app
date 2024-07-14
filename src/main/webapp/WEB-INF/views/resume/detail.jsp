@@ -728,11 +728,11 @@
 		        career: $('.formWrapCareer .container').map(function() {
 		            const $this = $(this);
 		            return {
-		                company_name: $this.find('[id^="Career_C_Name_"]').val(),
+		                companyName: $this.find('[id^="Career_C_Name_"]').val(),
 		                dname: $this.find('[id^="Career_C_Part_"]').val(),
-		                join_date: formatDate($this.find('[id^="Career_CSYM_"]').val()),
-		                resignation_date: formatDate($this.find('[id^="Career_CEYM_"]').val()),
-		                job_description: $this.find('.textarea-career').val(),
+		                joinDate: formatDate($this.find('[id^="Career_CSYM_"]').val()),
+		                resignationDate: formatDate($this.find('[id^="Career_CEYM_"]').val() + 1), // 1일씩 밀리는 이슈
+		                jobDescription: $this.find('.textarea-career').val(),
 		                position: $this.find('[name="position_field"]').val(),
 		                sal: parseInt(removeCommas($this.find('[id^="Career_M_MainPay_User_"]').val()))
 		            };

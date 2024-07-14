@@ -58,6 +58,35 @@
             </foreach>
         ) A
     </insert>
+    <insert id="insertCareer" parameterType="java.util.List">
+	    INSERT INTO career (
+	        RESUME_NUM, COMPANY_CODE, DNAME, JOIN_DATE, 
+	        RESIGNATION_DATE, JOB_DESCRIPTION, POSITION, SAL
+	    )
+	    SELECT A.* FROM (
+	        <foreach collection="list" item="career" separator="UNION ALL">
+	            SELECT 
+	                #{career.resumeNum},
+	                (SELECT ci.COMPANY_CODE 
+	                 FROM companyinfo ci 
+	                 WHERE ci.COMPANY_NAME = #{career.companyName}),
+	                #{career.dname},
+	                TO_DATE(TO_CHAR(#{career.joinDate}, 'YYYY-MM-DD'), 'YYYY-MM-DD'),
+	                <choose>
+	                    <when test="career.resignationDate != null">
+	                        TO_DATE(TO_CHAR(#{career.resignationDate}, 'YYYY-MM-DD'), 'YYYY-MM-DD'),
+	                    </when>
+	                    <otherwise>
+	                        NULL,
+	                    </otherwise>
+	                </choose>
+	                #{career.jobDescription},
+	                #{career.position},
+	                #{career.sal}
+	            FROM DUAL
+	        </foreach>
+	    ) A
+	</insert>
     <delete id="deleteSkill" parameterType="java.lang.String">
     	DELETE skill WHERE resume_num = #{resumeNum}
     </delete>
