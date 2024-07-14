@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 import kr.co.sist.admin.dao.recruit.RecruitAdminDAO;
 import kr.co.sist.admin.domain.recruit.RecruitDomain;
 import kr.co.sist.admin.domain.resume.CompanyDomain;
+import kr.co.sist.admin.domain.resume.SummaryDomain;
 import kr.co.sist.admin.vo.recruit.SearchVO;
 import kr.co.sist.admin.vo.resume.RecruitAdminVO;
+import kr.co.sist.admin.vo.resume.SummaryVO;
 
 @Service
 public class RecruitAdminService {
@@ -29,6 +31,10 @@ public class RecruitAdminService {
         RecruitDomain recruit = null;
         recruit = recruitAdminDAO.selectOneRecruit(recruitNum);
         return recruit;
+    }
+
+    public SummaryDomain searchRecruitSummary(SummaryVO summary) {
+        return recruitAdminDAO.selectRecruitSummary(summary);
     }
 
     public int searchRecruitsCount(SearchVO searchVO) {

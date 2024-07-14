@@ -176,6 +176,12 @@
         LEFT JOIN companyinfo ci ON r.company_code = ci.company_code
         WHERE recruit_num = #{recruitNum}
     </select>
+    <select id="selectRecruitSummary" resultType="kr.co.sist.admin.domain.resume.SummaryDomain" parameterType="kr.co.sist.admin.vo.resume.SummaryVO">
+    	select ci.company_name as companyName, r.title as recruitTitle
+    	FROM recruit r
+        LEFT JOIN companyinfo ci ON r.company_code = ci.company_code
+        where r.recruit_num = #{recruitNum} and ci.company_code = #{companyCode}
+    </select>
     <select id="selectCompanyNames" parameterType="java.lang.String" resultType="kr.co.sist.admin.domain.resume.CompanyDomain">
     	SELECT company_name as name, company_code as code from companyinfo
     	<where>

@@ -26,8 +26,10 @@ public class ResumeAdminController {
     }
 
     @GetMapping("/manage/resumes.do")
-    public String showResumePage(@RequestParam("recruitNum") String recruitNum, Model model) {
+    public String showResumePage(@RequestParam("recruitNum") String recruitNum,
+            @RequestParam("companyCode") String companyCode, Model model) {
         model.addAttribute("recruitNum", recruitNum);
+        model.addAttribute("companyCode", companyCode);
         return "/manage/recruit/resume/resumes";
     }
 

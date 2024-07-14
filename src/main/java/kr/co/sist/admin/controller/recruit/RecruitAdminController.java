@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import kr.co.sist.admin.domain.recruit.RecruitDomain;
 import kr.co.sist.admin.domain.resume.CompanyDomain;
+import kr.co.sist.admin.domain.resume.SummaryDomain;
 import kr.co.sist.admin.service.recruit.RecruitAdminService;
 import kr.co.sist.admin.vo.recruit.SearchVO;
 import kr.co.sist.admin.vo.resume.RecruitAdminVO;
+import kr.co.sist.admin.vo.resume.SummaryVO;
 
 @Controller
 public class RecruitAdminController {
@@ -52,6 +54,13 @@ public class RecruitAdminController {
         result.setId(recruitNum);
 
         return result;
+    }
+
+    @PostMapping("/api/manage/recruit/summary.do")
+    @ResponseBody
+    public SummaryDomain searchRecruitSummary(@RequestBody SummaryVO summary) {
+        System.out.println(summary.toString());
+        return recruitAdminService.searchRecruitSummary(summary);
     }
 
     @GetMapping("/api/manage/recruit/counts.do")

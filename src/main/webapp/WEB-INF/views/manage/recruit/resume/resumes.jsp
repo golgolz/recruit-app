@@ -48,6 +48,25 @@
     		resetForm();
     	});
     	
+    	var summary = createSummaryVO();
+    	
+    	$.ajax({
+    		url: "${pageContext.request.contextPath}/api/manage/recruit/summary.do",
+    		method: 'POST',
+            data: JSON.stringify(summary),
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            success: function(data) {
+            	console.log(data);
+            	updateStatus(data);
+            },
+            error: function(xhr, status, error) {
+                console.error("Error fetching data: " + error);
+                console.log(summary);
+                console.log(JSON.stringify(summary));
+            }
+    	});
+		
     	$('.pagination').on('click', '.page-link', function(e) {
             e.preventDefault();
             var clickedPage = $(this).data('page');
@@ -172,6 +191,13 @@
 	    return searchVO;
 	}
 	
+	function createSummaryVO(){
+		return{
+			recruitNum: parseInt("${recruitNum}"),
+			companyCode: "${companyCode}"
+		};
+	}
+	
 	function resetForm() {
         $('select[name="category"]').prop('selectedIndex', 0);
         $('input[name="keyword"]').val('');
@@ -204,6 +230,25 @@
 
         $('.pagination').html(paginationHtml);
     }
+	
+	function updateStatus(data) {
+	    var statusDiv = document.getElementById('status');
+	    var companyName = escapeHtml(data.companyName || '');
+	    var recruitTitle = escapeHtml(data.recruitTitle || '');
+	    
+	    statusDiv.innerHTML = 
+	        '<div style="font-weight: bold;">기업명 : ' + companyName + '</div>' +
+	        '<div style="font-weight: bold;">공고명 : ' + recruitTitle + '</div>';
+	}
+
+	function escapeHtml(unsafe) {
+	    return unsafe
+	         .replace(/&/g, "&amp;")
+	         .replace(/</g, "&lt;")
+	         .replace(/>/g, "&gt;")
+	         .replace(/"/g, "&quot;")
+	         .replace(/'/g, "&#039;");
+	}
 </script>
 <!-- golgolz start -->
 <link href="http://localhost//recruit-app/assets/css/pagenation.css" rel="stylesheet" />
