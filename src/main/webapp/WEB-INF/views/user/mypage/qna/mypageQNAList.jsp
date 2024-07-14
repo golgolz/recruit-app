@@ -70,40 +70,43 @@ td{
 			</div>
 			<!-- tap menu //-->
 			<!--// 내 제안내역 보기 -->
-			<div class="inquiryListWrap" id="pageContent">
-			<!--// List 시작 -->
-			<div class="schListWrap">
-				<div class="mtcSchListTb">
-				<!--[개발] 문의 내용이 없는 경우 hide 처리 -->
-					<table summary="내 제안내역 보기 목록으로 글번호, 내용, 날짜, 답변여부로 구성되어 있습니다.">
-					<caption>내 제안내역 보기</caption>
-					<colgroup>
-						<col class="col_1">
-						<col class="col_2">
-						<col class="col_3">
-						<col class="col_4">
-					</colgroup>
-					<thead class="blind">
-						<tr>
-							<th scope="col">글번호</th>
-							<th scope="col">내용</th>
-							<th scope="col">날짜</th>
-							<th scope="col">답변여부</th>
-						</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="uesrqna" items="${qnaList}">
-								<tr>
-								<td><c:out value="${uesrqna.view_num}"/></td>
-								<td class="alLeft"><span class="tit"><a href="http://localhost/recruit-app/user/mypage/qna/mypageQNADetail.do?qna_num=${uesrqna.qna_num}"><c:out value="${uesrqna.title}"/></a></span></td>
-								<td><c:out value="${uesrqna.input_date}"/></td>
-								<td class=""><c:out value="${uesrqna.flag}"/></td>
-								</tr>
-							</c:forEach>
-						</tbody>
-						</table>
-		
-				<!-- <div style="text-align:center; margin-top:30px">
+										<div class="inquiryListWrap" id="pageContent">
+											<!--// List 시작 -->
+											<div class="schListWrap">
+												<div class="mtcSchListTb">
+													<!--[개발] 문의 내용이 없는 경우 hide 처리 -->
+													<table
+														summary="내 제안내역 보기 목록으로 글번호, 내용, 날짜, 답변여부로 구성되어 있습니다.">
+														<caption>내 제안내역 보기</caption>
+														<colgroup>
+															<col class="col_1">
+															<col class="col_2">
+															<col class="col_3">
+															<col class="col_4">
+														</colgroup>
+														<thead class="blind">
+															<tr>
+																<th scope="col">글번호</th>
+																<th scope="col">내용</th>
+																<th scope="col">날짜</th>
+																<th scope="col">답변여부</th>
+															</tr>
+														</thead>
+														<tbody>
+															<c:forEach var="uesrqna" items="${qnaList}">
+																<tr>
+																	<td><c:out value="${uesrqna.view_num}" /></td>
+																	<td class="alLeft"><span class="tit"><a
+																			href="http://localhost/recruit-app/user/mypage/qna/mypageQNADetail.do?qna_num=${uesrqna.qna_num}"><c:out
+																					value="${uesrqna.title}" /></a></span></td>
+																	<td><c:out value="${uesrqna.input_date}" /></td>
+																	<td class=""><c:out value="${uesrqna.flag}" /></td>
+																</tr>
+															</c:forEach>
+														</tbody>
+													</table>
+
+													<!-- <div style="text-align:center; margin-top:30px">
 			        <nav aria-label="...">
 			                <ul class="pagination pagination-lg" style="display: inline-flex;">
 			                       <li class="page-item disabled">
@@ -120,34 +123,38 @@ td{
 			                 </ul>
 			         </nav>
 				</div> -->
-				<c:set var="currentPage" value="${searchVO.currentPage}" />
-				<c:set var="totalPages" value="${searchVO.totalPages}" />
-				
-				<div style="text-align:center; margin-top:30px">
-				    <nav aria-label="...">
-				        <ul class="pagination pagination-lg" style="display: inline-flex;">
-				            <c:if test="${currentPage > 1}">
-				                <li class="page-item">
-				                    <a class="page-link" href="?currentPage=${currentPage - 1}&itemsPerPage=${searchVO.itemsPerPage}">&lt;</a>
-				                </li>
-				            </c:if>
-				            <c:forEach var="i" begin="1" end="${totalPages}">
-				                <li class="page-item ${i == currentPage ? 'active' : ''}">
-				                    <a class="page-link" href="?currentPage=${i}&itemsPerPage=${searchVO.itemsPerPage}">${i}</a>
-				                </li>
-				            </c:forEach>
-				            <c:if test="${currentPage < totalPages}">
-				                <li class="page-item">
-				                    <a class="page-link" href="?currentPage=${currentPage + 1}&itemsPerPage=${searchVO.itemsPerPage}">&gt;</a>
-				                </li>
-				            </c:if>
-				        </ul>
-				    </nav>
-				</div>
-			</div>
-			</div>
-			</div>
-			<!-- List 끝 //-->
+													<c:set var="userId" value="${sessionScope.userId}" />
+													<c:set var="currentPage" value="${searchVO.currentPage}" />
+													<c:set var="totalPages" value="${searchVO.totalPages}" />
+
+													<div style="text-align: center; margin-top: 30px">
+														<nav aria-label="...">
+															<ul class="pagination pagination-lg"
+																style="display: inline-flex;">
+																<c:if test="${currentPage > 1}">
+																	<li class="page-item"><a class="page-link"
+																		href="?currentPage=${currentPage - 1}&itemsPerPage=${searchVO.itemsPerPage}">&lt;</a>
+																	</li>
+																</c:if>
+																<c:forEach var="i" begin="1" end="${totalPages}">
+																	<li
+																		class="page-item ${i == currentPage ? 'active' : ''}">
+																		<a class="page-link"
+																		href="?currentPage=${i}&itemsPerPage=${searchVO.itemsPerPage}">${i}</a>
+																	</li>
+																</c:forEach>
+																<c:if test="${currentPage < totalPages}">
+																	<li class="page-item"><a class="page-link"
+																		href="?currentPage=${currentPage + 1}&itemsPerPage=${searchVO.itemsPerPage}">&gt;</a>
+																	</li>
+																</c:if>
+															</ul>
+														</nav>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- List 끝 //-->
 			</div>
 					</section>
 		</div>

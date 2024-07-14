@@ -15,6 +15,8 @@ public class SearchVO {
     private String keyword;
     private String searchType;
 
+    private String userId;
+
     private int currentPage = 1;
     private int itemsPerPage = 10;
     private int totalItems;

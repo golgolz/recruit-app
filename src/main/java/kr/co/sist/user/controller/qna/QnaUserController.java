@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import kr.co.sist.user.domain.qna.UserQnaDomain;
 import kr.co.sist.user.service.qna.QnaUserService;
 import kr.co.sist.user.vo.qna.SearchVO;
@@ -26,21 +27,24 @@ public class QnaUserController {
 
     @GetMapping("/user/mypage/qna/mypageQNAList.do")
     public String searchMyQnaList(@RequestParam(defaultValue = "1") int currentPage,
-            @RequestParam(defaultValue = "10") int itemsPerPage, Model model) {
+            @RequestParam(defaultValue = "10") int itemsPerPage, Model model,
+            @SessionAttribute("userId") String userId) {
         SearchVO sVO = new SearchVO();
+        sVO.setUserId(userId);
         sVO.setCurrentPage(currentPage);
         sVO.setItemsPerPage(itemsPerPage);
         sVO.pageIndexes();
 
-        int totlalItems = qnaUserService.countMyQnas();
-        sVO.setTotalItems(totlalItems);
-        sVO.setTotalPages((int) Math.ceil((double) totlalItems / itemsPerPage));
+        int totallItems = qnaUserService.countMyQnas(sVO);
+        sVO.setTotalItems(totallItems);
+        sVO.setTotalPages((int) Math.ceil((double) totallItems / itemsPerPage));
 
         List<Map<String, Object>> qnaList = qnaUserService.searchMyQnaList(sVO);
         model.addAttribute("qnaList", qnaList);
         model.addAttribute("searchVO", sVO);
         return "user/mypage/qna/mypageQNAList";
     }
+
 
 
     @GetMapping("/user/mypage/qna/mypageQNADetail.do")

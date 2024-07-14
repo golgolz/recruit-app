@@ -18,7 +18,6 @@
                 <a
                   href="http://localhost/recruit-app/notice/notices.do"
                   class=""
-                  target="_blank"
                   rel="noopener noreferrer"
                   data-attribute-id="fnb"
                   data-fnb-kind="investment"
@@ -31,7 +30,6 @@
                 ><a
                   href="http://localhost/recruit-app/user/mypage/qna/mypageQnaForm.do"
                   class=""
-                  target="_blank"
                   rel="noopener noreferrer"
                   data-attribute-id="fnb"
                   data-fnb-kind="AD"

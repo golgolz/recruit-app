@@ -14,6 +14,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class ResumeVO {
+    private String id;
     private String owner;
     private String email;
     private String title;

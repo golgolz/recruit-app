@@ -104,7 +104,7 @@ input[type="number"]::-webkit-inner-spin-button {
 		        success: function(response) {
 		        	if(response === "success"){
 			            alert("등록에 성공했습니다.");
-			            location.href="${pageContext.request.contextPath}/manage/recruits.do";
+			            location.href="${pageContext.request.contextPath}/manage/recruit/recruits.do";
 		        	}
 		        }
 		    });
@@ -131,7 +131,7 @@ input[type="number"]::-webkit-inner-spin-button {
 			        success: function(response) {
 			            if(response === "success"){
 			                alert("수정에 성공했습니다.");
-			                location.href="${pageContext.request.contextPath}/manage/recruits.do";
+			                location.href="${pageContext.request.contextPath}/manage/recruit/recruits.do";
 			            }
 			        }
 			    });
@@ -150,7 +150,7 @@ input[type="number"]::-webkit-inner-spin-button {
 			        success: function(response) {
 			            if(response === "success"){
 			                alert("삭제에 성공했습니다.");
-			                location.href="${pageContext.request.contextPath}/manage/recruits.do";
+			                location.href="${pageContext.request.contextPath}/manage/recruit/recruits.do";
 			            }
 			        }
 			    });
