@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import kr.co.sist.user.dao.resume.ResumeUserDAO;
 import kr.co.sist.user.domain.resume.ResumeListDomain;
 import kr.co.sist.user.vo.resume.ApplyVO;
+import kr.co.sist.user.vo.resume.ProfileVO;
 import kr.co.sist.user.vo.resume.ResumeVO;
 
 @Service
@@ -19,6 +20,10 @@ public class ResumeUserService {
 
     public List<ResumeListDomain> searchResumes(String resumeNum) {
         return resumeUserDAO.selectResumes(resumeNum);
+    }
+
+    public ProfileVO searchProfile(String userId) {
+        return resumeUserDAO.selectProfileInfo(userId);
     }
 
     public int apply(ApplyVO apply) {

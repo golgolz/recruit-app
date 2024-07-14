@@ -15,6 +15,7 @@ import kr.co.sist.user.vo.resume.CareerVO;
 import kr.co.sist.user.vo.resume.CertificationVO;
 import kr.co.sist.user.vo.resume.EducationVO;
 import kr.co.sist.user.vo.resume.LanguageVO;
+import kr.co.sist.user.vo.resume.ProfileVO;
 import kr.co.sist.user.vo.resume.ResumeVO;
 import kr.co.sist.user.vo.resume.SkillVO;
 
@@ -43,6 +44,15 @@ public class ResumeUserDAO {
         myBatis.closeHandler(session);
 
         return result;
+    }
+
+    public ProfileVO selectProfileInfo(String userId) {
+        SqlSession session = myBatis.getMyBatisHandler(false);
+
+        ProfileVO profile = session.selectOne("kr.co.sist.resume.user.selectProfileinfo", userId);
+        myBatis.closeHandler(session);
+
+        return profile;
     }
 
     public int insertApply(ApplyVO apply) {

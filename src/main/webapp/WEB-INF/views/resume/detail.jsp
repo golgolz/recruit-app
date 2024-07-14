@@ -235,6 +235,20 @@
 		                $("#recruit-list tbody").html('<tr><td colspan="4" style="font-size: 16px; font-weight: bold;">데이터를 불러오는 데 실패했습니다.</td></tr>');
 		            }
 		        });
+		    } else {
+		    	var id = "<%= session.getAttribute("userId") %>";
+		    	$.ajax({
+		    		url: "${pageContext.request.contextPath}/api/resume/profile.do?id=" + id,
+		    		method: "GET",
+		    		dataType: "JSON",
+		    		success: function(data){
+		    			console.log(data);
+		    			updateProfileForm(data);
+		    		},
+		    		error: function(xhr, status, error){
+		                console.error("Error fetching data: " + error);
+		    		}
+		    	});
 		    }
 			
 			$("#registerBtn").click(function(){

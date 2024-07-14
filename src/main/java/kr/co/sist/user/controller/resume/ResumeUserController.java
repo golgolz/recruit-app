@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.co.sist.user.domain.resume.ResumeListDomain;
 import kr.co.sist.user.service.resume.ResumeUserService;
 import kr.co.sist.user.vo.resume.ApplyVO;
+import kr.co.sist.user.vo.resume.ProfileVO;
 import kr.co.sist.user.vo.resume.ResumeVO;
 
 @Controller
@@ -56,6 +57,12 @@ public class ResumeUserController {
         return result;
     }
 
+    @GetMapping("/api/resume/profile.do")
+    @ResponseBody
+    public ProfileVO addProfileInfo(@RequestParam("id") String userId) {
+        return resumeUserService.searchProfile(userId);
+    }
+
     @PostMapping("/api/resume.do")
     @ResponseBody
     public String addResume(@RequestBody ResumeVO resumeVO) {
@@ -72,7 +79,6 @@ public class ResumeUserController {
     public String modifyResume(@RequestBody ResumeVO resumeVO) {
         String result = "success";
 
-        System.out.println(resumeVO);
         resumeUserService.modifyResume(resumeVO);
 
         return result;
