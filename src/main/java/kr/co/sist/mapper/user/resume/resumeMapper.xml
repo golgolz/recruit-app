@@ -17,6 +17,135 @@
     	INSERT INTO apply (RECRUIT_NUM, RESUME_NUM, USER_ID, PROGRESS_STATE, APPLY_DATE)
 		VALUES (#{recruitNum}, #{resumeNum}, #{userId}, '지원완료', TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-DD'), 'YYYY-MM-DD'))
     </insert>
-    <!-- <insert id="insertResume">
-    </insert> -->
+    <update id="updateResume" parameterType="kr.co.sist.user.vo.resume.ResumeVO">
+    	UPDATE resume 
+    	SET 
+	    	title = #{title},
+	    	profile_img = #{profile},
+	    	self_introduction = #{introduce},
+	    	update_date = TO_CHAR(SYSDATE, 'YYYY-MM-DD'),
+	    	addr = #{addr}
+    	WHERE resume_num = #{id}
+    </update>
+    <insert id="insertSkill" parameterType="java.util.List">
+	    INSERT INTO skill (RESUME_NUM, SKILL_CODE)
+	    SELECT A.* FROM (
+	        <foreach collection="list" item="skill" separator="UNION ALL">
+	            SELECT #{skill.resumeNum} AS RESUME_NUM, sl.SKILL_CODE
+	            FROM skill_list sl
+	            WHERE sl.SKILL_NAME = #{skill.skillName}
+	        </foreach>
+	    ) A
+	</insert>
+	<insert id="insertEducation" parameterType="java.util.List">
+        INSERT INTO education (
+            RESUME_NUM, SCHOOL_CLASSIFICATION, SCHOOL_NAME, ADMISSION_DATE, 
+            GRADUATION_DATE, GRADUATION_STATE, MAJOR, GRADES, TOTAL_SCORE
+        )
+        SELECT A.* FROM (
+            <foreach collection="list" item="edu" separator="UNION ALL">
+                SELECT 
+                    #{edu.resumeNum}, 
+	                #{edu.schoolClassification}, 
+	                #{edu.schoolName},
+	                TO_DATE(TO_CHAR(#{edu.admissionDate}, 'YYYY-MM-DD'), 'YYYY-MM-DD'),
+	                TO_DATE(TO_CHAR(#{edu.graduationDate}, 'YYYY-MM-DD'), 'YYYY-MM-DD'),
+	                #{edu.graduationState},
+	                #{edu.major}, 
+	                #{edu.grades}, 
+	                #{edu.totalScore}
+	                FROM DUAL
+            </foreach>
+        ) A
+    </insert>
+    <insert id="insertCareer" parameterType="java.util.List">
+	    INSERT INTO career (
+	        RESUME_NUM, COMPANY_CODE, DNAME, JOIN_DATE, 
+	        RESIGNATION_DATE, JOB_DESCRIPTION, POSITION, SAL
+	    )
+	    SELECT A.* FROM (
+	        <foreach collection="list" item="career" separator="UNION ALL">
+	            SELECT 
+	                #{career.resumeNum},
+	                (SELECT ci.COMPANY_CODE 
+	                 FROM companyinfo ci 
+	                 WHERE ci.COMPANY_NAME = #{career.companyName}),
+	                #{career.dname},
+	                TO_DATE(TO_CHAR(#{career.joinDate}, 'YYYY-MM-DD'), 'YYYY-MM-DD'),
+	                <choose>
+	                    <when test="career.resignationDate != null">
+	                        TO_DATE(TO_CHAR(#{career.resignationDate}, 'YYYY-MM-DD'), 'YYYY-MM-DD'),
+	                    </when>
+	                    <otherwise>
+	                        NULL,
+	                    </otherwise>
+	                </choose>
+	                #{career.jobDescription},
+	                #{career.position},
+	                #{career.sal}
+	            FROM DUAL
+	        </foreach>
+	    ) A
+	</insert>
+	<insert id="insertCertification" parameterType="java.util.List">
+	    INSERT INTO certificate (
+	        RESUME_NUM, CERTIFICATE_NAME, PUBLISHER, ACQUISITION_DATE
+	    )
+	    SELECT A.* FROM (
+	        <foreach collection="list" item="cert" separator="UNION ALL">
+	            SELECT 
+	                #{cert.resumeNum},
+	                #{cert.certificateName},
+	                #{cert.publisher},
+	                TO_DATE(TO_CHAR(#{cert.acquisitionDate}, 'YYYY-MM-DD'), 'YYYY-MM-DD')
+	            FROM DUAL
+	        </foreach>
+	    ) A
+	</insert>
+	<insert id="insertLanguage" parameterType="java.util.List">
+	    INSERT INTO language (
+	        RESUME_NUM, CATEGORY, LANGUAGE, TEST_NAME, LANG_LEVEL, AQUISITION_DATE
+	    )
+	    SELECT A.* FROM (
+	        <foreach collection="list" item="lang" separator="UNION ALL">
+	            SELECT 
+	                #{lang.resumeNum},
+	                #{lang.category},
+	                #{lang.language},
+	                <choose>
+	                    <when test="lang.testName != null and lang.testName != ''">
+	                        #{lang.testName}
+	                    </when>
+	                    <otherwise>
+	                        NULL
+	                    </otherwise>
+	                </choose>,
+	                #{lang.langLevel},
+	                <choose>
+	                    <when test="lang.acquisitionDate != null">
+	                		TO_DATE(TO_CHAR(#{lang.acquisitionDate}, 'YYYY-MM-DD'), 'YYYY-MM-DD')
+	                    </when>
+	                    <otherwise>
+	                        NULL
+	                    </otherwise>
+	                </choose>
+	            FROM DUAL
+	        </foreach>
+	    ) A
+	</insert>
+    <delete id="deleteSkill" parameterType="java.lang.String">
+    	DELETE skill WHERE resume_num = #{resumeNum}
+    </delete>
+    <delete id="deleteEdu" parameterType="java.lang.String">
+    	DELETE education WHERE resume_num = #{resumeNum}
+    </delete>
+    <delete id="deleteCareer" parameterType="java.lang.String">
+    	DELETE career WHERE resume_num = #{resumeNum}
+    </delete>
+    <delete id="deleteCertifacation" parameterType="java.lang.String">
+    	DELETE certificate WHERE resume_num = #{resumeNum}
+    </delete>
+    <delete id="deleteLanguage" parameterType="java.lang.String">
+    	DELETE language WHERE resume_num = #{resumeNum}
+    </delete>
 </mapper>

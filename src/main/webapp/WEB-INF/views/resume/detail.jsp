@@ -255,21 +255,23 @@
 			});
 			
 			$("#updateBtn").click(function(){
-				let resumeData = createResumeData();
-				console.log(resumeData);
-				console.log(JSON.stringify(resumeData));
-				$.ajax({
-					url: "${pageContext.request.contextPath}/api/resume.do",
-					type: "POST",
-			        contentType: "application/json; charset=utf-8",
-			        data: JSON.stringify(resumeData),
-					success: function(data){
-						console.log("success");
-					},
-					error: function(xhr, status, error){
-						console.log("fail");
-					}
-				});
+				if(confirm("수정하시겠습니까?")){
+					let resumeData = createResumeData();
+					console.log(resumeData);
+					console.log(JSON.stringify(resumeData));
+					$.ajax({
+						url: "${pageContext.request.contextPath}/api/resume.do",
+						type: "PUT",
+				        contentType: "application/json; charset=utf-8",
+				        data: JSON.stringify(resumeData),
+						success: function(data){
+							alert("수정이 완료되었습니다.");
+						},
+						error: function(xhr, status, error){
+							console.log("fail");
+						}
+					});
+				}
 			});
 			
 			$("#removeBtn").click(function(){
@@ -692,6 +694,7 @@
 		
 		function createResumeData() {
 		    const mainData = {
+		    	id: "${resumeNum}",
 		        owner: $('#UserInfo_M_Name').val(),
 		        email: $('#UserInfo_M_Email').val(),
 		        title: $('#UserResume_M_Resume_Title').val(),
@@ -707,29 +710,29 @@
 
 		    const subData = {
 		        skills: $('.chip.active').map(function() {
-		            return { skill_name: $(this).data('value') };
+		            return { skillName: $(this).data('value') };
 		        }).get(),
 		        education: $('.formWrapEducation .container').map(function() {
 		            const $this = $(this);
 		            return {
-		                school_classification: $this.find('[name$="Mstr_Dctr_Type_Code"]').val(),
-		                school_name: $this.find('[name$="Schl_Name"]').val(),
-		                admission_date: formatDate($this.find('[name$="Entc_YM"]').val()),
-		                graduation_date: formatDate($this.find('[name$="Grad_YM"]').val()),
-		                graduation_state: $this.find('.dropdown-edcation-state .button.buttonChoose span').text(),
+		                schoolClassification: $this.find('[name$="Mstr_Dctr_Type_Code"]').val(),
+		                schoolName: $this.find('input[data-type="School_Name"][type="text"]').val(),
+		                admissionDate: formatDate($this.find('[name$="Entc_YM"]').val()),
+		                graduationDate: formatDate($this.find('[name$="Grad_YM"]').val()),
+		                graduationState: $this.find('.dropdown-edcation-state .button.buttonChoose span').text(),
 		                major: $this.find('[id^="univmajor_"]').val(),
 		                grades: parseFloat($this.find('[name$="Grade"]').val()),
-		                total_score: parseFloat($this.find('[name$="Grade_Prft_Scr"]').val())
+		                totalScore: parseFloat($this.find('[name$="Grade_Prft_Scr"]').val())
 		            };
 		        }).get(),
 		        career: $('.formWrapCareer .container').map(function() {
 		            const $this = $(this);
 		            return {
-		                company_name: $this.find('[id^="Career_C_Name_"]').val(),
+		                companyName: $this.find('[id^="Career_C_Name_"]').val(),
 		                dname: $this.find('[id^="Career_C_Part_"]').val(),
-		                join_date: formatDate($this.find('[id^="Career_CSYM_"]').val()),
-		                resignation_date: formatDate($this.find('[id^="Career_CEYM_"]').val()),
-		                job_description: $this.find('.textarea-career').val(),
+		                joinDate: formatDate($this.find('[id^="Career_CSYM_"]').val()),
+		                resignationDate: formatDate($this.find('[id^="Career_CEYM_"]').val()), // 1일씩 밀리는 이슈
+		                jobDescription: $this.find('.textarea-career').val(),
 		                position: $this.find('[name="position_field"]').val(),
 		                sal: parseInt(removeCommas($this.find('[id^="Career_M_MainPay_User_"]').val()))
 		            };
@@ -737,9 +740,9 @@
 		        certifications: $('.formWrapCertificate .container').map(function() {
 		            const $this = $(this);
 		            return {
-		                certificate_name: $this.find('[id^="License_Search_"]').val(),
+		                certificateName: $this.find('[id^="License_Search_"]').val(),
 		                publisher: $this.find('[id^="License_Lc_Pub_"]').val(),
-		                acquisition_date: formatDate($this.find('[id^="License_Lc_YYMM_"]').val())
+		                acquisitionDate: formatDate($this.find('[id^="License_Lc_YYMM_"]').val())
 		            };
 		        }).get(),
 		        languages: $('.formWrapLanguage .container').map(function() {
@@ -749,12 +752,12 @@
 
 		            return {
 		                language: $this.find('.dropdown-language-name .button.buttonChoose > span').text().trim(),
-		                test_name: isConversation ? null : $this.find('.devExamDropdown .button.buttonChoose > span').text().trim(),
-		                lang_level: isConversation 
+		                testName: isConversation ? null : $this.find('.devExamDropdown .button.buttonChoose > span').text().trim(),
+		                langLevel: isConversation 
 		                    ? $this.find('.devConversationArea .dropdown-language-grade .button.buttonChoose > span').text().trim()
 		                    : $this.find('.devExamArea [id^="Language_Test1_Point_I_"]').val(),
 		                category: isConversation ? '회화능력' : '공인시험',
-		                aquisition_date: formatDate($this.find('[id^="Language_Test_YYMM_"]').val())
+		                acquisitionDate: formatDate($this.find('[id^="Language_Test_YYMM_"]').val())
 		            };
 		        }).get()
 		    };
