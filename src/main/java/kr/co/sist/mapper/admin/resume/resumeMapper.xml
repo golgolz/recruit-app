@@ -127,6 +127,11 @@
 		)
 		WHERE rnum BETWEEN #{startNum} AND #{endNum}
 	</select>
+	<select id="selectRecruitTitle" parameterType="int" resultType="java.lang.String">
+		select title
+		from recruit
+		where recruit_num = #{recruitNum}
+	</select>
 	<select id="selectResumeCount" resultType="int" parameterType="kr.co.sist.admin.vo.resume.SearchVO">
 		SELECT COUNT(*) AS total_count
 		FROM (

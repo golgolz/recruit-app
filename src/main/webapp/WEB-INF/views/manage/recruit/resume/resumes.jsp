@@ -48,6 +48,23 @@
     		resetForm();
     	});
     	
+    	var summary = createSummaryVO();
+    	
+    	$.ajax({
+    		url: "${pageContext.request.contextPath}/api/manage/recruit/summary.do",
+    		method: 'POST',
+            data: JSON.stringify(summary),
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            success: function(data) {
+            	//console.log(data);
+            	updateStatus(data);
+            },
+            error: function(xhr, status, error) {
+                console.error("Error fetching data: " + error);
+            }
+    	});
+		
     	$('.pagination').on('click', '.page-link', function(e) {
             e.preventDefault();
             var clickedPage = $(this).data('page');
@@ -82,14 +99,14 @@
 	
 	function updateResumeList(){
     	var searchVO = createSearchVO();
-    	console.log(searchVO);
+    	//console.log(searchVO);
 		$.ajax({
     		url: "${pageContext.request.contextPath}/api/manage/resumes.do",
             method: 'GET',
             data: searchVO,
             dataType: 'JSON',
             success: function(data) {
-            	console.log(data);
+            	//console.log(data);
             	populateTable(data);
                 if(!(data && data.length > 0)){
                     $("#sodr_list tbody").html('<tr><td colspan="10" style="font-size: 16px; font-weight: bold;">검색 결과가 없습니다.</td></tr>');
@@ -137,7 +154,7 @@
 	            "<td>" +
 	                "<input type='button' value='바로가기' class='btn btn-outline-secondary btn-sm' " +
 	                "style='font-weight: bold; margin: 0px auto;' " +
-	                "onclick='location.href=\"http://localhost/recruit-app/manage/resumes/detail.do?id=" + item.resumeId + "\"' />" +
+	                "onclick='location.href=\"http://localhost/recruit-app/manage/resumes/detail.do?id=" + item.resumeId + "&recruitNum=${recruitNum}\"' />" +
 	            "</td>";
 	        
 	        tableBody.appendChild(row);
@@ -172,6 +189,13 @@
 	    return searchVO;
 	}
 	
+	function createSummaryVO(){
+		return{
+			recruitNum: parseInt("${recruitNum}"),
+			companyCode: "${companyCode}"
+		};
+	}
+	
 	function resetForm() {
         $('select[name="category"]').prop('selectedIndex', 0);
         $('input[name="keyword"]').val('');
@@ -185,7 +209,7 @@
     	var startPage = (currentGroup - 1) * showPages + 1;
         var paginationHtml = '';
         var endPage = Math.min(Math.ceil(totalPages / itemsPerPage) , startPage + showPages - 1);
-        console.log("end : ", endPage);
+        //console.log("end : ", endPage);
         if(endPage == 0){
         	return;
         }
@@ -204,6 +228,25 @@
 
         $('.pagination').html(paginationHtml);
     }
+	
+	function updateStatus(data) {
+	    var statusDiv = document.getElementById('status');
+	    var companyName = escapeHtml(data.companyName || '');
+	    var recruitTitle = escapeHtml(data.recruitTitle || '');
+	    
+	    statusDiv.innerHTML = 
+	        '<div style="font-weight: bold;">기업명 : ' + companyName + '</div>' +
+	        '<div style="font-weight: bold;">공고명 : ' + recruitTitle + '</div>';
+	}
+
+	function escapeHtml(unsafe) {
+	    return unsafe
+	         .replace(/&/g, "&amp;")
+	         .replace(/</g, "&lt;")
+	         .replace(/>/g, "&gt;")
+	         .replace(/"/g, "&quot;")
+	         .replace(/'/g, "&#039;");
+	}
 </script>
 <!-- golgolz start -->
 <link href="http://localhost//recruit-app/assets/css/pagenation.css" rel="stylesheet" />

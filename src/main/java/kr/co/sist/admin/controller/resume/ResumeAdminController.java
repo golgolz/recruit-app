@@ -26,14 +26,24 @@ public class ResumeAdminController {
     }
 
     @GetMapping("/manage/resumes.do")
-    public String showResumePage(@RequestParam("recruitNum") String recruitNum, Model model) {
+    public String showResumePage(@RequestParam("recruitNum") String recruitNum,
+            @RequestParam("companyCode") String companyCode, Model model) {
         model.addAttribute("recruitNum", recruitNum);
+        model.addAttribute("companyCode", companyCode);
         return "/manage/recruit/resume/resumes";
     }
 
+    @GetMapping(value = "/api/manage/resume/recruit.do", produces = "text/plain;charset=UTF-8")
+    @ResponseBody
+    public String searchRecruitTitle(@RequestParam("recruitNum") int recruitNum) {
+        return resumeAdminService.searchRecruitTitle(recruitNum);
+    }
+
     @GetMapping("/manage/resumes/detail.do")
-    public String showResumeDetailPage(@RequestParam("id") String resumeNum, Model model) {
+    public String showResumeDetailPage(@RequestParam("id") String resumeNum,
+            @RequestParam("recruitNum") String recruitNum, Model model) {
         model.addAttribute("resumeNum", resumeNum);
+        model.addAttribute("recruitNum", recruitNum);
         return "/manage/recruit/resume/detail";
     }
 

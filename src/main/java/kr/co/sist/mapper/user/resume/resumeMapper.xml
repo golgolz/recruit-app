@@ -6,17 +6,49 @@
     <select id="selectResumes" resultType="kr.co.sist.user.domain.resume.ResumeListDomain" parameterType="java.lang.String">
 		select resume_num as resumeNum, title, input_date as inputDate
 		from resume 
-		where user_id=#{user_id}
+		where user_id=#{user_id} and delete_flag != 'T'
     </select>
     <select id="countResumesPerUser" resultType="int" parameterType="java.lang.String">
     	select count(*) as count
 		from resume 
 		where user_id=#{user_id}
     </select>
+    <select id="selectProfileinfo" resultType="kr.co.sist.user.vo.resume.ProfileVO" parameterType="java.lang.String">
+    	select name as owner, TO_CHAR(birth_date, 'YYYY-MM-DD') as birth, gender, user_id as email, tel, phone 
+    	from users 
+    	where user_id = #{userId}
+    </select>
     <insert id="apply" parameterType="kr.co.sist.user.vo.resume.ApplyVO">
     	INSERT INTO apply (RECRUIT_NUM, RESUME_NUM, USER_ID, PROGRESS_STATE, APPLY_DATE)
 		VALUES (#{recruitNum}, #{resumeNum}, #{userId}, '지원완료', TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-DD'), 'YYYY-MM-DD'))
     </insert>
+    <insert id="insertResume" parameterType="kr.co.sist.user.vo.resume.ResumeVO">
+	    INSERT INTO resume (
+	        RESUME_NUM,
+	        USER_ID,
+	        TITLE,
+	        PROFILE_IMG,
+	        SELF_INTRODUCTION,
+	        INPUT_DATE,
+	        UPDATE_DATE,
+	        ADDR
+	    ) VALUES (
+	        #{id},
+	        #{email},
+	        #{title},
+	        #{profile},
+	        #{introduce},
+	        TO_CHAR(SYSDATE, 'YYYY-MM-DD'),
+	        TO_CHAR(SYSDATE, 'YYYY-MM-DD'),
+	        #{addr}
+	    )
+	</insert>
+	<update id="deleteResume" parameterType="java.lang.String">
+		UPDATE resume
+		SET
+			delete_flag = 'T'
+		where resume_num = #{resumeNum}
+	</update>
     <update id="updateResume" parameterType="kr.co.sist.user.vo.resume.ResumeVO">
     	UPDATE resume 
     	SET 

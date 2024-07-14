@@ -80,42 +80,105 @@ String userId = (String)session.getAttribute("userId");
 		function updateResumeList(data) {
 		    var mtuList = document.querySelector('.mtuList ul');
 		    mtuList.innerHTML = '';
+		    if(recruitNum){
+			    for (var i = 0; i < data.length; i++) {
+			        var resume = data[i];
+			        var li = document.createElement('li');
+			        li.innerHTML = 
+			            '<div class="col col01">' +
+			                '<div class="tit">' +
+			                    '<a href="http://localhost/recruit-app/resume/detail.do?id=' + resume.resumeNum + '">' + resume.title + '</a>' +
+			                '</div>' +
+			                '<div class="date">' + resume.inputDate + '</div>' +
+			            '</div>' +
+			            '<div class="col col02">' +
+			                '<div class="btnCell">' +
+			                    '<input type="button" class="selectBtn golgolBtn btn btn-outline-primary btn-sm" data-resume="' + resume.resumeNum + '" value="선택" />' +
+			                '</div>' +
+			                '<div class="btnCell">' +
+			                    '<input type="button" class="updateBtn golgolBtn btn btn-outline-primary btn-sm" data-resume="' + resume.resumeNum + '" value="수정" />' +
+			                '</div>' +
+			                '<div class="btnCell">' +
+			                    '<input type="button" class="removeBtn golgolBtn btn btn-outline-primary btn-sm" data-resume="' + resume.resumeNum + '" value="삭제" />' +
+			                '</div>' +
+			            '</div>';
+			        mtuList.appendChild(li);
+			    }
 
-		    for (var i = 0; i < data.length; i++) {
-		        var resume = data[i];
-		        var li = document.createElement('li');
-		        li.innerHTML = 
-		            '<div class="col col01">' +
-		                '<div class="tit">' +
-		                    '<a href="http://localhost/recruit-app/resume/detail.do?id=' + resume.resumeNum + '">' + resume.title + '</a>' +
-		                '</div>' +
-		                '<div class="date">' + resume.inputDate + '</div>' +
-		            '</div>' +
-		            '<div class="col col02">' +
-		                '<div class="btnCell">' +
-		                    '<input type="button" id="selectBtn" data-resume="' + resume.resumeNum + '" class="golgolBtn btn btn-outline-primary btn-sm" value="선택" />' +
-		                '</div>' +
-		                '<div class="btnCell">' +
-		                    '<input type="button" id="updateBtn" data-resume="' + resume.resumeNum + '" class="golgolBtn btn btn-outline-primary btn-sm" value="수정" />' +
-		                '</div>' +
-		                '<div class="btnCell">' +
-		                    '<input type="button" id="removeBtn" data-resume="' + resume.resumeNum + '" class="golgolBtn btn btn-outline-primary btn-sm" value="삭제" />' +
-		                '</div>' +
-		            '</div>';
-		        mtuList.appendChild(li);
+			    // 이벤트 위임을 사용하여 버튼에 이벤트 핸들러 추가
+			    $('.mtuList ul').on('click', '.selectBtn', function() {
+			        apply($(this).data('resume'));
+			    });
 
-		        $("#selectBtn").click(function(){
-		        	apply($(this).data('resume'));
-		        });
-		        
-				$("#updateBtn").click(function(){
-					var resumeNum = $(this).data('resume');
+			    $('.mtuList ul').on('click', '.updateBtn', function() {
+			        var resumeNum = $(this).data('resume');
 			        window.location.href = 'http://localhost/recruit-app/resume/detail.do?id=' + resumeNum;
-				});
+			    });
 
-				$("#removeBtn").click(function(){
-					confirm("삭제하시겠습니까?");
-				});
+			    $('.mtuList ul').on('click', '.removeBtn', function() {
+			        var resumeNum = $(this).data('resume');
+			        if(confirm("삭제하시겠습니까?")) {
+			            $.ajax({
+			                url: "${pageContext.request.contextPath}/api/resume.do?id=" + resumeNum,
+			                type: "DELETE",
+			                success: function(data) {
+			                    alert("삭제가 완료되었습니다.");
+			                    // 삭제 후 목록을 다시 불러오는 로직 추가
+			                },
+			                error: function(xhr, status, error) {
+			                    console.log("fail");
+			                }
+			            });
+			        }
+			    });
+		    } else {
+			    for (var i = 0; i < data.length; i++) {
+			        var resume = data[i];
+			        var li = document.createElement('li');
+			        li.innerHTML = 
+			            '<div class="col col01">' +
+			                '<div class="tit">' +
+			                    '<a href="http://localhost/recruit-app/resume/detail.do?id=' + resume.resumeNum + '">' + resume.title + '</a>' +
+			                '</div>' +
+			                '<div class="date">' + resume.inputDate + '</div>' +
+			            '</div>' +
+			            '<div class="col col02">' +
+			                '<div class="btnCell">' +
+			                    '<input type="button" class="updateBtn golgolBtn btn btn-outline-primary btn-sm" data-resume="' + resume.resumeNum + '" value="수정" />' +
+			                '</div>' +
+			                '<div class="btnCell">' +
+			                    '<input type="button" class="removeBtn golgolBtn btn btn-outline-primary btn-sm" data-resume="' + resume.resumeNum + '" value="삭제" />' +
+			                '</div>' +
+			            '</div>';
+			        mtuList.appendChild(li);
+			    }
+
+			    // 이벤트 위임을 사용하여 버튼에 이벤트 핸들러 추가
+			    $('.mtuList ul').on('click', '.selectBtn', function() {
+			        apply($(this).data('resume'));
+			    });
+
+			    $('.mtuList ul').on('click', '.updateBtn', function() {
+			        var resumeNum = $(this).data('resume');
+			        window.location.href = 'http://localhost/recruit-app/resume/detail.do?id=' + resumeNum;
+			    });
+
+			    $('.mtuList ul').on('click', '.removeBtn', function() {
+			        var resumeNum = $(this).data('resume');
+			        if(confirm("삭제하시겠습니까?")) {
+			            $.ajax({
+			                url: "${pageContext.request.contextPath}/api/resume.do?id=" + resumeNum,
+			                type: "DELETE",
+			                success: function(data) {
+			                    alert("삭제가 완료되었습니다.");
+			                    // 삭제 후 목록을 다시 불러오는 로직 추가
+			                },
+			                error: function(xhr, status, error) {
+			                    console.log("fail");
+			                }
+			            });
+			        }
+			    });
 		    }
 		}
 		

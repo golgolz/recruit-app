@@ -13,10 +13,12 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class CertificationVO {
-    private String resumeNum;
-    private String certificateName;
-    private String publisher;
+public class ProfileVO {
+    private String owner;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
-    private Date acquisitionDate;
+    private Date birth;
+    private String gender;
+    private String email;
+    private String tel;
+    private String phone;
 }

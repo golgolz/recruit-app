@@ -213,7 +213,8 @@
 			});
 			
 			var resumeNum = "${resumeNum}";
-			
+	    	var id = "<%= session.getAttribute("userId") %>";
+	    	
 			if (resumeNum) {
 				$.ajax({
 		            url: "${pageContext.request.contextPath}/api/manage/resumes/detail.do?id=" + resumeNum,
@@ -235,23 +236,39 @@
 		                $("#recruit-list tbody").html('<tr><td colspan="4" style="font-size: 16px; font-weight: bold;">데이터를 불러오는 데 실패했습니다.</td></tr>');
 		            }
 		        });
+		    } else {
+		    	$.ajax({
+		    		url: "${pageContext.request.contextPath}/api/resume/profile.do?id=" + id,
+		    		method: "GET",
+		    		dataType: "JSON",
+		    		success: function(data){
+		    			console.log(data);
+		    			updateProfileForm(data);
+		    		},
+		    		error: function(xhr, status, error){
+		                console.error("Error fetching data: " + error);
+		    		}
+		    	});
 		    }
 			
 			$("#registerBtn").click(function(){
-				let resumeData = createResumeData();
-				console.log(resumeData);
-				$.ajax({
-					url: "${pageContext.request.contextPath}/api/resume.do",
-					method: "POST",
-					dataType: "JSON",
-					data: resumeData,
-					success: function(data){
-						console.log("success");
-					},
-					error: function(xhr, status, error){
-						console.log("fail");
-					}
-				});
+				if(confirm("등록하시겠습니까?")){
+					let resumeData = createResumeData();
+					console.log(resumeData);
+					$.ajax({
+						url: "${pageContext.request.contextPath}/api/resume.do",
+						method: "POST",
+				        contentType: "application/json; charset=utf-8",
+				        data: JSON.stringify(resumeData),
+						success: function(data){
+							console.log("success");
+							alert("등록이 완료되었습니다.");
+						},
+						error: function(xhr, status, error){
+							console.log("fail");
+						}
+					});
+				}
 			});
 			
 			$("#updateBtn").click(function(){
@@ -275,7 +292,18 @@
 			});
 			
 			$("#removeBtn").click(function(){
-				alert("clicked");
+				if(confirm("삭제하시겠습니까?")){
+					$.ajax({
+						url: "${pageContext.request.contextPath}/api/resume.do?id=" + resumeNum,
+						type: "DELETE",
+						success: function(data){
+							alert("삭제가 완료되었습니다.");
+						},
+						error: function(xhr, status, error){
+							console.log("fail");
+						}
+					});
+				}
 			});
 			<!-- golgolz end -->
 		});

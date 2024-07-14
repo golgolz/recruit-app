@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.co.sist.user.domain.resume.ResumeListDomain;
 import kr.co.sist.user.service.resume.ResumeUserService;
 import kr.co.sist.user.vo.resume.ApplyVO;
+import kr.co.sist.user.vo.resume.ProfileVO;
 import kr.co.sist.user.vo.resume.ResumeVO;
 
 @Controller
@@ -56,13 +58,21 @@ public class ResumeUserController {
         return result;
     }
 
+    @GetMapping("/api/resume/profile.do")
+    @ResponseBody
+    public ProfileVO addProfileInfo(@RequestParam("id") String userId) {
+        return resumeUserService.searchProfile(userId);
+    }
+
     @PostMapping("/api/resume.do")
     @ResponseBody
     public String addResume(@RequestBody ResumeVO resumeVO) {
-        String result = "success";
+        String result = "fail";
 
         System.out.println(resumeVO);
-        resumeUserService.addResume(resumeVO);
+        if (resumeUserService.addResume(resumeVO) == 1) {
+            result = "success";
+        }
 
         return result;
     }
@@ -70,11 +80,19 @@ public class ResumeUserController {
     @PutMapping("/api/resume.do")
     @ResponseBody
     public String modifyResume(@RequestBody ResumeVO resumeVO) {
-        String result = "success";
+        String result = "fail";
 
-        System.out.println(resumeVO);
-        resumeUserService.modifyResume(resumeVO);
+        if (resumeUserService.modifyResume(resumeVO) == 1) {
+            result = "success";
+        }
 
         return result;
+    }
+
+    @DeleteMapping("/api/resume.do")
+    @ResponseBody
+    public String removeResume(@RequestParam("id") String resumeNum) {
+        resumeUserService.removeResume(resumeNum);
+        return "success";
     }
 }

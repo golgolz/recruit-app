@@ -41,4 +41,8 @@ public class ResumeAdminService {
 
         return resume;
     }
+
+    public String searchRecruitTitle(int recruitNum) {
+        return resumeAdminDAO.selectRecruitTitle(recruitNum);
+    }
 }
