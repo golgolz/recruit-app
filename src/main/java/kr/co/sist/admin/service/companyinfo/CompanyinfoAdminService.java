@@ -27,17 +27,33 @@ public class CompanyinfoAdminService {
         return list;
         // return companyinfoUserDAO.selectAllCompanyinfo();
     }
-
-    public List<SearchDomain> searchCompanyinfoList(SearchVO sVO) {
-
-        return companyinfoAdminDAO.selectCompanyinfoList(sVO);
+    
+    public List<SearchDomain> selectCompanyinfoList(SearchVO sVO) {
+        List<SearchDomain> list=null;
+        
+        try {
+            list=companyinfoAdminDAO.selectCompanyinfo(sVO);
+        }catch(PersistenceException pe){
+            pe.printStackTrace();
+        }
+        
+        return list;
     }
 
-    public List<SearchDomain> searchCompanyinfo(Map<String, Object> params) {
-        return companyinfoAdminDAO.selectCompanyinfo(params);
+    public int selectPage(SearchVO sVO) {
+        int page = 0;
+        
+        try {
+            page = companyinfoAdminDAO.selectPage(sVO);
+            
+            
+        }catch (PersistenceException pe) {
+            pe.printStackTrace();
+        }
+        
+        return page;
     }
-
-
+    
     public List<SearchDomain> searchCompanyinfoDetail(String companyCode) {
         List<SearchDomain> list = null;
         try {
@@ -159,6 +175,4 @@ public class CompanyinfoAdminService {
         return result;
     }
 
-    
-    
 }

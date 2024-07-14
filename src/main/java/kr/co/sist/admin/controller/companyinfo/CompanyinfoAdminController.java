@@ -11,15 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import kr.co.sist.admin.service.companyinfo.CompanyinfoAdminService;
 import kr.co.sist.domain.companyinfo.SearchDomain;
 import kr.co.sist.vo.companyinfo.CompanyinfoVO;
 import kr.co.sist.vo.companyinfo.HistoryVO;
+import kr.co.sist.vo.companyinfo.SearchVO;
 import kr.co.sist.vo.companyinfo.WelfareVO;
 
 @Controller
@@ -28,11 +29,31 @@ public class CompanyinfoAdminController {
      private CompanyinfoAdminService companyinfoAdminService;
 
     @GetMapping("/manage/companyinfo/adminCompanyinfoList.do")
-    public String searchAllCompanyinfo(Model model) {
-        List<SearchDomain> list=companyinfoAdminService.searchAllCompanyinfo();
-        model.addAttribute("listCompanyinfo",list);
+    public String searchAllCompanyinfo(@ModelAttribute SearchVO sVO, Model model) {
+//        List<SearchDomain> list=companyinfoAdminService.searchAllCompanyinfo();
+        System.out.println("처음 getPage : "+sVO.getPage());
+     // 페이지 번호가 0이거나 음수일 경우 1로 초기화
+        if (sVO.getPage() <= 0) {
+            sVO.setPage(1);
+        }
+        
+        List<SearchDomain> list = companyinfoAdminService.selectCompanyinfoList(sVO);
+        int page = companyinfoAdminService.selectPage(sVO);
+        
+        model.addAttribute("companyinfoList",list);
+        model.addAttribute("sVO",sVO);
+        model.addAttribute("totalPage",page);
+        
+        System.out.println("===========list : "+list);
+        System.out.println("===========list size : "+list.size());
+        System.out.println("===========page : "+page);
+        
+        System.out.println("avgSal : "+sVO.getAvgSal());
+        System.out.println(" getPage : "+sVO.getPage());
+        
         return "manage/companyinfo/companies";
     }
+    
     @GetMapping("/manage/companyinfo/adminCompanyinfoDetail.do")
     public String companyinfoDetail(String companyCode, HttpSession session, Model model) {
         List<SearchDomain> list=companyinfoAdminService.searchCompanyinfoDetail(companyCode);
@@ -268,27 +289,7 @@ public class CompanyinfoAdminController {
 //        return "companyinfo/search_test";
 //    }
 //    
-    @ResponseBody
-    @PostMapping("/manage/companyinfo/adminCompanySearchList.do")
-    public Map<String, Object> companyinfoSearchList(Model model, @RequestParam(name = "companyName" , defaultValue ="null")String companyName, @RequestParam(name = "avgSal" , defaultValue ="0")String strAvgSal, @RequestParam(name = "selectedValue" , defaultValue ="���þ���")String selectedValue) {
-        int avgSal=Integer.parseInt(strAvgSal);
-     // �˻� ������ HashMap�� ����
-        Map<String, Object> params = new HashMap<>();
-        params.put("companyName", companyName);
-        params.put("avgSal", avgSal);
-        params.put("companyClassification", selectedValue);
-        System.out.println("�̰� controller�� params�� : "+params);
 
-        // ���� ������ �˻� ��û
-        List<SearchDomain> companyList = companyinfoAdminService.searchCompanyinfo(params);
-
-        // ��� �����Ϳ� ���¸� ���� Map ����
-        Map<String, Object> response = new HashMap<>();
-        response.put("adminCompanyList", companyList);
-        response.put("status", "success"); // ���� ���� �߰�
-
-        return response;
-    }
 //    
 //    @GetMapping("/companyinfo/companyinfoDetail.do")
 //    public String searchCompanyinfoDetail(String companyCode, Model model) {

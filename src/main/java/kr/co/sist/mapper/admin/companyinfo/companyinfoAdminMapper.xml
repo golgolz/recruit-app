@@ -7,6 +7,7 @@
     <result property="field" column="FIELD" />
     <result property="keyword" column="KEYWORD" />
     <result property="currentPage" column="CURRENT_PAGE" />
+    <result property="num" column="NUM" />
     <result property="startNum" column="START_NUM" />
     <result property="endNum" column="END_NUM" />
     <result property="avgSal" column="AVG_SAL" />
@@ -30,38 +31,51 @@
 </resultMap>
 
     <select id="selectAllCompanyinfo" resultMap="companyInfoResultMap">
-	    SELECT COMPANY_CODE, COMPANY_NAME, LOGO, COMPANY_CLASSIFICATION, AVG_SAL, HEADCOUNT
+	    SELECT COMPANY_CODE, COMPANY_NAME, LOGO, COMPANY_CLASSIFICATION, AVG_SAL, HEADCOUNT, INPUT_DATE
 		FROM COMPANYINFO
+		ORDER BY company_name
     </select>
     
-    <select id="selectCompanyinfo" resultMap="companyInfoResultMap" parameterType="map">
-    	SELECT COMPANY_CODE, COMPANY_NAME, LOGO, REVENUE, HEADCOUNT, INPUT_DATE
+	<select id="selectCompanyinfo" resultMap="companyInfoResultMap" parameterType="kr.co.sist.vo.companyinfo.SearchVO">
+	    SELECT NUM, COMPANY_CODE, COMPANY_NAME, LOGO, COMPANY_CLASSIFICATION, AVG_SAL, HEADCOUNT, INPUT_DATE
+		FROM (
+		SELECT ROW_NUMBER() OVER (ORDER BY COMPANY_CODE) AS NUM,
+		COMPANY_CODE, COMPANY_NAME, LOGO, COMPANY_CLASSIFICATION, AVG_SAL, HEADCOUNT, INPUT_DATE FROM COMPANYINFO
+	       <where>
+		        <if test="searchDataValue != null">
+				AND COMPANY_NAME LIKE '%' || #{searchDataValue} || '%'
+				</if>
+		        <if test="avgSal != null">
+				AND AVG_SAL >= #{avgSal}
+				</if>
+		        <if test="companyClassification != null">
+	            AND COMPANY_CLASSIFICATION = #{companyClassification} 
+	        	</if>
+	        </where>
+	        )
+		    <where>
+				<if test="page != 0">
+					AND NUM >= #{startRow} AND NUM &lt;= #{endRow}
+				</if>
+			</where>
+			ORDER BY company_name
+	</select>
+	
+	<select id="selectPage" resultType="int" parameterType="kr.co.sist.vo.companyinfo.SearchVO">
+		SELECT CEIL(COUNT(*)/5)
 		FROM COMPANYINFO
 		<where>
-	        <if test="companyName != null and companyName != ''">
-	            COMPANY_NAME LIKE '%' || #{companyName} || '%'
-	        </if>
-	        <if test="avg_sal != null">
-	            AND AVG_SAL >= #{avgSal}
-	        </if>
+			<if test="searchDataValue != null">
+				AND COMPANY_NAME LIKE '%' || #{searchDataValue} || '%'
+			</if>
+			<if test="avgSal != null">
+				AND AVG_SAL >= #{avgSal}
+			</if>
 	        <if test="companyClassification != null">
-	            AND COMPANY_CLASSIFICATION = #{companyClassification}
-	        </if>
-	        <if test="headcount != null">
-	            <choose>
-                <when test="headcount == '0'">
-                    AND HEADCOUNT &lt; 5
-                </when>
-                <when test="headcount == '1'">
-                    AND HEADCOUNT &lt; 50
-                </when>
-                <when test="headcount == '2'">
-                    AND HEADCOUNT &gt;= 50
-                </when>
-            </choose>
-	        </if>
-    	</where>
-    </select>
+            	AND COMPANY_CLASSIFICATION = #{companyClassification} 
+        	</if>
+		</where>
+	</select>
     
     <select id="selectCompanyinfoDetail" resultMap="companyInfoResultMap" parameterType="String">
     	SELECT COMPANY_CODE,COMPANY_NAME,BUSINESS_NUMBER,LOGO,COMPANY_IMG,DESCRIPTION,HEADCOUNT,COMPANY_CLASSIFICATION,REVENUE,AVG_SAL,CEO_NAME,ADDR,ESTABLISHMENT_DATE,INPUT_DATE
