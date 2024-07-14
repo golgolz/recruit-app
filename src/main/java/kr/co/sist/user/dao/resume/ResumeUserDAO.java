@@ -72,16 +72,25 @@ public class ResumeUserDAO {
 
     public int insertResume(ResumeVO resumeVO) {
         SqlSession session = myBatis.getMyBatisHandler(false);
+
+        int result = 0;
+        result = session.update("kr.co.sist.resume.user.insertResume", resumeVO);
+
+        if (result != 1) {
+            session.rollback();
+        } else {
+            session.commit();
+        }
+
         myBatis.closeHandler(session);
-        return 0;
+        saveResumeData(resumeVO);
+        return result;
     }
 
     public int updateResume(ResumeVO resumeVO) {
         SqlSession session = myBatis.getMyBatisHandler(false);
 
-        String[] subDatas = {"Skill", "Edu", "Career", "Certification", "Language"};
         int result = 0;
-
         result = session.update("kr.co.sist.resume.user.updateResume", resumeVO);
 
         if (result != 1) {
@@ -92,7 +101,7 @@ public class ResumeUserDAO {
 
         myBatis.closeHandler(session);
         saveResumeData(resumeVO);
-        return 0;
+        return result;
     }
 
     public void saveResumeData(ResumeVO resumeVO) {
@@ -100,25 +109,28 @@ public class ResumeUserDAO {
         try {
             Map<String, Object> subData = mapper.readValue(resumeVO.getSubData(),
                     new TypeReference<Map<String, Object>>() {});
+            String resumeNum = resumeVO.getId();
 
             List<SkillVO> skills = mapper.convertValue(subData.get("skills"),
                     new TypeReference<List<SkillVO>>() {});
 
-            String resumeNum = resumeVO.getId();
+            if (skills != null) {
+                for (SkillVO skill : skills) {
+                    skill.setResumeNum(resumeNum);
+                }
 
-            for (SkillVO skill : skills) {
-                skill.setResumeNum(resumeNum);
+                deleteSkill(resumeNum);
+                insertSkill(skills);
             }
-
-            deleteSkill(resumeNum);
-            insertSkill(skills);
 
             List<EducationVO> educations = mapper.convertValue(subData.get("education"),
                     new TypeReference<List<EducationVO>>() {});
             // System.out.println("edu size is " + educations.size()); --- > why 1?
-            if (educations != null && !educations.isEmpty()) {
+            if (educations != null && !educations.isEmpty() && !(educations.size() == 1
+                    && educations.get(0).getSchoolClassification() == null)) {
                 for (EducationVO education : educations) {
                     education.setResumeNum(resumeNum);
+                    System.out.println(education.toString());
                 }
 
                 deleteEdu(resumeNum);
@@ -127,9 +139,11 @@ public class ResumeUserDAO {
 
             List<CareerVO> careers = mapper.convertValue(subData.get("career"),
                     new TypeReference<List<CareerVO>>() {});
-            if (careers != null && !careers.isEmpty()) {
+            if (careers != null && !careers.isEmpty()
+                    && !(careers.size() == 1 && careers.get(0).getCompanyName().equals(""))) {
                 for (CareerVO career : careers) {
                     career.setResumeNum(resumeNum);
+                    System.out.println(career.toString());
                 }
 
                 deleteCareer(resumeNum);
@@ -138,9 +152,11 @@ public class ResumeUserDAO {
 
             List<CertificationVO> certifications = mapper.convertValue(
                     subData.get("certifications"), new TypeReference<List<CertificationVO>>() {});
-            if (certifications != null && !certifications.isEmpty()) {
+            if (certifications != null && !certifications.isEmpty() && !(certifications.size() == 1
+                    && certifications.get(0).getCertificateName().equals(""))) {
                 for (CertificationVO certification : certifications) {
                     certification.setResumeNum(resumeNum);
+                    System.out.println(certification.toString());
                 }
 
                 deleteCertification(resumeNum);
@@ -149,9 +165,11 @@ public class ResumeUserDAO {
 
             List<LanguageVO> languages = mapper.convertValue(subData.get("languages"),
                     new TypeReference<List<LanguageVO>>() {});
-            if (languages != null && !languages.isEmpty()) {
+            if (languages != null && !languages.isEmpty()
+                    && !(languages.size() == 1 && languages.get(0).getLanguage().equals("외국어명*"))) {
                 for (LanguageVO language : languages) {
                     language.setResumeNum(resumeNum);
+                    System.out.println(language.toString());
                 }
 
                 deleteLanguage(resumeNum);

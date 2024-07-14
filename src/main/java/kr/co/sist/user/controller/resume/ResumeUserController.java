@@ -66,10 +66,12 @@ public class ResumeUserController {
     @PostMapping("/api/resume.do")
     @ResponseBody
     public String addResume(@RequestBody ResumeVO resumeVO) {
-        String result = "success";
+        String result = "fail";
 
         System.out.println(resumeVO);
-        resumeUserService.addResume(resumeVO);
+        if (resumeUserService.addResume(resumeVO) == 1) {
+            result = "success";
+        }
 
         return result;
     }
@@ -77,9 +79,11 @@ public class ResumeUserController {
     @PutMapping("/api/resume.do")
     @ResponseBody
     public String modifyResume(@RequestBody ResumeVO resumeVO) {
-        String result = "success";
+        String result = "fail";
 
-        resumeUserService.modifyResume(resumeVO);
+        if (resumeUserService.modifyResume(resumeVO) == 1) {
+            result = "success";
+        }
 
         return result;
     }

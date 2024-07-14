@@ -252,20 +252,23 @@
 		    }
 			
 			$("#registerBtn").click(function(){
-				let resumeData = createResumeData();
-				console.log(resumeData);
-				$.ajax({
-					url: "${pageContext.request.contextPath}/api/resume.do",
-					method: "POST",
-					dataType: "JSON",
-					data: resumeData,
-					success: function(data){
-						console.log("success");
-					},
-					error: function(xhr, status, error){
-						console.log("fail");
-					}
-				});
+				if(confirm("등록하시겠습니까?")){
+					let resumeData = createResumeData();
+					console.log(resumeData);
+					$.ajax({
+						url: "${pageContext.request.contextPath}/api/resume.do",
+						method: "POST",
+				        contentType: "application/json; charset=utf-8",
+				        data: JSON.stringify(resumeData),
+						success: function(data){
+							console.log("success");
+							alert("등록이 완료되었습니다.");
+						},
+						error: function(xhr, status, error){
+							console.log("fail");
+						}
+					});
+				}
 			});
 			
 			$("#updateBtn").click(function(){

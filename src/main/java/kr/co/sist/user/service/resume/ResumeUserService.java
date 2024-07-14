@@ -31,8 +31,9 @@ public class ResumeUserService {
     }
 
     public int addResume(ResumeVO resumeVO) {
-        StringBuilder userId = new StringBuilder(resumeVO.getEmail());
-        resumeUserDAO.selectResumeCount(resumeVO.getEmail());
+        String userId = resumeVO.getEmail();
+        int count = resumeUserDAO.selectResumeCount(resumeVO.getEmail());
+        resumeVO.setId(userId.substring(0, userId.lastIndexOf('.')) + "_" + (count + 1));
         return resumeUserDAO.insertResume(resumeVO);
     }
 
