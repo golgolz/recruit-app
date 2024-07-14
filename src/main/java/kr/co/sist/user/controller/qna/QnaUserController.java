@@ -3,6 +3,7 @@ package kr.co.sist.user.controller.qna;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -64,12 +65,21 @@ public class QnaUserController {
     }
 
     @PostMapping("/user/mypage/qna/mypageWriteQNA.do")
-    public String addQna(@ModelAttribute("qVO") UserQnaVO qVO, Model model) {
+    public String addQna(@ModelAttribute("qVO") UserQnaVO qVO, Model model, HttpSession session) {
+        String userId = (String) session.getAttribute("userId");
         String category = qVO.getCategory();
+
+        System.out.println("--------------------------------userId" + userId);
+
+        /*
+         * if (userId == null || userId.isEmpty()) { throw new
+         * IllegalArgumentException("세션에 user_id가 없습니다."); }
+         */
 
         if (category == null || category.isEmpty()) {
             throw new IllegalArgumentException("오류.");
         }
+        qVO.setUserId(userId);
         qnaUserService.addQna(qVO);
         System.out.println("++++qVO++++" + qVO);
         List<String> categories = Arrays.asList("서비스 문의", "제안사항", "오류신고");

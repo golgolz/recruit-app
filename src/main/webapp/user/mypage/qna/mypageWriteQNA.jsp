@@ -59,6 +59,7 @@
 						<li class=""><a href="http://localhost/recruit-app/user/mypage/qna/mypageQNAList.do">문의 내역</a></li>
 					</ul>
 				</div>
+			<!-- 세션 값 확인 -->
 			<!-- tap menu //-->
 		    <div class="inquiryForm inquiryForm--selection">
 		       <form action="${pageContext.request.contextPath}/user/mypage/qna/mypageWriteQNA.do" method="post" id="Qnaform">
@@ -97,10 +98,12 @@
 			       <div class="tbCell tbTh">
 			           <label for="lb_inq_2">내용 <em>(필수)</em></label>
 			       </div>
-<!-- 			       <div class="tbCell">
-			       <textarea name="contents" id="lb_inq_2" title="내용을 입력하세요." class="txArea"></textarea> -->
 			       <div>
 			       <textarea name="content" value="${param.content}" id="lb_inq_2" title="내용을 입력하세요." style="height:350px; width:400px"></textarea>
+			        <input type="hidden" name="userId" value="${sessionScope.user_id}">
+			        <%
+						String userId = (String)session.getAttribute("userId");
+						%>
 			       <%-- <input id="reply_date" name="qna_num"  value="${param.qna_num}" type="hidden" /> --%>
 			       </div>
 			       </div>
@@ -155,6 +158,7 @@
 			      </div>
 			      </fieldset>
 			      </form>
+			      
 			      </div>
 			      </div>
 			</div>
