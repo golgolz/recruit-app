@@ -57,13 +57,11 @@
             contentType: "application/json; charset=utf-8",
             dataType: 'json',
             success: function(data) {
-            	console.log(data);
+            	//console.log(data);
             	updateStatus(data);
             },
             error: function(xhr, status, error) {
                 console.error("Error fetching data: " + error);
-                console.log(summary);
-                console.log(JSON.stringify(summary));
             }
     	});
 		
@@ -101,14 +99,14 @@
 	
 	function updateResumeList(){
     	var searchVO = createSearchVO();
-    	console.log(searchVO);
+    	//console.log(searchVO);
 		$.ajax({
     		url: "${pageContext.request.contextPath}/api/manage/resumes.do",
             method: 'GET',
             data: searchVO,
             dataType: 'JSON',
             success: function(data) {
-            	console.log(data);
+            	//console.log(data);
             	populateTable(data);
                 if(!(data && data.length > 0)){
                     $("#sodr_list tbody").html('<tr><td colspan="10" style="font-size: 16px; font-weight: bold;">검색 결과가 없습니다.</td></tr>');
@@ -156,7 +154,7 @@
 	            "<td>" +
 	                "<input type='button' value='바로가기' class='btn btn-outline-secondary btn-sm' " +
 	                "style='font-weight: bold; margin: 0px auto;' " +
-	                "onclick='location.href=\"http://localhost/recruit-app/manage/resumes/detail.do?id=" + item.resumeId + "\"' />" +
+	                "onclick='location.href=\"http://localhost/recruit-app/manage/resumes/detail.do?id=" + item.resumeId + "&recruitNum=${recruitNum}\"' />" +
 	            "</td>";
 	        
 	        tableBody.appendChild(row);
@@ -211,7 +209,7 @@
     	var startPage = (currentGroup - 1) * showPages + 1;
         var paginationHtml = '';
         var endPage = Math.min(Math.ceil(totalPages / itemsPerPage) , startPage + showPages - 1);
-        console.log("end : ", endPage);
+        //console.log("end : ", endPage);
         if(endPage == 0){
         	return;
         }

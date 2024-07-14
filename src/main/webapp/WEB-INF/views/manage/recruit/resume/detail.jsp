@@ -18,6 +18,24 @@
     	$("#recruit_menu").addClass("bg-gradient-primary");
     	
     	$.ajax({
+    		url: "${pageContext.request.contextPath}/api/manage/resume/recruit.do?recruitNum=${recruitNum}",
+    		method: "GET",
+    		dataType: "text",
+    		success: function(data){
+    			var statusDiv = document.getElementById('status');
+    		    var recruitTitleDiv = statusDiv.querySelector('div:first-child');
+    		    
+    		    if (recruitTitleDiv) {
+    		        recruitTitleDiv.textContent = '공고명 : ' + data;
+    		    } else {
+    		        console.error("Recruit title div not found");
+    		    }
+    		},
+            error: function(xhr, status, error) {
+                console.error("Error fetching data: " + error);
+            }
+    	});
+    	$.ajax({
             url: "${pageContext.request.contextPath}/api/manage/resumes/detail.do?id=${resumeNum}",
             method: 'GET',
             dataType: 'JSON',

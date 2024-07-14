@@ -37,6 +37,14 @@ public class ResumeAdminDAO {
         return count;
     }
 
+    public String selectRecruitTitle(int recruitNum) {
+        SqlSession session = myBatis.getMyBatisHandler(false);
+        String title = session.selectOne("kr.co.sist.resume.admin.selectRecruitTitle", recruitNum);
+        myBatis.closeHandler(session);
+
+        return title;
+    }
+
     public ResumeDomain searchOneResume(String resumeNum) {
         SqlSession session = myBatis.getMyBatisHandler(false);
         StringBuilder subData = new StringBuilder("{");
