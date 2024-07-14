@@ -28,24 +28,23 @@ public class CompanyinfoAdminDAO {
         mbConfig.closeHandler(ss);
         return list;
     }
-    
-    public List<SearchDomain> selectCompanyinfoList(SearchVO sVO)throws PersistenceException{
+
+    public List<SearchDomain> selectCompanyinfo(SearchVO sVO)throws PersistenceException{
         List<SearchDomain> list=null;
         SqlSession ss=mbConfig.getMyBatisHandler(false);
-        list=ss.selectList("kr.co.sist.admin.companyinfo.selectAllCompanyinfo", sVO);
+        list=ss.selectList("kr.co.sist.admin.companyinfo.selectCompanyinfo", sVO);
+        System.out.println("DAO selectCompanyinfo sVO: " + sVO);
+        System.out.println("DAO selectCompanyinfo list: " + list);
         mbConfig.closeHandler(ss);
-        
         return list;
     }
     
-    public List<SearchDomain> selectCompanyinfo(Map<String, Object> params)throws PersistenceException{
-        List<SearchDomain> list=null;
-        SqlSession ss=mbConfig.getMyBatisHandler(false);
-        list=ss.selectList("kr.co.sist.admin.companyinfo.selectCompanyinfo", params);
+    public int selectPage(SearchVO sVO)throws PersistenceException {
+        int page = 0;
+        SqlSession ss = mbConfig.getMyBatisHandler(false);
+        page = ss.selectOne("kr.co.sist.admin.companyinfo.selectPage",sVO);
         mbConfig.closeHandler(ss);
-        System.out.println("이것은 params야 : "+params);
-        System.out.println("이것은 list야 : "+list);
-        return list;
+        return page;
     }
 
     public List<SearchDomain> selectCompanyinfoDetail(String companyCode)throws PersistenceException{

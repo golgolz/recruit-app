@@ -15,7 +15,7 @@ import lombok.ToString;
 public class SearchDomain {
   private String field, keyword;
   private String currentPage;
-  private int startNum, endNum;
+  private int num, startNum, endNum;
   private int avgSal, revenue, headcount;
   private String companyCode, companyName, description, logo, companyImg, businessNumber, addr, ceoName, companyClassification;
   private Date establishmentDate, inputDate;
