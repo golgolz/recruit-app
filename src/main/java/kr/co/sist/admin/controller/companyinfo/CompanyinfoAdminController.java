@@ -235,7 +235,7 @@ public class CompanyinfoAdminController {
         return "redirect:/manage/companyinfo/adminHistoryWelfare.do?companyCode=" + companyCode;
     }
 
-    @PostMapping("/companyinfo/insertWelfare.do")
+    @PostMapping("/manage/companyinfo/insertWelfare.do")
     public String insertWelfare(HttpServletRequest request, HttpSession session) {
         String companyCode= (String) session.getAttribute("companyCode");
         String category = request.getParameter("hidWelfareCategory");
