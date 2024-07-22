@@ -20,8 +20,8 @@ if ($LASTEXITCODE -eq 0) {
 
     Write-Host "6. Running new Docker container..." -ForegroundColor Yellow
     #docker run -d -p 9999:8080 --name recruit-app-container recruit-app-image
-    #docker run -d -p 80:80 -p 8080:8080 -e DB_HOST=211.63.89.138 -e DB_PORT=1521 --name recruit-app-container recruit-app-image
-    docker run -d -p 80:8080 -e DB_HOST=211.63.89.138 -e DB_PORT=1521 --name recruit-app-container recruit-app-image
+    #docker run -d -p 80:80 -p 8080:8080 -e DB_HOST=127.0.0.1 -e DB_PORT=1521 --name recruit-app-container recruit-app-image
+    docker run -d -p 80:8080 -e DB_HOST=127.0.0.1 -e DB_PORT=1521 --name recruit-app-container recruit-app-image
 
     Start-Sleep -Seconds 10  # Wait 10 seconds for the container to fully start
 
